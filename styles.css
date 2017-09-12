@@ -1,0 +1,123 @@
+header{
+  width:100%;
+  height: 40px;
+  background-color: #3399FF ;
+  position: fixed;
+  z-index:2000;
+}
+.header-left{
+  width: 50%;
+  float: left;
+  font-weight: bold;
+}
+.header_title{
+  font-size:1.2em;
+  padding-left: 5%;
+  margin-bottom: 0;
+}
+.header_subtitle{
+  font-size: 0.6em;
+  padding-left: 8%;
+  margin-bottom: 0;
+}
+.header-right{
+  text-align: right;
+  float: right;
+}
+.header-right span{
+  line-height: 40px;
+  font-size: 0.7em;
+  padding-right: 8px;
+}
+.header-right img{
+  margin-right: 15px;
+}
+#main-wrapper{
+  background-image: url('assets/img/cebty_image.jpg');
+  background-position: center center;
+}
+#main-wrapper p{
+  text-align: center;
+}
+.title-title{
+  padding-top: 60px;
+  font-size: 30px;
+  font-weight: bold;
+}
+.title-subtitle{
+  font-weight: bold;
+  margin-bottom: 50px;
+}
+.login{
+  background-color: white;
+  width: 230px;
+  text-align: center;
+  margin: 0 auto;
+  opacity: 0.9;
+  border-radius: 3px;
+  margin-bottom: 20px;
+}
+.login input{
+  margin-top: 16px;
+}
+.input-text{
+  border: solid skyblue 1.3px;
+  border-radius: 3px
+}
+.login-button input{
+  padding: 0 8px;
+  margin-left: 12px;
+  margin-right: 12px;
+  margin-bottom: 10px;
+}
+.search{
+  text-align: center;
+  padding-bottom: 20px;
+}
+.search1{
+  margin: 0 20px;
+}
+.search2{
+  margin: 0 20px;
+}
+.search3{
+  margin: 0 20px;
+}
+#new-item-wrapper{
+  margin-top: 40px;
+}
+.new-item-title{
+  text-align: center;
+  font-size: 16px;
+  margin-bottom: 30px;
+}
+.product{
+  text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+footer{
+  background-color: #000080;
+  color: white;
+}
+.footer-left{
+  text-align: left
+}
+.footer-right{
+  float:  right;
+}
+footer{
+  font-size: 2em;
+}
