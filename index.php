@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="utf-8">
-  <title></title>
+  <title>セブティー</title>
   <?php require('parts/assets.php') ?>
 </head>
     <?php require('parts/header.php'); ?>
