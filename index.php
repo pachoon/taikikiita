@@ -37,7 +37,7 @@
     </div>
     <div id="new-item-wrapper">
       <div class="new-item-title">
-        <span>新着アイテム</span>
+        <span>新着商品</span>
         <img src="assets/img/new.png" width="20px" height="20px">
       </div>
       <div　class="container products">
