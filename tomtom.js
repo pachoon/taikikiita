@@ -1,5 +1,5 @@
-$(function(){
-  $('.show-text').click(function(){
-    $('.hide-text').fadeIn();
-  });
+
+$("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("active");
 });

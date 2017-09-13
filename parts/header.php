@@ -12,6 +12,6 @@
     <span>マイページ</span>
     <span>検索</span>
     <span>チャット</span>
-    <span><img src="assets/img/hamburger.png" width="20px"></span>
+    <span></span>
   </div>
 </header>

@@ -1,3 +1,4 @@
+@media(min-width: 670px){
 header{
   width:100%;
   height: 40px;
@@ -6,8 +7,8 @@ header{
   z-index:2000;
 }
 .header-left{
-  width: 50%;
   float: left;
+  width: 70%;
   font-weight: bold;
 }
 .header_title{
@@ -15,9 +16,20 @@ header{
   padding-left: 5%;
   margin-bottom: 0;
 }
+.header_title:hover{
+  opacity: 0.8;
+}
+header span:hover{
+  font-weight: bold;
+}
+#new-item-wrapper img:hover{
+  opacity: 0.8;
+}
+
 .header_subtitle{
-  font-size: 0.6em;
+  font-size: 1px;
   padding-left: 8%;
+  padding-right: 10px;
   margin-bottom: 0;
 }
 .header-right{
@@ -32,10 +44,40 @@ header{
 .header-right img{
   margin-right: 15px;
 }
+}
+
+@media(max-width: 670px){
+header{
+width:100%;
+height: 30px;
+background-color: #3399FF ;
+position: fixed;
+z-index:2000;
+}
+header span{
+  display: none
+}
+.header_title{
+  font-size: 1em;
+  line-height: 30px;
+  font-weight: bold;
+  padding-left: 10px;
+}
+.header_title:hover{
+  opacity: 0.8;
+}
+.header_subtitle{
+    display: none;
+  }
+}
+
 #main-wrapper{
   background-image: url('assets/img/cebty_image.jpg');
   background-position: center center;
+  background-size: cover;
+  text-align: center;
 }
+.
 #main-wrapper p{
   text-align: center;
 }
@@ -49,11 +91,10 @@ header{
   margin-bottom: 50px;
 }
 .login{
-  background-color: white;
   width: 230px;
   text-align: center;
   margin: 0 auto;
-  opacity: 0.9;
+  background-color: rgba(255,255,255,0.8);
   border-radius: 3px;
   margin-bottom: 20px;
 }
@@ -70,6 +111,11 @@ header{
   margin-right: 12px;
   margin-bottom: 10px;
 }
+.btn{
+  margin: 10px 11px;
+  padding: 5px 15px;
+  font-size: 0.8em;
+}
 .search{
   text-align: center;
   padding-bottom: 20px;
@@ -81,8 +127,16 @@ header{
   margin: 0 20px;
 }
 .search3{
-  margin: 0 20px;
+  margin: 3px 20px;
 }
+/*select{
+  background-color: skyblue;
+  color: white;
+  border-radius: 3px;
+  border: solid 0.1px white;
+  text-align: center;
+  padding: 3px 10px;
+}*/
 #new-item-wrapper{
   margin-top: 40px;
 }
@@ -93,21 +147,12 @@ header{
 }
 .product{
   text-align: center;
+  padding-right: 0;
+  padding-left: 0;
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+@media(min-width: 600px){
 footer{
   background-color: #000080;
   color: white;
@@ -116,8 +161,46 @@ footer{
   text-align: left
 }
 .footer-right{
-  float:  right;
+  float: right;
+  padding-right: 18px;
 }
 footer{
-  font-size: 2em;
+  font-size: 1em;
+}
+footer span:hover{
+  opacity: 0.8;
+}
+footer-right-1{
+  float: left;
+}
+}
+
+
+@media(max-width:600px){
+footer{
+  background-color: #000080;
+  color: white;
+  height: 40px;
+}
+.footer-left{
+  text-align: left
+  vertical-align: bottom;
+}
+.footer-right{
+  float: right;
+  padding-left: 3px;
+  margin-top: 2px;
+}
+footer{
+  font-size: 10px;
+}
+.footer-left-2{
+  display: none;
+}
+.footer-left-1{
+  display: none;
+}
+footer span:hover{
+  opacity: 0.8;
+}
 }
