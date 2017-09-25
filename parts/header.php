@@ -12,6 +12,6 @@
     <span>マイページ</span>
     <span>検索</span>
     <span>チャット</span>
-    <span></span>
+    <span><i class="fa fa-bars" aria-hidden="true"></i></span>
   </div>
 </header>

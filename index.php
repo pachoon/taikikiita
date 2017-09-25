@@ -4,6 +4,8 @@
   <meta charset="utf-8">
   <title>セブティー</title>
   <?php require('parts/assets.php') ?>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+  
 </head>
     
     <?php require('parts/header.php'); ?>
@@ -33,7 +35,7 @@
             <option value="ohters">その他</option>
           </select>
           <input type="text" placeholder="キーワード" class="search2">
-          <button　type="submit" class="search3 btn btn-danger">検索</button>
+          <button type="submit" class="search3 btn btn-danger">検索</button>
       </div>
     </div>
     <div id="new-item-wrapper">
