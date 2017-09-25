@@ -4,8 +4,10 @@
   <meta charset="utf-8">
   <title>セブティー</title>
   <?php require('parts/assets.php') ?>
+  <?php require('parts/header.php'); ?>
 </head>
-    <?php require('parts/header.php'); ?>
+<body>
+
     <br>
     <div id="main-wrapper">
       <div class="title">
@@ -115,7 +117,6 @@
     </div>
     　
     <?php require('parts/footer.php') ?>
-<body>
 
 </body>
 </html>
