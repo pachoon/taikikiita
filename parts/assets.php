@@ -1,37 +1,41 @@
 
+        <!-- Google Fonts  -->
+        <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,500' rel='stylesheet' type='text/css'> <!-- Body font -->
+        <link href='http://fonts.googleapis.com/css?family=Lato:300,400' rel='stylesheet' type='text/css'> <!-- Navbar font -->
 
-    <!-- bootstrap -->
-    <link rel="stylesheet" type="text/css" href="assets/bootstrap/css/bootstrap.min.css">
-    <script src="assets/js/bootstrap.js"></script>
+        <!-- Libs and Plugins CSS -->
+        <link rel="stylesheet" href="inc/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="inc/animations/css/animate.min.css">
+        <link rel="stylesheet" href="inc/font-awesome/css/font-awesome.min.css"> <!-- Font Icons -->
+        <link rel="stylesheet" href="inc/owl-carousel/css/owl.carousel.css">
+        <link rel="stylesheet" href="inc/owl-carousel/css/owl.theme.css">
 
-    <!-- stlye css -->
-    <link rel="stylesheet" type="text/css" href="css/styles.css">
+        <!-- Theme CSS -->
+        <link rel="stylesheet" href="css/reset.css">
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/mobile.css">
 
-    <!-- Skin CSS -->
-    <link rel="stylesheet" href="css/ice-blue.css">
+        <!-- Skin CSS -->
+        <link rel="stylesheet" href="css/skin/cool-gray.css">
+        <!-- <link rel="stylesheet" href="css/skin/ice-blue.css"> -->
+        <!-- <link rel="stylesheet" href="css/skin/summer-orange.css"> -->
+        <!-- <link rel="stylesheet" href="css/skin/fresh-lime.css"> -->
+        <!-- <link rel="stylesheet" href="css/skin/night-purple.css"> -->
 
-    <!-- Google Fonts  -->
-    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,500' rel='stylesheet' type='text/css'> <!-- Body font -->
-    <link href='http://fonts.googleapis.com/css?family=Lato:300,400' rel='stylesheet' type='text/css'> <!-- Navbar font -->
 
-    <!-- Libs and Plugins CSS -->
-    <link rel="stylesheet" href="assets/animations/css/animate.min.css">
-    <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css"> <!-- Font awesome -->
-    <link rel="stylesheet" href="assets/owl-carousel/css/owl.carousel.css">
-    <link rel="stylesheet" href="assets/owl-carousel/css/owl.theme.css">
+                <!-- Plugins JS -->
+        <script src="inc/jquery/jquery-1.11.1.min.js"></script>
+        <script src="inc/bootstrap/js/bootstrap.min.js"></script>
+        <script src="inc/owl-carousel/js/owl.carousel.min.js"></script>
+        <script src="inc/stellar/js/jquery.stellar.min.js"></script>
+        <script src="inc/animations/js/wow.min.js"></script>
+        <script src="inc/waypoints.min.js"></script>
+        <script src="inc/isotope.pkgd.min.js"></script>
+        <script src="inc/classie.js"></script>
+        <script src="inc/jquery.easing.min.js"></script>
+        <script src="inc/jquery.counterup.min.js"></script>
+        <script src="inc/smoothscroll.js"></script>
 
-    <!-- Plugins JS -->
-    <script src="assets/jquery/jquery-1.11.1.min.js"></script>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets/owl-carousel/js/owl.carousel.min.js"></script>
-    <script src="assets/stellar/js/jquery.stellar.min.js"></script>
-    <script src="assets/animations/js/wow.min.js"></script>
-    <script src="assets/waypoints.min.js"></script>
-    <script src="assets/isotope.pkgd.min.js"></script>
-    <script src="assets/classie.js"></script>
-    <script src="assets/jquery.easing.min.js"></script>
-    <script src="assets/jquery.counterup.min.js"></script>
-    <script src="assets/smoothscroll.js"></script>
 
-    <!-- Theme JS -->
-    <script src="assets/js/theme.js"></script>
+                <!-- Theme JS -->
+        <script src="js/theme.js"></script>
