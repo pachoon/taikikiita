@@ -16,9 +16,9 @@
   <link href="css/contact.css" rel="stylesheet" />
 
 
-    <link href="https://fonts.googleapis.com/css?family=Oleo+Script:400,700" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Teko:400,700" rel="stylesheet">
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Oleo+Script:400,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Teko:400,700" rel="stylesheet">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
 
 </head>
@@ -31,9 +31,21 @@
   </div>
 
 <section id="contact">
-      <div class="section-content" style="padding: 150px;">
-        <h1 class="section-header">Get in <span class="content-header wow fadeIn " data-wow-delay="0.2s" data-wow-duration="2s"> Touch with us</span></h1>
-        <h3>Lorem Ipsum is simply dummy text of the printing and typesetting industry</h3>
+      <div class="section-content">
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+        <h1 class="section-header"><span style="color: #fffff9">Get in </span><span class="content-header wow fadeIn " data-wow-delay="0.2s" data-wow-duration="2s"> Touch with us</span></h1>
+        <h3><span style="color: #fffff9">何かお困りですか？<br>サービスへのご意見、ご相談されたいことがあれば<br>お気軽に下記からご連絡をお待ちしております。</span></h3>
       </div>
       <div class="contact-section">
       <div class="container">
@@ -48,8 +60,8 @@
                 <input type="email" class="form-control" id="exampleInputEmail" placeholder=" Enter Email id">
               </div>  
               <div class="form-group">
-                <label for="telephone">Mobile No.</label>
-                <input type="tel" class="form-control" id="telephone" placeholder=" Enter 10-digit mobile no.">
+                <label for="telephone">Subtitle</label>
+                <input type="tel" class="form-control" id="telephone" placeholder=" Enter Subtitle">
               </div>
             </div>
             <div class="col-md-6">
@@ -67,28 +79,6 @@
       </div>
     </section>
 
-
-
-
-
-
-<!--   <h1 >お問い合わせ情報入力</h1>
-  <form method="GET" action="check.php">
-    <div>
-        ニックネーム<br>
-        <input type="text" name="nickname" style="width:100px">
-    </div>
-    <div>
-        メールアドレス<br>
-        <input type="text" name="email" style="width: 200px">
-    </div>
-    <div>
-        お問い合わせ内容<br>
-        <textarea name="content" cols="40" rows="5"></textarea>
-    </div>
-    <input type="submit" value="送信">
-  </form>
-</div> -->
 </body>
 </html>
 
