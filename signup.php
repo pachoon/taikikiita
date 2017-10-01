@@ -118,74 +118,78 @@ if(isset($_SESSION['login_user'])){
 
 <?php require('parts/assets.php') ?>
 
-<section id="text-carousel-intro-section" class="parallax" data-stellar-background-ratio="0.5" style="background-image: url(img/slider-bg.jpg); ">
+<section id="text-carousel-intro-section" class="parallax" data-stellar-background-ratio="0.5" style="background-image: url(img/slider-bg2.jpg); ">
 
-<div class="container" style="padding-top:130px;">
-    <div class="row">
-        <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 well">
-            <h5 class="text-center">新規登録</h5>
-            <form action="#" method="post" class="form" role="form" enctype="multipart/form-data">
-            <div class="row">
-                <div class="col-xs-12 col-md-12">
-                    <input class="form-control" name="username" placeholder="ユーザーネーム" type="text"
-                        required autofocus style="height:28px; font-size:12px;"/>
+
+    <div class="container" style="padding-top:130px;">
+        <div class="row">
+            <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 well">
+                <h5 class="text-center">新規登録</h5>
+                <div class="devider"></div>
+                <form action="#" method="post" class="form" role="form" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-xs-12 col-md-12">
+                        <input class="form-control" name="username" placeholder="ユーザーネーム" type="text"
+                            required autofocus style="height:28px; font-size:12px;"/>
+                    </div>
                 </div>
+                <input class="form-control" name="email" placeholder="メールアドレス" required type="email" style="height:28px; font-size:12px;"/>
+                <input class="form-control" name="password" placeholder="パスワード" required type="password" style="height:28px; font-size:12px;"/>
+                <!-- <input class="form-control" name="password" placeholder="パスワード再入力" type="password" style="height:28px; font-size:12px;"/> -->
+
+    <!--             <label for="" style="font-size:12px;padding-bottom:5px;">
+                    生年月日</label>
+                <div class="row">
+                    <div class="col-xs-4 col-md-4">
+                        <select class="form-control" style="height:28px; font-size:12px;">
+                            <option value="Month">月</option>
+                        </select>
+                    </div>
+                    <div class="col-xs-4 col-md-4">
+                        <select class="form-control" style="height:28px; font-size:12px;">
+                            <option value="Day">日</option>
+                        </select>
+                    </div>
+                    <div class="col-xs-4 col-md-4">
+                        <select class="form-control" style="height:28px; font-size:12px;">
+                            <option value="Year">年</option>
+                        </select>
+                    </div>
+                </div> -->
+
+
+                <label class="radio-inline" >
+                    <input type="radio" name="gender" id="inlineCheckbox1" required value="男" />
+                    男
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="gender" id="inlineCheckbox2" required value="女" />
+                    女
+                </label>
+                <br><br>
+                <select class="form-control" required name="school" style="height:28px; font-size:12px;">
+                  <option disabled >学校名</option>
+                  <option>NexSeed</option>
+                  <option>QQ english</option>
+                </select>
+                <textarea class="form-control" name="introduce" placeholder="自己紹介" required type="text" style="height:80px;font-size:12px;"/></textarea>
+
+                <label for="file_photo" required style="color: white;background-color: crimson;padding: 6px;border-radius: 6px; cursor:pointer;font-size:12px;">
+                  プロフィール画像を選択
+                    <input type="file" id="file_photo" name="profile_image_path" accept="image/*" required style="display:none" >
+                </label>
+
+                <div class="preview" style="padding-bottom:7px;"></div>
+
+
+                <button class="btn btn-md btn-primary btn-block" type="submit">
+                    確認画面へ</button>
+                </form>
             </div>
-            <input class="form-control" name="email" placeholder="メールアドレス" required type="email" style="height:28px; font-size:12px;"/>
-            <input class="form-control" name="password" placeholder="パスワード" required type="password" style="height:28px; font-size:12px;"/>
-            <!-- <input class="form-control" name="password" placeholder="パスワード再入力" type="password" style="height:28px; font-size:12px;"/> -->
-
-<!--             <label for="" style="font-size:12px;padding-bottom:5px;">
-                生年月日</label>
-            <div class="row">
-                <div class="col-xs-4 col-md-4">
-                    <select class="form-control" style="height:28px; font-size:12px;">
-                        <option value="Month">月</option>
-                    </select>
-                </div>
-                <div class="col-xs-4 col-md-4">
-                    <select class="form-control" style="height:28px; font-size:12px;">
-                        <option value="Day">日</option>
-                    </select>
-                </div>
-                <div class="col-xs-4 col-md-4">
-                    <select class="form-control" style="height:28px; font-size:12px;">
-                        <option value="Year">年</option>
-                    </select>
-                </div>
-            </div> -->
-
-
-            <label class="radio-inline" >
-                <input type="radio" name="gender" id="inlineCheckbox1" required value="male" />
-                男
-            </label>
-            <label class="radio-inline">
-                <input type="radio" name="gender" id="inlineCheckbox2" required value="female" />
-                女
-            </label>
-            <br><br>
-            <select class="form-control" required name="school" style="height:28px; font-size:12px;">
-              <option disabled >学校名</option>
-              <option>NexSeed</option>
-              <option>QQ english</option>
-            </select>
-            <textarea class="form-control" name="introduce" placeholder="自己紹介" required type="text" style="height:80px;font-size:12px;"/></textarea>
-
-            <label for="file_photo" required style="color: white;background-color: crimson;padding: 6px;border-radius: 6px; cursor:pointer;font-size:12px;">
-              プロフィール画像を選択
-                <input type="file" id="file_photo" name="profile_image_path" accept="image/*" required style="display:none" >
-            </label>
-
-            <div class="preview" style="padding-bottom:7px;"></div>
-
-
-            <button class="btn btn-md btn-primary btn-block" type="submit">
-                確認画面へ</button>
-            </form>
         </div>
     </div>
-</div>
+
+
 
 </section>
 

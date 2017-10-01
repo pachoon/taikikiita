@@ -104,24 +104,20 @@ session_start();
 
 <?php
 
-if(isset($_SESSION['login_user'])){
 
   require('parts/login_header.php');
 
-}else{
-
-  require('parts/header.php');
-}
 
  ?>
 <?php require('parts/assets.php') ?>
 
-<section id="text-carousel-intro-section" class="parallax" data-stellar-background-ratio="0.5" style="background-image: url(img/slider-bg.jpg); ">
+<section id="text-carousel-intro-section" class="parallax" data-stellar-background-ratio="0.5" style="background-image: url(img/slider-bg2.jpg); ">
 
-<div class="container" style="padding-top:130px;">
+<div class="container" style="padding-top:100px;">
     <div class="row">
         <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 well">
             <h5 class="text-center">プロフィール編集</h5>
+            <div class="devider"></div>
             <form action="#" method="post" class="form" role="form" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-xs-12 col-md-12">

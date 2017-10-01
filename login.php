@@ -85,12 +85,13 @@ if(!empty($_POST)){
  ?>
 <?php require('parts/assets.php') ?>
 
-<section id="text-carousel-intro-section" class="parallax" data-stellar-background-ratio="0.5" style="background-image: url(img/slider-bg.jpg); ">
+<section id="text-carousel-intro-section" class="parallax" data-stellar-background-ratio="0.5" style="background-image: url(img/slider-bg2.jpg); ">
 
 <div class="container" style="padding-top:200px;">
     <div class="row">
         <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 well">
             <h5 class="text-center" style="padding-bottom:5px;">ログイン</h5>
+            <div class="devider"></div>
             <form action="#" method="post" class="form" role="form" enctype="multipart/form-data">
 
             <input class="form-control" name="email" placeholder="メールアドレス" required type="email" style="height:28px; font-size:12px;"/>

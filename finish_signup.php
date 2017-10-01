@@ -28,14 +28,14 @@ if(isset($_SESSION['login_user'])){
 
 <?php require('parts/assets.php') ?>
 
-<section id="text-carousel-intro-section" class="parallax" data-stellar-background-ratio="0.5" style="background-image: url(img/slider-bg.jpg); ">
+<section id="text-carousel-intro-section" class="parallax" data-stellar-background-ratio="0.5" style="background-image: url(img/slider-bg2.jpg); ">
 
 <div class="container" style="padding-top:250px;">
     <div class="row">
         <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 well">
 
             <h6 class="text-center">ユーザー登録が完了しました！</h6>
-
+            <div class="devider"></div>
             <div class="row">
                <div class="col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2">
                  <form action="login.php"><button class="btn btn-md btn-primary btn-block" type="submit">さっそく始める</button></form>

@@ -66,33 +66,30 @@
 
 <?php
 
-if(isset($_SESSION['login_user'])){
-
-  require('parts/login_header.php');
-
-}else{
-
   require('parts/header.php');
-}
 
  ?>
 
 <?php require('parts/assets.php') ?>
 
-<section id="text-carousel-intro-section" class="parallax" data-stellar-background-ratio="0.5" style="background-image: url(img/slider-bg.jpg); ">
+
+
+<section id="text-carousel-intro-section" class="parallax" data-stellar-background-ratio="0.5" style="background-image: url(img/slider-bg2.jpg); ">
+
 
 <div class="container" style="padding-top:100px;">
     <div class="row">
         <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 well">
             <h5 class="text-center">登録内容確認</h5>
+            <div class="devider"></div>
             <form action="#" method="post" class="form" role="form">
             <div class="row">
                 <div class="col-xs-12 col-md-12">
-                  <p>ユーザーネーム： <?php echo $_SESSION['user_info']['username']; ?></p>
+                  <p style="padding-bottom:1px;">ユーザーネーム： 　<?php echo $_SESSION['user_info']['username']; ?></p>
                 </div>
             </div>
-            <p>メールアドレス：<?php echo $_SESSION['user_info']['email'];?> </p>
-            <p>パスワード：●●●●●●●●●</p>
+            <p style="padding-bottom:1px;">メールアドレス：　<?php echo $_SESSION['user_info']['email'];?> </p>
+            <p style="padding-bottom:1px;">パスワード：　<span style="font-size:10px;">●●●●●●●●●</span></p>
 
 <!--             <label for="" style="font-size:12px;padding-bottom:5px;">
                 生年月日</label>
@@ -114,11 +111,11 @@ if(isset($_SESSION['login_user'])){
                 </div>
             </div> -->
 
-            <p>性別：<?php echo $_SESSION['user_info']['gender']; ?></p>
-            <p>学校名：<?php echo $_SESSION['user_info']['school']; ?></p>
-            <p>自己紹介：<?php echo $_SESSION['user_info']['introduce']; ?></p>
+            <p style="padding-bottom:1px;">性別：　<?php echo $_SESSION['user_info']['gender']; ?></p>
+            <p style="padding-bottom:1px;">学校名：　<?php echo $_SESSION['user_info']['school']; ?></p>
+            <p style="padding-bottom:1px;">自己紹介：　<?php echo $_SESSION['user_info']['introduce']; ?></p>
 
-            <p>プロフィール画像：</p>
+            <p style="padding-bottom:1px;">プロフィール画像：</p>
             <img src="profile_image/<?php echo $_SESSION['user_info']['profile_image_path'];?>" width="150">
 
             <div class="preview" style="padding-bottom:7px;"></div>
@@ -137,6 +134,8 @@ if(isset($_SESSION['login_user'])){
         </div>
     </div>
 </div>
+
+
 
 </section>
 
