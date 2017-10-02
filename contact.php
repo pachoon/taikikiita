@@ -36,7 +36,7 @@
         <br>
         <br>
 
-        <h1 class="section-header"><span class="content-header wow fadeIn " data-wow-delay="0.2s" data-wow-duration="2s"> Get in Touch with us</span></h1>
+        <h1 class="section-header"><span class="content-header wow fadeIn " data-wow-delay="0.2s" data-wow-duration="2s">お問い合わせ</span></h1>
         <h3><span style="color: #fffff9">何かお困りですか？<br>サービスへのご意見、ご相談されたいことがあれば<br>お気軽に下記からご連絡をお待ちしております。</span></h3>
       </div>
       <div class="contact-section">
