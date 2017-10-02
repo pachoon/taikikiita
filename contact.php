@@ -14,7 +14,7 @@
 
 
 </head>
-<body>
+<body style="background-color: #3a6186 , #89253e">
 
   <?php require('parts/header.php'); ?>
   <div class="container">
@@ -70,6 +70,8 @@
         </form>
       </div>
     </section>
+
+  <?php require('parts/footer.php'); ?>
 
 </body>
 </html>

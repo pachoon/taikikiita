@@ -173,6 +173,19 @@
     echo 'お問い合わせいただきました内容につきましては、追ってご連絡をお待ちください。';
 
 ?>
+  <?php require('parts/footer.php'); ?>
+<script type="text/javascript">
+    $(document).ready(function() {
+  $("#navMenu").click(function() {
+   //$(".nav").toggleClass("small");
+    if ($(".nav").hasClass("small")) {
+      $(".nav").removeClass("small");
+    } else {
+      $(".nav").addClass("small");
+    }
+  });
+});
 
+</script>
 </body>
 </html>
