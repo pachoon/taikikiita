@@ -39,7 +39,7 @@
     <link rel="stylesheet" href="css/skin/night-purple.css">
 
     <link rel="stylesheet" href="css/product.css">
-    <script type="text/javascript" src="product.js"></script>
+    
 
 <title>商品情報</title>
 </head>
@@ -137,12 +137,11 @@
               $(".mCustomScrollbar").mCustomScrollbar({axis:"x"});
               });
             </script>
+            
           </div>
             <!-- productPictureEnd -->
         <div class="col-md-6">
-          <div class="items">
-            
-          </div>
+          
           
         </div>
 
@@ -154,6 +153,6 @@
 
 
 
-
+<script type="text/javascript" src="product.js"></script>
 </body>
 </html>
