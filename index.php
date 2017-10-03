@@ -36,6 +36,8 @@
         <!-- <link rel="stylesheet" href="css/skin/fresh-lime.css"> -->
         <link rel="stylesheet" href="css/skin/night-purple.css">
 
+        <link rel="stylesheet" type="text/css" href="css/signup.css">
+
 	</head>
 
 
@@ -72,7 +74,7 @@
                             <li><a class="" href="">商品検索</a></li>
                             <li><a class="" href="">チャット</a></li>
                             <li><a class="" href="">お問合せ</a></li>
-                            <li><a class="" href="">ログイン</a></li>
+                            <li><a class="" href="login.php">ログイン</a></li>
                         </ul>
                     </div><!-- /.navbar-collapse -->
                   </div><!-- /.container -->
@@ -94,7 +96,7 @@
 							<div class="item">
                             <img src="img/mainlogo.png">
                                 <div class="extra-space-l"></div>
-								<a class="btn btn-blank" href="" target="_blank" role="button">新規登録</a>
+								<a class="btn btn-blank" href="signup.php" role="button">新規登録</a>
 							</div>
 						</div>
 
@@ -142,7 +144,7 @@
                                                         <a href="#">掃除機＊ほぼ新品です！</a>
                                                         <ul>
                                                             <li><span>価格：６０ペソ</span></li>
-                                                            <li><span>引渡し可能日：10月28日〜</span></li>
+                                                            <li><span>引渡し可能日：即日</span></li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -154,7 +156,7 @@
                                                         <a href="#">カップヌードル８個！</a>
                                                         <ul>
                                                             <li><span>価格：４５ペソ</span></li>
-                                                            <li><span>引渡し可能日：10月1日〜</span></li>
+                                                            <li><span>引渡し可能日：即日</span></li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -163,10 +165,10 @@
                                                 <div class="portfolio_single_content">
                                                     <img src="img/portfolio/h9.jpg" alt="title"/>
                                                     <div>
-                                                        <a href="#">ドライヤー</a>
+                                                        <a href="#">ドライヤー状態良好</a>
                                                         <ul>
                                                             <li><span>価格：１００ペソ</span></li>
-                                                            <li><span>引渡し可能日：即日</span></li>
+                                                            <li><span>引渡し可能日：10月1日〜</span></li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -211,10 +213,10 @@
                                                 <div class="portfolio_single_content">
                                                     <img src="img/portfolio/h7.jpg" alt="title"/>
                                                     <div>
-                                                        <a href="#">水着女性用＊１度しか使ってません</a>
+                                                        <a href="#">水着女性用＊２回使いました</a>
                                                         <ul>
                                                             <li><span>価格：２０ペソ</span></li>
-                                                            <li><span>引渡し可能日：9月28日〜</span></li>
+                                                            <li><span>引渡し可能日：10月28日〜</span></li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -223,7 +225,7 @@
                                                 <div class="portfolio_single_content">
                                                     <img src="img/portfolio/h8.jpg" alt="title"/>
                                                     <div>
-                                                        <a href="#">車売ってますーー</a>
+                                                        <a href="#">車売ってますーー！！</a>
                                                         <ul>
                                                             <li><span>価格：１５０ペソ</span></li>
                                                             <li><span>引渡し可能日：8月28日〜</span></li>
@@ -272,6 +274,8 @@
             <a href="#" class="scrolltotop"><i class="fa fa-arrow-up"></i></a> <!-- Scroll to top button -->
 
         </div><!-- body ends -->
+
+
 
 
         <!-- Plugins JS -->

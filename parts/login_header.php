@@ -1,4 +1,4 @@
-            <!--========== BEGIN HEADER ==========-->
+           <!--========== BEGIN HEADER ==========-->
             <header id="header" class="header-main">
 
                 <!-- Begin Navbar -->
@@ -20,12 +20,12 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a class="" href="index.php">ホーム</a></li>
-                            <li><a class="" href="">マイページ</a></li>
+                            <li><a class="" href="login_index.php">ようこそ、<?php echo $_SESSION['login_user']['username'];?>さん</a></li>
+                            <li><a class="" href="edit_intro.php">マイページ</a></li>
                             <li><a class="" href="">商品検索</a></li>
                             <li><a class="" href="">チャット</a></li>
                             <li><a class="" href="">お問合せ</a></li>
-                            <li><a class="" href="login.php">ログイン</a></li>
+                            <li><a class="" href="logout.php">ログアウト</a></li>
                         </ul>
                     </div><!-- /.navbar-collapse -->
                   </div><!-- /.container -->
@@ -34,3 +34,4 @@
 
             </header>
             <!-- ========= END HEADER =========-->
+
