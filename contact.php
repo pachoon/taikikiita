@@ -14,14 +14,14 @@
 
 
 </head>
-<body style="background-color: #3a6186 , #89253e">
+<body style="background-color: #3a6186 , #89253e" id="container">
 
   <?php require('parts/header.php'); ?>
   <div class="container">
     <div class="row">
     </div>
   </div>
-
+<div class="body">
 <section id="contact">
       <div class="section-content">
         <br>
@@ -69,10 +69,22 @@
           </div>
         </form>
       </div>
-    </section>
+      </div>
+        <br>
+        <br>
+        <br>
+        <br>
+            <footer class="text-off-white">
 
-  <?php require('parts/footer.php'); ?>
 
+                <div class="footer">
+                    <div class="container text-center wow fadeIn" data-wow-delay="0.4s">
+                        <p class="copyright">Copyright &copy; 2017 - Designed By <a href="" class="theme-author">TaikiKiita</a> &amp; Developed by <a href="" class="theme-author">NagamiTaiki</a></p>
+                    </div>
+                </div>
+
+            </footer>
+</section>
 </body>
 </html>
 

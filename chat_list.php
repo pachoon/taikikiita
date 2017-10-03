@@ -54,66 +54,66 @@
                 <button type="button" class="btn btn-default btn-filter" data-target="all">全て</button>
               </div>
             </div>
-            <div class="table-container">
+            <div class="table-container" >
               <table class="table table-filter">
                 <tbody>
-                  <tr data-status="pagado">
-                    <td>
-                      <div class="ckbox">
-                        <input type="checkbox" id="checkbox1">
-                        <label for="checkbox1"></label>
+                  <tr data-status="pagado" class="selected">
+                    <!-- <td> -->
+<!--                       <div class="ckbox">
+                        <input type="checkbox" id="checkbox4" checked>
+                        <label for="checkbox4"></label>
                       </div>
                     </td>
                     <td>
-                      <a href="javascript:;" class="star">
+                      <a href="javascript:;" class="star star-checked">
                         <i class="glyphicon glyphicon-star"></i>
                       </a>
                     </td>
-                    <td>
+ -->                    <td>
                       <div class="media">
                         <a href="#" class="pull-left">
                           <img src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" class="media-photo">
                         </a>
-                        <div class="media-body">
+                        <!-- <div class="media-body"> -->
                           <span class="media-meta pull-right">Febrero 13, 2016</span>
                           <h4 class="title">
                             Lorem Impsum
                             <span class="pull-right pagado">(Pagado)</span>
                           </h4>
                           <p class="summary">Ut enim ad minim veniam, quis nostrud exercitation...</p>
-                        </div>
+                        <!-- </div> -->
                       </div>
                     </td>
                   </tr>
                   <tr data-status="pendiente">
-                    <td>
+<!--                     <td>
                       <div class="ckbox">
                         <input type="checkbox" id="checkbox3">
                         <label for="checkbox3"></label>
                       </div>
-                    </td>
-                    <td>
+                    </td> -->
+<!--                     <td>
                       <a href="javascript:;" class="star">
                         <i class="glyphicon glyphicon-star"></i>
                       </a>
-                    </td>
+                    </td> -->
                     <td>
-                      <div class="media">
+                      <div class="media" >
                         <a href="#" class="pull-left">
                           <img src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" class="media-photo">
                         </a>
-                        <div class="media-body">
+                        <!-- <div class="media-body"> -->
                           <span class="media-meta pull-right">Febrero 13, 2016</span>
                           <h4 class="title">
                             Lorem Impsum
                             <span class="pull-right pendiente">(Pendiente)</span>
                           </h4>
                           <p class="summary">Ut enim ad minim veniam, quis nostrud exercitation...</p>
-                        </div>
+                        <!-- </div> -->
                       </div>
                     </td>
                   </tr>
-                  <tr data-status="cancelado">
+ <!--                  <tr data-status="cancelado">
                     <td>
                       <div class="ckbox">
                         <input type="checkbox" id="checkbox2">
@@ -124,26 +124,26 @@
                       <a href="javascript:;" class="star">
                         <i class="glyphicon glyphicon-star"></i>
                       </a>
-                    </td>
+                    </td> -->
                     <td>
                       <div class="media">
                         <a href="#" class="pull-left">
                           <img src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" class="media-photo">
                         </a>
-                        <div class="media-body">
+                        <!-- <div class="media-body"> -->
                           <span class="media-meta pull-right">Febrero 13, 2016</span>
                           <h4 class="title">
                             Lorem Impsum
                             <span class="pull-right cancelado">(Cancelado)</span>
                           </h4>
                           <p class="summary">Ut enim ad minim veniam, quis nostrud exercitation...</p>
-                        </div>
+                        <!-- </div> -->
                       </div>
                     </td>
                   </tr>
                   <tr data-status="pagado" class="selected">
-                    <td>
-                      <div class="ckbox">
+                    <!-- <td> -->
+<!--                       <div class="ckbox">
                         <input type="checkbox" id="checkbox4" checked>
                         <label for="checkbox4"></label>
                       </div>
@@ -153,24 +153,24 @@
                         <i class="glyphicon glyphicon-star"></i>
                       </a>
                     </td>
-                    <td>
+ -->                    <td>
                       <div class="media">
                         <a href="#" class="pull-left">
                           <img src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" class="media-photo">
                         </a>
-                        <div class="media-body">
+                        <!-- <div class="media-body"> -->
                           <span class="media-meta pull-right">Febrero 13, 2016</span>
                           <h4 class="title">
                             Lorem Impsum
                             <span class="pull-right pagado">(Pagado)</span>
                           </h4>
                           <p class="summary">Ut enim ad minim veniam, quis nostrud exercitation...</p>
-                        </div>
+                        <!-- </div> -->
                       </div>
                     </td>
                   </tr>
                   <tr data-status="pendiente">
-                    <td>
+<!--                     <td>
                       <div class="ckbox">
                         <input type="checkbox" id="checkbox5">
                         <label for="checkbox5"></label>
@@ -181,19 +181,19 @@
                         <i class="glyphicon glyphicon-star"></i>
                       </a>
                     </td>
-                    <td>
+ -->                    <td>
                       <div class="media">
                         <a href="#" class="pull-left">
                           <img src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" class="media-photo">
                         </a>
-                        <div class="media-body">
+                        <!-- <div class="media-body"> -->
                           <span class="media-meta pull-right">Febrero 13, 2016</span>
                           <h4 class="title">
                             Lorem Impsum
                             <span class="pull-right pendiente">(Pendiente)</span>
                           </h4>
                           <p class="summary">Ut enim ad minim veniam, quis nostrud exercitation...</p>
-                        </div>
+                        <!-- </div> -->
                       </div>
                     </td>
                   </tr>

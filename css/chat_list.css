@@ -37,6 +37,15 @@ body {
 /*  --------------------------------------------------
   :: Table Filter
   -------------------------------------------------- */
+
+
+
+
+
+
+
+
+
 .panel {
   border: 1px solid #ddd;
   background-color: #fcfcfc;
@@ -123,7 +132,7 @@ body {
 .table-filter .media-photo {
   width: 35px;
 }
-.table-filter .media-body {
+.table-filter {
     display: block;
     /* Had to use this style to force the div to expand (wasn't necessary with my bootstrap version 3.3.6) */
 }
@@ -136,7 +145,7 @@ body {
   font-size: 14px;
   font-weight: bold;
   line-height: normal;
-  margin: 0;
+  margin: 100;
 }
 .table-filter .media .title span {
   font-size: .8em;
