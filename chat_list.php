@@ -57,31 +57,31 @@
             <div class="table-container" >
               <table class="table table-filter">
                 <tbody>
-                  <tr data-status="pagado" class="selected">
-                    <!-- <td> -->
-<!--                       <div class="ckbox">
-                        <input type="checkbox" id="checkbox4" checked>
-                        <label for="checkbox4"></label>
+                  <tr data-status="pagado">
+<!--                     <td>
+                      <div class="ckbox">
+                        <input type="checkbox" id="checkbox1">
+                        <label for="checkbox1"></label>
                       </div>
-                    </td>
-                    <td>
-                      <a href="javascript:;" class="star star-checked">
+                    </td> -->
+<!--                     <td>
+                      <a href="javascript:;" class="star">
                         <i class="glyphicon glyphicon-star"></i>
                       </a>
-                    </td>
- -->                    <td>
-                      <div class="media">
+                    </td> -->
+                    <td >
+                      <div class="media" >
                         <a href="#" class="pull-left">
                           <img src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" class="media-photo">
                         </a>
-                        <!-- <div class="media-body"> -->
-                          <span class="media-meta pull-right">Febrero 13, 2016</span>
+                        <div class="media-body">
+                          <span >Febrero 13, 2016</span>
                           <h4 class="title">
                             Lorem Impsum
                             <span class="pull-right pagado">(Pagado)</span>
                           </h4>
                           <p class="summary">Ut enim ad minim veniam, quis nostrud exercitation...</p>
-                        <!-- </div> -->
+                        </div>
                       </div>
                     </td>
                   </tr>
@@ -98,18 +98,18 @@
                       </a>
                     </td> -->
                     <td>
-                      <div class="media" >
+                      <div class="media" style="width: 648px;">
                         <a href="#" class="pull-left">
                           <img src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" class="media-photo">
                         </a>
-                        <!-- <div class="media-body"> -->
+                        <div class="media-body">
                           <span class="media-meta pull-right">Febrero 13, 2016</span>
                           <h4 class="title">
                             Lorem Impsum
                             <span class="pull-right pendiente">(Pendiente)</span>
                           </h4>
                           <p class="summary">Ut enim ad minim veniam, quis nostrud exercitation...</p>
-                        <!-- </div> -->
+                        </div>
                       </div>
                     </td>
                   </tr>
@@ -130,14 +130,14 @@
                         <a href="#" class="pull-left">
                           <img src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" class="media-photo">
                         </a>
-                        <!-- <div class="media-body"> -->
+                        <div class="media-body">
                           <span class="media-meta pull-right">Febrero 13, 2016</span>
                           <h4 class="title">
                             Lorem Impsum
                             <span class="pull-right cancelado">(Cancelado)</span>
                           </h4>
                           <p class="summary">Ut enim ad minim veniam, quis nostrud exercitation...</p>
-                        <!-- </div> -->
+                        </div>
                       </div>
                     </td>
                   </tr>
@@ -158,14 +158,14 @@
                         <a href="#" class="pull-left">
                           <img src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" class="media-photo">
                         </a>
-                        <!-- <div class="media-body"> -->
+                        <div class="media-body">
                           <span class="media-meta pull-right">Febrero 13, 2016</span>
                           <h4 class="title">
                             Lorem Impsum
                             <span class="pull-right pagado">(Pagado)</span>
                           </h4>
                           <p class="summary">Ut enim ad minim veniam, quis nostrud exercitation...</p>
-                        <!-- </div> -->
+                        </div>
                       </div>
                     </td>
                   </tr>
@@ -186,14 +186,14 @@
                         <a href="#" class="pull-left">
                           <img src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" class="media-photo">
                         </a>
-                        <!-- <div class="media-body"> -->
+                        <div class="media-body">
                           <span class="media-meta pull-right">Febrero 13, 2016</span>
                           <h4 class="title">
                             Lorem Impsum
                             <span class="pull-right pendiente">(Pendiente)</span>
                           </h4>
                           <p class="summary">Ut enim ad minim veniam, quis nostrud exercitation...</p>
-                        <!-- </div> -->
+                        </div>
                       </div>
                     </td>
                   </tr>
@@ -234,5 +234,4 @@
 </script>
 </body>
 </html>
-
 
