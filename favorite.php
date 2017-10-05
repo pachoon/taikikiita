@@ -16,7 +16,7 @@ if(!isset($_SESSION['login_user']['id'])){
 <head>
 <meta charset="utf-8">
  <?php require('parts/assets.php') ?>
-  <!-- <link rel="stylesheet" href="css/style.css">   -->
+  <link rel="stylesheet" href="css/style.css">  
   <link href="css/favorite.css" rel="stylesheet" />
   <meta charset="utf-8">
 
@@ -46,8 +46,7 @@ if(!isset($_SESSION['login_user']['id'])){
         <br>
         <br>
         <br>
-</div>
-  <div class="container">
+  <!-- <div class="container">
     <div class="col-xs-12">
         <div class="portfolio_content">
         <div class="row"  id="portfolio">
@@ -165,33 +164,48 @@ if(!isset($_SESSION['login_user']['id'])){
                             <li><span>引渡し可能日：10月8日〜</span></li>
                             <li><button type="button"><a href="?delete=on&content=自転車とても快適なやつ"><i class="fa fa-trash-o fa-3x" aria-hidden="true"></i></a></button></li>
                         </ul>
-                    </div>ツイートを持ってくる感じでループさせる
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
 <?php 
 
-$sql='SELECT `item_name`,`price`'
+$sql='SELECT `item_name`,`price`,`dealing_date` ,``FROM `cebty_favorite`';
+$data = array();
+$stmt = $dbh->prepare($sql);
+$stmt->execute($data);
 
 
 
 
-$favorite = array();
+$favorites = array();
     while (true) {
         $record = $stmt->fetch(PDO::FETCH_ASSOC);
             if (!$record){
         break;
     }
-    $favorite[]=$record;
+    $favorites[]=$record;
 }
   ?>
 
-
-
-
-
+<?php 
+    foreach ($favorites as $favorite) {?>
+        <div class="row"  id="portfolio">
+            <div class="col-xs-12 col-sm-4 elec">
+                <div class="portfolio_single_content">
+                    <img src="img/portfolio/h1.jpg<?php echo $favorite['itempic_path'];?> " alt="title"/>
+                    <div>
+                        <a href="#"> <?php echo $favorite['username']; ?></a>
+                        <ul>
+                            <li><span>引渡し可能日：即日ちょ</span></li>
+                            <li><button type="button"><a href="favorite_delete.php"><i class="fa fa-trash-o fa-3x" aria-hidden="true"></i></a></button></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+    <?php } ?>
 
 
     <div>
@@ -203,3 +217,4 @@ $favorite = array();
   <?php require('parts/footer.php'); ?>
 </body>
 </html>
+
