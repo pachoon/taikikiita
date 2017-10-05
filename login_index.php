@@ -97,7 +97,7 @@ if(!isset($_SESSION['login_user']['id'])){
                         <ul class="nav navbar-nav navbar-right">
                             <li><a class="" href="login_index.php">ようこそ、<?php echo $_SESSION['login_user']['username'];?>さん</a></li>
                             <li><a class="" href="edit_intro.php">マイページ</a></li>
-                            <li><a class="" href="">商品検索</a></li>
+                            <li><a class="" href="search.php">商品検索</a></li>
                             <li><a class="" href="">チャット</a></li>
                             <li><a class="" href="">お問合せ</a></li>
                             <li><a class="" href="logout.php">ログアウト</a></li>

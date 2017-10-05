@@ -1,3 +1,6 @@
+<?php session_start(); ?>
+
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -12,11 +15,8 @@
 </head>
 <body>
 
-<?php
-  require('parts/login_header.php');
- ?>
-
-<?php require('parts/assets.php') ?>
+<?php require('parts/login_header.php'); ?>
+<?php require('parts/assets.php'); ?>
 
 
 <section id="text-carousel-intro-section" class="parallax" data-stellar-background-ratio="0.5" style="background-image: url(img/slider-bg2.jpg); ">

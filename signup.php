@@ -54,8 +54,6 @@ session_start();
             $errors['profile_image_path'] = 'extension';
         }
 
-        }else{
-          $errors['profile_image_path'] = 'blank';
         }
 
     if (empty($errors)){
