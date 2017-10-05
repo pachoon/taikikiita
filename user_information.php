@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8">
-<!-- <?php require('parts/assets.php') ?> -->
+<?php require('parts/assets.php') ?>
   <!-- <link rel="stylesheet" href="css/style.css">   -->
   <link href="css/mypage.css" rel="stylesheet" />
   <meta charset="utf-8">
@@ -10,26 +10,28 @@
   <title>プロフィール一部</title>
 </head>
 <body>
-  <?php require('parts/header.php'); ?>
-<!-- main -->
-<section class="main">
-  <div class="points"></div>
-  <div class="shield-left"></div>
-  <div class="shield-right"></div>
-  <!-- card -->
-  <div class="card">
-    <div class="detail">
-    <div class="detail-images"><img src="https://dl.dropboxusercontent.com/s/pil7jdc7d7m8u0h/pic.png" alt="Picture"></div>
-    <h3>MohamadReza Deylami</h3>
-    <!-- <h4>UI Designer</h4> -->
-    <p>ここに文章を引っ張ってくる</p>
-    <div class="content-　　"></div>
+<div class="container content">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="testimonials">
+              <div class="active item">
 
-    <ul>
+                  <div class="carousel-info">
+                    <img alt="" src="http://keenthemes.com/assets/bootsnipp/img1-small.jpg" class="pull-left">
+                    <div class="pull-left">
+                      <span class="testimonials-name">Lina Mars</span>
+                      <span class="testimonials-post">Commercial Director</span>
+                    </div>
+                  </div>
 
-<!-- /card -->
-</section>
-  <?php require('parts/footer.php'); ?>
 
+
+
+                  <blockquote><p>Denim you probably haven't heard of. Lorem ipsum dolor met consectetur adipisicing sit amet, consectetur adipisicing elit, of them jean shorts sed magna aliqua. Lorem ipsum dolor met.</p></blockquote>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
 </body>
 </html>

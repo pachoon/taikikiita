@@ -1,3 +1,16 @@
+<?php 
+
+  session_start();
+  require('dbconnect.php');
+
+  // ログインチェック
+if(!isset($_SESSION['login_user']['id'])){
+    header('Location: login.php');
+    exit();
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -23,6 +36,11 @@
         <br>
         <br>
         <br>
+<?php if(isset($_GET['delete'])){ ?>
+    <div class="alert alert-success text-center">
+      「<?php echo $_GET['content']; ?>」という商品を削除しました。
+    </div>
+<?php } ?>
 <h1 class="section-header"><span class="content-header wow fadeIn  animated" data-wow-delay="0.2s" data-wow-duration="2s" style="visibility: visible; animation-duration: 2s; animation-delay: 0.2s; animation-name: fadeIn;"> お気に入り商品</span></h1>
         <br>
         <br>
@@ -145,13 +163,37 @@
                         <ul>
                             <li><span>価格：６０ペソ</span></li>
                             <li><span>引渡し可能日：10月8日〜</span></li>
-                            <li><button type="button"><a href="############"><i class="fa fa-trash-o fa-3x" aria-hidden="true"></i></a></button></li>
+                            <li><button type="button"><a href="?delete=on&content=自転車とても快適なやつ"><i class="fa fa-trash-o fa-3x" aria-hidden="true"></i></a></button></li>
                         </ul>
-                    </div>
+                    </div>ツイートを持ってくる感じでループさせる
                 </div>
             </div>
         </div>
     </div>
+
+<?php 
+
+$sql='SELECT `item_name`,`price`'
+
+
+
+
+$favorite = array();
+    while (true) {
+        $record = $stmt->fetch(PDO::FETCH_ASSOC);
+            if (!$record){
+        break;
+    }
+    $favorite[]=$record;
+}
+  ?>
+
+
+
+
+
+
+
     <div>
         <a href="mypage.php"><button type="submit" class="btn btn-default submit"><i class="fa fa-paper-plane" aria-hidden="true"></i>  マイページへ</button></a> 
     </div>

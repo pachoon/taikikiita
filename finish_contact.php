@@ -6,15 +6,10 @@
   <meta charset="utf-8">
   <title>お問い合わせ完了</title>
   <link href="css/confirm_contact.css" rel="stylesheet" />
-
-
   <link href="https://fonts.googleapis.com/css?family=Oleo+Script:400,700" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Teko:400,700" rel="stylesheet">
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-
-
 </head>
-<body>
 <body>
 
   <?php require('parts/header.php'); ?>
@@ -49,7 +44,7 @@
       </div>
       <div class="modal-body">
         <p>お問い合わせいただきました内容につきましては、追ってご連絡をお待ちくださいね</p>
-        <button type="submit" class="btn btn-default submit" ><i class="fa fa-paper-plane" aria-hidden="true"></i>  Back</button>
+        <a href="index.php"><button type="submit" class="btn btn-default submit" ><i class="fa fa-paper-plane" aria-hidden="true"></i>  Back</button></a>
         <div class="row">
             <div class="col-12-xs text-center">
             </div>
@@ -74,7 +69,7 @@
 // ページをリダイレクトする処理
 // header('Location:飛ばしたいファイルパス');
 // exit();とセットで使用します。
-        header('Location:contact.php');
+        // header('Location:contact.php');
         exit();
     }
 // ★★★★★★★★★★★★ポイント★★★上のリダイレクトの結果が、URLの部分で〜thanks.phpに直接書いて、飛ぼうとすると自動で、〜index.htmlに飛ぶ
@@ -101,7 +96,7 @@
 // ■■■■■■■■■■PHPとMySQLの連携の３ステップ
 // ★★★★★★★★★★★★★★★★★ステップ１：データベースとの接続（限られた人にしかアクセスして欲しくないから、こんなに多くのコードをかく）
 // ！！！！丸暗記！！！！！！
-    $dsn = 'mysql:dbname=★★★★★★★★;host=localhost';
+    $dsn = 'mysql:dbname=Cebty;host=localhost';
     $user = 'root';
     $password = '';
     $dbh = new PDO($dsn, $user, $password);
@@ -125,11 +120,19 @@
     //                     `nickname`=?,
     //                     `email`=?,
     //                     `content`=?';
+        $username=htmlspecialchars($_POST['username']);
+        $email=htmlspecialchars($_POST['email']);
+        $subject=htmlspecialchars($_POST['subject']);
+        $content=htmlspecialchars($_POST['content']);
 
-    $sql = 'INSERT INTO `users` SET
-                        `nickname`=?,
+        
+    $sql = 'INSERT INTO `cebty_contact` SET
+                        `username`=?,
+                        `content`=?,
                         `email`=?,
-                        `content`=?';
+                        `subject`=?';
+
+
 
     // echo $sql;
     // echo '<br>';
@@ -138,9 +141,8 @@
 // <!-- ？に対応したデータを配列形式で定義する (みやすくするために、変数に入れる。そのまま右辺を使ってもいい。)-->
 
 
-
-    $data=array($nickname,$email,$content);
-    // echo $data[0];=>$nicknameの値。
+    $data=array($username,$content,$email,$subject);
+        // echo $data[0];=>$nicknameの値。
     // // すなわち最初のページのニックネームの値が入る。
     // echo $data[1];=>$emailの値。
     // // すなわち最初のページのemailの値が入る。
@@ -169,8 +171,7 @@
 
     // ステップ３：データベース切断
     $dbh=null;
-    echo 'お問い合わせいただきまして誠にありがとうございます。<br>';
-    echo 'お問い合わせいただきました内容につきましては、追ってご連絡をお待ちください。';
+
 
 ?>
   <?php require('parts/footer.php'); ?>
@@ -187,5 +188,6 @@
 });
 
 </script>
+</section>
 </body>
 </html>
