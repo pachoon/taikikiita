@@ -1,11 +1,11 @@
-* {
+/** {
   box-sizing: border-box;
 }
 
 body {
   background-color: #edeff2;
   font-family: "Calibri", "Roboto", sans-serif;
-}
+}*/
 
 .chat_window {
   /*position: absolute;*/
@@ -16,7 +16,6 @@ body {
   background-color: #fff;
   left: 50%;
   top: 50%;
-  transform: translateX(-50%) translateY(-50%);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
   background-color: #f8f8f8;
   overflow: hidden;
@@ -145,7 +144,6 @@ body {
   width: 100%;
   background-color: #fff;
   padding: 20px 20px;
-  position: absolute;
   bottom: 0;
 }
 .bottom_wrapper .message_input_wrapper {
@@ -192,4 +190,25 @@ body {
 
 .message_template {
   display: none;
+}
+
+.chat-box1{
+  text-align: center;
+  display: table-cell;
+  vertical-align: middle;
+  width: 40%;
+  height: 100px;
+  margin-right: auto;
+}
+.chat-box2{
+  text-align: center;
+  display: table-cell;
+  vertical-align: middle;
+  width: 60%;
+  height: 120px;
+  margin-left: auto;
+}
+
+.chat{
+  text-align: center;
 }

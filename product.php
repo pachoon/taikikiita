@@ -81,12 +81,13 @@
       <div class="container" style="margin-top: 150px;">
         <div class="row">
           <div class=" col-md-6">
-            <h2 id="product-h2">商品名</h4>
+            <h2 id="product-h2">商品名</h2>
+            <div class="devider"></div>
               <div id='carousel-custom' class='carousel slide' data-ride='carousel'>
                 <div class='carousel-outer'>
       <!-- me art lab slider -->
                   <div class='carousel-inner '>
-                    <div class='item active'>
+                    <div class='item active' style="width: 300px; height: 300px;">
                       <img src='http://images.asos-media.com/inv/media/8/2/3/3/5313328/print/image1xxl.jpg' alt=''id="zoom_05"  data-zoom-image="http://images.asos-media.com/inv/media/8/2/3/3/5313328/print/image1xxl.jpg"/>
                     </div>
                     <div class='item'  id="zoom_05">
@@ -132,19 +133,44 @@
 
                 </ol>
             </div>
-            <script type="text/javascript">
-              $(document).ready(function() {
-              $(".mCustomScrollbar").mCustomScrollbar({axis:"x"});
-              });
-            </script>
+            
             
           </div>
             <!-- productPictureEnd -->
         <div class="col-md-6">
+          <p class="item-detail">価格 : </p>
+          <p class="item-detail">１００円</p>
+          <br>
+          <p class="item-detail">引渡可能日 : </p>
+          <p class="item-detail">１０月１０日</p>
+          <br>
+          <p class="item-detail">エリア : </p>
+          <p class="item-detail">アヤラ付近</p>
+          <br>
+          <p class="item-detail">エリア : </p>
+          <p class="item-detail">アヤラ付近</p>
+          <br>
+          <p class="item-detail">コメント</p>
+          <p class="item-detail">めっちゃ綺麗に使っていました。価格は交渉いたします。受け渡し場所も相談させてください。よろしくお願いします。</p>
+          <br>
           
-          
+          <br>
         </div>
 
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <a href="product.php" class="btn btn-danger btn-lg">購入リクエスト</a> 
+          <a href="product.php" class="btn btn-warning btn-lg">お気に入り登録</a>
+          <br>
+          <a href="product.php" class="btn btn-info btn-lg">出品者へ問合せ</a>
+          
+        </div>
+        <div class="col-md-6">
+          
+        </div>
       </div>
     </div>
     
@@ -152,7 +178,11 @@
 
 
 
-
+<script type="text/javascript">
+              $(document).ready(function() {
+              $(".mCustomScrollbar").mCustomScrollbar({axis:"x"});
+              });
+            </script>
 <script type="text/javascript" src="product.js"></script>
 </body>
 </html>

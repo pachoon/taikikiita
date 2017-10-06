@@ -81,62 +81,71 @@ echo $comment;
   </header>
 <body>
   <div class="container" style="padding-top: 130px">
-    <div class="row">
-      <div class="col-md-offset-3 col-md-6 frame">
-        <table id="edit_putup" class="table">
-          <thead>
-            <tr>
-              <th>商品名</th>
-              <th>出品者</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">1</th>
-                <td><img src="img/slider-bg.jpg" style="width:150px;"></td>
-                <td>taro.kirameki@example.com</td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-                <td>煌木 次郎</td>
-                <td>jiro.kirameki@example.com</td>
-            </tr>
-          </tbody>
-        </table>
+    <div class="row" style="">
+      <div class="col-md-offset-2 col-md-4">
+        <h2 class="chat">商品</h2>
+        <div class="devider"></div>
       </div>
+      <div class="col-md-4">
+        <h2 class="chat">投稿者</h2>
+        <div class="devider"></div>
+      </div>
+        <div class="row">
+          <div class="col-md-offset-2 col-md-2">
+            <div class="chat-box1">
+              <img src="img/camera-icon.jpg" width="120px">
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="chat-box2">
+              <h4>商品概要</h4>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="chat-box1">
+              <img src="img/user_icon.png" width="120px">
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="chat-box2">
+              <h4>百獣の王</h4>
+            </div>
+          </div>
+          
+        </div>
+      
     </div>
   </div>
   <!-- chat bigin-->
-  <div class="container" style="padding-top: 230px">
+  <div class="container">
     <div class="row">
+    <div class="col-md-8 col-md-offset-2">
       <div class="chat_window" >
         <div class="top_menu">
-          <div class="buttons">
-            <div class="button close"></div>
-            <div class="button minimize"></div>
-            <div class="button maximize"></div>
-          </div>
           <div class="title">Chat</div>
         </div>
-        <ul class="messages"></ul>
+        
+        <div class="col-md-12">
+        <ul class="messages" ></ul>
           <div class="bottom_wrapper clearfix">
             <div class="message_input_wrapper">
-              <input class="message_input" placeholder="Type your message here..." />
+              <input class="message_input" placeholder="メッセージを入力してください..." />
             </div>
             <div class="send_message">
               <div class="icon"></div>
-              <div class="text">Send</div>
+              <div class="text">送信</div>
             </div>
           </div>
-      </div>
-      <div class="message_template">
+      
+      <!-- <div class="message_template">
         <li class="message">
           <div class="avatar"></div>
           <div class="text_wrapper">
             <div class="text"></div>
           </div>
         </li>
-      </div>
+      </div> -->
+    
     </div>
   </div>
   <!-- chat end -->
