@@ -1,126 +1,109 @@
 <?php 
 
-// session_start();
+session_start();
 
 
-//     $item_name = '';
-//     $itempic_path = '';
-//     $itempic_path2 = '';
-//     $itempic_path3 = '';
-//     $price = '';
-//     $limited_date = '';
-//     $item_detail = '';
-//     $dealing_area = '';
-//     $daling_date = '';
-//     $category = '';
+    $item_name = '';
+    $price = '';
+    $limited_date = '';
+    $item_detail = '';
+    $dealing_area = '';
+    $daling_date = '';
+    $category = '';
 
 
-//     if(!empty($_POST)){
+     if(!empty($_POST)){
 
+      echo 'POST送信しました<br>';
 
-//     $item_name = $_POST['item_name'];
-//     $itempic_path = $_POST['itempic_path'];
-//     $itempic_path2 = $_POST['itempic_path2'];
-//     $itempic_path3 = $_POST['itempic_path3'];
-//     $price = $_POST['price'];
-//     $limited_date = $_POST['limited_date'];
-//     $item_detail = $_POST['item_detail'];
-//     $dealing_area = $_POST['dealing_area'];
-//     $daling_date = $_POST['daling_date'];
-//     $category = $_POST['category'];
+     $item_name = $_POST['item_name'];
+     $price = $_POST['price'];
+     $limited_date = $_POST['limited_date'];
+     $item_detail = $_POST['item_detail'];
+     $dealing_area = $_POST['dealing_area'];
+     $daling_date = $_POST['daling_date'];
+     $category = $_POST['category'];
 
+     $erros = array();
+     if($item_name == '' ){
+         $errors['item_name'] = 'blank';
+     }
+     if($price == '' ){
+         $errors['price'] = 'blank';
+     }
+     if($limited_date == '' ){
+         $errors['limited_date'] = 'blank';
+     }
+     if($item_detail == '' ){
+         $errors['item_detail'] = 'blank';
+     }
+     if($dealing_area == '' ){
+         $errors['dealing_area'] = 'blank';
+     }
+     if($daling_date == '' ){
+         $errors['daling_date'] = 'blank';
+     }
+     if($category == '' ){
+         $errors['category'] = 'blank';
+     }
 
-//     $erros = array();
-
-//     if($item_name == '' ){
-//         $errors['item_name'] = 'blank';
-//     }
-//     if($itempic_path == '' ){
-//         $errors['itempic_path'] = 'blank';
-//     }
-//     if($itempic_path2 == '' ){
-//         $errors['itempic_path2'] = 'blank';
-//     }
-//     if($itempic_path3 == '' ){
-//         $errors['itempic_path3'] = 'blank';
-//     }
-//     if($price == '' ){
-//         $errors['price'] = 'blank';
-//     }
-//     if($limited_date == '' ){
-//         $errors['limited_date'] = 'blank';
-//     }
-//     if($item_detail == '' ){
-//         $errors['item_detail'] = 'blank';
-//     }
-//     if($dealing_area == '' ){
-//         $errors['dealing_area'] = 'blank';
-//     }
-//     if($daling_date == '' ){
-//         $errors['daling_date'] = 'blank';
-//     }
-//     if($category == '' ){
-//         $errors['category'] = 'blank';
-//     }
-
-//    $fileNameOne = $_FILES['itempic_path']['name'];
-
-//    if(!empty($fileNameOne)){
-//         $ext = substr($fileNameOne,-3);
-//         $ext = strtolower($ext);
-//         if ($ext != 'jpg' && $ext != 'png' && $ext != 'gif'){
-//             $errors['itempic_path'] = 'extension';
-//         }
-//         }
-//     if (empty($errors)){
-//         move_uploaded_file($_FILES['itempic_path']['tmp_name'], 'profile_image/'.$fileNameOne);
-
-//    $fileNameTwo = $_FILES['itempic_path2']['name'];
-
-//    if(!empty($fileNameTwo)){
-//         $ext = substr($fileNameTwo,-3);
-//         $ext = strtolower($ext);
-//         if ($ext != 'jpg' && $ext != 'png' && $ext != 'gif'){
-//             $errors['itempic_path2'] = 'extension';
-//         }
-//         }
-//     if (empty($errors)){
-//         move_uploaded_file($_FILES['itempic_path2']['tmp_name'], 'profile_image/'.$fileNameTwo);
-
-//    $fileNameThree = $_FILES['itempic_path3']['name'];
-
-//    if(!empty($fileNameThree)){
-//         $ext = substr($fileNameThree,-3);
-//         $ext = strtolower($ext);
-//         if ($ext != 'jpg' && $ext != 'png' && $ext != 'gif'){
-//             $errors['itempic_path3'] = 'extension';
-//         }
-//         }
-//     if (empty($errors)){
-//         move_uploaded_file($_FILES['itempic_path3']['tmp_name'], 'profile_image/'.$fileNameThree);
+    $fileNameOne = $_FILES['itempic_path']['name'];
+    if(!empty($fileNameOne)){
+         $ext = substr($fileNameOne,-3);
+         $ext = strtolower($ext);
+         if ($ext != 'jpg' && $ext != 'png' && $ext != 'gif'){
+             $errors['itempic_path'] = 'extension';
+         }
+    }
+    $fileNameTwo = $_FILES['itempic_path2']['name'];
+    if(!empty($fileNameTwo)){
+         $ext = substr($fileNameTwo,-3);
+         $ext = strtolower($ext);
+         if ($ext != 'jpg' && $ext != 'png' && $ext != 'gif'){
+             $errors['itempic_path2'] = 'extension';
+         }
+    }
+    $fileNameThree = $_FILES['itempic_path3']['name'];
+    if(!empty($fileNameThree)){
+         $ext = substr($fileNameThree,-3);
+         $ext = strtolower($ext);
+         if ($ext != 'jpg' && $ext != 'png' && $ext != 'gif'){
+             $errors['itempic_path3'] = 'extension';
+         }
+    }
+    if (empty($errors)){
+         move_uploaded_file($_FILES['itempic_path']['tmp_name'], 'itempic/'.$fileNameOne);
+    }
+    if (empty($errors)){
+         move_uploaded_file($_FILES['itempic_path2']['tmp_name'], 'itempic/'.$fileNameTwo);
+    }
+    if (empty($errors)){
+         move_uploaded_file($_FILES['itempic_path3']['tmp_name'], 'itempic/'.$fileNameThree);
+    }
 
 
 
-//         // check.phpへリダイレクト
-//         // $_SESSEION スーパーグローバル変数
-//         // データを一時的に保存する
-//         $_SESSION['user_info']['item_name'] = $item_name;
-//         $_SESSION['user_info']['itempic_path'] = $itempic_path;
-//         $_SESSION['user_info']['itempic_path2'] = $itempic_path2;
-//         $_SESSION['user_info']['itempic_path3'] = $itempic_path3;
-//         $_SESSION['user_info']['price'] = $price;
-//         $_SESSION['user_info']['limited_date'] = $limited_date;
-//         $_SESSION['user_info']['item_detail'] = $item_detail;
-//         $_SESSION['user_info']['dealing_area'] = $dealing_area;
-//         $_SESSION['user_info']['daling_date'] = $daling_date;
-//         $_SESSION['user_info']['category'] = $category;
+
+         // check.phpへリダイレクト
+         // $_SESSEION スーパーグローバル変数
+         // データを一時的に保存する
+         $_SESSION['item_info']['item_name'] = $item_name;
+         $_SESSION['item_info']['itempic_path'] = $fileNameOne;
+         $_SESSION['item_info']['itempic_path2'] = $fileNameTwo;
+         $_SESSION['item_info']['itempic_path3'] = $fileNameThree;
+         $_SESSION['item_info']['price'] = $price;
+         $_SESSION['item_info']['limited_date'] = $limited_date;
+         $_SESSION['item_info']['item_detail'] = $item_detail;
+         $_SESSION['item_info']['dealing_area'] = $dealing_area;
+         $_SESSION['item_info']['daling_date'] = $daling_date;
+         $_SESSION['item_info']['category'] = $category;
 
 
-//         // POST送信を破棄する
-//         header('Location: confirm_signup.php');
-//         exit();
-//     }
-//   }
+         // POST送信を破棄する
+         header('Location: product_confirm_putup.php');
+         exit();
+     }
+   
 
  ?>
 
@@ -140,22 +123,22 @@
 <body>
 
 
-<?php
+<!-- <?php
 
-if(isset($_SESSION['login_user'])){
+// if(isset($_SESSION['login_user'])){
 
-  require('parts/login_header.php');
+//   require('parts/login_header.php');
 
-}else{
+// }else{
 
-  require('parts/header.php');
-}
+//   require('parts/header.php');
+// }
 
- ?>
+ ?> -->
 
-<!-- <?php require('parts/assets.php') ?> -->
+<!-- <?php //require('parts/assets.php') ?> -->
 
-<section id="text-carousel-intro-section" class="parallax" data-stellar-background-ratio="0.5" style="background-image: url(img/slider-bg2.jpg); ">
+<!-- <section id="text-carousel-intro-section" class="parallax" data-stellar-background-ratio="0.5" style="background-image: url(img/slider-bg2.jpg); "> -->
 
 
     <div class="container" style="padding-top:130px;">
@@ -163,7 +146,7 @@ if(isset($_SESSION['login_user'])){
             <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 well">
                 <h2 class="text-center">商品登録</h2>
                 <div class="devider"></div>
-                <form action="#" method="post" class="form" role="form" enctype="multipart/form-data">
+                <form action="" method="post" class="form" role="form" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-xs-12 col-md-12">
                       <h5>題名</h5>
@@ -172,24 +155,11 @@ if(isset($_SESSION['login_user'])){
                     </div>
                     <!-- 商品画像１ -->
                     <h5>商品画像</h5>
-                <label for="file_photo" required style="color: white;background-color: crimson;padding: 6px;border-radius: 6px; cursor:pointer;font-size:12px;">
-                  商品画像を選択
-                    <input type="file" id="file_photo" name="profile_image_path" accept="image/*" required style="display:none" >
-                </label>
-                <div class="preview" style="padding-bottom:7px;"></div>
-                    <!-- 商品画像２ -->
-                <label for="file_photo" required style="color: white;background-color: crimson;padding: 6px;border-radius: 6px; cursor:pointer;font-size:12px;">
-                  商品画像を選択
-                    <input type="file" id="file_photo" name="profile_image_path" accept="image/*" required style="display:none" >
-                </label>
-                <div class="preview" style="padding-bottom:7px;"></div>
-                    <!-- 商品画像３ -->
-                <label for="file_photo" required style="color: white;background-color: crimson;padding: 6px;border-radius: 6px; cursor:pointer;font-size:12px;">
-                  商品画像を選択
-                    <input type="file" id="file_photo" name="profile_image_path" accept="image/*" required style="display:none" >
-                </label>
-                <div class="preview" style="padding-bottom:7px;"></div>
-
+                    <input type="file" name="itempic_path" accept="image/*"  >
+                    <input type="file" name="itempic_path2" accept="image/*"  >
+                    <input type="file" name="itempic_path3" accept="image/*"  >
+                
+                
                 </div>
                 <h5>価格</h5>
                 <input class="form-control" name="price" placeholder="例：1000" type="numper" style="height:28px; font-size:12px;"/>
@@ -220,14 +190,7 @@ if(isset($_SESSION['login_user'])){
                   <option>薬</option>
                   <option>その他</option>
                 </select>
-
-                
-
-                
-
-
-
-
+                <br>
                 <button class="btn btn-md btn-primary btn-block" type="submit">
                     確認画面へ</button>
                 </form>
@@ -251,44 +214,6 @@ if(isset($_SESSION['login_user'])){
             </footer>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-
-<script>
-
-$(function(){
-  //画像ファイルプレビュー表示のイベント追加 fileを選択時に発火するイベントを登録
-  $('form').on('change', 'input[type="file"]', function(e) {
-    var file = e.target.files[0],
-        reader = new FileReader(),
-        $preview = $(".preview");
-        t = this;
-
-    // 画像ファイル以外の場合は何もしない
-    if(file.type.indexOf("image") < 0){
-      return false;
-    }
-
-    // ファイル読み込みが完了した際のイベント登録
-    reader.onload = (function(file) {
-      return function(e) {
-        //既存のプレビューを削除
-        $preview.empty();
-        // .prevewの領域の中にロードした画像を表示するimageタグを追加
-        $preview.append($('<img style="padding-top:5px;">').attr({
-                  src: e.target.result,
-                  width: "150px",
-                  class: "preview",
-                  title: file.name
-              }));
-      };
-    })(file);
-
-    reader.readAsDataURL(file);
-  });
-});
-
-
-</script>
-
 
 
     <script src="inc/jquery/jquery-1.11.1.min.js"></script>

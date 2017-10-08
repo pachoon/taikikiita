@@ -1,9 +1,11 @@
 <!-- 仮です -->
 <?php
-if(isset($_GET[‘comment’])){
-$comment = $_GET[‘comment’];
-echo $comment;
-}
+// if(isset($_GET[‘comment’])){
+// $comment = $_GET[‘comment’];
+// echo $comment;
+// }
+
+
 ?>
 <!-- 仮でした。 -->
 
@@ -92,6 +94,16 @@ echo $comment;
         <button type="button" class="btn btn-default btn-lg" style=" background-color: #f95481;">新規出品</button>
       </div>
     </div>
+
+          <?php foreach ($items as $item) { ?>
+            <div style="margin-bottom: 15px;">
+              <?php echo $items['username']; ?><br>
+              <img src="profile_image/<?php echo $tweet['picture_path'];?>" width="40px">
+              <span style="font-size: 17px"><?php echo $tweet['tweet']; ?></span>
+              <br>
+              <a href="view.php?id=<?php echo $tweet['id']; ?>"><?php echo "ツイート日時:" . $tweet['created']; ?></a><br>
+              
+<?php } ?>
 
     <div class="container" style="padding-top: 50px;" align="center">
       <table id="edit_putup" class="table table-responsive">

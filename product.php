@@ -1,4 +1,71 @@
 <!-- 仮です -->
+<?php 
+   session_start();
+
+   $dsn = 'mysql:dbname=cebty;host=localhost';
+   $user = 'root';
+   $password = '';
+   $dbh = new PDO($dsn, $user, $password);
+   $dbh->query('SET NAMES utf8');
+
+   $errors = array();
+   if(!empty($_POST)){
+     //POST送信があった全てがここの中に入る
+
+     if(isset($_POST['favorit']) && $_POST['favorit'] == 'favorit'){
+         //いいねを押した時はここの処理が走る
+         echo 'いいね';
+         $sql = 'INSERT INTO `cebty_favorit` SET `items_id`=? ,
+                                                 `user_id`=?
+         ';
+         $data = array($_POST['items_id'],$_SESSION['login_user']['id']);
+         $stmt = $dbh->prepare($sql);
+         $stmt->execute($data);
+     }elseif(isset($_POST['favorit']) && $_POST['favorit'] == 'unlike'){
+         //いいね取り消しを押した場合、ここの処理が走る
+         $sql = 'DELETE FROM `cebty_favorit` WHERE `items_id`=?
+                                             AND `user_id`=?
+         ';
+         $data = array($_POST['items_id'],$_SESSION['login_user']['id']);
+         $stmt = $dbh->prepare($sql);
+         $stmt->execute($data);
+
+     }
+
+  //   if(isset($_POST['likes'])){
+  //       // いいね、またはいいね取り消しを押した場合は、ここの処理が走る
+  //       // $_POSTの情報を破棄。
+  //       header('Location: timeline.php');
+  //       exit();
+  //   }
+
+
+        $item = $_SESSION['items_id'];
+
+   }
+
+  $sql = "SELECT `cebty_items`.*, `cebty_users`.`username`,`cebty_users`.`picture_path`
+          FROM `cebty_users`
+          LEFT JOIN `cebty_items`
+          ON `cebty_items`.`user_id` = `cebty_users`.`id`
+          WHERE 1 ";
+
+//   $tweets = array();
+//     while (true) {
+//     $record = $stmt->fetch(PDO::FETCH_ASSOC);
+//     // $recordはデータベースのカラム値をkeyとする、
+//     // 連想配列で構成されます。（データベースから1件とってきます）
+//     // echo $record['username'];
+//     // echo "<br>";
+//     if (!$record){
+//         break;
+//     }
+//     $tweets[]=$record;
+// }
+
+ ?>
+
+
 
 <!-- 仮でした。 -->
 <!DOCTYPE html>
@@ -6,7 +73,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Cebty</title>
+    <title>商品詳細</title>
     <meta name="description" content="">
     <meta name="keywords" content="セブティ, Cebty" />
     <meta name="author" content="">
@@ -77,99 +144,91 @@
   </header>
   <!-- ========= END HEADER =========-->
 <body>
-        <!-- productPicture -->
-      <div class="container" style="margin-top: 150px;">
+              <div class="container" style="margin-top: 150px;">
         <div class="row">
-          <div class=" col-md-6">
-            <h2 id="product-h2">商品名</h2>
-            <div class="devider"></div>
-              <div id='carousel-custom' class='carousel slide' data-ride='carousel'>
-                <div class='carousel-outer'>
-      <!-- me art lab slider -->
-                  <div class='carousel-inner '>
-                    <div class='item active' style="width: 300px; height: 300px;">
-                      <img src='http://images.asos-media.com/inv/media/8/2/3/3/5313328/print/image1xxl.jpg' alt=''id="zoom_05"  data-zoom-image="http://images.asos-media.com/inv/media/8/2/3/3/5313328/print/image1xxl.jpg"/>
-                    </div>
-                    <div class='item'  id="zoom_05">
-                      <img src='http://images.asos-media.com/inv/media/8/2/3/3/5313328/image2xxl.jpg' alt='' data-zoom-image="http://images.asos-media.com/inv/media/8/2/3/3/5313328/image2xxl.jpg" />
-                    </div>
-                    <div class='item'>
-                      <img src='http://images.asos-media.com/inv/media/8/2/3/3/5313328/image3xxl.jpg' alt='' data-zoom-image="http://images.asos-media.com/inv/media/8/2/3/3/5313328/image3xxl.jpg" />
-                    </div>
-                    <div class='item'>
-                      <img src='http://images.asos-media.com/inv/media/3/6/7/0/4850763/multi/image1xxl.jpg' alt='' data-zoom-image="http://images.asos-media.com/inv/media/3/6/7/0/4850763/multi/image1xxl.jpg" id="zoom_05"/>
-                    </div>
-                    <div class='item'>
-                      <img src='http://images.asos-media.com/inv/media/5/2/1/3/4603125/gold/image1xxl.jpg' alt='' data-zoom-image="http://images.asos-media.com/inv/media/5/2/1/3/4603125/gold/image1xxl.jpg" id="zoom_05"/>
-                    </div>
-                    <div class='item'>
-                      <img src='http://images.asos-media.com/inv/media/5/3/6/8/4948635/mink/image1xxl.jpg' alt='' data-zoom-image="http://images.asos-media.com/inv/media/5/3/6/8/4948635/mink/image1xxl.jpg" id="zoom_05"/>
-                    </div>
-                    <div class='item'>
-                      <img src='http://images.asos-media.com/inv/media/1/3/0/8/5268031/image2xxl.jpgg' alt='' data-zoom-image="http://images.asos-media.com/inv/media/1/3/0/8/5268031/image2xxl.jpg" id="zoom_05"/>
-                    </div>
-                    <script>
-                      $("#zoom_05").elevateZoom({ zoomType    : "inner", cursor: "crosshair" });
-                    </script>
-                  </div>
-                    <!-- sag sol -->
-                    <a class='left carousel-control' href='#carousel-custom' data-slide='prev'>
-                        <span class='glyphicon glyphicon-chevron-left'></span>
-                    </a>
-                    <a class='right carousel-control' href='#carousel-custom' data-slide='next'>
-                        <span class='glyphicon glyphicon-chevron-right'></span>
-                    </a>
-                </div>
-                
-                <!-- thumb -->
-                <ol class='carousel-indicators mCustomScrollbar meartlab'>
-                    <li data-target='#carousel-custom' data-slide-to='0' class='active'><img src='http://images.asos-media.com/inv/media/8/2/3/3/5313328/print/image1xxl.jpg' alt='' /></li>
-                    <li data-target='#carousel-custom' data-slide-to='1'><img src='http://images.asos-media.com/inv/media/8/2/3/3/5313328/image2xxl.jpg' alt='' /></li>
-                    <li data-target='#carousel-custom' data-slide-to='2'><img src='http://images.asos-media.com/inv/media/8/2/3/3/5313328/image3xxl.jpg' alt='' /></li>
-                    <li data-target='#carousel-custom' data-slide-to='3'><img src='http://images.asos-media.com/inv/media/3/6/7/0/4850763/multi/image1xxl.jpg' alt='' /></li>
-                    <li data-target='#carousel-custom' data-slide-to='4'><img src='http://images.asos-media.com/inv/media/5/2/1/3/4603125/gold/image1xxl.jpg' alt='' /></li>
-                    <li data-target='#carousel-custom' data-slide-to='5'><img src='http://images.asos-media.com/inv/media/5/3/6/8/4948635/mink/image1xxl.jpg' alt='' /></li>
-                    <li data-target='#carousel-custom' data-slide-to='6'><img src='http://images.asos-media.com/inv/media/1/3/0/8/5268031/image2xxl.jpg' alt='' /></li>
+          <h2 id="product-h2"><?php echo $_SESSION['item_name'] ?> </h2>
+          <div class="devider"></div>
+        </div>
+        <!-- productPicture -->
 
-                </ol>
+
+        <div class="row">
+            <div class=" col-md-6">
+            <img src="profile_image/<?php echo $_SESSION['picture_path']; ?>" width="50px">
+            <img src="profile_image/<?php echo $_SESSION['picture_path']; ?>" width="50px">
+            <img src="profile_image/<?php echo $_SESSION['picture_path']; ?>" width="50px">
             </div>
-            
-            
-          </div>
+        
             <!-- productPictureEnd -->
         <div class="col-md-6">
-          <p class="item-detail">価格 : </p>
-          <p class="item-detail">１００円</p>
+          <p class="item-detail">価格 : <?php echo $_SESSION['price'] ?>ペソ</p>
           <br>
-          <p class="item-detail">引渡可能日 : </p>
-          <p class="item-detail">１０月１０日</p>
+          <p class="item-detail">引渡可能日 : <?php echo $_SESSION['daling_date'] ?></p>
           <br>
-          <p class="item-detail">エリア : </p>
-          <p class="item-detail">アヤラ付近</p>
+          <p class="item-detail">エリア : <?php echo $_SESSION['dealing_area'] ?></p>
           <br>
-          <p class="item-detail">エリア : </p>
-          <p class="item-detail">アヤラ付近</p>
+          <p class="item-detail">カテゴリ : <?php echo $_SESSION['category'] ?></p>
           <br>
-          <p class="item-detail">コメント</p>
-          <p class="item-detail">めっちゃ綺麗に使っていました。価格は交渉いたします。受け渡し場所も相談させてください。よろしくお願いします。</p>
+          <p class="item-detail">コメント : </p>
+          <p class="item-detail"><?php echo $_SESSION['item_detail'] ?></p>
+          <br>
+          <p class="item-detail">掲載期限 : <?php echo $_SESSION['limited_date'] ?></p>
           <br>
           
           <br>
         </div>
-
       </div>
-    </div>
+
     <div class="container">
       <div class="row">
         <div class="col-md-6">
           <a href="product.php" class="btn btn-danger btn-lg">購入リクエスト</a> 
-          <a href="product.php" class="btn btn-warning btn-lg">お気に入り登録</a>
+
+          <?php 
+                  // いいねのカウントを表示
+                  $sql = 'SELECT COUNT(*) AS `count` FROM `cebty_favorite` WHERE `items_id` = ?';
+                  $data = array();
+                  $stmt = $dbh->prepare($sql);
+                  $stmt->execute($data);
+                  // 1件文のデータを取得
+                  $likes = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                  // 自分がいいね！を一回以上しているかどうかをチェック
+                  $sql = 'SELECT COUNT(*) AS `count` FROM `cebty_favorite` WHERE `items_id` = ? AND `user_id` = ?';
+                  $data = array($item['items_id'],$_SESSION['login_user']['id']);
+                  $stmt = $dbh->prepare($sql);
+                  $stmt->execute($data);
+                  // 1件文のデータを取得
+                  $likes_chk = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                   var_dump($likes_chk['count']);
+              ?>
+
+          <!-- お気に入りボタン -->
+          <form method="POST" action="">
+            <!-- いいね！数 <?php //echo $tweet['likes_count']; ?> -->
+              <!-- <input type="hidden" name="_id" value="<?php //echo $tweet['id']; ?>"> -->
+              <?php if ($likes_chk['count']==0) {?>
+                <input type="hidden" name="likes" value="like">
+                <input type="submit" value="お気に入り" class="btn btn-warning btn-lg">
+              <?php }else{ ?>
+                <input type="hidden" name="likes" value="unlike">
+                <input type="submit" value="お気に入り　取消" class="btn btn-danger btn-xs">
+
+              <?php } ?> 
+
+               
+            </form>
           <br>
-          <a href="product.php" class="btn btn-info btn-lg">出品者へ問合せ</a>
+          <a href="product.php" class="btn btn-info btn-lg" >出品者へ問合せ</a>
           
         </div>
-        <div class="col-md-6">
-          
+        <p style="text-align: center;">出品者</p>
+        <div class="col-md-2">
+          <img src="profile_image/<?php echo $_SESSION['picture_path']; ?>" width="50px">
+        </div>
+        <div>
+          <a href=""><?php echo $_SESSION['cebty_user']['username']?></a>
         </div>
       </div>
     </div>

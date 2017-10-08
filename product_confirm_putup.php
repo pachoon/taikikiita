@@ -11,37 +11,44 @@
   $dbh->query('SET NAMES utf8');
 
 
+
     //一度も入力せずに飛んだ人は登録画面へ飛ばす。
-  if(!isset($_SESSION['user_info'])){
-    header('Location: signup.php');
-    exit();
-  }
+  // if(!isset($_SESSION['user_info'])){
+  //   header('Location: signup.php');
+  //   exit();
+  // }
 
   if(!empty($_POST)){
 
-      $username = $_SESSION['user_info']['username'];
-      $email = $_SESSION['user_info']['email'];
-      $password = $_SESSION['user_info']['password'];
-      $gender = $_SESSION['user_info']['gender'];
-      $school = $_SESSION['user_info']['school'];
-      $introduce = $_SESSION['user_info']['introduce'];
-      $picture_path = $_SESSION['user_info']['profile_image_path'];
+      $item_name = $_SESSION['item_info']['item_name'];
+      $itempic_path = $_SESSION['item_info']['itempic_path'];
+      $itempic_path2 = $_SESSION['item_info']['itempic_path2'];
+      $itempic_path3 = $_SESSION['item_info']['itempic_path3'];
+      $price = $_SESSION['item_info']['price'];
+      $limited_date = $_SESSION['item_info']['limited_date'];
+      $item_detail = $_SESSION['item_info']['item_detail'];
+      $dealing_area = $_SESSION['item_info']['dealing_area'];
+      $daling_date = $_SESSION['item_info']['daling_date'];
+      $category = $_SESSION['item_info']['category'];
 
       //INSERT処理
-      $sql = 'INSERT INTO `cebty_users` SET `username`=?,
-                                              `email`=?,
-                                              `password`=?,
-                                              `gender`=?,
-                                              `school`=?,
-                                              `introduce`=?,
-                                              `picture_path`=?,
-                                              `created`=NOW()';
+      $sql = 'INSERT INTO `cebty_items` SET `item_name`=?,
+                                            `itempic_path`=?,
+                                            `itempic_path2`=?,
+                                            `itempic_path3`=?,
+                                            `price`=?,
+                                            `limited_date`=?,
+                                            `item_detail`=?,
+                                            `dealing_area`=?,
+                                            `daling_date`=?,
+                                            `category`=?,
+                                            `created`=NOW()';
                                               //sha1でパスワードをハッシュ化
-      $data = array($username,$email,sha1($password),$gender,$school,$introduce,$picture_path);
+      $data = array($item_name,$itempic_path,$itempic_path2,$itempic_path3,$price,$limited_date,$item_detail,$dealing_area,$daling_date,$category);
       $stmt = $dbh->prepare($sql);
       $stmt->execute($data);
 
-      header('Location: finish_signup.php');
+      header('Location: edit_putup.php');
       exit();
 
   }
@@ -74,7 +81,7 @@
 
 
 
-<section id="text-carousel-intro-section" class="parallax" data-stellar-background-ratio="0.5" style="background-image: url(img/slider-bg2.jpg); ">
+<!-- <section id="text-carousel-intro-section" class="parallax" data-stellar-background-ratio="0.5" style="background-image: url(img/slider-bg2.jpg); "> -->
 
 
 <div class="container" style="padding-top:100px;">
@@ -85,40 +92,21 @@
             <form action="#" method="post" class="form" role="form">
             <div class="row">
                 <div class="col-xs-12 col-md-12">
-                  <p style="padding-bottom:1px;">ユーザーネーム： 　<?php echo $_SESSION['user_info']['username']; ?></p>
+                  <p style="padding-bottom:1px;">題名： 　<?php echo $_SESSION['item_info']['item_name']; ?></p>
                 </div>
             </div>
-            <p style="padding-bottom:1px;">メールアドレス：　<?php echo $_SESSION['user_info']['email'];?> </p>
-            <p style="padding-bottom:1px;">パスワード：　<span style="font-size:10px;">●●●●●●●●●</span></p>
-
-<!--             <label for="" style="font-size:12px;padding-bottom:5px;">
-                生年月日</label>
-            <div class="row">
-                <div class="col-xs-4 col-md-4">
-                    <select class="form-control" style="height:28px; font-size:12px;">
-                        <option value="Month">月</option>
-                    </select>
-                </div>
-                <div class="col-xs-4 col-md-4">
-                    <select class="form-control" style="height:28px; font-size:12px;">
-                        <option value="Day">日</option>
-                    </select>
-                </div>
-                <div class="col-xs-4 col-md-4">
-                    <select class="form-control" style="height:28px; font-size:12px;">
-                        <option value="Year">年</option>
-                    </select>
-                </div>
-            </div> -->
-
-            <p style="padding-bottom:1px;">性別：　<?php echo $_SESSION['user_info']['gender']; ?></p>
-            <p style="padding-bottom:1px;">学校名：　<?php echo $_SESSION['user_info']['school']; ?></p>
-            <p style="padding-bottom:1px;">自己紹介：　<?php echo $_SESSION['user_info']['introduce']; ?></p>
-
-            <p style="padding-bottom:1px;">プロフィール画像：</p>
-            <img src="profile_image/<?php echo $_SESSION['user_info']['profile_image_path'];?>" width="150">
-
+            <p style="padding-bottom:1px;">商品画像：</p>
+            <img src="itempic/<?php echo $_SESSION['item_info']['itempic_path'];?>" width="150">
+            <img src="itempic/<?php echo $_SESSION['item_info']['itempic_path2'];?>" width="150">
+            <img src="itempic/<?php echo $_SESSION['item_info']['itempic_path3'];?>" width="150">
             <div class="preview" style="padding-bottom:7px;"></div>
+
+            <p style="padding-bottom:1px;">価格：　<?php echo $_SESSION['item_info']['price'];?> </p>
+            <p style="padding-bottom:1px;">掲載期限：　<?php echo $_SESSION['item_info']['limited_date'];?> </p>
+            <p style="padding-bottom:1px;">コメント：　<?php echo $_SESSION['item_info']['item_detail']; ?></p>
+            <p style="padding-bottom:1px;">エリア：　<?php echo $_SESSION['item_info']['dealing_area'];?> </p>
+            <p style="padding-bottom:1px;">取引可能日：　<?php echo $_SESSION['item_info']['daling_date']; ?>以降</p>
+            <p style="padding-bottom:1px;">カテゴリ：　<?php echo $_SESSION['item_info']['category']; ?></p>
 
             <div class="row">
                <div class="col-sm-6 col-md-6">
