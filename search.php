@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>商品検索</title>
+  <?php require('parts/assets.php') ?>
+  <link rel="stylesheet" type="text/css" href="css/search.css">
+</head>
+<body>
+
+<script src="js/search.js"></script>
+
+
+<?php
+
+session_start();
+
+if(isset($_SESSION['login_user']['username'])){
+
+require('parts/login_header.php');
+
+}else{
+
+require('parts/header.php');
+
+}
+
+
+  $dsn = 'mysql:dbname=cebty;host=localhost';
+  $user = 'root';
+  $password = '';
+  $dbh = new PDO($dsn, $user, $password);
+  $dbh->query('SET NAMES utf8');
+
+
+
+
+if(!empty($_POST['freeword']) || !empty($_POST['price']) || !empty($_POST['area'])){
+
+    $sql = 'SELECT * FROM `cebty_items` WHERE (`item_name` LIKE "%'.$_POST['freeword'].'%"
+                                              OR `item_detail` LIKE "%'.$_POST['freeword'].'%")
+                                                               AND `price` = ?
+                                                               AND `dealing_area` = ?';
+    $data = array($_POST['price'], $_POST['area']);
+    $stmt = $dbh->prepare($sql);
+    $stmt->execute($data);
+
+
+while(true){
+  $record = $stmt->fetch(PDO::FETCH_ASSOC);
+
+  if(!$record){
+     break;
+  }
+
+  $products=array();
+
+  $products[]=$record;
+}
+
+} else {
+
+    $sql = "SELECT * FROM `cebty_items` " ;
+    $data = array();
+    $stmt = $dbh->prepare($sql);
+    $stmt->execute($data);
+
+
+// 表示用の配列を用意
+
+while(true){
+  $record = $stmt->fetch(PDO::FETCH_ASSOC);
+  //$recordはデータベースのカラム値をkeyとする連想配列で構成されます.(データベースから１件取ってきます)
+
+
+  if(!$record){
+     break;
+  }
+  $products[]=$record;
+}
+}
+
+
+
+
+ ?>
+
+                                    <div class="portfolio_menu" id="filters" style="padding-top:120px;">
+                                        <ul>
+                                            <li class="active_prot_menu"><a href="#porfolio_menu" data-filter="*">すべて</a></li>
+                                            <li><a href="#porfolio_menu" data-filter=".elec">家電</a></li>
+                                            <li><a href="#porfolio_menu" data-filter=".cloth" >衣服</a></li>
+                                            <li><a href="#porfolio_menu" data-filter=".food">食料品</a></li>
+                                            <li><a href="#porfolio_menu" data-filter=".medecine">薬</a></li>
+                                            <li><a href="#porfolio_menu" data-filter=".others">その他</a></li>
+                                        </ul>
+                                    </div>
+
+
+  <header id="myCarousel" class="carousel slide">
+        <!-- Wrapper for Slides -->
+        <div class="carousel-buttons">
+  <div class="search" >
+        <div class="container" >
+          <div class="row">
+                <div class="col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1">
+              <div class="form-section">
+                <div class="row">
+                    <form role="form" method="POST" action="">
+                      <div class="col-sm-3 col-md-3">
+                        <div class="form-group">
+                             <div class="serchtile">価格</div>
+                          <label class="sr-only" for="looking">価格</label>
+                         <select id="selectbasic" name="price" class="form-control">
+                              <option value="*">全て</option>
+                              <option value="100">100ペソ以下</option>
+                              <option value="500">100-500ペソ以下</option>
+                              <option value="800">500-1000ペソ以下</option>
+                              <option value="1200">1000ペソ以上</option>
+                            </select>
+                        </div>
+                      </div>
+                      <div class="col-sm-3 col-md-3">
+                        <div class="form-group">
+                         <div class="serchtile">エリア</div>
+                          <label class="sr-only" for="area">エリア</label>
+                          <div class="input-group">
+                            <select id="age" name="area" class="form-control">
+                              <option value="*">全て</option>
+                              <option value="ITパーク">ITパーク</option>
+                              <option value="アヤラセンター">アヤラセンター</option>
+                              <option value="マンダウエ">マンダウエ</option>
+                              <option value="マクタン島">マクタン島</option>
+                            </select>
+                         </div>
+                        </div>
+                      </div>
+                          
+
+
+                      <div class="col-sm-4 col-md-4">
+                          
+                        <div class="form-group">
+                            <div class="serchtile">フリーワード</div>
+                          <label class="sr-only" for="religion">フリーワード</label>
+                          <input type="text" id="religion" name="freeword" class="form-control" name="">
+                        </div>
+                      </div>
+
+                      <div class="col-sm-2 col-md-2">
+                          <br>
+                           <div class="serchtile"></div>
+                        <button type="submit" class="btn btn-default btn-primary btn-block">検索</button>
+                   
+                      </div>
+                    </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+       
+        </div>
+
+
+
+    </header>  
+
+
+
+<div class="devider"></div>
+
+<div class="portfolio_content" id="portfolio">
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+
+        <?php foreach($products as $product){ ?>
+
+
+            <div class="col-md-3 col-sm-4 <?php echo $product['category']; ?> ">
+                <div class="view">
+                    <div class="caption">
+                        <h3>　　　　　</h3>
+                        <a href="" rel="tooltip" title="お気に入り"><span class="fa fa-heart-o fa-2x"></span></a>
+                        <a href="" rel="tooltip" title="商品詳細"><span class="fa fa-search fa-2x"></span></a>
+                    </div>
+                    <img src="itempc_path/<?php echo $product['itempc_path'];  ?>" class="img-responsive">
+                     <div class="propertyType house" style="line-height: 20px;"><?php echo $product['dealing_area']; ?></div>
+
+                </div>
+                <div class="info">
+                    <p class="small" style="text-overflow: ellipsis"><?php echo $product['item_name']; ?></p>
+                    <p class="small wb-red">受渡し可能日：<?php echo $product['daling_date']; ?></p>
+                </div>
+                <div class="stats wb-red-bg text-center">
+                    <span class="fa fa-rub" rel="tooltip" title="価格：<?php echo $product['price']; ?>ペソ"> <strong> <?php echo $product['price']; ?></strong></span>
+                </div>
+            </div>
+        <?php }  ?>
+
+        </div>
+    </div>
+</div>
+</div>
+
+
+        <script src="inc/jquery/jquery-1.11.1.min.js"></script>
+        <script src="inc/bootstrap/js/bootstrap.min.js"></script>
+        <script src="inc/owl-carousel/js/owl.carousel.min.js"></script>
+        <script src="inc/stellar/js/jquery.stellar.min.js"></script>
+        <script src="inc/animations/js/wow.min.js"></script>
+        <script src="inc/waypoints.min.js"></script>
+        <script src="inc/isotope.pkgd.min.js"></script>
+        <script src="inc/classie.js"></script>
+        <script src="inc/jquery.easing.min.js"></script>
+        <script src="inc/jquery.counterup.min.js"></script>
+        <script src="inc/smoothscroll.js"></script>
+
+        <!-- Theme JS -->
+        <script src="js/theme.js"></script>
+
+<br><br><br>
+<?php require('parts/footer.php') ?>
+
+</body>
+</html>
