@@ -1,5 +1,8 @@
 <!-- 仮です -->
-<?php 
+
+
+
+<?php
    session_start();
 
    $dsn = 'mysql:dbname=cebty;host=localhost';
@@ -7,6 +10,15 @@
    $password = '';
    $dbh = new PDO($dsn, $user, $password);
    $dbh->query('SET NAMES utf8');
+
+   $sql = "SELECT `cebty_items`.*, `cebty_users`.`username`,`cebty_users`.`picture_path`
+           FROM `cebty_users`
+           LEFT JOIN `cebty_items`
+           ON `cebty_items`.`user_id` = `cebty_users`.`id`
+           WHERE `cebty_items`.`id`=? ";
+   $data = array($_GET['id']); //?がない場合は空のままでOK
+   $stmt = $dbh->prepare($sql);
+   $stmt->execute($data); 
 
    $errors = array();
    if(!empty($_POST)){
@@ -44,11 +56,7 @@
 
    }
 
-  $sql = "SELECT `cebty_items`.*, `cebty_users`.`username`,`cebty_users`.`picture_path`
-          FROM `cebty_users`
-          LEFT JOIN `cebty_items`
-          ON `cebty_items`.`user_id` = `cebty_users`.`id`
-          WHERE 1 ";
+
 
 //   $tweets = array();
 //     while (true) {
