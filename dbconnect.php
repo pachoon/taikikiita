@@ -1,6 +1,6 @@
 <?php
 // MySQL接続情報
-$dsn = 'mysql:dbname=Cebty;host=localhost';
+$dsn = 'mysql:dbname=cebty;host=localhost';
 $user = 'root';
 $password = '';
 $dbh = new PDO($dsn, $user, $password);

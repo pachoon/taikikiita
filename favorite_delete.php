@@ -33,8 +33,8 @@ if(!isset($_SESSION['login_user']['id'])){
   // if(!isset($_SESSION['login_user']['id'])){
       // echo '削除可能！';
       // 削除(DELETE文のSQLを記述で完了！)
-      $sql = 'DELETE FROM `cebty_favorite` WHERE `item_name`=?';
-      $data = array($_GET['item_name']);
+      $sql = 'DELETE FROM `cebty_favorite` WHERE `id`=?';
+      $data = array($_GET['id']);
       $stmt = $dbh->prepare($sql);
       $stmt->execute($data);
 
