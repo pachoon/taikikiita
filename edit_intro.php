@@ -165,7 +165,7 @@ session_start();
             </label>
 
             <div class="preview2" style="padding-top:5px;"><img src="profile_image/<?php echo $_SESSION['login_user']['picture_path']; ?>" width="150"></div>
-            
+
 
             <div class="preview" style="padding-bottom:7px;"></div>
 

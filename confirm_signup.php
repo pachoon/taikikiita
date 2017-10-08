@@ -126,7 +126,7 @@
                  <button class="btn btn-md btn-primary btn-block" type="submit">登録する</button>
                </div>
                <div class="col-sm-6 col-md-6">
-                 <button class="btn btn-md btn-danger btn-block" type="submit">修正する</button>
+                 <a href="javascript:history.back()" class="btn btn-md btn-danger btn-block">もどる</a>
                </div>
             </div>
 

@@ -29,7 +29,7 @@
             <div class="devider"></div>
             <div class="row">
                <div class="col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2">
-                 <form action=""><button class="btn btn-md btn-primary btn-block" type="submit">マイページへ戻る</button></form>
+                 <form action=""><a href="edit_intro.php" class="btn btn-md btn-primary btn-block" type="submit">マイページへ戻る</a></form>
                </div>
             </div>
 
