@@ -34,13 +34,7 @@ if(!isset($_SESSION['login_user']['id'])){
 
 
 
-  // ログイン状態かチェック
-if(!isset($_SESSION['login_user']['id'])){
-    // セッションデータを保持しているかチェック
-    // セッションデータがなければ、ログインページへ飛ばす
-    header('Location: login.php');
-    exit();
-}
+
 
 
 if(isset($_SESSION['login_user']['id'])){
