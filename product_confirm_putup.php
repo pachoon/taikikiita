@@ -13,17 +13,17 @@
 
 
     //一度も入力せずに飛んだ人は登録画面へ飛ばす。
-  // if(!isset($_SESSION['user_info'])){
-  //   header('Location: signup.php');
-  //   exit();
-  // }
+  if(!isset($_SESSION['login_user']['id'])){
+    //セッションデータを保持しているかチェック
+    //セッションデータがなければログインページへ飛ばす
+    header('Location: login.php');
+    exit();
+  }
 
   if(!empty($_POST)){
 
       $item_name = $_SESSION['item_info']['item_name'];
       $itempic_path = $_SESSION['item_info']['itempic_path'];
-      $itempic_path2 = $_SESSION['item_info']['itempic_path2'];
-      $itempic_path3 = $_SESSION['item_info']['itempic_path3'];
       $price = $_SESSION['item_info']['price'];
       $limited_date = $_SESSION['item_info']['limited_date'];
       $item_detail = $_SESSION['item_info']['item_detail'];
@@ -32,10 +32,9 @@
       $category = $_SESSION['item_info']['category'];
 
       //INSERT処理
-      $sql = 'INSERT INTO `cebty_items` SET `item_name`=?,
+      $sql = 'INSERT INTO `cebty_items` SET `user_id`=?,
+                                            `item_name`=?,
                                             `itempic_path`=?,
-                                            `itempic_path2`=?,
-                                            `itempic_path3`=?,
                                             `price`=?,
                                             `limited_date`=?,
                                             `item_detail`=?,
@@ -43,8 +42,8 @@
                                             `daling_date`=?,
                                             `category`=?,
                                             `created`=NOW()';
-                                              //sha1でパスワードをハッシュ化
-      $data = array($item_name,$itempic_path,$itempic_path2,$itempic_path3,$price,$limited_date,$item_detail,$dealing_area,$daling_date,$category);
+                                              
+      $data = array($item_name,$itempic_path,$price,$limited_date,$item_detail,$dealing_area,$daling_date,$category);
       $stmt = $dbh->prepare($sql);
       $stmt->execute($data);
 
@@ -97,11 +96,9 @@
             </div>
             <p style="padding-bottom:1px;">商品画像：</p>
             <img src="itempic/<?php echo $_SESSION['item_info']['itempic_path'];?>" width="150">
-            <img src="itempic/<?php echo $_SESSION['item_info']['itempic_path2'];?>" width="150">
-            <img src="itempic/<?php echo $_SESSION['item_info']['itempic_path3'];?>" width="150">
             <div class="preview" style="padding-bottom:7px;"></div>
 
-            <p style="padding-bottom:1px;">価格：　<?php echo $_SESSION['item_info']['price'];?> </p>
+            <p style="padding-bottom:1px;">価格：　<?php echo $_SESSION['item_info']['price'];?> ペソ</p>
             <p style="padding-bottom:1px;">掲載期限：　<?php echo $_SESSION['item_info']['limited_date'];?> </p>
             <p style="padding-bottom:1px;">コメント：　<?php echo $_SESSION['item_info']['item_detail']; ?></p>
             <p style="padding-bottom:1px;">エリア：　<?php echo $_SESSION['item_info']['dealing_area'];?> </p>

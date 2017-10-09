@@ -2,6 +2,18 @@
 
 session_start();
 
+   $dsn = 'mysql:dbname=cebty;host=localhost';
+   $user = 'root';
+   $password = '';
+   $dbh = new PDO($dsn, $user, $password);
+   $dbh->query('SET NAMES utf8');
+
+    if(!isset($_SESSION['login_user']['id'])){
+    //セッションデータを保持しているかチェック
+    //セッションデータがなければログインページへ飛ばす
+    header('Location: login.php');
+     exit();
+    }
 
     $item_name = '';
     $price = '';
@@ -15,7 +27,6 @@ session_start();
      if(!empty($_POST)){
 
       echo 'POST送信しました<br>';
-
      $item_name = $_POST['item_name'];
      $price = $_POST['price'];
      $limited_date = $_POST['limited_date'];
@@ -47,50 +58,25 @@ session_start();
          $errors['category'] = 'blank';
      }
 
-    $fileNameOne = $_FILES['itempic_path']['name'];
-    if(!empty($fileNameOne)){
-         $ext = substr($fileNameOne,-3);
+    $fileName = $_FILES['itempic_path']['name'];
+    if(!empty($fileName)){
+         $ext = substr($fileName,-3);
          $ext = strtolower($ext);
          if ($ext != 'jpg' && $ext != 'png' && $ext != 'gif'){
              $errors['itempic_path'] = 'extension';
          }
     }
-    $fileNameTwo = $_FILES['itempic_path2']['name'];
-    if(!empty($fileNameTwo)){
-         $ext = substr($fileNameTwo,-3);
-         $ext = strtolower($ext);
-         if ($ext != 'jpg' && $ext != 'png' && $ext != 'gif'){
-             $errors['itempic_path2'] = 'extension';
-         }
-    }
-    $fileNameThree = $_FILES['itempic_path3']['name'];
-    if(!empty($fileNameThree)){
-         $ext = substr($fileNameThree,-3);
-         $ext = strtolower($ext);
-         if ($ext != 'jpg' && $ext != 'png' && $ext != 'gif'){
-             $errors['itempic_path3'] = 'extension';
-         }
-    }
+    
     if (empty($errors)){
-         move_uploaded_file($_FILES['itempic_path']['tmp_name'], 'itempic/'.$fileNameOne);
+         move_uploaded_file($_FILES['itempic_path']['tmp_name'], 'itempic/'.$fileName);
     }
-    if (empty($errors)){
-         move_uploaded_file($_FILES['itempic_path2']['tmp_name'], 'itempic/'.$fileNameTwo);
-    }
-    if (empty($errors)){
-         move_uploaded_file($_FILES['itempic_path3']['tmp_name'], 'itempic/'.$fileNameThree);
-    }
-
-
-
 
          // check.phpへリダイレクト
          // $_SESSEION スーパーグローバル変数
          // データを一時的に保存する
+         
          $_SESSION['item_info']['item_name'] = $item_name;
-         $_SESSION['item_info']['itempic_path'] = $fileNameOne;
-         $_SESSION['item_info']['itempic_path2'] = $fileNameTwo;
-         $_SESSION['item_info']['itempic_path3'] = $fileNameThree;
+         $_SESSION['item_info']['itempic_path'] = $fileName;
          $_SESSION['item_info']['price'] = $price;
          $_SESSION['item_info']['limited_date'] = $limited_date;
          $_SESSION['item_info']['item_detail'] = $item_detail;
@@ -156,10 +142,7 @@ session_start();
                     <!-- 商品画像１ -->
                     <h5>商品画像</h5>
                     <input type="file" name="itempic_path" accept="image/*"  >
-                    <input type="file" name="itempic_path2" accept="image/*"  >
-                    <input type="file" name="itempic_path3" accept="image/*"  >
-                
-                
+
                 </div>
                 <h5>価格</h5>
                 <input class="form-control" name="price" placeholder="例：1000" type="numper" style="height:28px; font-size:12px;"/>
@@ -169,7 +152,7 @@ session_start();
                 <textarea class="form-control" name="item_detail" placeholder="コメント" required type="text" style="height:80px;font-size:12px;"/></textarea>
                 <h5>地域</h5>
                 <select class="form-control" required name="dealing_area" style="height:28px; font-size:12px;">
-                  <option disabled="--地域を選択してください--">--地域を選択してください--</option>
+                  <option>--地域を選択してください--</option>
                   <option>アヤラ</option>
                   <option>ITパーク</option>
                   <option>マクタン</option>
@@ -183,7 +166,7 @@ session_start();
                 <br><br>
                 <h5>カテゴリ</h5>
                 <select class="form-control" required name="category" style="height:28px; font-size:12px;">
-                  <option disabled="--カテゴリを選択してください--">--カテゴリを選択してください--</option>
+                  <option>--カテゴリを選択してください--</option>
                   <option>家電</option>
                   <option>衣服</option>
                   <option>食料品</option>

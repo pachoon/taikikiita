@@ -1,7 +1,5 @@
 <!-- 仮です -->
 
-
-
 <?php
    session_start();
 
@@ -11,50 +9,68 @@
    $dbh = new PDO($dsn, $user, $password);
    $dbh->query('SET NAMES utf8');
 
+
+
    $sql = "SELECT `cebty_items`.*, `cebty_users`.`username`,`cebty_users`.`picture_path`
-           FROM `cebty_users`
-           LEFT JOIN `cebty_items`
+           FROM `cebty_items`
+           LEFT JOIN `cebty_users`
            ON `cebty_items`.`user_id` = `cebty_users`.`id`
            WHERE `cebty_items`.`id`=? ";
    $data = array($_GET['id']); //?がない場合は空のままでOK
    $stmt = $dbh->prepare($sql);
    $stmt->execute($data); 
 
-   $errors = array();
-   if(!empty($_POST)){
-     //POST送信があった全てがここの中に入る
+   $item = $stmt->fetch(PDO::FETCH_ASSOC);
 
-     if(isset($_POST['favorit']) && $_POST['favorit'] == 'favorit'){
-         //いいねを押した時はここの処理が走る
-         echo 'いいね';
-         $sql = 'INSERT INTO `cebty_favorit` SET `items_id`=? ,
+// リクエスト機能
+   if(isset($_POST['request']) && $_POST['request'] == 'request'){
+        //いいねを押した時はここの処理が走る
+        echo 'リクエスト';
+        $sql = 'INSERT INTO `cebty_deals` SET `items_id`=? ,
+                                              `user_id`=?,
+                                              `buyrequest`=?
+        ';
+        $data = array($_POST['items_id'],$_SESSION['login_user']['id']);
+        $stmt = $dbh->prepare($sql);
+        $stmt->execute($data);
+    }
+    if(isset($_POST['request'])){
+        // いいね、またはいいね取り消しを押した場合は、ここの処理が走る
+        // $_POSTの情報を破棄。
+        header('Location: product.php?id=' . $_POST['items_id']);
+        exit();
+    }
+
+// いいね機能
+    if(isset($_POST['favorite']) && $_POST['favorite'] == 'favorite'){
+        //いいねを押した時はここの処理が走る
+        echo 'いいね';
+        $sql = 'INSERT INTO `cebty_favorite` SET `items_id`=? ,
                                                  `user_id`=?
-         ';
-         $data = array($_POST['items_id'],$_SESSION['login_user']['id']);
-         $stmt = $dbh->prepare($sql);
-         $stmt->execute($data);
-     }elseif(isset($_POST['favorit']) && $_POST['favorit'] == 'unlike'){
-         //いいね取り消しを押した場合、ここの処理が走る
-         $sql = 'DELETE FROM `cebty_favorit` WHERE `items_id`=?
+        ';
+        $data = array($_POST['items_id'],$_SESSION['login_user']['id']);
+        $stmt = $dbh->prepare($sql);
+        $stmt->execute($data);
+
+    }elseif(isset($_POST['favorite']) && $_POST['favorite'] == 'unfavorite'){
+        //いいね取り消しを押した場合、ここの処理が走る
+        $sql = 'DELETE FROM `cebty_favorite` WHERE `items_id`=?
                                              AND `user_id`=?
-         ';
-         $data = array($_POST['items_id'],$_SESSION['login_user']['id']);
-         $stmt = $dbh->prepare($sql);
-         $stmt->execute($data);
+        ';
+        $data = array($_POST['items_id'],$_SESSION['login_user']['id']);
+        $stmt = $dbh->prepare($sql);
+        $stmt->execute($data);
 
-     }
+    }
+    if(isset($_POST['favorite'])){
+        // いいね、またはいいね取り消しを押した場合は、ここの処理が走る
+        // $_POSTの情報を破棄。
+        header('Location: product.php?id=' . $_POST['items_id']);
+        exit();
+    }
 
-  //   if(isset($_POST['likes'])){
-  //       // いいね、またはいいね取り消しを押した場合は、ここの処理が走る
-  //       // $_POSTの情報を破棄。
-  //       header('Location: timeline.php');
-  //       exit();
-  //   }
 
 
-        $item = $_SESSION['items_id'];
-
-   }
 
 
 
@@ -119,114 +135,134 @@
 <title>商品情報</title>
 </head>
 
-<body>
-  <!--========== BEGIN HEADER ==========-->
-  <header id="header" class="header-main">
-  <!-- Begin Navbar -->
-    <nav id="main-navbar" class="navbar navbar-default navbar-fixed-top" role="navigation"> <!-- Classes: navbar-default, navbar-inverse, navbar-fixed-top, navbar-fixed-bottom, navbar-transparent. Note: If you use non-transparent navbar, set "height: 98px;" to #header -->
-      <div class="container">
-      <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-            <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                    </button>
-                      <a class="navbar-brand page-scroll" href="index.html">Cebty</a>
-        </div>
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a class="" href="">ホーム</a></li>
-                <li><a class="" href="">マイページ</a></li>
-                  <li><a class="" href="">商品検索</a></li>
-                    <li><a class="" href="">チャット</a></li>
-                      <li><a class="" href="">お問合せ</a></li>
-                        <li><a class="" href="">ログイン</a></li>
-                        </ul>
-        </div><!-- /.navbar-collapse -->
-      </div><!-- /.container -->
-    </nav>
-                <!-- End Navbar -->
-  </header>
+
+
+
+
   <!-- ========= END HEADER =========-->
 <body>
-              <div class="container" style="margin-top: 150px;">
+<?php 
+
+if(isset($_SESSION['login_user'])){
+  require('parts/login_header.php');
+}
+else{
+  require('parts/header.php');
+}
+ ?>
+
+
+
+              <div class="container" style="margin-top: 150px; height: 600px; ">
         <div class="row">
-          <h2 id="product-h2"><?php echo $_SESSION['item_name'] ?> </h2>
+          <h2 id="product-h2"><?php echo $item['item_name'];?></h2>
           <div class="devider"></div>
         </div>
         <!-- productPicture -->
-
-
         <div class="row">
-            <div class=" col-md-6">
-            <img src="profile_image/<?php echo $_SESSION['picture_path']; ?>" width="50px">
-            <img src="profile_image/<?php echo $_SESSION['picture_path']; ?>" width="50px">
-            <img src="profile_image/<?php echo $_SESSION['picture_path']; ?>" width="50px">
+            <div class=" col-md-6" style="text-align: center;">
+            <img src="itempic/<?php echo $item['itempic_path']; ?>" width="400px" >
             </div>
         
             <!-- productPictureEnd -->
         <div class="col-md-6">
-          <p class="item-detail">価格 : <?php echo $_SESSION['price'] ?>ペソ</p>
+          <p class="item-detail">価格 : <?php echo $item['price'] ?>ペソ</p>
           <br>
-          <p class="item-detail">引渡可能日 : <?php echo $_SESSION['daling_date'] ?></p>
+          <p class="item-detail">引渡可能日 : <?php echo $item['daling_date'] ?></p>
           <br>
-          <p class="item-detail">エリア : <?php echo $_SESSION['dealing_area'] ?></p>
+          <p class="item-detail">エリア : <?php echo $item['dealing_area'] ?></p>
           <br>
-          <p class="item-detail">カテゴリ : <?php echo $_SESSION['category'] ?></p>
+          <p class="item-detail">カテゴリ : <?php echo $item['category'] ?></p>
           <br>
           <p class="item-detail">コメント : </p>
-          <p class="item-detail"><?php echo $_SESSION['item_detail'] ?></p>
+          <p class="item-detail"><?php echo $item['item_detail'] ?></p>
           <br>
-          <p class="item-detail">掲載期限 : <?php echo $_SESSION['limited_date'] ?></p>
+          <p class="item-detail">掲載期限 : <?php echo $item['limited_date'] ?></p>
           <br>
           
           <br>
         </div>
       </div>
 
-    <div class="container">
+    <div class="container" style="text-align: center;">
       <div class="row">
         <div class="col-md-6">
-          <a href="product.php" class="btn btn-danger btn-lg">購入リクエスト</a> 
+        <br>
 
-          <?php 
-                  // いいねのカウントを表示
-                  $sql = 'SELECT COUNT(*) AS `count` FROM `cebty_favorite` WHERE `items_id` = ?';
-                  $data = array();
+                <?php 
+                  // 購入リクエストを表示
+                  $sql = 'SELECT COUNT(*) AS `count` FROM `cebty_deals` WHERE `item_id` = ?';
+                  $data = array($item['id']);
                   $stmt = $dbh->prepare($sql);
                   $stmt->execute($data);
                   // 1件文のデータを取得
-                  $likes = $stmt->fetch(PDO::FETCH_ASSOC);
+                  $request = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                  // 自分がいいね！を一回以上しているかどうかをチェック
+                  $sql = 'SELECT COUNT(*) AS `count` FROM `cebty_deals` WHERE `item_id` = ?
+                                                                        AND   `user_id` = ?
+
+                                                                          ';
+                  $data = array($item['id'],$_SESSION['login_user']['id']);
+                  $stmt = $dbh->prepare($sql);
+                  $stmt->execute($data);
+                  // 1件文のデータを取得
+                  $request_chk = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                  ?>
+
+          <form method="POST" action="">
+                <br>
+                <input type="hidden" name="item_id" value="<?php echo $item['id']; ?>">
+                <!-- ここのif文で10回いいね！、しないと取り消しが出現しないようにしている -->
+                <?php if($request_chk['count'] == 0){ ?>
+                    <input type="hidden" name="request" value="request">
+                    <input type="submit" value="購入リクエスト" class="btn btn-danger btn-lg">
+                <?php }else{ ?>
+                      <input type="hidden" name="favorite" value="unrequest">
+                      <input type="submit" value="購入リクエスト！済" class="btn btn-danger btn-lg">
+                <?php } ?>
+                <br><br>
+                
+              </form>
+
+
+              <?php 
+                  // いいねのカウントを表示
+                  $sql = 'SELECT COUNT(*) AS `count` FROM `cebty_favorite` WHERE `items_id` = ?';
+                  $data = array($item['id']);
+                  $stmt = $dbh->prepare($sql);
+                  $stmt->execute($data);
+                  // 1件文のデータを取得
+                  $favorite = $stmt->fetch(PDO::FETCH_ASSOC);
 
                   // 自分がいいね！を一回以上しているかどうかをチェック
                   $sql = 'SELECT COUNT(*) AS `count` FROM `cebty_favorite` WHERE `items_id` = ? AND `user_id` = ?';
-                  $data = array($item['items_id'],$_SESSION['login_user']['id']);
+                  $data = array($item['id'],$_SESSION['login_user']['id']);
                   $stmt = $dbh->prepare($sql);
                   $stmt->execute($data);
                   // 1件文のデータを取得
-                  $likes_chk = $stmt->fetch(PDO::FETCH_ASSOC);
+                  $favorite_chk = $stmt->fetch(PDO::FETCH_ASSOC);
 
-                   var_dump($likes_chk['count']);
+                  // var_dump($likes_chk['count']);
               ?>
+<!-- いいね！ボタン設置 -->
+              <form method="POST" action="">
+                <br>
+                <input type="hidden" name="items_id" value="<?php echo $item['id']; ?>">
+                <!-- ここのif文で10回いいね！、しないと取り消しが出現しないようにしている -->
+                <?php if($favorite_chk['count'] == 0){ ?>
+                    <input type="hidden" name="favorite" value="favorite">
+                    <input type="submit" value="お気に入り！" class="btn btn-primary btn-lg">
+                <?php }else{ ?>
+                      <input type="hidden" name="favorite" value="unfavorite">
+                      <input type="submit" value="お気に入り！取り消し" class="btn btn-warning btn-lg">
+                <?php } ?>
+                <br><br>
+                いいね！数:<?php echo $favorite['count'];?>
+              </form>
 
-          <!-- お気に入りボタン -->
-          <form method="POST" action="">
-            <!-- いいね！数 <?php //echo $tweet['likes_count']; ?> -->
-              <!-- <input type="hidden" name="_id" value="<?php //echo $tweet['id']; ?>"> -->
-              <?php if ($likes_chk['count']==0) {?>
-                <input type="hidden" name="likes" value="like">
-                <input type="submit" value="お気に入り" class="btn btn-warning btn-lg">
-              <?php }else{ ?>
-                <input type="hidden" name="likes" value="unlike">
-                <input type="submit" value="お気に入り　取消" class="btn btn-danger btn-xs">
 
-              <?php } ?> 
-
-               
-            </form>
           <br>
           <a href="product.php" class="btn btn-info btn-lg" >出品者へ問合せ</a>
           
