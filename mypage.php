@@ -8,61 +8,11 @@ if(!isset($_SESSION['login_user']['id'])){
     // セッションデータがなければ、ログインページへ飛ばす
     header('Location: login.php');
     exit();
-}
+
+ } ?>
 
 
 
-  // 初期値を空文字に設定。
-  $username='';
-  $school='';
-  $gender='';
-  $introduce='';
-  $picture_path='';
-
-  // $username= $_POST['username'];
-  // $school=$_POST['school'];
-  // $gender=$_POST['gender'];
-
-
-
-
-  $_SESSION['user_info']['username']=$username;
-  $_SESSION['user_info']['school']=$school;
-  $_SESSION['user_info']['gender']=$gender;
-  $_SESSION['user_info']['introduce']=$introduce;
-  $_SESSION['user_info']['picture_path']=$picture_path;
-
-
-
-
-
-
-if(isset($_SESSION['login_user']['id'])){
-  $sql = "SELECT * FROM `cebty_users` WHERE `username`=?,
-                                            `school`=?,
-                                            `gender`=?,
-                                            `introduce`=?,
-                                            `picture_path`";
-
-  $data = array($username,$school,$gender,$introduce,$picture_path);
-  $stmt = $dbh->prepare($sql);
-  $stmt->execute($data);
-
-  $record = $stmt->fetch(PDO::FETCH_ASSOC);
-// 表示用の配列を用意
-  $profile=array();
-while(true){
-  $record = $stmt->fetch(PDO::FETCH_ASSOC);
-  //$recordはデータベースのカラム値をkeyとする連想配列で構成されます.(データベースから１件取ってきます)
-
-
-  if(!$record){
-     break;
-  }
-  $profile[]=$record;
-}
-
-} ?>
 
 
 
@@ -81,7 +31,7 @@ while(true){
 
   <meta charset="utf-8">
 
-  <title>プロフィール一部</title>
+  <title>マイページ</title>
 </head>
 <body style="background-color: #3a6186 , #89253e">
   <?php require('parts/header.php'); ?>
@@ -104,17 +54,17 @@ while(true){
         <br>
         <br>
 
-        <h1 class="section-header"><span class="content-header wow fadeIn " data-wow-delay="0.2s" data-wow-duration="2s">profile</span></h1>
+        <h1 class="section-header"><span class="content-header wow fadeIn " data-wow-delay="0.2s" data-wow-duration="2s">マイページ</span></h1>
 
 <div class="container">
     <div class="row clearfix well">
     <div class="col-md-2 column">
-      <img class="img-thumbnail" alt="140x140" src="profile_image/image.e.jpg" />
+      <img class="img-thumbnail" alt="140x140" src="profile_image/<?php echo $_SESSION['login_user']['picture_path'];?>" >
     </div>
     <div class="col-md-8 column">
       <blockquote>
         <p style="font-size: 40px; color: black;" >
-          <?php echo $username; ?> 
+          <?php echo $_SESSION['login_user']['username']; ?> 
         </p> <!-- <small>学校名 / 性別 / </small> -->
       </blockquote>
     </div>
@@ -152,7 +102,7 @@ while(true){
                       <div class="col-md-8 column">
                       <p>
                         <strong>About me</strong><br/>
-                                    <?php echo $introduce; ?>
+                                    <?php echo $_SESSION['login_user']['introduce']; ?>
                       </p>
                                 <hr/>
                                 <!-- <p>
@@ -200,7 +150,7 @@ while(true){
                               学校名
                             </td>
                             <td>
-                              <?php echo $school;?>
+                              <?php echo $_SESSION['login_user']['school'];?>
                             </td>
                           </tr>
                                         <tr>
@@ -208,9 +158,11 @@ while(true){
                               性別
                             </td>
                             <td>
-                              <?php echo $gender;?>
+                              <?php echo $_SESSION['login_user']['gender'];?>
                             </td>
                           </tr>
+
+
                                         <!-- <tr>
                               <td>
                               Height
@@ -334,7 +286,7 @@ while(true){
     </div>
   </div>
 </div>
-r
+
 </body>
   <?php require('parts/footer.php'); ?>
 

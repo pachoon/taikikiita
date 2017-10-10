@@ -2,13 +2,6 @@
 
 session_start();
 
-    $username = '';
-    $email = '';
-    $password = '';
-    $gender = '';
-    $school = '';
-    $introduce = '';
-
 
     if(!empty($_POST)){
 

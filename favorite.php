@@ -11,8 +11,12 @@ if(!isset($_SESSION['login_user']['id'])){
 
 
 
-$sql = "SELECT * FROM `cebty_favorite`" ;
-$data = array();
+// $sql = "SELECT * FROM `cebty_favorite`" ;
+
+
+$sql='SELECT * FROM `cebty_favorite` WHERE `user_id`=?';
+
+$data = array($_SESSION['login_user']['id']);
 $stmt = $dbh->prepare($sql);
 $stmt->execute($data);
 
@@ -33,7 +37,7 @@ $favorites[]=$record;
 <html lang="ja">
 <head>
 <meta charset="utf-8">
- <?php require('parts/assets.php') ?>
+
   <link rel="stylesheet" href="css/style.css">  
   <link href="css/favorite.css" rel="stylesheet" />
   <meta charset="utf-8">
@@ -41,7 +45,18 @@ $favorites[]=$record;
   <title>お気に入り</title>
 </head>
 <body>
-<?php require('parts/header.php'); ?>
+<?php
+
+if(isset($_SESSION['login_user'])){
+
+  require('parts/login_header.php');
+
+}else{
+
+  require('parts/header.php');
+}
+
+ ?>
 <div class="section-content">
         <br>
         <br>
@@ -54,7 +69,7 @@ $favorites[]=$record;
         <br>
         <br>
         <br>
-<?php if(isset($_GET['delete'])){ ?>
+<?php if(isset($_GET['delete']) && isset($_GET['content'])){ ?>
     <div class="alert alert-success text-center">
       「<?php echo $_GET['content']; ?>」という商品を削除しました。
     </div>
@@ -87,28 +102,34 @@ $favorites[]=$record;
                                         <div class="row"  id="portfolio">
                                             <div class="col-xs-12 col-sm-4 elec">
                                                 <div class="portfolio_single_content">
-                                                    <img src="profile_image/<?php echo $favorites[$i]['itempic_path'];?>" alt="title"/>
+                                                    <a href="<?php echo $favorites[$i]['item_id'];?>"><img src="profile_image/<?php echo $favorites[$i]['itempic_path'];?>" alt="title"></a>
                                                     <div>
-                                                        <a href="#########"> <?php echo $favorites[$i]['item_name']; ?></a>
+                                                         <?php echo $favorites[$i]['item_name']; ?>
                                                         <ul>
+                                                          <?php if($_SESSION['login_user']['id']==$favorites[$i]['user_id']){ ?>
+                                                                            <a href="favorite_delete.php?id=<?php echo $favorites['id']; ?>" class="btn btn-danger btn-xs">削除
+                                                                             </a>
+ <li><button type="button"><a href="favorite_delete.php?id=<?php echo $favorites[$i]['id']; ?>"><i class="fa fa-trash-o fa-3x" aria-hidden="true"></i></a></button></li>
+                                                                        <?php } ?>
+
+
+
+
+
+
+
                                                             <li><span> <?php echo $favorites[$i]['price']; ?></span></li>
-                                                            <li><span><?php echo $favorites[$i]['dealing_date']; ?></span></li>
-                                                            <li><button type="button"><a href="favorite_delete.php"><i class="fa fa-trash-o fa-3x" aria-hidden="true"></i></a></button></li>
+                                                            <li><span><?php echo $favorites[$i]['daling_data']; ?></span></li>
                                                         </ul>
                                                     </div>
                                                 </div>
                                             </div>
                                 <?php } ?>
-
-
-    <div>
-        <a href="mypage.php"><button type="submit" class="btn btn-default submit"><i class="fa fa-paper-plane" aria-hidden="true"></i>  マイページへ</button></a> 
-    </div>
   </div>
     </div>
   </div>
 </body>
   <?php require('parts/footer.php'); ?>
-
+<?php require('parts/assets.php') ?>
 </html>
 

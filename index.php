@@ -71,7 +71,7 @@
                         <ul class="nav navbar-nav navbar-right">
                             <li><a class="" href="">ホーム</a></li>
                             <li><a class="" href="">マイページ</a></li>
-                            <li><a class="" href="">商品検索</a></li>
+                            <li><a class="" href="search.php">商品検索</a></li>
                             <li><a class="" href="">チャット</a></li>
                             <li><a class="" href="">お問合せ</a></li>
                             <li><a class="" href="login.php">ログイン</a></li>
@@ -135,23 +135,78 @@
                                             <li><a href="#porfolio_menu" data-filter=".others">その他</a></li>
                                         </ul>
                                     </div>
+
+
+<?php
+
+
+
+  $dsn = 'mysql:dbname=cebty;host=localhost';
+  $user = 'root';
+  $password = '';
+  $dbh = new PDO($dsn, $user, $password);
+  $dbh->query('SET NAMES utf8');
+
+
+
+
+$sql = "SELECT * FROM `cebty_users` " ;
+$data = array();
+$stmt = $dbh->prepare($sql);
+$stmt->execute($data);
+
+
+// 表示用の配列を用意
+
+while(true){
+  $record = $stmt->fetch(PDO::FETCH_ASSOC);
+  //$recordはデータベースのカラム値をkeyとする連想配列で構成されます.(データベースから１件取ってきます)
+
+
+  if(!$record){
+     break;
+  }
+  $products[]=$record;
+}
+
+
+//つまり
+//$products = array($record, $record, $record);
+//上記のような配列が入ってくる
+//echo $products[0]にすると1番目のユーザーネームが表示される
+
+
+
+
+ ?>
+
+
+
+
+
+                                <?php foreach($products as $product){ ?>
                                     <div class="portfolio_content">
                                         <div class="row"  id="portfolio">
                                             <div class="col-xs-12 col-sm-4 elec">
                                                 <div class="portfolio_single_content">
-                                                    <img src="img/portfolio/h1.jpg" alt="title"/>
+                                                    <img src="profile_image/<?php echo $product['picture_path'];?> " alt="title"/>
                                                     <div>
-                                                        <a href="#">掃除機＊ほぼ新品です！</a>
+                                                        <a href="#"> <?php echo $product['username']; ?></a>
                                                         <ul>
-                                                            <li><span>価格：６０ペソ</span></li>
-                                                            <li><span>引渡し可能日：即日</span></li>
+                                                            <li><span> <?php echo $product['gender']; ?></span></li>
+                                                            <li><span>引渡し可能日：即日ちょ</span></li>
                                                         </ul>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-xs-12 col-sm-4 food">
+                                <?php } ?>
+
+
+
+
+<!--                                             <div class="col-xs-12 col-sm-4 food">
                                                 <div class="portfolio_single_content">
-                                                    <img src="img/portfolio/h6.jpg" alt="title"/>
+                                                    <img src="profile_image/<?php echo $product['picture_path'];?> " alt="title"/>
                                                     <div>
                                                         <a href="#">カップヌードル８個！</a>
                                                         <ul>
@@ -163,7 +218,7 @@
                                             </div>
                                             <div class="col-xs-12 col-sm-4 elec">
                                                 <div class="portfolio_single_content">
-                                                    <img src="img/portfolio/h9.jpg" alt="title"/>
+                                                    <img src="profile_image/<?php echo $product['picture_path'];?> " alt="title"/>
                                                     <div>
                                                         <a href="#">ドライヤー状態良好</a>
                                                         <ul>
@@ -175,7 +230,7 @@
                                             </div>
                                             <div class="col-xs-12 col-sm-4 cloth">
                                                 <div class="portfolio_single_content">
-                                                    <img src="img/portfolio/h4.jpg" alt="title"/>
+                                                    <img src="profile_image/<?php echo $product['picture_path'];?> " alt="title"/>
                                                     <div>
                                                         <a href="#">ハンガー５個セット</a>
                                                         <ul>
@@ -187,7 +242,7 @@
                                             </div>
                                             <div class="col-xs-12 col-sm-4 medecine">
                                                 <div class="portfolio_single_content">
-                                                    <img src="img//portfolio/h5.jpg" alt="title"/>
+                                                    <img src="profile_image/<?php echo $product['picture_path'];?> " alt="title"/>
                                                     <div>
                                                         <a href="#">正露丸＊半分くらいあります</a>
                                                         <ul>
@@ -199,7 +254,7 @@
                                             </div>
                                             <div class="col-xs-12 col-sm-4 elec">
                                                 <div class="portfolio_single_content">
-                                                    <img src="img/portfolio/h2.jpg" alt="title"/>
+                                                    <img src="profile_image/<?php echo $product['picture_path'];?> " alt="title"/>
                                                     <div>
                                                         <a href="#">電子レンジ</a>
                                                         <ul>
@@ -211,7 +266,7 @@
                                             </div>
                                             <div class="col-xs-12 col-sm-4 cloth">
                                                 <div class="portfolio_single_content">
-                                                    <img src="img/portfolio/h7.jpg" alt="title"/>
+                                                    <img src="profile_image/<?php echo $product['picture_path'];?> " alt="title"/>
                                                     <div>
                                                         <a href="#">水着女性用＊２回使いました</a>
                                                         <ul>
@@ -223,7 +278,7 @@
                                             </div>
                                             <div class="col-xs-12 col-sm-4 others">
                                                 <div class="portfolio_single_content">
-                                                    <img src="img/portfolio/h8.jpg" alt="title"/>
+                                                    <img src="profile_image/<?php echo $product['picture_path'];?> " alt="title"/>
                                                     <div>
                                                         <a href="#">車売ってますーー！！</a>
                                                         <ul>
@@ -235,7 +290,7 @@
                                             </div>
                                             <div class="col-xs-12 col-sm-4 others">
                                                 <div class="portfolio_single_content">
-                                                    <img src="img/portfolio/h3.jpg" alt="title"/>
+                                                    <img src="profile_image/<?php echo $product['picture_path'];?> " alt="title"/>
                                                     <div>
                                                         <a href="#">自転車とても快適なやつ</a>
                                                         <ul>
@@ -244,7 +299,13 @@
                                                         </ul>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> -->
+
+
+
+
+
+
                                         </div>
                                     </div>
                                 </div>

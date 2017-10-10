@@ -11,8 +11,8 @@ if(!isset($_SESSION['login_user']['id'])){
 
 
 
-$sql = "SELECT * FROM `cebty_chat`" ;
-$data = array();
+$sql = "SELECT * FROM `cebty_chat` WHERE `user_id`=? OR `other_id`=? ORDER BY `cebty_chat`.`created` DESC" ;
+$data = array($_SESSION['login_user']['id'], $_SESSION['login_user']['id']);
 $stmt = $dbh->prepare($sql);
 $stmt->execute($data);
 
@@ -30,7 +30,7 @@ $stmt->execute($data);
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <?php require('parts/assets.php') ?>
+
   <link rel="stylesheet" href="css/style.css">  
   <meta charset="utf-8">
   <title>チャット一覧</title>
@@ -41,11 +41,24 @@ $stmt->execute($data);
   <link href="https://fonts.googleapis.com/css?family=Teko:400,700" rel="stylesheet">
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
-
+<?php require('parts/assets.php'); ?>
 </head>
 <body style="background-color: #3a6186 , #89253e">
 
-  <?php require('parts/header.php'); ?>
+<?php
+
+if(isset($_SESSION['login_user'])){
+
+  require('parts/login_header.php');
+
+}else{
+
+  require('parts/header.php');
+}
+
+ ?>
+
+
   <div class="container">
     <div class="row">
     </div>
@@ -86,11 +99,25 @@ $stmt->execute($data);
                 <button type="button" class="btn btn-default btn-filter" data-target="all">全て</button>
               </div>
             </div>
- <?php foreach ($chats as $chat) {?>
+
+
+
+
+
+
+
+
+
+
+  <?php foreach ($chats as $chat) {?>
              <div class="table-container" >
               <table class="table table-filter">
                 <tbody>
-                  <tr data-status="send">
+                  <tr data-status="<?php if($chat['user_id']==$_SESSION['login_user']['id']){
+                    echo 'send';
+                  }else{
+                    echo 'recieve';
+                  } ?>">
                     
                     <td>
                       <div class="media" style="width: 648px;">
@@ -101,7 +128,12 @@ $stmt->execute($data);
                           <span class="media-meta pull-right"><?php echo $chat['modifid'];?></span>
                           <h4 class="title">
                             <?php echo $chat['user_id'];?>
-                            <span class="pull-right recieve">(send)</span>
+                            <span class="pull-right recieve"><?php if($chat['user_id']==$_SESSION['login_user']['id']){
+                    echo '送信
+                    ';
+                  }else{
+                    echo '受信';
+                  } ?></span>
                           </h4>
                           <p class="summary"><?php echo $chat['comment'];?></p>
                         </div>
@@ -109,6 +141,25 @@ $stmt->execute($data);
                     </td>
                   </tr>
                   <?php } ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                   <!-- <tr data-status="recieve">
                     
                     <td>

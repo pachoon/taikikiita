@@ -27,19 +27,24 @@
       $introduce = $_SESSION['user_info']['introduce'];
       $picture_path = $_SESSION['user_info']['profile_image_path'];
 
-      //INSERT処理
-      $sql = 'INSERT INTO `cebty_users` SET `username`=?,
+
+      $sql = 'UPDATE `cebty_users` SET `username`=?,
                                               `email`=?,
                                               `password`=?,
                                               `gender`=?,
                                               `school`=?,
                                               `introduce`=?,
                                               `picture_path`=?,
-                                              `created`=NOW()';
-                                              //sha1でパスワードをハッシュ化
-      $data = array($username,$email,sha1($password),$gender,$school,$introduce,$picture_path);
+                                              `created`=NOW()
+                                              WHERE `id` =?';
+
+      $data = array($username,$email,sha1($password),$gender,$school,$introduce,$picture_path, $_SESSION['login_user']['id']);
       $stmt = $dbh->prepare($sql);
       $stmt->execute($data);
+
+      $_SESSION['user_info']['id']= $_SESSION['login_user']['id'];
+      $_SESSION['user_info']['created']= $_SESSION['login_user']['created'];
+      $_SESSION['login_user']=$_SESSION['user_info'];
 
       header('Location: finish_edit_intro.php');
       exit();
@@ -129,10 +134,10 @@ if(isset($_SESSION['login_user'])){
             <div class="row">
                <div class="col-sm-6 col-md-6">
                 <input type="hidden" name="action" value="submit">
-                 <button class="btn btn-md btn-primary btn-block" type="submit">登録する</button>
+                 <button class="btn btn-md btn-primary btn-block" type="submit">更新する</button>
                </div>
                <div class="col-sm-6 col-md-6">
-                 <button class="btn btn-md btn-danger btn-block" type="submit">修正する</button>
+                 <button class="btn btn-md btn-danger btn-block" type="submit">戻る</button>
                </div>
             </div>
 
