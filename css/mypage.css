@@ -1,0 +1,382 @@
+body {
+background-color: #ffffff;
+background-color: transparent;
+background: #3a6186; /* fallback for old browsers */
+background: -webkit-linear-gradient(to left, #3a6186 , #89253e); /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to left, #3a6186 , #89253e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.content-header{
+  font-family: 'Oleo Script', cursive;
+  color:#fcc500;
+  font-size: 45px;
+}
+
+
+
+
+
+
+/***
+User Profile Sidebar by @keenthemes
+A component of Metronic Theme - #1 Selling Bootstrap 3 Admin Theme in Themeforest: http://j.mp/metronictheme
+Licensed under MIT
+**
+
+/* Content */
+.content {
+    padding-top: 30px;
+}
+
+/* Testimonials */
+.testimonials blockquote {
+    background: #f8f8f8 none repeat scroll 0 0;
+    border: medium none;
+    color: #666;
+    display: block;
+    font-size: 14px;
+    line-height: 20px;
+    padding: 15px;
+    position: relative;
+}
+.testimonials blockquote::before {
+    width: 0; 
+    height: 0;
+  right: 0;
+  bottom: 0;
+  content: " "; 
+  display: block; 
+  position: absolute;
+    border-bottom: 20px solid #fff;    
+  border-right: 0 solid transparent;
+  border-left: 15px solid transparent;
+  border-left-style: inset; /*FF fixes*/
+  border-bottom-style: inset; /*FF fixes*/
+}
+.testimonials blockquote::after {
+    width: 0;
+    height: 0;
+    right: 0;
+    bottom: 0;
+    content: " ";
+    display: block;
+    position: absolute;
+    border-style: solid;
+    border-width: 20px 20px 0 0;
+    border-color: #e63f0c transparent transparent transparent;
+}
+.testimonials .carousel-info img {
+    border: 1px solid #f5f5f5;
+    border-radius: 150px !important;
+    height: 75px;
+    padding: 3px;
+    width: 75px;
+}
+.testimonials .carousel-info {
+    overflow: hidden;
+}
+.testimonials .carousel-info img {
+    margin-right: 15px;
+}
+.testimonials .carousel-info span {
+    display: block;
+}
+.testimonials span.testimonials-name {
+    color: #e6400c;
+    font-size: 16px;
+    font-weight: 300;
+    margin: 23px 0 7px;
+}
+.testimonials span.testimonials-post {
+    color: #656565;
+    font-size: 12px;
+}
+
+
+
+
+/*html, body, .container {
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  overflow: hidden;
+}*/
+
+/*.container {
+  padding:150px;
+  background: #2F2F31;
+}*/
+
+#navMenu {
+  top: 150px;
+  left: 200px;
+  width: 140px;
+  height: 140px;
+  z-index: 100;
+  background: linear-gradient(90deg, #910EC9, #d350db, #910EC9);
+  -webkit-background: linear-gradient(90deg, #910EC9, #d350db, #910EC9);
+  background-size: 400% 400%;
+  -webkit-background-size: 400% 400%;
+  animation: gradient 5s infinite;
+  -webkit-animation: gradient 5s infinite;
+}
+
+#navMenu:hover, .nav:hover {
+  background: #d350db;
+}
+
+@keyframes gradient {
+  50% {
+    background-position: 100% 0;
+  }
+}
+@-webkit-keyframes gradient {
+  50% {
+    background-position: 100% 0;
+  }
+}
+
+.diamond {
+  position: absolute;
+  width: 67.5px;
+  height: 67.5px;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  background: #910EC9;
+  margin: 10px;
+  cursor: pointer;
+  box-shadow: 1px 4px 10px #101010;
+}
+
+.diamond:active {
+  background: #710b9e;
+  box-shadow: 0px 1px 2.5px #101010;
+  transition: 0.1s;
+  -webkit-transition: 0.1s;
+}
+
+/*.popUp{
+  text-align:center;
+  border-radius:10px 0px;
+  position:absolute;
+  top:100px;
+  left:330px;
+  overflow:hidden;
+  background:red;
+  width:0px;
+  max-width:100px;
+}
+
+.#nav1:hover + .popUp{
+  width:100px;
+}*/
+
+.nav {
+  transition: 0.5s;
+  -webkit-transition: 0.5s;
+}
+
+.nav1 {
+  top: 86px;
+  left: 287px;
+}
+
+.nav2 {
+  top: 136px;
+  left: 337px;
+}
+
+.nav3 {
+  top: 186px;
+  left: 387px;
+}
+
+.nav4 {
+  top: 236px;
+  left: 337px;
+}
+
+.nav5 {
+  top: 286px;
+  left: 287px;
+}
+
+.small {
+  top: 186px;
+  left: 236px;
+  z-index: 10;
+  background: #643fc1;
+  transition: 0.5s;
+  -webkit-transition: 0.5s;
+}
+
+.rotCorrect {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  margin-left: 14px;
+  margin-top: 8px;
+}
+
+#mainRotCorrect {
+  margin-left: 26px;
+  margin-top: 28px;
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  max-width: 90px;
+}
+
+/*i {
+  color: #EEEEEE;
+}*/
+/*★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★*/
+/*html, body {
+  height: 100%;
+}
+
+body {
+  background: #efefef;
+  color: hsl(240,30,10);
+  font: 700 14px/1 Montserrat, sans-serif;
+  letter-spacing: 0.125em;
+  text-align: center;
+  text-transform: uppercase;
+}*/
+
+h1 {
+  margin: 3em 0 2em;
+}
+
+.btn {
+  background: none;
+  border: 2px solid;
+  border-bottom-width: 4px;
+  font: inherit;
+  letter-spacing: inherit;
+  /*margin: 1em;*/
+  padding: 1em 2em;
+  text-transform: inherit;
+  transition: color 1s;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.btn-1 {
+  $color: #9c89f7;
+  color: $color;
+  
+  &:hover {
+    animation: halftone 1s forwards;
+    background: radial-gradient(circle, $color 0.2em, transparent 0.25em) 0 0 / 1.25em 1.25em
+              , radial-gradient(circle, $color 0.2em, transparent 0.25em) 6.25em 6.25em / 1.25em 1.25em;
+    color: adjust-hue($color,180);
+  }
+}
+
+@keyframes halftone {
+  100% {
+    background-size: 2.375em 2.375em, 0.1em 0.1em;
+  }
+}
+
+.btn-2 {
+  $color: #82f6d8;
+  color: $color;
+  
+  &:hover {
+    animation: stripes-move 0.75s infinite linear;
+    background: repeating-linear-gradient(45deg, $color 0, $color 0.25em, transparent 0.25em, transparent .5em);
+    color: adjust-hue($color,180);
+  }
+}
+
+@keyframes stripes-move {
+  100% {
+    background-position: 5em 0px;
+  }
+}
+
+.btn-3 {
+  $color: #d3f169;
+  color: $color;
+  
+  &:hover {
+    animation: sawtooth 0.35s infinite linear;
+    background: linear-gradient(45deg, $color 0.5em, transparent 0.5em) 0 0 / 1em 1em
+              , linear-gradient(-45deg, $color 0.5em, transparent 0.5em) 0 0 / 1em 1em;
+    color: adjust-hue($color,180);
+  }
+}
+
+@keyframes sawtooth {
+  100% {
+    background-position: 1em 0;
+  }
+}
+
+.btn-4 {
+  $color: #eea163;
+  color: $color;
+  
+  &:hover {
+    animation: zigzag 1s linear infinite;
+    background: linear-gradient(135deg, rgba($color,0.25) 0.25em, transparent 0.25em) -0.5em 0
+              , linear-gradient(225deg, rgba($color,0.25) 0.25em, transparent 0.25em) -0.5em 0
+              , linear-gradient(315deg, rgba($color,0.25) 0.25em, transparent 0.25em) 0 0
+              , linear-gradient(45deg, rgba($color,0.25) 0.25em, transparent 0.25em) 0 0;
+    background-size: 0.75em 0.75em;
+    color: adjust-hue($color,180);
+  }
+}
+
+@keyframes zigzag {
+  100% {
+    background-position: 1em 0, 1em 0, -0.75em 0 , -0.75em 0;
+  }
+}
+
+/*.btn-5 {
+  $color: #7cf07f;
+  $color2: #88d6f3;
+  color: $color;
+  
+  &:hover {
+    animation: blinds 0.75s linear forwards;
+    background: linear-gradient(0deg, $color 25%, transparent 25%) 0 0 / 0.5em 0.5em
+              , linear-gradient(0deg, $color2 50%, transparent 50%) 0 0 / 1em 1em;
+    color: adjust-hue($color,180);
+  }
+}
+
+@keyframes blinds {
+  100% {
+    background-position: 0 0, 0 -3em;
+    background-size: 0 0, 1em 6em;
+  }
+}
+
+.btn-6 {
+  $color: #f9879b;
+  color: $color;
+  
+  &:hover {
+    animation: pulse 1s ease-in infinite;
+    background: radial-gradient(circle, rgba($color,0.25) 43%, transparent 50%) 0 0 / 1em 1em
+              , radial-gradient(circle, rgba($color,0.25) 43%, transparent 50%) 0.5em 0.5em / 2em 2em;
+    color: darken(adjust-hue($color,180),30%);
+  }
+}*/
+
+@keyframes pulse {  
+  50% {
+    background-position: 0.66em 0.66em, -0.33em -0.33em;
+  }
+  
+  100% {
+    background-size: 2em 2em, 1em 1em;
+    background-position: -1.5em -1.5em, -1em -1em;
+  }
+}
+
+p{
+  margin: all;
+}

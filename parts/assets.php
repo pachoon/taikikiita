@@ -16,7 +16,7 @@
         <link rel="stylesheet" href="css/mobile.css">
 
         <!-- Skin CSS -->
-        <!-- <link rel="stylesheet" href="css/skin/cool-gray.css"> -->
+        <!--<link rel="stylesheet" href="css/skin/cool-gray.css">-->
         <!-- <link rel="stylesheet" href="css/skin/ice-blue.css"> -->
         <!-- <link rel="stylesheet" href="css/skin/summer-orange.css"> -->
         <!-- <link rel="stylesheet" href="css/skin/fresh-lime.css"> -->
