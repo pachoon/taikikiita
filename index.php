@@ -70,10 +70,10 @@
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav navbar-right">
                             <li><a class="" href="">ホーム</a></li>
-                            <li><a class="" href="">マイページ</a></li>
+                            <li><a class="" href="mypage.php">マイページ</a></li>
                             <li><a class="" href="search.php">商品検索</a></li>
                             <li><a class="" href="">チャット</a></li>
-                            <li><a class="" href="">お問合せ</a></li>
+                            <li><a class="" href="contact.php">お問合せ</a></li>
                             <li><a class="" href="login.php">ログイン</a></li>
                         </ul>
                     </div><!-- /.navbar-collapse -->

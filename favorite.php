@@ -37,7 +37,8 @@ $favorites[]=$record;
 <html lang="ja">
 <head>
 <meta charset="utf-8">
-
+<?php require('parts/assets.php') ?>
+  
   <link rel="stylesheet" href="css/style.css">  
   <link href="css/favorite.css" rel="stylesheet" />
   <meta charset="utf-8">
@@ -107,8 +108,6 @@ if(isset($_SESSION['login_user'])){
                                                          <?php echo $favorites[$i]['item_name']; ?>
                                                         <ul>
                                                           <?php if($_SESSION['login_user']['id']==$favorites[$i]['user_id']){ ?>
-                                                                            <a href="favorite_delete.php?id=<?php echo $favorites['id']; ?>" class="btn btn-danger btn-xs">削除
-                                                                             </a>
  <li><button type="button"><a href="favorite_delete.php?id=<?php echo $favorites[$i]['id']; ?>"><i class="fa fa-trash-o fa-3x" aria-hidden="true"></i></a></button></li>
                                                                         <?php } ?>
 
@@ -128,8 +127,9 @@ if(isset($_SESSION['login_user'])){
   </div>
     </div>
   </div>
+
 </body>
-  <?php require('parts/footer.php'); ?>
-<?php require('parts/assets.php') ?>
+
+
 </html>
 
