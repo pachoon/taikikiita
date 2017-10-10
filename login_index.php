@@ -99,7 +99,7 @@ if(!isset($_SESSION['login_user']['id'])){
                             <li><a class="" href="edit_intro.php">マイページ</a></li>
                             <li><a class="" href="search.php">商品検索</a></li>
                             <li><a class="" href="">チャット</a></li>
-                            <li><a class="" href="">お問合せ</a></li>
+                            <li><a class="" href="contact.php">お問合せ</a></li>
                             <li><a class="" href="logout.php">ログアウト</a></li>
                         </ul>
                     </div><!-- /.navbar-collapse -->
