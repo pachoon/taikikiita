@@ -14,7 +14,7 @@
 <?php
 
 session_start();
-
+$startPrice='9999';
 if(isset($_SESSION['login_user']['username'])){
 
 require('parts/login_header.php');
@@ -34,17 +34,29 @@ require('parts/header.php');
 
 
 
+  if($_POST['price']=='9999'){
+    $a = "!";}else{ $a = '';}
+
+  if($_POST['area']=='9999'){
+    $b = '!' ;} else { $b = '';}
+
+
 
 if(!empty($_POST['freeword']) || !empty($_POST['price']) || !empty($_POST['area'])){
 
+$startPrice=$_POST['price'];
+
+
+
     $sql = 'SELECT * FROM `cebty_items` WHERE (`item_name` LIKE "%'.$_POST['freeword'].'%"
                                               OR `item_detail` LIKE "%'.$_POST['freeword'].'%")
-                                                               AND `price` = ?
-                                                               AND `dealing_area` = ?';
+                                                               AND `price_label` '.$a.'= ?
+                                                               AND `dealing_area` '.$b.'= ?';
     $data = array($_POST['price'], $_POST['area']);
     $stmt = $dbh->prepare($sql);
     $stmt->execute($data);
 
+  $products=array();
 
 while(true){
   $record = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -53,7 +65,6 @@ while(true){
      break;
   }
 
-  $products=array();
 
   $products[]=$record;
 }
@@ -112,11 +123,35 @@ while(true){
                              <div class="serchtile">価格</div>
                           <label class="sr-only" for="looking">価格</label>
                          <select id="selectbasic" name="price" class="form-control">
-                              <option value="*">全て</option>
-                              <option value="100">100ペソ以下</option>
-                              <option value="500">100-500ペソ以下</option>
-                              <option value="800">500-1000ペソ以下</option>
-                              <option value="1200">1000ペソ以上</option>
+                              <?php if($startPrice=="9999"){ ?>
+                              <option value="9999" selected>全て</option>
+                              <?php }else{ ?>
+                              <option value="9999">全て</option>
+                              <?php } ?>
+
+                              <?php if($startPrice=="1"){ ?>
+                              <option value="1" selected>100ペソ以下</option>
+                              <?php }else{ ?>
+                              <option value="1">100ペソ以下</option>
+                              <?php } ?>
+
+                              <?php if($startPrice=="2"){ ?>
+                              <option value="2" selected>100-500ペソ以下</option>
+                              <?php }else{ ?>
+                              <option value="2">100-500ペソ以下</option>
+                              <?php } ?>
+
+                              <?php if($startPrice=="3"){ ?>
+                              <option value="3" selected>500-1000ペソ以下</option>
+                              <?php }else{ ?>
+                              <option value="3">500-1000ペソ以下</option>
+                              <?php } ?>
+
+                              <?php if($startPrice=="4"){ ?>
+                              <option value="4" selected>1000ペソ以上</option>
+                              <?php }else{ ?>
+                              <option value="4">1000ペソ以上</option>
+                              <?php } ?>
                             </select>
                         </div>
                       </div>
@@ -126,9 +161,9 @@ while(true){
                           <label class="sr-only" for="area">エリア</label>
                           <div class="input-group">
                             <select id="age" name="area" class="form-control">
-                              <option value="*">全て</option>
+                              <option value="9999">全て</option>
                               <option value="ITパーク">ITパーク</option>
-                              <option value="アヤラセンター">アヤラセンター</option>
+                              <option value="アヤラ">アヤラ</option>
                               <option value="マンダウエ">マンダウエ</option>
                               <option value="マクタン島">マクタン島</option>
                             </select>
@@ -167,7 +202,7 @@ while(true){
 
     </header>  
 
-
+<?php  var_dump($a); var_dump($b);?>
 
 <div class="devider"></div>
 
