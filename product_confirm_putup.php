@@ -43,7 +43,7 @@
                                             `category`=?,
                                             `created`=NOW()';
                                               
-      $data = array($item_name,$itempic_path,$price,$limited_date,$item_detail,$dealing_area,$daling_date,$category);
+      $data = array($_SESSION['login_user']['id'],$item_name,$itempic_path,$price,$limited_date,$item_detail,$dealing_area,$daling_date,$category);
       $stmt = $dbh->prepare($sql);
       $stmt->execute($data);
 
@@ -72,7 +72,12 @@
 
 <?php
 
+if(isset($_SESSION['login_user'])){
+  require('parts/login_header.php');
+}
+else{
   require('parts/header.php');
+}
 
  ?>
 

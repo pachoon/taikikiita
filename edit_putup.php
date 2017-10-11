@@ -8,24 +8,39 @@
     $dbh = new PDO($dsn, $user, $password);
     $dbh->query('SET NAMES utf8');
 
-   //  if(!isset($_SESSION['login_user']['id'])){
-   // //セッションデータを保持しているかチェック
-   // //セッションデータがなければ、ログインページに飛ばす。
-   //   header('Location:login.php');
-   //   exit();
-   // }
+     if(!isset($_SESSION['login_user']['id'])){
+    //セッションデータを保持しているかチェック
+    //セッションデータがなければ、ログインページに飛ばす。
+      header('Location:login.php');
+      exit();
+     }
 
 //    if(isset($_POST['tweet'])){
 //           $tweet=$_POST['tweet'];
 
-    $sql = "SELECT (*) FROM`cebty_items` WHERE 1";
-    $data = array(); //?がない場合は空のままでOK
-    $stmt = $dbh->prepare($sql);
-    $stmt->execute($data); 
-
-    $items = $stmt->fetch(PDO::FETCH_ASSOC);
+    
 
 ?>
+<?php 
+
+$sql  = "SELECT * FROM `cebty_items` WHERE `user_id` =? ";
+$data = array($_SESSION['login_user']['id']);
+$stmt = $dbh->prepare($sql);
+$stmt->execute($data);//object型でexecuteを実行している
+
+//表示用の配列を用意
+$items = array();
+while (true) {
+  $record = $stmt->fetch(PDO::FETCH_ASSOC);
+  // echo $record['username'];
+  // echo "<br>"
+  if (!$record){
+    break;
+  }
+  $items[]=$record;
+}
+
+ ?>
 <!-- 仮でした。 -->
 
 <!DOCTYPE html>
@@ -81,8 +96,7 @@ else{
 }
  ?>
 
-  <!-- ========= END HEADER =========-->
-  <!--========== BEGIN HEADER ==========-->
+
   <div class="container" style="padding-top: 130px;" align="center">
     
     <div class="row">
@@ -90,20 +104,66 @@ else{
       <div class="devider"></div>
     </div>
     <div style="text-align: center; padding-top: 50px;">
-        <button type="button" class="btn btn-default btn-lg" style=" background-color: #f95481;">新規出品</button>
+      <a href="puroduct_putup.php" class="btn btn-success btn-lg">新規出品</a>
     </div>
   </div>
-      
-
+  <div class="container" style="padding-top: 130px;" align="center"  >
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>商品写真</th>
+          <th>題名</th>
+          <th>価格</th>
+          <th>引渡可能日</th>
+          <th>エリア</th>
+          <th>カテゴリ</th>
+          <th>コメント</th>
+          <th>掲載期限</th>
+          <th>管理</th>
+        </tr>
+      </thead>
         <?php foreach ($items as $item) { ?>
           <div style="margin-bottom: 15px;">
-            <?php echo $tweet['username']; ?><br>
-            <img src="profile_image/<?php echo $tweet['picture_path']; ?>" width="40px">
-            <span style="font-size: 17px;"><?php echo $tweet['tweet']; ?></span><br>
-            <a href="view.php?id=<?php echo $tweet['id']; ?>">
-            <?php echo "ツイート日時:".$tweet['created']; ?></a><br>
-            <br>
-        <?php } ?>
+            <tbody>
+            <tr style="vertical-align: middle;">
+              <td style="vertical-align: middle;"><img src="itempic/<?php echo $item['itempic_path']; ?>" width="100px"></td>
+              <td style="vertical-align: middle;"><a href="product.php?id=<?php echo $item['id']; ?>">
+              <?php echo $item['item_name']; ?></a></td>
+              <td style="vertical-align: middle;">
+                <span style="font-size: 17px;"><?php echo $item['price'].'ペソ'; ?></span><br></td>
+              <td style="vertical-align: middle;">
+                <span style="font-size: 17px;"><?php echo $item['limited_date']; ?></span><br></td>
+              <td style="vertical-align: middle;">
+                <span style="font-size: 17px;"><?php echo $item['dealing_area']; ?></span><br></td>
+              <td style="vertical-align: middle;">
+                <span style="font-size: 17px;"><?php echo $item['category']; ?></span><br></td>
+              <td style="vertical-align: middle;">
+                <span style="font-size: 17px;"><?php echo $item['item_detail']; ?></span><br></td>
+              <td style="vertical-align: middle;">
+                <span style="font-size: 17px;"><?php echo $item['daling_date']; ?></span><br></td>
+              <td style="vertical-align: middle;">
+                <a href="edhit.php?id=<?php echo $tweet['id']; ?>" class="btn btn-warning btn-sm">編集</a><br><br>
+                <a href="delete.php?id=<?php echo $tweet['id']; ?>" class="btn btn-danger btn-sm">削除</a></td>
+              <br><br>
+            </tr>
+          </div>
+          </tbody>
+          <?php } ?>
+        </div>
+      
+    </table>
+  
+
+  <!-- <footer class="text-off-white">
+    <div class="footer">
+      <div class="container text-center wow fadeIn" data-wow-delay="0.4s">
+        <p class="copyright">Copyright &copy; 2017 - Designed By <a href="" class="theme-author">TaikiKiita</a> &amp; Developed by <a href="" class="theme-author">NagamiTaiki</a></p>
+      </div>
+    </div>
+  </footer>
+            <!- End footer -->
+  <!-- <a href="#" class="scrolltotop"><i class="fa fa-arrow-up"></i></a> --> <!-- Scroll to top button -->
+       
       
 
 </body>

@@ -15,6 +15,11 @@ session_start();
      exit();
     }
 
+    // if(!isset($_GET['id'])){
+    //   header('Location: timeline.php');
+    //   exit();
+    // }
+
     $item_name = '';
     $price = '';
     $limited_date = '';
