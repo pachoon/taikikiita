@@ -26,18 +26,20 @@ if(!isset($_SESSION['login_user']['id'])){
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 <body style="background-color: #3a6186 , #89253e" id="container">
+
+
+
 <?php
+session_start();
 
-if(isset($_SESSION['login_user'])){
-
-  require('parts/login_header.php');
-
+  if(isset($_SESSION['login_user']['id'])){
+    require('parts/login_header.php');
 }else{
+    require('parts/header.php');
+} ?>
 
-  require('parts/header.php');
-}
 
- ?>
+
   <div class="container">
     <div class="row">
     </div>

@@ -60,7 +60,7 @@
     </div>
     <div class="col-md-8 column">
       <blockquote>
-        <p style="font-size: 40px; color: black;" >
+        <p style="font-size: 60px; color: black;" >
           <?php echo $user['username']; ?> 
         </p> <!-- <small>学校名 / 性別 / </small> -->
       </blockquote>

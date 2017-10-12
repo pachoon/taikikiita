@@ -23,7 +23,7 @@
                             <li><a class="" href="login_index.php">ようこそ、<?php echo $_SESSION['login_user']['username'];?>さん</a></li>
                             <li><a class="" href="mypage.php">マイページ</a></li>
                             <li><a class="" href="search.php">商品検索</a></li>
-                            <li><a class="" href="">チャット</a></li>
+                            <li><a class="" href="chat_list.php">チャット</a></li>
                             <li><a class="" href="contact.php">お問合せ</a></li>
                             <li><a class="" href="logout.php">ログアウト</a></li>
                         </ul>

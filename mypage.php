@@ -34,19 +34,7 @@ if(!isset($_SESSION['login_user']['id'])){
   <title>マイページ</title>
 </head>
 <body style="background-color: #3a6186 , #89253e">
-<?php
-
-if(isset($_SESSION['login_user'])){
-
-  require('parts/login_header.php');
-
-}else{
-
-  require('parts/header.php');
-}
-
- ?>
-
+  <?php require('parts/login_header.php'); ?>
     <div class="container">
     <div class="row">
     </div>
@@ -75,7 +63,7 @@ if(isset($_SESSION['login_user'])){
     </div>
     <div class="col-md-8 column">
       <blockquote>
-        <p style="font-size: 40px; color: black;" >
+        <p style="font-size: 60px; color: black;" >
           <?php echo $_SESSION['login_user']['username']; ?> 
         </p> <!-- <small>学校名 / 性別 / </small> -->
       </blockquote>
@@ -85,7 +73,7 @@ if(isset($_SESSION['login_user'])){
          <button class="btn btn-default btn-block" type="button"><a href="edit_intro.php"><span style="font-weight: 900;">
                     プロフィール編集</span></a>
                  </button>
-                 <button class="btn btn-default btn-block" type="button"><a href="###########"><span style="font-weight: 900;">
+                 <button class="btn btn-default btn-block" type="button"><a href="edit_putup.php"><span style="font-weight: 900;">
                     出品管理</span></a>
                  </button>
                  <button class="btn btn-default btn-block" type="button"><a href="favorite2.php"><span style="font-weight: 900;">
