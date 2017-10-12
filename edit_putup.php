@@ -1,10 +1,46 @@
 <!-- 仮です -->
-<?php
-if(isset($_GET[‘comment’])){
-$comment = $_GET[‘comment’];
-echo $comment;
-}
+<?php  
+   session_start();
+
+    $dsn = 'mysql:dbname=cebty;host=localhost';
+    $user = 'root';
+    $password = '';
+    $dbh = new PDO($dsn, $user, $password);
+    $dbh->query('SET NAMES utf8');
+
+     if(!isset($_SESSION['login_user']['id'])){
+    //セッションデータを保持しているかチェック
+    //セッションデータがなければ、ログインページに飛ばす。
+      header('Location:login.php');
+      exit();
+     }
+
+//    if(isset($_POST['tweet'])){
+//           $tweet=$_POST['tweet'];
+
+    
+
 ?>
+<?php 
+
+$sql  = "SELECT * FROM `cebty_items` WHERE `user_id` =? ";
+$data = array($_GET['login_user_id']);
+$stmt = $dbh->prepare($sql);
+$stmt->execute($data);//object型でexecuteを実行している
+
+//表示用の配列を用意
+$items = array();
+while (true) {
+  $record = $stmt->fetch(PDO::FETCH_ASSOC);
+  // echo $record['username'];
+  // echo "<br>"
+  if (!$record){
+    break;
+  }
+  $items[]=$record;
+}
+
+ ?>
 <!-- 仮でした。 -->
 
 <!DOCTYPE html>
@@ -12,7 +48,6 @@ echo $comment;
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Cebty</title>
     <meta name="description" content="">
     <meta name="keywords" content="セブティ, Cebty" />
     <meta name="author" content="">
@@ -33,7 +68,7 @@ echo $comment;
 
 
     <!-- Theme CSS -->
-        <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/mobile.css">
 
@@ -51,84 +86,85 @@ echo $comment;
 
 <body>
   <!--========== BEGIN HEADER ==========-->
-  <header id="header" class="header-main">
-  <!-- Begin Navbar -->
-    <nav id="main-navbar" class="navbar navbar-default navbar-fixed-top" role="navigation"> <!-- Classes: navbar-default, navbar-inverse, navbar-fixed-top, navbar-fixed-bottom, navbar-transparent. Note: If you use non-transparent navbar, set "height: 98px;" to #header -->
-      <div class="container">
-      <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-            <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                    </button>
-                      <a class="navbar-brand page-scroll" href="index.html">Cebty</a>
-        </div>
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a class="" href="">ホーム</a></li>
-                <li><a class="" href="">マイページ</a></li>
-                  <li><a class="" href="">商品検索</a></li>
-                    <li><a class="" href="">チャット</a></li>
-                      <li><a class="" href="">お問合せ</a></li>
-                        <li><a class="" href="">ログイン</a></li>
-                        </ul>
-        </div><!-- /.navbar-collapse -->
-      </div><!-- /.container -->
-    </nav>
-                <!-- End Navbar -->
-  </header>
-  <!-- ========= END HEADER =========-->
-  <!--========== BEGIN HEADER ==========-->
+<?php 
+
+if(isset($_SESSION['login_user'])){
+  require('parts/login_header.php');
+}
+else{
+  require('parts/header.php');
+}
+ ?>
+
+
   <div class="container" style="padding-top: 130px;" align="center">
+    
     <div class="row">
-      <div class="col-md-3">
-        <button type="button" class="btn btn-default btn-lg " style=" background-color: #7e75b3; ">出品管理</button>
-      </div>
-      <div class="col-md-6"></div>
-      <div class="col-md-3">
-        <button type="button" class="btn btn-default btn-lg" style=" background-color: #f95481;">新規出品</button>
-      </div>
+      <h2 id="product-h2">商品管理</h2>
+      <div class="devider"></div>
     </div>
-
-    <div class="container" style="padding-top: 50px;" align="center">
-      <table id="edit_putup" class="table table-responsive">
-        <thead>
-          <tr>
-            <th>画像</th>
-            <th>商品名</th>
-            <th>価格</th>
-            <th>引渡可能日</th>
-            <th>コメント</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr >
-            <th scope="row"><img src="img/slider-bg.jpg" style="width:150px;"></th>
-              <td ><input type = “text” name =“itemname/“></td>
-              <td><input type = “number” name =“price/“>
-                <select name="men">
-                  <option value="1">ペソ</option>
-                  <option value="2">円</option>
-                </select></td>
-              <td><input type="text" id="datepicker"></td>
-              <td><textarea name="comment" cols="30" rows="5"></textarea><br /></td>
-
-              <td><button type="submit" class="btn btn-danger">登録</button><br><br>
-                  <button type="submit" class="btn btn-danger">削除</button></td>
-          </tr>
-        </tbody>
-
-
-      </table>
-      
-
+    <div style="text-align: center; padding-top: 50px;">
+      <a href="puroduct_putup.php" class="btn btn-success btn-lg">新規出品</a>
     </div>
-
   </div>
+  <div class="container"  >
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th style="text-align: center;">商品写真</th>
+          <th style="text-align: center;">題名</th>
+          <th style="text-align: center;">価格</th>
+          <th style="text-align: center;">引渡可能日</th>
+          <th style="text-align: center;">エリア</th>
+          <th style="text-align: center;">カテゴリ</th>
+          <th style="text-align: center;">コメント</th>
+          <th style="text-align: center;">掲載期限</th>
+          <th style="text-align: center;">管理</th>
+        </tr>
+      </thead>
+        <?php foreach ($items as $item) { ?>
+          <div style="margin-bottom: 15px;">
+            <tbody>
+            <tr style="vertical-align: middle;">
+              <td style="vertical-align: middle;"><img src="itempic/<?php echo $item['itempic_path']; ?>" width="100px"></td>
+              <td style="vertical-align: middle;"><a href="product.php?item_id=<?php echo $item['id']; ?>">
+              <strong></strong> <?php echo $item['item_name']; ?></a></td>
+              <td style="vertical-align: middle;">
+                <span style="font-size: 17px;"><?php echo $item['price'].'ペソ'; ?></span><br></td>
+              <td style="vertical-align: middle;">
+                <span style="font-size: 17px;"><?php echo $item['limited_date']; ?></span><br></td>
+              <td style="vertical-align: middle;">
+                <span style="font-size: 17px;"><?php echo $item['dealing_area']; ?></span><br></td>
+              <td style="vertical-align: middle;">
+                <span style="font-size: 17px;"><?php echo $item['category']; ?></span><br></td>
+              <td style="vertical-align: middle;">
+                <span style="font-size: 17px;"><?php echo $item['item_detail']; ?></span><br></td>
+              <td style="vertical-align: middle;">
+                <span style="font-size: 17px;"><?php echo $item['daling_date']; ?></span><br></td>
+              <td style="vertical-align: middle;">
+                <a href="edit_putup_change.php?item_id=<?php echo $item['id']; ?>" class="btn btn-warning btn-sm">編集</a><br><br>
+                <a href="product_delete.php?item_id=<?php echo $item['id']; ?>" class="btn btn-danger btn-sm">削除</a></td>
+              <br><br>
+            </tr>
+          </div>
+          </tbody>
+          <?php } ?>
+        </div>
+      
+    </table>
+  
+
+  <!-- <footer class="text-off-white">
+    <div class="footer">
+      <div class="container text-center wow fadeIn" data-wow-delay="0.4s">
+        <p class="copyright">Copyright &copy; 2017 - Designed By <a href="" class="theme-author">TaikiKiita</a> &amp; Developed by <a href="" class="theme-author">NagamiTaiki</a></p>
+      </div>
+    </div>
+  </footer>
+            <!- End footer -->
+  <!-- <a href="#" class="scrolltotop"><i class="fa fa-arrow-up"></i></a> --> <!-- Scroll to top button -->
+       
+      
 
 </body>
 </html>
