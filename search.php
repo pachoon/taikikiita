@@ -13,7 +13,9 @@
 
 <?php
 
-if(isset($_SESSION['login_user'])){
+session_start();
+$startPrice='9999';
+if(isset($_SESSION['login_user']['username'])){
 
 require('parts/login_header.php');
 
@@ -23,9 +25,78 @@ require('parts/header.php');
 
 }
 
+
+  $dsn = 'mysql:dbname=cebty;host=localhost';
+  $user = 'root';
+  $password = '';
+  $dbh = new PDO($dsn, $user, $password);
+  $dbh->query('SET NAMES utf8');
+
+
+
+  if($_POST['price']=='9999'){
+    $a = "!";}else{ $a = '';}
+
+  if($_POST['area']=='9999'){
+    $b = '!' ;} else { $b = '';}
+
+
+
+if(!empty($_POST['freeword']) || !empty($_POST['price']) || !empty($_POST['area'])){
+
+$startPrice=$_POST['price'];
+
+
+
+    $sql = 'SELECT * FROM `cebty_items` WHERE (`item_name` LIKE "%'.$_POST['freeword'].'%"
+                                              OR `item_detail` LIKE "%'.$_POST['freeword'].'%")
+                                                               AND `price_label ` '.$a.'= ?
+                                                               AND `dealing_area` '.$b.'= ?';
+    $data = array($_POST['price'], $_POST['area']);
+    $stmt = $dbh->prepare($sql);
+    $stmt->execute($data);
+
+  $products=array();
+
+while(true){
+  $record = $stmt->fetch(PDO::FETCH_ASSOC);
+
+  if(!$record){
+     break;
+  }
+
+
+  $products[]=$record;
+}
+
+} else {
+
+    $sql = "SELECT * FROM `cebty_items` " ;
+    $data = array();
+    $stmt = $dbh->prepare($sql);
+    $stmt->execute($data);
+
+
+// 表示用の配列を用意
+
+while(true){
+  $record = $stmt->fetch(PDO::FETCH_ASSOC);
+  //$recordはデータベースのカラム値をkeyとする連想配列で構成されます.(データベースから１件取ってきます)
+
+
+  if(!$record){
+     break;
+  }
+  $products[]=$record;
+}
+}
+
+
+
+
  ?>
 
-                                    <div class="portfolio_menu" id="filters" style="padding-top:100px;">
+                                    <div class="portfolio_menu" id="filters" style="padding-top:120px;">
                                         <ul>
                                             <li class="active_prot_menu"><a href="#porfolio_menu" data-filter="*">すべて</a></li>
                                             <li><a href="#porfolio_menu" data-filter=".elec">家電</a></li>
@@ -40,36 +111,61 @@ require('parts/header.php');
   <header id="myCarousel" class="carousel slide">
         <!-- Wrapper for Slides -->
         <div class="carousel-buttons">
-  <div class="search">
-        <div class="container">
+  <div class="search" >
+        <div class="container" >
           <div class="row">
                 <div class="col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1">
               <div class="form-section">
                 <div class="row">
-                    <form role="form">
+                    <form role="form" method="POST" action="">
                       <div class="col-sm-3 col-md-3">
                         <div class="form-group">
                              <div class="serchtile">価格</div>
                           <label class="sr-only" for="looking">価格</label>
-                         <select id="selectbasic" name="selectbasic" class="form-control">
-                              <option value="1">50ペソ以下</option>
-                              <option value="2">50-200ペソ</option>
-                              <option value="2">200-500ペソ</option>
-                              <option value="2">500-1000ペソ</option>
-                              <option value="2">1000ペソ以上</option>
+                         <select id="selectbasic" name="price" class="form-control">
+                              <?php if($startPrice=="9999"){ ?>
+                              <option value="9999" selected>全て</option>
+                              <?php }else{ ?>
+                              <option value="9999">全て</option>
+                              <?php } ?>
+
+                              <?php if($startPrice=="1"){ ?>
+                              <option value="1" selected>100ペソ以下</option>
+                              <?php }else{ ?>
+                              <option value="1">100ペソ以下</option>
+                              <?php } ?>
+
+                              <?php if($startPrice=="2"){ ?>
+                              <option value="2" selected>100-500ペソ以下</option>
+                              <?php }else{ ?>
+                              <option value="2">100-500ペソ以下</option>
+                              <?php } ?>
+
+                              <?php if($startPrice=="3"){ ?>
+                              <option value="3" selected>500-1000ペソ以下</option>
+                              <?php }else{ ?>
+                              <option value="3">500-1000ペソ以下</option>
+                              <?php } ?>
+
+                              <?php if($startPrice=="4"){ ?>
+                              <option value="4" selected>1000ペソ以上</option>
+                              <?php }else{ ?>
+                              <option value="4">1000ペソ以上</option>
+                              <?php } ?>
                             </select>
                         </div>
                       </div>
                       <div class="col-sm-3 col-md-3">
                         <div class="form-group">
                          <div class="serchtile">エリア</div>
-                          <label class="sr-only" for="age">エリア</label>
+                          <label class="sr-only" for="area">エリア</label>
                           <div class="input-group">
-                            <select id="age" name="age" class="form-control">
-                              <option value="18">ITパーク周辺</option>
-                              <option value="19">アヤラセンター</option>
-                              <option value="20">マンダウエシティ</option>
-                              <option value="21">マクタン島</option>
+                            <select id="age" name="area" class="form-control">
+                              <option value="9999">全て</option>
+                              <option value="ITパーク">ITパーク</option>
+                              <option value="アヤラ">アヤラ</option>
+                              <option value="マンダウエ">マンダウエ</option>
+                              <option value="マクタン島">マクタン島</option>
                             </select>
                          </div>
                         </div>
@@ -82,7 +178,7 @@ require('parts/header.php');
                         <div class="form-group">
                             <div class="serchtile">フリーワード</div>
                           <label class="sr-only" for="religion">フリーワード</label>
-                          <input type="text" id="religion" name="religion" class="form-control" name="">
+                          <input type="text" id="religion" name="freeword" class="form-control" name="">
                         </div>
                       </div>
 
@@ -106,96 +202,42 @@ require('parts/header.php');
 
     </header>  
 
+<?php  var_dump($a); var_dump($b);?>
 
+<div class="devider"></div>
 
-
-<div class="devider" style="margin:0; margin-bottom:15px;"></div>
+<div class="portfolio_content" id="portfolio">
 <div class="container">
     <div class="row">
         <div class="col-md-12 col-sm-12">
-            <div class="col-md-3 col-sm-4" >
+
+        <?php foreach($products as $product){ ?>
+
+
+            <div class="col-md-3 col-sm-4 <?php echo $product['category']; ?> ">
                 <div class="view">
                     <div class="caption">
                         <h3>　　　　　</h3>
                         <a href="" rel="tooltip" title="お気に入り"><span class="fa fa-heart-o fa-2x"></span></a>
                         <a href="" rel="tooltip" title="商品詳細"><span class="fa fa-search fa-2x"></span></a>
                     </div>
-                    <img src="profile_image/image.e.jpg" class="img-responsive">
-                    <div class="propertyType house" style="line-height: 20px;">ITパーク</div>
+                    <img src="itempc_path/<?php echo $product['itempc_path'];  ?>" class="img-responsive">
+                     <div class="propertyType house" style="line-height: 20px;"><?php echo $product['dealing_area']; ?></div>
+
                 </div>
                 <div class="info">
-                    <p class="small" style="text-overflow: ellipsis">商品名</p>
-                    <p class="small wb-red">引き渡し可能日</p>
+                    <p class="small" style="text-overflow: ellipsis"><?php echo $product['item_name']; ?></p>
+                    <p class="small wb-red">受渡し可能日：<?php echo $product['daling_date']; ?></p>
                 </div>
                 <div class="stats wb-red-bg text-center">
-                    <span class="fa fa-rub" rel="tooltip" title="価格：６０ペソ"> <strong>１８０</strong></span>
+                    <span class="fa fa-rub" rel="tooltip" title="価格：<?php echo $product['price']; ?>ペソ"> <strong> <?php echo $product['price']; ?></strong></span>
                 </div>
             </div>
-
-
-            <div class="col-md-3 col-sm-4">
-                <div class="view">
-                    <div class="caption">
-                        <h3>　　　　　</h3>
-                        <a href="" rel="tooltip" title="お気に入り"><span class="fa fa-heart-o fa-2x"></span></a>
-                        <a href="" rel="tooltip" title="商品詳細"><span class="fa fa-search fa-2x"></span></a>
-                    </div>
-                    <img src="profile_image/image.e.jpg" class="img-responsive">
-                    <div class="propertyType unit" style="line-height: 20px;">ITパーク</div>
-                </div>
-                <div class="info">
-                    <p class="small" style="text-overflow: ellipsis">商品名</p>
-                    <p class="small wb-red">引き渡し可能日</p>
-                </div>
-                <div class="stats wb-red-bg text-center">
-                    <span class="fa fa-rub" rel="tooltip" title="価格：６０ペソ"> <strong>１８０</strong></span>
-                </div>
-            </div>
-
-
-                        <div class="col-md-3 col-sm-4">
-                <div class="view">
-                    <div class="caption">
-                        <h3>　　　　　</h3>
-                        <a href="" rel="tooltip" title="お気に入り"><span class="fa fa-heart-o fa-2x"></span></a>
-                        <a href="" rel="tooltip" title="商品詳細"><span class="fa fa-search fa-2x"></span></a>
-                    </div>
-                    <img src="profile_image/image.e.jpg" class="img-responsive">
-                    <div class="propertyType land" style="line-height: 20px;">ITパーク</div>
-                </div>
-                <div class="info">
-                    <p class="small" style="text-overflow: ellipsis">商品名</p>
-                    <p class="small wb-red">引き渡し可能日</p>
-                </div>
-                <div class="stats wb-red-bg text-center">
-                    <span class="fa fa-rub" rel="tooltip" title="価格：６０ペソ"> <strong>１８０</strong></span>
-                </div>
-            </div>
-
-
-
-            <div class="col-md-3 col-sm-4">
-                <div class="view">
-                    <div class="caption">
-                        <h3>　　　　　</h3>
-                        <a href="" rel="tooltip" title="お気に入り"><span class="fa fa-heart-o fa-2x"></span></a>
-                        <a href="" rel="tooltip" title="商品詳細"><span class="fa fa-search fa-2x"></span></a>
-                    </div>
-                    <img src="profile_image/image.e.jpg" class="img-responsive">
-                    <div class="propertyType commercial" style="line-height: 20px;">ITパーク</div>
-                </div>
-                <div class="info">
-                    <p class="small" style="text-overflow: ellipsis">商品名</p>
-                    <p class="small wb-red">引き渡し可能日</p>
-                </div>
-                <div class="stats wb-red-bg text-center">
-                    <span class="fa fa-rub" rel="tooltip" title="価格：６０ペソ"> <strong>１８０</strong></span>
-                </div>
-            </div>
-
+        <?php }  ?>
 
         </div>
     </div>
+</div>
 </div>
 
 

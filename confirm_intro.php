@@ -137,7 +137,7 @@ if(isset($_SESSION['login_user'])){
                  <button class="btn btn-md btn-primary btn-block" type="submit">更新する</button>
                </div>
                <div class="col-sm-6 col-md-6">
-                 <button class="btn btn-md btn-danger btn-block" type="submit">戻る</button>
+                 <a href="javascript:history.back()" class="btn btn-md btn-danger btn-block">もどる</a>
                </div>
             </div>
 

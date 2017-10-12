@@ -21,6 +21,39 @@ if(!isset($_SESSION['login_user']['id'])){
 
 
 
+  $dsn = 'mysql:dbname=cebty;host=localhost';
+  $user = 'root';
+  $password = '';
+  $dbh = new PDO($dsn, $user, $password);
+  $dbh->query('SET NAMES utf8');
+
+
+
+
+$sql = "SELECT * FROM `cebty_items` " ;
+$data = array();
+$stmt = $dbh->prepare($sql);
+$stmt->execute($data);
+
+
+// 表示用の配列を用意
+
+while(true){
+  $record = $stmt->fetch(PDO::FETCH_ASSOC);
+  //$recordはデータベースのカラム値をkeyとする連想配列で構成されます.(データベースから１件取ってきます)
+
+
+  if(!$record){
+     break;
+  }
+  $products[]=$record;
+}
+
+
+
+
+
+
  ?>
 
 
@@ -51,7 +84,7 @@ if(!isset($_SESSION['login_user']['id'])){
     <link rel="stylesheet" href="inc/owl-carousel/css/owl.theme.css">
 
     <!-- Theme CSS -->
-        <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/mobile.css">
 
@@ -160,7 +193,34 @@ if(!isset($_SESSION['login_user']['id'])){
                                             <li><a href="#porfolio_menu" data-filter=".others">その他</a></li>
                                         </ul>
                                     </div>
+
+
+
+                                <?php foreach($products as $product){ ?>
                                     <div class="portfolio_content">
+                                        <div class="row"  id="portfolio">
+                                            <div class="col-xs-12 col-sm-4 <?php echo $product['category']; ?>">
+                                                <div class="portfolio_single_content">
+                                                    <img src="itempc_path/<?php echo $product['itempc_path'];?> " alt="title"/>
+                                                    <div>
+                                                        <a href="#"> <?php echo $product['item_name']; ?></a>
+                                                        <ul>
+                                                            <li><span>価格：<?php echo $product['price']; ?></span></li>
+                                                            <li><span>引き渡し可能日：<?php echo $product['daling_date'] ?></span></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                <?php } ?>
+
+
+
+
+
+
+
+
+<!--                                     <div class="portfolio_content">
                                         <div class="row"  id="portfolio">
                                             <div class="col-xs-12 col-sm-4 elec">
                                                 <div class="portfolio_single_content">
@@ -271,7 +331,7 @@ if(!isset($_SESSION['login_user']['id'])){
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
 
                             </div>

@@ -100,11 +100,42 @@ if(!empty($_POST)){
 
             <button class="btn btn-md btn-primary btn-block" type="submit">
                 ログイン</button>
-                <div class="text-center" style="padding-top:15px;"><a href="signup.php">新規登録はこちらから</a></div>
+                <div class="text-center" style="padding-top:15px;"><a onclick="gate();">新規登録はこちらから</a></div>
             </form>
         </div>
     </div>
 </div>
+
+
+
+<script type="text/javascript">
+
+function gate(){
+   // ▼ユーザの入力を求める
+   var UserInput;
+   UserInput = prompt("パスワードを入力して下さい:","");
+   // ▼入力内容をチェック
+   if(UserInput == "nexseed" ) {
+     location.href = 'signup.php';
+   }
+   // ▼キャンセルをチェック
+   else if(UserInput != null && UserInput != "nexseed"){
+          // ▼入力内容からファイル名を生成して移動
+       alert("パスワードが間違っています。");
+   }
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
 
 </section>
 

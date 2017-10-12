@@ -88,7 +88,7 @@ if(isset($_SESSION['login_user'])){
                  <button class="btn btn-default btn-block" type="button"><a href="###########"><span style="font-weight: 900;">
                     出品管理</span></a>
                  </button>
-                 <button class="btn btn-default btn-block" type="button"><a href="favorite.php"><span style="font-weight: 900;">
+                 <button class="btn btn-default btn-block" type="button"><a href="favorite2.php"><span style="font-weight: 900;">
                     お気に入り</span></a>
                  </button>
     </div>

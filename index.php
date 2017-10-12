@@ -96,7 +96,7 @@
 							<div class="item">
                             <img src="img/mainlogo.png">
                                 <div class="extra-space-l"></div>
-								<a class="btn btn-blank" href="signup.php" role="button">新規登録</a>
+								<a class="btn btn-blank" role="button" onclick="gate();">新規登録</a>
 							</div>
 						</div>
 
@@ -105,6 +105,39 @@
 
 			</section>
 			<!-- End text carousel intro section -->
+
+
+
+
+
+<script type="text/javascript">
+
+function gate(){
+   // ▼ユーザの入力を求める
+   var UserInput;
+   UserInput = prompt("パスワードを入力して下さい:","");
+   // ▼入力内容をチェック
+   if(UserInput == "nexseed" ) {
+     location.href = 'signup.php';
+   }
+   // ▼キャンセルをチェック
+   else if(UserInput != null && UserInput != "nexseed"){
+          // ▼入力内容からファイル名を生成して移動
+       alert("パスワードが間違っています。");
+   }
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -150,7 +183,7 @@
 
 
 
-$sql = "SELECT * FROM `cebty_users` " ;
+$sql = "SELECT * FROM `cebty_items` " ;
 $data = array();
 $stmt = $dbh->prepare($sql);
 $stmt->execute($data);
@@ -187,14 +220,14 @@ while(true){
                                 <?php foreach($products as $product){ ?>
                                     <div class="portfolio_content">
                                         <div class="row"  id="portfolio">
-                                            <div class="col-xs-12 col-sm-4 elec">
+                                            <div class="col-xs-12 col-sm-4 <?php echo $product['category']; ?>">
                                                 <div class="portfolio_single_content">
-                                                    <img src="profile_image/<?php echo $product['picture_path'];?> " alt="title"/>
+                                                    <img src="itempc_path/<?php echo $product['itempc_path'];?> " alt="title"/>
                                                     <div>
-                                                        <a href="#"> <?php echo $product['username']; ?></a>
+                                                        <a href="#"> <?php echo $product['item_name']; ?></a>
                                                         <ul>
-                                                            <li><span> <?php echo $product['gender']; ?></span></li>
-                                                            <li><span>引渡し可能日：即日ちょ</span></li>
+                                                            <li><span>価格：<?php echo $product['price']; ?>ペソ</span></li>
+                                                            <li><span>引き渡し可能日：<?php echo $product['daling_date'] ?>〜</span></li>
                                                         </ul>
                                                     </div>
                                                 </div>
