@@ -24,7 +24,7 @@
 <?php 
 
 $sql  = "SELECT * FROM `cebty_items` WHERE `user_id` =? ";
-$data = array($_SESSION['login_user']['id']);
+$data = array($_GET['login_user_id']);
 $stmt = $dbh->prepare($sql);
 $stmt->execute($data);//object型でexecuteを実行している
 
@@ -68,7 +68,7 @@ while (true) {
 
 
     <!-- Theme CSS -->
-        <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/mobile.css">
 
@@ -107,19 +107,19 @@ else{
       <a href="puroduct_putup.php" class="btn btn-success btn-lg">新規出品</a>
     </div>
   </div>
-  <div class="container" style="padding-top: 130px;" align="center"  >
+  <div class="container"  >
     <table class="table table-hover">
       <thead>
         <tr>
-          <th>商品写真</th>
-          <th>題名</th>
-          <th>価格</th>
-          <th>引渡可能日</th>
-          <th>エリア</th>
-          <th>カテゴリ</th>
-          <th>コメント</th>
-          <th>掲載期限</th>
-          <th>管理</th>
+          <th style="text-align: center;">商品写真</th>
+          <th style="text-align: center;">題名</th>
+          <th style="text-align: center;">価格</th>
+          <th style="text-align: center;">引渡可能日</th>
+          <th style="text-align: center;">エリア</th>
+          <th style="text-align: center;">カテゴリ</th>
+          <th style="text-align: center;">コメント</th>
+          <th style="text-align: center;">掲載期限</th>
+          <th style="text-align: center;">管理</th>
         </tr>
       </thead>
         <?php foreach ($items as $item) { ?>
@@ -127,8 +127,8 @@ else{
             <tbody>
             <tr style="vertical-align: middle;">
               <td style="vertical-align: middle;"><img src="itempic/<?php echo $item['itempic_path']; ?>" width="100px"></td>
-              <td style="vertical-align: middle;"><a href="product.php?id=<?php echo $item['id']; ?>">
-              <?php echo $item['item_name']; ?></a></td>
+              <td style="vertical-align: middle;"><a href="product.php?item_id=<?php echo $item['id']; ?>">
+              <strong></strong> <?php echo $item['item_name']; ?></a></td>
               <td style="vertical-align: middle;">
                 <span style="font-size: 17px;"><?php echo $item['price'].'ペソ'; ?></span><br></td>
               <td style="vertical-align: middle;">
@@ -142,8 +142,8 @@ else{
               <td style="vertical-align: middle;">
                 <span style="font-size: 17px;"><?php echo $item['daling_date']; ?></span><br></td>
               <td style="vertical-align: middle;">
-                <a href="edhit.php?id=<?php echo $tweet['id']; ?>" class="btn btn-warning btn-sm">編集</a><br><br>
-                <a href="delete.php?id=<?php echo $tweet['id']; ?>" class="btn btn-danger btn-sm">削除</a></td>
+                <a href="edit_putup_change.php?item_id=<?php echo $item['id']; ?>" class="btn btn-warning btn-sm">編集</a><br><br>
+                <a href="product_delete.php?item_id=<?php echo $item['id']; ?>" class="btn btn-danger btn-sm">削除</a></td>
               <br><br>
             </tr>
           </div>

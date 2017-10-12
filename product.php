@@ -3,6 +3,8 @@
 <?php
    session_start();
 
+
+
    $dsn = 'mysql:dbname=cebty;host=localhost';
    $user = 'root';
    $password = '';
@@ -16,7 +18,7 @@
            LEFT JOIN `cebty_users`
            ON `cebty_items`.`user_id` = `cebty_users`.`id`
            WHERE `cebty_items`.`id`=? ";
-   $data = array($_GET['id']); //?がない場合は空のままでOK
+   $data = array($_GET['item_id']); //?がない場合は空のままでOK
    $stmt = $dbh->prepare($sql);
    $stmt->execute($data); 
 
@@ -65,7 +67,7 @@
     if(isset($_POST['favorite'])){
         // いいね、またはいいね取り消しを押した場合は、ここの処理が走る
         // $_POSTの情報を破棄。
-        header('Location: product.php?id=' . $_POST['items_id']);
+        header('Location: product.php?item_id=' . $_POST['items_id']);
         exit();
     }
 
@@ -152,7 +154,7 @@
     <!-- productPicture -->
     <div class="row">
         <div class=" col-md-6" style="text-align: center;">
-        <img src="itempic/<?php echo $item['itempic_path']; ?>" width="400px" >
+        <img src="itempic/<?php echo $item['itempic_path']; ?>" width="400px" height="400px" >
     </div>
     <!-- productPictureEnd -->
     <div class="col-md-6">
@@ -188,7 +190,7 @@
           $request_chk = $stmt->fetch(PDO::FETCH_ASSOC);
         ?>
         
-        <?php if($_SESSION['login_user']['id'] = $item['user_id'] ){ ?>
+        <?php if($_SESSION['login_user']['id'] == $item['user_id'] ){ ?>
           <form method="POST" action=""><br>
             <input type="hidden" name="item_id" value="<?php echo $item['id']; ?>">
             <?php if($request_chk['count'] == 0){ ?>
@@ -199,6 +201,11 @@
               <input type="submit" value="受付再開" class="btn btn-warning btn-lg">
             <?php } ?><br><br>
           </form>
+        <?php } ?>
+
+        <?php if($_SESSION['login_user']['id'] == $item['user_id'] ){ ?>
+          <a href="edit_putup.php?login_user_id=<?php echo $_SESSION['login_user']['id']; ?>" class="btn btn-warning btn-lg" >
+            商品管理ページに戻る</a>
         <?php } ?>
          <!-- お気に入りを表示 -->
         <?php 
@@ -219,7 +226,7 @@
             // var_dump($likes_chk['count']);
         ?>
         <!-- お気に入りボタン設置 -->
-        <?php if($_SESSION['login_user']['id'] =!$item['user_id'] ){ ?>
+        <?php if($_SESSION['login_user']['id'] ==!$item['user_id'] ){ ?>
           <form method="POST" action=""><br>
             <input type="hidden" name="items_id" value="<?php echo $item['id']; ?>">
             <!-- ここのif文で10回いいね！、しないと取り消しが出現しないようにしている -->
@@ -235,16 +242,18 @@
         <?php } ?><br>
       </div>
 
-      <?php if($_SESSION['login_user']['id'] =!$item['user_id'] ){ ?>
+      <?php if($_SESSION['login_user']['id'] ==!$item['user_id']){ ?>
         <a href="chat.php?<?php echo 'item_id='.$item['id'].'&'.'user_id='.$item['user_id'].'&'.'login_id='.$_SESSION['login_user']['id']; ?>" class="btn btn-info btn-lg" >
           出品者へ問い合わせ</a>
+
       <?php } ?>
         
       <div class="col-md-6">
-        <div id="box16">
+        <div id="box16" >
           <p style="text-align: center;">出品者</p>
             <img src="profile_image/<?php echo $item['picture_path']; ?>" width="100px">
-            <a href=""><?php echo $item['username']?></a>
+            <a href="user_information.php?user_id=<?php echo $item['user_id']; ?>">
+              <?php echo $item['username']?></a>
         </div>
       </div>
     </div>

@@ -26,70 +26,64 @@ session_start();
 
      if(!empty($_POST)){
 
-      echo 'POST送信しました<br>';
-     $item_name = $_POST['item_name'];
-     $price = $_POST['price'];
-     $limited_date = $_POST['limited_date'];
-     $item_detail = $_POST['item_detail'];
-     $dealing_area = $_POST['dealing_area'];
-     $daling_date = $_POST['daling_date'];
-     $category = $_POST['category'];
+        echo 'POST送信しました<br>';
+        $item_name = $_POST['item_name'];
+        $price = $_POST['price'];
+        $limited_date = $_POST['limited_date'];
+        $item_detail = $_POST['item_detail'];
+        $dealing_area = $_POST['dealing_area'];
+        $daling_date = $_POST['daling_date'];
+        $category = $_POST['category'];
 
-     $erros = array();
-     if($item_name == '' ){
-         $errors['item_name'] = 'blank';
-     }
-     if($price == '' ){
-         $errors['price'] = 'blank';
-     }
-     if($limited_date == '' ){
-         $errors['limited_date'] = 'blank';
-     }
-     if($item_detail == '' ){
-         $errors['item_detail'] = 'blank';
-     }
-     if($dealing_area == '' ){
-         $errors['dealing_area'] = 'blank';
-     }
-     if($daling_date == '' ){
-         $errors['daling_date'] = 'blank';
-     }
-     if($category == '' ){
-         $errors['category'] = 'blank';
-     }
+        $erros = array();
+        if($item_name == '' ){
+           $errors['item_name'] = 'blank';
+        }
+        if($price == '' ){
+           $errors['price'] = 'blank';
+        }
+        if($limited_date == '' ){
+            $errors['limited_date'] = 'blank';
+        }
+        if($item_detail == '' ){
+            $errors['item_detail'] = 'blank';
+        }
+        if($dealing_area == '' ){
+            $errors['dealing_area'] = 'blank';
+        }
+        if($daling_date == '' ){
+            $errors['daling_date'] = 'blank';
+        }
+        if($category == '' ){
+            $errors['category'] = 'blank';
+        }
 
-    $fileName = $_FILES['itempic_path']['name'];
-    if(!empty($fileName)){
-         $ext = substr($fileName,-3);
-         $ext = strtolower($ext);
-         if ($ext != 'jpg' && $ext != 'png' && $ext != 'gif'){
-             $errors['itempic_path'] = 'extension';
-         }
-    }
+        $fileName = $_FILES['itempic_path']['name'];
+        if(!empty($fileName)){
+            $ext = substr($fileName,-3);
+            $ext = strtolower($ext);
+            if ($ext != 'jpg' && $ext != 'png' && $ext != 'gif'){
+                $errors['itempic_path'] = 'extension';
+            }
+        }
+        if (empty($errors)){
+             move_uploaded_file($_FILES['itempic_path']['tmp_name'], 'itempic/'.$fileName);
     
-    if (empty($errors)){
-         move_uploaded_file($_FILES['itempic_path']['tmp_name'], 'itempic/'.$fileName);
-    }
-
-         // check.phpへリダイレクト
-         // $_SESSEION スーパーグローバル変数
          // データを一時的に保存する
-         
-         $_SESSION['item_info']['item_name'] = $item_name;
-         $_SESSION['item_info']['itempic_path'] = $fileName;
-         $_SESSION['item_info']['price'] = $price;
-         $_SESSION['item_info']['limited_date'] = $limited_date;
-         $_SESSION['item_info']['item_detail'] = $item_detail;
-         $_SESSION['item_info']['dealing_area'] = $dealing_area;
-         $_SESSION['item_info']['daling_date'] = $daling_date;
-         $_SESSION['item_info']['category'] = $category;
+             $_SESSION['item_info']['item_name'] = $item_name;
+             $_SESSION['item_info']['itempic_path'] = $fileName;
+             $_SESSION['item_info']['price'] = $price;
+             $_SESSION['item_info']['limited_date'] = $limited_date;
+             $_SESSION['item_info']['item_detail'] = $item_detail;
+             $_SESSION['item_info']['dealing_area'] = $dealing_area;
+             $_SESSION['item_info']['daling_date'] = $daling_date;
+             $_SESSION['item_info']['category'] = $category;
 
-
-         // POST送信を破棄する
-         header('Location: product_confirm_putup.php');
-         exit();
-     }
-   
+             // POST送信を破棄する
+             header('Location: product_confirm_putup.php');
+             exit();
+        }
+    }
 
  ?>
 

@@ -113,10 +113,11 @@ else{
             <div class="row">
                <div class="col-sm-6 col-md-6">
                 <input type="hidden" name="action" value="submit">
-                 <button class="btn btn-md btn-primary btn-block" type="submit">登録する</button>
+                <a href="edit_putup.php?login_user_id=<?php echo $_SESSION['login_user']['id']; ?>" class="btn btn-primary btn-block" type="submit">登録する</a><br><br>
+                 
                </div>
                <div class="col-sm-6 col-md-6">
-                 <button class="btn btn-md btn-danger btn-block" type="submit">修正する</button>
+               <a href="javascript:history.back()" class="btn btn-md btn-danger btn-block">修正する</a>
                </div>
             </div>
 

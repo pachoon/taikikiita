@@ -94,6 +94,13 @@ session_start();
          header('Location: product_confirm_putup.php');
          exit();
      }
+
+     $sql = "SELECT * FROM `cebty_items` WHERE `id`=? ";
+     $data = array($_GET['item_id']); //?がない場合は空のままでOK
+     $stmt = $dbh->prepare($sql);
+     $stmt->execute($data); 
+
+     $item = $stmt->fetch(PDO::FETCH_ASSOC);
    
 
  ?>
@@ -141,22 +148,22 @@ session_start();
                 <div class="row">
                     <div class="col-xs-12 col-md-12">
                       <h5>題名</h5>
-                        <input class="form-control" name="item_name" placeholder="例：冷蔵庫　1000ペソ！" type="text"
+                        <input class="form-control" name="item_name" type="text" value="<?php echo $item['item_name']; ?> "
                             required autofocus style="height:28px; font-size:12px;"/>
                     </div>
                     <!-- 商品画像１ -->
                     <h5>商品画像</h5>
-                    <input type="file" name="itempic_path" accept="image/*"  >
+                    <input type="file" name="itempic_path" accept="image/*" value="<?php echo $item['itempic_path']; ?> ">
 
                 </div>
                 <h5>価格</h5>
-                <input class="form-control" name="price" placeholder="例：1000" type="numper" style="height:28px; font-size:12px;"/>
+                <input class="form-control" name="price" value="<?php echo $item['price']; ?> " type="numper" style="height:28px; font-size:12px;"/>
                 <h5>掲載期限</h5>
-                <input class="form-control" name="limited_date" type="date" style="height:28px; font-size:12px;"/>
+                <input class="form-control" name="limited_date" type="date" value="<?php echo $item['limited_date']; ?> " style="height:28px; font-size:12px;"/>
                 <h5>コメント</h5>
-                <textarea class="form-control" name="item_detail" placeholder="コメント" required type="text" style="height:80px;font-size:12px;"/></textarea>
+                <textarea class="form-control" name="item_detail" value="<?php echo $item['item_detail']; ?> " required type="text" style="height:80px;font-size:12px;"/></textarea>
                 <h5>地域</h5>
-                <select class="form-control" required name="dealing_area" style="height:28px; font-size:12px;">
+                <select class="form-control" required name="dealing_area" value="<?php echo $item['dealing_area']; ?> " style="height:28px; font-size:12px;">
                   <option>--地域を選択してください--</option>
                   <option>アヤラ</option>
                   <option>ITパーク</option>
@@ -165,12 +172,12 @@ session_start();
                   <option>その他</option>
                 </select>
                 <h5>取引可能日</h5>
-                <input class="form-control" name="daling_date" type="date" style="height:28px; font-size:12px;"/>
+                <input class="form-control" name="daling_date" value="<?php echo $item['daling_date']; ?> " type="date" style="height:28px; font-size:12px;"/>
                 以降
                 
                 <br><br>
                 <h5>カテゴリ</h5>
-                <select class="form-control" required name="category" style="height:28px; font-size:12px;">
+                <select class="form-control" required name="category" value="<?php echo $item['category']; ?> " style="height:28px; font-size:12px;">
                   <option>--カテゴリを選択してください--</option>
                   <option>家電</option>
                   <option>衣服</option>
