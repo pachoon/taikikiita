@@ -15,6 +15,9 @@
 
 session_start();
 $startPrice='9999';
+$startArea='9999';
+$startFreeword='';
+
 if(isset($_SESSION['login_user']['username'])){
 
 require('parts/login_header.php');
@@ -45,6 +48,8 @@ require('parts/header.php');
 if(!empty($_POST['freeword']) || !empty($_POST['price']) || !empty($_POST['area'])){
 
 $startPrice=$_POST['price'];
+$startArea=$_POST['area'];
+$startFreeword=$_POST['freeword'];
 
 
 
@@ -69,7 +74,33 @@ while(true){
   $products[]=$record;
 }
 
-} else {
+}elseif(!empty($_GET['freeword']) || !empty($_GET['price']) || !empty($_GET['area'])){
+
+
+    $sql = 'SELECT * FROM `cebty_items` WHERE (`item_name` LIKE "%'.$_GET['freeword'].'%"
+                                              OR `item_detail` LIKE "%'.$_GET['freeword'].'%")
+                                                               AND `price_label` '.$a.'= ?
+                                                               AND `dealing_area` '.$b.'= ?';
+    $data = array($_GET['price'], $_GET['area']);
+    $stmt = $dbh->prepare($sql);
+    $stmt->execute($data);
+
+  $products=array();
+
+while(true){
+  $record = $stmt->fetch(PDO::FETCH_ASSOC);
+
+  if(!$record){
+     break;
+  }
+
+
+  $products[]=$record;
+
+}
+
+
+}else{
 
     $sql = "SELECT * FROM `cebty_items` " ;
     $data = array();
@@ -94,9 +125,14 @@ while(true){
 
 
 
+
+
+
+
+
  ?>
 
-                                    <div class="portfolio_menu" id="filters" style="padding-top:120px;">
+                                    <div class="portfolio_menu" id="filters" style="padding-top:80px;">
                                         <ul>
                                             <li class="active_prot_menu"><a href="#porfolio_menu" data-filter="*">すべて</a></li>
                                             <li><a href="#porfolio_menu" data-filter=".elec">家電</a></li>
@@ -112,7 +148,7 @@ while(true){
         <!-- Wrapper for Slides -->
         <div class="carousel-buttons">
   <div class="search" >
-        <div class="container" >
+        <div class="container">
           <div class="row">
                 <div class="col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1">
               <div class="form-section">
@@ -161,11 +197,31 @@ while(true){
                           <label class="sr-only" for="area">エリア</label>
                           <div class="input-group">
                             <select id="age" name="area" class="form-control">
+                              <?php if($startArea=="9999"){ ?>
+                              <option value="9999" selected>全て</option>
+                              <?php }else{ ?>
                               <option value="9999">全て</option>
+                              <?php } ?>
+                              <?php if($startArea=="ITパーク"){ ?>
+                              <option value="ITパーク" selected>ITパーク</option>
+                              <?php }else{ ?>
                               <option value="ITパーク">ITパーク</option>
+                              <?php } ?>
+                              <?php if($startArea=="アヤラ"){ ?>
+                              <option value="アヤラ" selected>アヤラ</option>
+                              <?php }else{ ?>
                               <option value="アヤラ">アヤラ</option>
+                              <?php } ?>
+                              <?php if($startArea=="マンダウエ"){ ?>
+                              <option value="マンダウエ" selected>マンダウエ</option>
+                              <?php }else{ ?>
                               <option value="マンダウエ">マンダウエ</option>
+                              <?php } ?>
+                              <?php if($startArea=="マクタン島"){ ?>
+                              <option value="マクタン島" selected>マクタン島</option>
+                              <?php }else{ ?>
                               <option value="マクタン島">マクタン島</option>
+                              <?php } ?>
                             </select>
                          </div>
                         </div>
@@ -178,7 +234,7 @@ while(true){
                         <div class="form-group">
                             <div class="serchtile">フリーワード</div>
                           <label class="sr-only" for="religion">フリーワード</label>
-                          <input type="text" id="religion" name="freeword" class="form-control" name="">
+                          <input type="text" id="religion" name="freeword" class="form-control" value="<?php echo $startFreeword; ?>">
                         </div>
                       </div>
 
@@ -202,9 +258,10 @@ while(true){
 
     </header>  
 
-<?php  var_dump($a); var_dump($b);?>
 
 <div class="devider"></div>
+
+
 
 <div class="portfolio_content" id="portfolio">
 <div class="container">
@@ -213,16 +270,30 @@ while(true){
 
         <?php foreach($products as $product){ ?>
 
+<?php
+  $sql='SELECT * FROM `cebty_favorite` where `user_id` =? and `items_id` = ?';
 
-            <div class="col-md-3 col-sm-4 <?php echo $product['category']; ?> ">
+  $data = array($_SESSION['login_user']['id'], $product['id']);
+  $stmt = $dbh->prepare($sql);
+  $stmt->execute($data);
+  $favorite = $stmt->fetch(PDO::FETCH_ASSOC);
+?>
+
+
+            <div class="col-md-3 col-sm-4 <?php echo $product['category']; ?> " id="<?php echo $product['id'];?>">
                 <div class="view">
                     <div class="caption">
                         <h3>　　　　　</h3>
-                        <a href="" rel="tooltip" title="お気に入り"><span class="fa fa-heart-o fa-2x"></span></a>
+
+<?php if(!$favorite){ ?>
+                        <a href="fav.php?item_id=<?php echo $product['id']; ?>&price=<?php echo $startPrice; ?>&area=<?php echo $startArea; ?>&freeword=<?php echo $startFreeword; ?>&like" rel="tooltip" title="お気に入り"><span class="fa fa-heart-o fa-2x"></span></a>
+<?php }elseif($favorite){ ?>
+                        <a href="fav.php?item_id=<?php echo $product['id']; ?>&price=<?php echo $startPrice; ?>&area=<?php echo $startArea; ?>&freeword=<?php echo $startFreeword; ?>&unlike" rel="tooltip" title="お気に入り解除"><span class="fa fa-heart fa-2x"></span></a>
+<?php } ?>
                         <a href="" rel="tooltip" title="商品詳細"><span class="fa fa-search fa-2x"></span></a>
                     </div>
                     <img src="itempc_path/<?php echo $product['itempc_path'];  ?>" class="img-responsive">
-                     <div class="propertyType house" style="line-height: 20px;"><?php echo $product['dealing_area']; ?></div>
+                     <div class="propertyType <?php if($product['dealing_area']=='ITパーク'){echo 'it';}elseif($product['dealing_area']=='アヤラ'){echo 'ayala';}elseif($product['dealing_area']=='マンダウエ'){echo 'mandaue';}elseif($product['dealing_area']=='マクタン島'){echo 'makutan';} ?>" style="line-height: 20px;"><?php echo $product['dealing_area']; ?></div>
 
                 </div>
                 <div class="info">
