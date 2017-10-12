@@ -15,6 +15,11 @@ session_start();
      exit();
     }
 
+    // if(!isset($_GET['id'])){
+    //   header('Location: timeline.php');
+    //   exit();
+    // }
+
     $item_name = '';
     $price = '';
     $limited_date = '';
@@ -26,64 +31,77 @@ session_start();
 
      if(!empty($_POST)){
 
-        echo 'POST送信しました<br>';
-        $item_name = $_POST['item_name'];
-        $price = $_POST['price'];
-        $limited_date = $_POST['limited_date'];
-        $item_detail = $_POST['item_detail'];
-        $dealing_area = $_POST['dealing_area'];
-        $daling_date = $_POST['daling_date'];
-        $category = $_POST['category'];
+      echo 'POST送信しました<br>';
+     $item_name = $_POST['item_name'];
+     $price = $_POST['price'];
+     $limited_date = $_POST['limited_date'];
+     $item_detail = $_POST['item_detail'];
+     $dealing_area = $_POST['dealing_area'];
+     $daling_date = $_POST['daling_date'];
+     $category = $_POST['category'];
 
-        $erros = array();
-        if($item_name == '' ){
-           $errors['item_name'] = 'blank';
-        }
-        if($price == '' ){
-           $errors['price'] = 'blank';
-        }
-        if($limited_date == '' ){
-            $errors['limited_date'] = 'blank';
-        }
-        if($item_detail == '' ){
-            $errors['item_detail'] = 'blank';
-        }
-        if($dealing_area == '' ){
-            $errors['dealing_area'] = 'blank';
-        }
-        if($daling_date == '' ){
-            $errors['daling_date'] = 'blank';
-        }
-        if($category == '' ){
-            $errors['category'] = 'blank';
-        }
+     $erros = array();
+     if($item_name == '' ){
+         $errors['item_name'] = 'blank';
+     }
+     if($price == '' ){
+         $errors['price'] = 'blank';
+     }
+     if($limited_date == '' ){
+         $errors['limited_date'] = 'blank';
+     }
+     if($item_detail == '' ){
+         $errors['item_detail'] = 'blank';
+     }
+     if($dealing_area == '' ){
+         $errors['dealing_area'] = 'blank';
+     }
+     if($daling_date == '' ){
+         $errors['daling_date'] = 'blank';
+     }
+     if($category == '' ){
+         $errors['category'] = 'blank';
+     }
 
-        $fileName = $_FILES['itempic_path']['name'];
-        if(!empty($fileName)){
-            $ext = substr($fileName,-3);
-            $ext = strtolower($ext);
-            if ($ext != 'jpg' && $ext != 'png' && $ext != 'gif'){
-                $errors['itempic_path'] = 'extension';
-            }
-        }
-        if (empty($errors)){
-             move_uploaded_file($_FILES['itempic_path']['tmp_name'], 'itempic/'.$fileName);
-    
-         // データを一時的に保存する
-             $_SESSION['item_info']['item_name'] = $item_name;
-             $_SESSION['item_info']['itempic_path'] = $fileName;
-             $_SESSION['item_info']['price'] = $price;
-             $_SESSION['item_info']['limited_date'] = $limited_date;
-             $_SESSION['item_info']['item_detail'] = $item_detail;
-             $_SESSION['item_info']['dealing_area'] = $dealing_area;
-             $_SESSION['item_info']['daling_date'] = $daling_date;
-             $_SESSION['item_info']['category'] = $category;
-
-             // POST送信を破棄する
-             header('Location: product_confirm_putup.php');
-             exit();
-        }
+    $fileName = $_FILES['itempic_path']['name'];
+    if(!empty($fileName)){
+         $ext = substr($fileName,-3);
+         $ext = strtolower($ext);
+         if ($ext != 'jpg' && $ext != 'png' && $ext != 'gif'){
+             $errors['itempic_path'] = 'extension';
+         }
     }
+    
+    if (empty($errors)){
+         move_uploaded_file($_FILES['itempic_path']['tmp_name'], 'itempic/'.$fileName);
+    }
+
+         // check.phpへリダイレクト
+         // $_SESSEION スーパーグローバル変数
+         // データを一時的に保存する
+         
+         $_SESSION['item_info']['item_name'] = $item_name;
+         $_SESSION['item_info']['itempic_path'] = $fileName;
+         $_SESSION['item_info']['price'] = $price;
+         $_SESSION['item_info']['limited_date'] = $limited_date;
+         $_SESSION['item_info']['item_detail'] = $item_detail;
+         $_SESSION['item_info']['dealing_area'] = $dealing_area;
+         $_SESSION['item_info']['daling_date'] = $daling_date;
+         $_SESSION['item_info']['category'] = $category;
+
+
+         // POST送信を破棄する
+         header('Location: product_confirm_putup.php');
+         exit();
+     }
+
+     $sql = "SELECT * FROM `cebty_items` WHERE `id`=? ";
+     $data = array($_GET['item_id']); //?がない場合は空のままでOK
+     $stmt = $dbh->prepare($sql);
+     $stmt->execute($data); 
+
+     $item = $stmt->fetch(PDO::FETCH_ASSOC);
+   
 
  ?>
 
@@ -130,22 +148,22 @@ session_start();
                 <div class="row">
                     <div class="col-xs-12 col-md-12">
                       <h5>題名</h5>
-                        <input class="form-control" name="item_name" placeholder="例：冷蔵庫　1000ペソ！" type="text"
+                        <input class="form-control" name="item_name" type="text" value="<?php echo $item['item_name']; ?> "
                             required autofocus style="height:28px; font-size:12px;"/>
                     </div>
                     <!-- 商品画像１ -->
                     <h5>商品画像</h5>
-                    <input type="file" name="itempic_path" accept="image/*"  >
+                    <input type="file" name="itempic_path" accept="image/*" value="<?php echo $item['itempic_path']; ?> ">
 
                 </div>
                 <h5>価格</h5>
-                <input class="form-control" name="price" placeholder="例：1000" type="numper" style="height:28px; font-size:12px;"/>
+                <input class="form-control" name="price" value="<?php echo $item['price']; ?> " type="numper" style="height:28px; font-size:12px;"/>
                 <h5>掲載期限</h5>
-                <input class="form-control" name="limited_date" type="date" style="height:28px; font-size:12px;"/>
+                <input class="form-control" name="limited_date" type="date" value="<?php echo $item['limited_date']; ?> " style="height:28px; font-size:12px;"/>
                 <h5>コメント</h5>
-                <textarea class="form-control" name="item_detail" placeholder="コメント" required type="text" style="height:80px;font-size:12px;"/></textarea>
+                <textarea class="form-control" name="item_detail" value="<?php echo $item['item_detail']; ?> " required type="text" style="height:80px;font-size:12px;"/></textarea>
                 <h5>地域</h5>
-                <select class="form-control" required name="dealing_area" style="height:28px; font-size:12px;">
+                <select class="form-control" required name="dealing_area" value="<?php echo $item['dealing_area']; ?> " style="height:28px; font-size:12px;">
                   <option>--地域を選択してください--</option>
                   <option>アヤラ</option>
                   <option>ITパーク</option>
@@ -154,12 +172,12 @@ session_start();
                   <option>その他</option>
                 </select>
                 <h5>取引可能日</h5>
-                <input class="form-control" name="daling_date" type="date" style="height:28px; font-size:12px;"/>
+                <input class="form-control" name="daling_date" value="<?php echo $item['daling_date']; ?> " type="date" style="height:28px; font-size:12px;"/>
                 以降
                 
                 <br><br>
                 <h5>カテゴリ</h5>
-                <select class="form-control" required name="category" style="height:28px; font-size:12px;">
+                <select class="form-control" required name="category" value="<?php echo $item['category']; ?> " style="height:28px; font-size:12px;">
                   <option>--カテゴリを選択してください--</option>
                   <option>家電</option>
                   <option>衣服</option>
