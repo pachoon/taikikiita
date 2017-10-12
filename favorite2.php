@@ -162,7 +162,7 @@ $favorites[]=$record;
                 <div class="view">
                     <div class="caption">
                     </div>
-                    <a href="<?php echo $favorites[$i]['item_id']; ?>"><img src="profile_image/<?php echo $favorites[$i]['itempic_path'];?>" class="img-responsive"></a>
+                    <a href="product.php?item_id=<?php echo $favorites[$i]['items_id']; ?>"><img src="profile_image/<?php echo $favorites[$i]['itempic_path'];?>" class="img-responsive"></a>
                 </div>
                 <div class="info">
                     <p class="small" style="text-overflow: ellipsis"><?php echo $favorites[$i]['item_name']; ?></p>
