@@ -1,12 +1,105 @@
 <!-- 仮です -->
 
+<?php
+   session_start();
+
+
+
+   $dsn = 'mysql:dbname=cebty;host=localhost';
+   $user = 'root';
+   $password = '';
+   $dbh = new PDO($dsn, $user, $password);
+   $dbh->query('SET NAMES utf8');
+
+
+
+   $sql = "SELECT `cebty_items`.*, `cebty_users`.`username`,`cebty_users`.`picture_path`
+           FROM `cebty_items`
+           LEFT JOIN `cebty_users`
+           ON `cebty_items`.`user_id` = `cebty_users`.`id`
+           WHERE `cebty_items`.`id`=? ";
+   $data = array($_GET['item_id']); //?がない場合は空のままでOK
+   $stmt = $dbh->prepare($sql);
+   $stmt->execute($data); 
+
+   $item = $stmt->fetch(PDO::FETCH_ASSOC);
+
+// リクエスト機能
+   if(isset($_POST['request']) && $_POST['request'] == 'request'){
+        //いいねを押した時はここの処理が走る
+        echo 'リクエスト';
+        $sql = 'INSERT INTO `cebty_deals` SET `items_id`=? ,
+                                              `user_id`=?,
+                                              `buyrequest`=?
+        ';
+        $data = array($_POST['items_id'],$_SESSION['login_user']['id']);
+        $stmt = $dbh->prepare($sql);
+        $stmt->execute($data);
+    }
+    if(isset($_POST['request'])){
+        // いいね、またはいいね取り消しを押した場合は、ここの処理が走る
+        // $_POSTの情報を破棄。
+        header('Location: product.php?id=' . $_POST['items_id']);
+        exit();
+    }
+
+// いいね機能
+    if(isset($_POST['favorite']) && $_POST['favorite'] == 'favorite'){
+        //いいねを押した時はここの処理が走る
+        echo 'いいね';
+        $sql = 'INSERT INTO `cebty_favorite` SET `items_id`=? ,
+                                                 `user_id`=?
+        ';
+        $data = array($_POST['items_id'],$_SESSION['login_user']['id']);
+        $stmt = $dbh->prepare($sql);
+        $stmt->execute($data);
+
+    }elseif(isset($_POST['favorite']) && $_POST['favorite'] == 'unfavorite'){
+        //いいね取り消しを押した場合、ここの処理が走る
+        $sql = 'DELETE FROM `cebty_favorite` WHERE `items_id`=?
+                                             AND `user_id`=?
+        ';
+        $data = array($_POST['items_id'],$_SESSION['login_user']['id']);
+        $stmt = $dbh->prepare($sql);
+        $stmt->execute($data);
+
+    }
+    if(isset($_POST['favorite'])){
+        // いいね、またはいいね取り消しを押した場合は、ここの処理が走る
+        // $_POSTの情報を破棄。
+        header('Location: product.php?item_id=' . $_POST['items_id']);
+        exit();
+    }
+
+
+
+
+
+
+//   $tweets = array();
+//     while (true) {
+//     $record = $stmt->fetch(PDO::FETCH_ASSOC);
+//     // $recordはデータベースのカラム値をkeyとする、
+//     // 連想配列で構成されます。（データベースから1件とってきます）
+//     // echo $record['username'];
+//     // echo "<br>";
+//     if (!$record){
+//         break;
+//     }
+//     $tweets[]=$record;
+// }
+
+ ?>
+
+
+
 <!-- 仮でした。 -->
 <!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Cebty</title>
+    <title>商品詳細</title>
     <meta name="description" content="">
     <meta name="keywords" content="セブティ, Cebty" />
     <meta name="author" content="">
@@ -27,6 +120,7 @@
 
 
     <!-- Theme CSS -->
+    <link rel="stylesheet" href="css/product.css">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/mobile.css">
@@ -38,121 +132,140 @@
     <!-- <link rel="stylesheet" href="css/skin/fresh-lime.css"> -->
     <link rel="stylesheet" href="css/skin/night-purple.css">
 
-    <link rel="stylesheet" href="css/product.css">
+
     
 
 <title>商品情報</title>
 </head>
 
-<body>
-  <!--========== BEGIN HEADER ==========-->
-  <header id="header" class="header-main">
-  <!-- Begin Navbar -->
-    <nav id="main-navbar" class="navbar navbar-default navbar-fixed-top" role="navigation"> <!-- Classes: navbar-default, navbar-inverse, navbar-fixed-top, navbar-fixed-bottom, navbar-transparent. Note: If you use non-transparent navbar, set "height: 98px;" to #header -->
-      <div class="container">
-      <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-            <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                    </button>
-                      <a class="navbar-brand page-scroll" href="index.html">Cebty</a>
-        </div>
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a class="" href="">ホーム</a></li>
-                <li><a class="" href="">マイページ</a></li>
-                  <li><a class="" href="">商品検索</a></li>
-                    <li><a class="" href="">チャット</a></li>
-                      <li><a class="" href="">お問合せ</a></li>
-                        <li><a class="" href="">ログイン</a></li>
-                        </ul>
-        </div><!-- /.navbar-collapse -->
-      </div><!-- /.container -->
-    </nav>
-                <!-- End Navbar -->
-  </header>
-  <!-- ========= END HEADER =========-->
-<body>
-        <!-- productPicture -->
-      <div class="container" style="margin-top: 150px;">
-        <div class="row">
-          <div class=" col-md-6">
-            <h2 id="product-h2">商品名</h4>
-              <div id='carousel-custom' class='carousel slide' data-ride='carousel'>
-                <div class='carousel-outer'>
-      <!-- me art lab slider -->
-                  <div class='carousel-inner '>
-                    <div class='item active'>
-                      <img src='http://images.asos-media.com/inv/media/8/2/3/3/5313328/print/image1xxl.jpg' alt=''id="zoom_05"  data-zoom-image="http://images.asos-media.com/inv/media/8/2/3/3/5313328/print/image1xxl.jpg"/>
-                    </div>
-                    <div class='item'  id="zoom_05">
-                      <img src='http://images.asos-media.com/inv/media/8/2/3/3/5313328/image2xxl.jpg' alt='' data-zoom-image="http://images.asos-media.com/inv/media/8/2/3/3/5313328/image2xxl.jpg" />
-                    </div>
-                    <div class='item'>
-                      <img src='http://images.asos-media.com/inv/media/8/2/3/3/5313328/image3xxl.jpg' alt='' data-zoom-image="http://images.asos-media.com/inv/media/8/2/3/3/5313328/image3xxl.jpg" />
-                    </div>
-                    <div class='item'>
-                      <img src='http://images.asos-media.com/inv/media/3/6/7/0/4850763/multi/image1xxl.jpg' alt='' data-zoom-image="http://images.asos-media.com/inv/media/3/6/7/0/4850763/multi/image1xxl.jpg" id="zoom_05"/>
-                    </div>
-                    <div class='item'>
-                      <img src='http://images.asos-media.com/inv/media/5/2/1/3/4603125/gold/image1xxl.jpg' alt='' data-zoom-image="http://images.asos-media.com/inv/media/5/2/1/3/4603125/gold/image1xxl.jpg" id="zoom_05"/>
-                    </div>
-                    <div class='item'>
-                      <img src='http://images.asos-media.com/inv/media/5/3/6/8/4948635/mink/image1xxl.jpg' alt='' data-zoom-image="http://images.asos-media.com/inv/media/5/3/6/8/4948635/mink/image1xxl.jpg" id="zoom_05"/>
-                    </div>
-                    <div class='item'>
-                      <img src='http://images.asos-media.com/inv/media/1/3/0/8/5268031/image2xxl.jpgg' alt='' data-zoom-image="http://images.asos-media.com/inv/media/1/3/0/8/5268031/image2xxl.jpg" id="zoom_05"/>
-                    </div>
-                    <script>
-                      $("#zoom_05").elevateZoom({ zoomType    : "inner", cursor: "crosshair" });
-                    </script>
-                  </div>
-                    <!-- sag sol -->
-                    <a class='left carousel-control' href='#carousel-custom' data-slide='prev'>
-                        <span class='glyphicon glyphicon-chevron-left'></span>
-                    </a>
-                    <a class='right carousel-control' href='#carousel-custom' data-slide='next'>
-                        <span class='glyphicon glyphicon-chevron-right'></span>
-                    </a>
-                </div>
-                
-                <!-- thumb -->
-                <ol class='carousel-indicators mCustomScrollbar meartlab'>
-                    <li data-target='#carousel-custom' data-slide-to='0' class='active'><img src='http://images.asos-media.com/inv/media/8/2/3/3/5313328/print/image1xxl.jpg' alt='' /></li>
-                    <li data-target='#carousel-custom' data-slide-to='1'><img src='http://images.asos-media.com/inv/media/8/2/3/3/5313328/image2xxl.jpg' alt='' /></li>
-                    <li data-target='#carousel-custom' data-slide-to='2'><img src='http://images.asos-media.com/inv/media/8/2/3/3/5313328/image3xxl.jpg' alt='' /></li>
-                    <li data-target='#carousel-custom' data-slide-to='3'><img src='http://images.asos-media.com/inv/media/3/6/7/0/4850763/multi/image1xxl.jpg' alt='' /></li>
-                    <li data-target='#carousel-custom' data-slide-to='4'><img src='http://images.asos-media.com/inv/media/5/2/1/3/4603125/gold/image1xxl.jpg' alt='' /></li>
-                    <li data-target='#carousel-custom' data-slide-to='5'><img src='http://images.asos-media.com/inv/media/5/3/6/8/4948635/mink/image1xxl.jpg' alt='' /></li>
-                    <li data-target='#carousel-custom' data-slide-to='6'><img src='http://images.asos-media.com/inv/media/1/3/0/8/5268031/image2xxl.jpg' alt='' /></li>
 
-                </ol>
-            </div>
-            <script type="text/javascript">
+<body>
+  <?php if(isset($_SESSION['login_user'])){
+          require('parts/login_header.php');
+        }else{
+          require('parts/header.php');
+        } ?>
+  
+  <div class="container" style="margin-top: 150px; height: 600px; ">
+    <div class="row">
+      <h2 id="product-h2"><?php echo $item['item_name'];?></h2>
+      <div class="devider"></div>
+    </div>
+    <!-- productPicture -->
+    <div class="row">
+        <div class=" col-md-6" style="text-align: center;">
+        <img src="itempic/<?php echo $item['itempic_path']; ?>" width="400px" height="400px" >
+    </div>
+    <!-- productPictureEnd -->
+    <div class="col-md-6">
+      <p class="item-detail">価格 : <?php echo $item['price'] ?>ペソ</p><br>
+      <p class="item-detail">引渡可能日 : <?php echo $item['daling_date'] ?></p><br>
+      <p class="item-detail">エリア : <?php echo $item['dealing_area'] ?></p><br>
+      <p class="item-detail">カテゴリ : <?php echo $item['category'] ?></p><br>
+      <p class="item-detail">コメント : </p>
+      <p class="item-detail" style="font-size: 18px;"><?php echo $item['item_detail'] ?></p><br>
+      <p class="item-detail">掲載期限 : <?php echo $item['limited_date'] ?></p><br><br><br>
+    </div>
+  </div>
+  <div class="container" style="text-align: center;">
+    <div class="row">
+      <div class="col-md-6">
+        <?php 
+          // 受付終了を表示
+          $sql = 'SELECT COUNT(*) AS `count` FROM `cebty_deals` WHERE `item_id` = ?';
+          $data = array($item['id']);
+          $stmt = $dbh->prepare($sql);
+          $stmt->execute($data);
+
+          $request = $stmt->fetch(PDO::FETCH_ASSOC);
+
+          // 自分が受付終了ボタンを押しているかどうかをチェック
+          $sql = 'SELECT COUNT(*) AS `count` FROM `cebty_deals` WHERE `item_id` = ?
+                                                                AND   `user_id` = ?
+                                                                                  ';
+          $data = array($item['id'],$_SESSION['login_user']['id']);
+          $stmt = $dbh->prepare($sql);
+          $stmt->execute($data);
+
+          $request_chk = $stmt->fetch(PDO::FETCH_ASSOC);
+        ?>
+        
+        <?php if($_SESSION['login_user']['id'] == $item['user_id'] ){ ?>
+          <form method="POST" action=""><br>
+            <input type="hidden" name="item_id" value="<?php echo $item['id']; ?>">
+            <?php if($request_chk['count'] == 0){ ?>
+              <input type="hidden" name="request" value="request">
+              <input type="submit" value="受付終了" class="btn btn-danger btn-lg">
+            <?php }else{ ?>
+              <input type="hidden" name="favorite" value="unrequest">
+              <input type="submit" value="受付再開" class="btn btn-warning btn-lg">
+            <?php } ?><br><br>
+          </form>
+        <?php } ?>
+
+        <?php if($_SESSION['login_user']['id'] == $item['user_id'] ){ ?>
+          <a href="edit_putup.php?login_user_id=<?php echo $_SESSION['login_user']['id']; ?>" class="btn btn-warning btn-lg" >
+            商品管理ページに戻る</a>
+        <?php } ?>
+         <!-- お気に入りを表示 -->
+        <?php 
+          $sql = 'SELECT COUNT(*) AS `count` FROM `cebty_favorite` WHERE `items_id` = ?';
+          $data = array($item['id']);
+          $stmt = $dbh->prepare($sql);
+          $stmt->execute($data);
+
+          $favorite = $stmt->fetch(PDO::FETCH_ASSOC);
+
+          $sql = 'SELECT COUNT(*) AS `count` FROM `cebty_favorite` WHERE `items_id` = ? AND `user_id` = ?';
+          $data = array($item['id'],$_SESSION['login_user']['id']);
+          $stmt = $dbh->prepare($sql);
+          $stmt->execute($data);
+
+          $favorite_chk = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            // var_dump($likes_chk['count']);
+        ?>
+        <!-- お気に入りボタン設置 -->
+        <?php if($_SESSION['login_user']['id'] ==!$item['user_id'] ){ ?>
+          <form method="POST" action=""><br>
+            <input type="hidden" name="items_id" value="<?php echo $item['id']; ?>">
+            <!-- ここのif文で10回いいね！、しないと取り消しが出現しないようにしている -->
+            <?php if($favorite_chk['count'] == 0){ ?>
+                <input type="hidden" name="favorite" value="favorite">
+                <input type="submit" value="お気に入り！" class="btn btn-primary btn-lg">
+            <?php }else{ ?>
+                  <input type="hidden" name="favorite" value="unfavorite">
+                  <input type="submit" value="お気に入り！取消" class="btn btn-warning btn-lg">
+            <?php } ?><br><br>
+            お気に入り数:<?php echo $favorite['count'];?>
+          </form>
+        <?php } ?><br>
+      </div>
+
+      <?php if($_SESSION['login_user']['id'] ==!$item['user_id']){ ?>
+        <a href="chat.php?<?php echo 'item_id='.$item['id'].'&'.'user_id='.$item['user_id'].'&'.'login_id='.$_SESSION['login_user']['id']; ?>" class="btn btn-info btn-lg" >
+          出品者へ問い合わせ</a>
+
+      <?php } ?>
+        
+      <div class="col-md-6">
+        <div id="box16" >
+          <p style="text-align: center;">出品者</p>
+            <img src="profile_image/<?php echo $item['picture_path']; ?>" width="100px">
+            <a href="user_information.php?user_id=<?php echo $item['user_id']; ?>">
+              <?php echo $item['username']?></a>
+        </div>
+      </div>
+    </div>
+
+
+
+
+<script type="text/javascript">
               $(document).ready(function() {
               $(".mCustomScrollbar").mCustomScrollbar({axis:"x"});
               });
             </script>
-            
-          </div>
-            <!-- productPictureEnd -->
-        <div class="col-md-6">
-          
-          
-        </div>
-
-      </div>
-    </div>
-    
-
-
-
-
-
 <script type="text/javascript" src="product.js"></script>
 </body>
 </html>
