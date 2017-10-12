@@ -1,3 +1,18 @@
+<?php
+  session_start();
+  require('dbconnect.php');
+
+  // ログイン状態かチェック
+if(!isset($_SESSION['login_user']['id'])){
+    // セッションデータを保持しているかチェック
+    // セッションデータがなければ、ログインページへ飛ばす
+    header('Location: login.php');
+    exit();
+
+ } ?>
+
+
+ 
 <!DOCTYPE html>
 <html lang="ja">
 <head>

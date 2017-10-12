@@ -14,7 +14,7 @@ if(!isset($_SESSION['login_user']['id'])){
   // ここはログインしたユーザーが通る
   // パラメータチェック
   if(!isset($_GET['id'])){
-    header('Location: favorite.php');
+    header('Location: favorite2.php');
     exit();
   }
 
@@ -53,7 +53,7 @@ if(!isset($_SESSION['login_user']['id'])){
   // 削除処理記載
   $content=$record['item_name'];
   // 削除終了後、timelineに飛ばす
-  header('Location: favorite.php?delete=on&content='.$content);
+  header('Location: favorite2.php?delete=on&content='.$content);
   exit();
 
 
