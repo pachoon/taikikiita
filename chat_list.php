@@ -25,6 +25,14 @@ $stmt->execute($data);
   }
   $chats[]=$record;
 }
+
+
+  $sql = 'SELECT * FROM `cebty_users` WHERE `id` = ?';
+  $data = array($_GET['user_id']);
+  $stmt = $dbh->prepare($sql);
+  $stmt->execute($data);
+
+  $user = $stmt->fetch(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -43,7 +51,15 @@ $stmt->execute($data);
 
 <?php require('parts/assets.php'); ?>
 </head>
-<body style="background-color: #3a6186 , #89253e">
+<body style="
+background-color: #ffffff;
+background-color: transparent;
+background: #3a6186; /* fallback for old browsers */
+background: -webkit-linear-gradient(to left, #3a6186 , #89253e); /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to left, #3a6186 , #89253e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+height: 100%;
+text-align: center; 
+">
 
 <?php
 
@@ -121,18 +137,18 @@ if(isset($_SESSION['login_user'])){
                     
                     <td>
                       <div class="media" style="width: 648px;">
-                        <a href="#" class="pull-left">
-                          <img src="profile_image/<?php echo $chat['picture_path'];?>" class="media-photo">
+                        <a href="chat.php?chat_id=<?php echo $chat['id'];?>" class="pull-left">
+                        <img alt="140x140" src="profile_image/<?php echo $user['picture_path']; ?> class="media-photo" >
+<?php var_dump($chat['id']) ?>
                         </a>
                         <div class="media-body">
                           <span class="media-meta pull-right"><?php echo $chat['modifid'];?></span>
                           <h4 class="title">
-                            <?php echo $chat['user_id'];?>
-                            <span class="pull-right recieve"><?php if($chat['user_id']==$_SESSION['login_user']['id']){
-                    echo '送信
-                    ';
+                            <?php echo $chat['username'];?>
+                            <span class="pull-right recieve" ><?php if($chat['user_id']==$_SESSION['login_user']['id']){
+                    echo '<font color="#5cb85c">送信</font>';
                   }else{
-                    echo '受信';
+                    echo '<font color="#FF9900">受信</font>';
                   } ?></span>
                           </h4>
                           <p class="summary"><?php echo $chat['comment'];?></p>
