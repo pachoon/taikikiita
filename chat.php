@@ -15,10 +15,6 @@
       exit();
      }
 
-
-
-  
-
     $sql = 'SELECT * FROM `cebty_items` WHERE `id` = ?';
     $data = array($_GET['item_id']);
     $stmt = $dbh->prepare($sql);
@@ -228,7 +224,7 @@ $errors = array();
                           <div class="chatComment" style="width: 570px;">
                             <!-- <a href="#" class="pull-left"> -->
                             <?php if($user_id=!$other_id) { ?>
-                              <img src="profile_image/<?php echo $['picture_path'];?>" class="chatComment-photo">
+                              <img src="profile_image/<?php echo $other['picture_path'];?>" class="chatComment-photo">
                               <!-- </a> -->
                               <div class="chatComment-body" style="width: 570px;">
                                <!-- <span class="media-meta pull-right"></span> -->
@@ -239,7 +235,7 @@ $errors = array();
                                 <p class="summary"><?php echo $chat['comment'];?></p>
                               </div>
                             <?php }else{ ?>
-                              <img src="profile_image/<?php echo $['picture_path'];?>" class="chatComment-photo">
+                              <img src="profile_image/<?php echo $other['picture_path'];?>" class="chatComment-photo">
                               <!-- </a> -->
                               <div class="chatComment-body" style="width: 570px;">
                                  <!-- <span class="media-meta pull-right"></span> -->

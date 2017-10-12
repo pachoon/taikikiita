@@ -203,10 +203,6 @@
           </form>
         <?php } ?>
 
-        <?php if($_SESSION['login_user']['id'] == $item['user_id'] ){ ?>
-          <a href="edit_putup.php?login_user_id=<?php echo $_SESSION['login_user']['id']; ?>" class="btn btn-warning btn-lg" >
-            商品管理ページに戻る</a>
-        <?php } ?>
          <!-- お気に入りを表示 -->
         <?php 
           $sql = 'SELECT COUNT(*) AS `count` FROM `cebty_favorite` WHERE `items_id` = ?';
@@ -240,14 +236,12 @@
             お気に入り数:<?php echo $favorite['count'];?>
           </form>
         <?php } ?><br>
+      
+        <?php if($_SESSION['login_user']['id'] ==!$item['user_id']){ ?>
+          <a href="chat.php?<?php echo 'item_id='.$item['id'].'&'.'user_id='.$item['user_id'].'&'.'login_id='.$_SESSION['login_user']['id']; ?>" class="btn btn-info btn-lg" >
+            出品者へ問い合わせ</a>
+        <?php } ?>
       </div>
-
-      <?php if($_SESSION['login_user']['id'] ==!$item['user_id']){ ?>
-        <a href="chat.php?<?php echo 'item_id='.$item['id'].'&'.'user_id='.$item['user_id'].'&'.'login_id='.$_SESSION['login_user']['id']; ?>" class="btn btn-info btn-lg" >
-          出品者へ問い合わせ</a>
-
-      <?php } ?>
-        
       <div class="col-md-6">
         <div id="box16" >
           <p style="text-align: center;">出品者</p>
