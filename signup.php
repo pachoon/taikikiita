@@ -54,6 +54,8 @@ session_start();
             $errors['profile_image_path'] = 'extension';
         }
 
+        }else{
+          $errors['profile_image_path'] = 'blank';
         }
 
     if (empty($errors)){
@@ -169,6 +171,15 @@ if(isset($_SESSION['login_user'])){
                   <option disabled >学校名</option>
                   <option>NexSeed</option>
                   <option>QQ english</option>
+                  <option>FEAセブシティ</option>
+                  <option>FirstEnglish</option>
+                  <option>ZEN English</option>
+                  <option>UV-ESL</option>
+                  <option>TARGET</option>
+                  <option>Brilliant Cebu</option>
+                  <option>CEGA</option>
+                  <option>Cebu Blue Ocean</option>
+                  <option>3D ACADEMY</option>
                 </select>
                 <textarea class="form-control" name="introduce" placeholder="自己紹介" required type="text" style="height:80px;font-size:12px;"/></textarea>
 
@@ -176,6 +187,11 @@ if(isset($_SESSION['login_user'])){
                   プロフィール画像を選択
                     <input type="file" id="file_photo" name="profile_image_path" accept="image/*" required style="display:none" >
                 </label>
+
+
+        <?php if(isset($errors['profile_image_path'])&& $errors['profile_image_path']=='blank'){ ?>
+            <div class="alert alert-danger">画像を選択してください。</div>
+        <?php } ?>
 
                 <div class="preview" style="padding-bottom:7px;"></div>
 

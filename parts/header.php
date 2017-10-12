@@ -23,7 +23,7 @@
                             <li><a class="" href="index.php">ホーム</a></li>
                             <li><a class="" href="mypage.php">マイページ</a></li>
                             <li><a class="" href="search.php">商品検索</a></li>
-                            <li><a class="" href="">チャット</a></li>
+                            <li><a class="" href="chat_list.php">チャット</a></li>
                             <li><a class="" href="contact.php">お問合せ</a></li>
                             <li><a class="" href="login.php">ログイン</a></li>
                         </ul>

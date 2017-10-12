@@ -34,7 +34,7 @@ if(!isset($_SESSION['login_user']['id'])){
   <title>マイページ</title>
 </head>
 <body style="background-color: #3a6186 , #89253e">
-  <?php require('parts/header.php'); ?>
+  <?php require('parts/login_header.php'); ?>
     <div class="container">
     <div class="row">
     </div>
@@ -70,7 +70,7 @@ if(!isset($_SESSION['login_user']['id'])){
     </div>
     <div class="col-md-2 column">
      
-         <button class="btn btn-default btn-block" type="button"><a href="###########"><span style="font-weight: 900;">
+         <button class="btn btn-default btn-block" type="button"><a href="edit_intro.php"><span style="font-weight: 900;">
                     プロフィール編集</span></a>
                  </button>
                  <button class="btn btn-default btn-block" type="button"><a href="###########"><span style="font-weight: 900;">

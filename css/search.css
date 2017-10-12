@@ -467,10 +467,10 @@ div.user-menu div.user-menu-content:not(.active){
     width: 100px;
 }
 
-.propertyType.house { background-color: red; }
-.propertyType.land { background-color: orange; }
-.propertyType.unit { background-color: green; }
-.propertyType.commercial { background-color: blue; }
+.propertyType.it { background-color: red; }
+.propertyType.ayala { background-color: orange; }
+.propertyType.mandaue { background-color: green; }
+.propertyType.makutan { background-color: blue; }
 
 .info {
     display: block;
