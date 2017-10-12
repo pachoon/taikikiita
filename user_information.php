@@ -34,7 +34,19 @@ if(!isset($_SESSION['login_user']['id'])){
   <title>ユーザー情報</title>
 </head>
 <body style="background-color: #3a6186 , #89253e">
-  <?php require('parts/header.php'); ?>
+<?php
+
+if(isset($_SESSION['login_user'])){
+
+  require('parts/login_header.php');
+
+}else{
+
+  require('parts/header.php');
+}
+
+ ?>
+
     <div class="container">
     <div class="row">
     </div>

@@ -53,7 +53,7 @@ if(!isset($_SESSION['login_user']['id'])){
   // 削除処理記載
   $content=$record['item_name'];
   // 削除終了後、timelineに飛ばす
-  header('Location: favorite.php?delete=on&content='.$content);
+  header('Location: favorite2.php?delete=on&content='.$content);
   exit();
 
 
