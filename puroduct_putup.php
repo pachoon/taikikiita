@@ -58,20 +58,20 @@ session_start();
             $errors['category'] = 'blank';
         }
 
-        $fileName = $_FILES['itempic_path']['name'];
+        $fileName = $_FILES['itempc_path']['name'];
         if(!empty($fileName)){
             $ext = substr($fileName,-3);
             $ext = strtolower($ext);
             if ($ext != 'jpg' && $ext != 'png' && $ext != 'gif'){
-                $errors['itempic_path'] = 'extension';
+                $errors['itempc_path'] = 'extension';
             }
         }
         if (empty($errors)){
-             move_uploaded_file($_FILES['itempic_path']['tmp_name'], 'itempic/'.$fileName);
+             move_uploaded_file($_FILES['itempc_path']['tmp_name'], 'itempic/'.$fileName);
     
          // データを一時的に保存する
              $_SESSION['item_info']['item_name'] = $item_name;
-             $_SESSION['item_info']['itempic_path'] = $fileName;
+             $_SESSION['item_info']['itempc_path'] = $fileName;
              $_SESSION['item_info']['price'] = $price;
              $_SESSION['item_info']['limited_date'] = $limited_date;
              $_SESSION['item_info']['item_detail'] = $item_detail;
@@ -135,7 +135,7 @@ session_start();
                     </div>
                     <!-- 商品画像１ -->
                     <h5>商品画像</h5>
-                    <input type="file" name="itempic_path" accept="image/*"  >
+                    <input type="file" name="itempc_path" accept="image/*"  >
 
                 </div>
                 <h5>価格</h5>

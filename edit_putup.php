@@ -126,7 +126,7 @@ else{
           <div style="margin-bottom: 15px;">
             <tbody>
             <tr style="vertical-align: middle;">
-              <td style="vertical-align: middle;"><img src="itempic/<?php echo $item['itempic_path']; ?>" width="100px"></td>
+              <td style="vertical-align: middle;"><img src="itempic/<?php echo $item['itempc_path']; ?>" width="100px"></td>
               <td style="vertical-align: middle;"><a href="product.php?item_id=<?php echo $item['id']; ?>">
               <strong></strong> <?php echo $item['item_name']; ?></a></td>
               <td style="vertical-align: middle;">
