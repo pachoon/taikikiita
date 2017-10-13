@@ -14,7 +14,7 @@ if(!isset($_SESSION['login_user']['id'])){
   // ここはログインしたユーザーが通る
   // パラメータチェック
   if(!isset($_GET['id'])){
-    header('Location: favorite.php');
+    header('Location: favorite2.php');
     exit();
   }
 

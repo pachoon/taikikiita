@@ -27,6 +27,9 @@ if(!isset($_SESSION['login_user']['id'])){
 </head>
 <body style="background-color: #3a6186 , #89253e" id="container">
 
+
+
+
 <?php
 session_start();
 
@@ -35,6 +38,8 @@ session_start();
 }else{
     require('parts/header.php');
 } ?>
+
+
 
   <div class="container">
     <div class="row">

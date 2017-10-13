@@ -27,6 +27,8 @@ $stmt->execute($data);
 }
 ?>
 
+
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -43,7 +45,15 @@ $stmt->execute($data);
 
 <?php require('parts/assets.php'); ?>
 </head>
-<body style="background-color: #3a6186 , #89253e">
+<body style="
+background-color: #ffffff;
+background-color: transparent;
+background: #3a6186; /* fallback for old browsers */
+background: -webkit-linear-gradient(to left, #3a6186 , #89253e); /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to left, #3a6186 , #89253e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+height: 100%;
+text-align: center; 
+">
 
 <?php
 
@@ -121,21 +131,18 @@ if(isset($_SESSION['login_user'])){
                     
                     <td>
                       <div class="media" style="width: 648px;">
-                        <a href="#" class="pull-left">
-                          <img src="profile_image/<?php echo $chat['picture_path'];?>" class="media-photo">
-                        </a>
+                        <p align="left" style="font-size: 30px"><?php echo $chat['username'];?></p>
+                        <a href="chat.php?chat_id=<?php echo $chat['id'];?>" class="pull-left">
+                       <img class="img-thumbnail"  align="left" alt="140x140" src="profile_image/<?php echo $_SESSION['login_user']['picture_path'];?>"><br><?php echo $chat['comment'];?></a>
                         <div class="media-body">
-                          <span class="media-meta pull-right"><?php echo $chat['modifid'];?></span>
+                          <span class="media-meta pull-right"><?php echo $chat['created'];?></span>
                           <h4 class="title">
-                            <?php echo $chat['user_id'];?>
-                            <span class="pull-right recieve"><?php if($chat['user_id']==$_SESSION['login_user']['id']){
-                    echo '送信
-                    ';
+                            <span class="pull-right recieve" ><?php if($chat['user_id']==$_SESSION['login_user']['id']){
+                    echo '<font color="#5cb85c">送信</font>';
                   }else{
-                    echo '受信';
+                    echo '<font color="#FF9900">受信</font>';
                   } ?></span>
                           </h4>
-                          <p class="summary"><?php echo $chat['comment'];?></p>
                         </div>
                       </div>
                     </td>

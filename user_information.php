@@ -2,19 +2,15 @@
   session_start();
   require('dbconnect.php');
 
-  // ログイン状態かチェック
-if(!isset($_SESSION['login_user']['id'])){
-    // セッションデータを保持しているかチェック
-    // セッションデータがなければ、ログインページへ飛ばす
-    header('Location: login.php');
-    exit();
-
- } ?>
 
 
+  $sql = 'SELECT * FROM `cebty_users` WHERE `id` = ?';
+  $data = array($_GET['user_id']);
+  $stmt = $dbh->prepare($sql);
+  $stmt->execute($data);
 
-
-
+  $user = $stmt->fetch(PDO::FETCH_ASSOC);
+  ?> 
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -34,18 +30,7 @@ if(!isset($_SESSION['login_user']['id'])){
   <title>ユーザー情報</title>
 </head>
 <body style="background-color: #3a6186 , #89253e">
-<?php
-
-if(isset($_SESSION['login_user'])){
-
-  require('parts/login_header.php');
-
-}else{
-
-  require('parts/header.php');
-}
-
- ?>
+<?php require('parts/header.php');?>
 
     <div class="container">
     <div class="row">
@@ -66,17 +51,17 @@ if(isset($_SESSION['login_user'])){
         <br>
         <br>
 
-        <h1 class="section-header"><span class="content-header wow fadeIn " data-wow-delay="0.2s" data-wow-duration="2s">ユーザー情報</span></h1>
+        <h1 class="section-header"><span class="content-header wow fadeIn " data-wow-delay="0.2s" data-wow-duration="2s">ユーザー詳細</span></h1>
 
 <div class="container">
     <div class="row clearfix well">
     <div class="col-md-2 column">
-      <img class="img-thumbnail" alt="140x140" src="profile_image/<?php echo $_SESSION['login_user']['picture_path']; ?>" >
+      <img class="img-thumbnail" alt="140x140" src="profile_image/<?php echo $user['picture_path']; ?>" >
     </div>
     <div class="col-md-8 column">
       <blockquote>
-        <p style="font-size: 40px; color: black;" >
-          <?php echo $_SESSION['login_user']['username']; ?> 
+        <p style="font-size: 60px; color: black;" >
+          <?php echo $user['username']; ?> 
         </p> <!-- <small>学校名 / 性別 / </small> -->
       </blockquote>
     </div>
@@ -114,7 +99,7 @@ if(isset($_SESSION['login_user'])){
                       <div class="col-md-8 column">
                       <p>
                         <strong>About me</strong><br/>
-                                    <?php echo $_SESSION['login_user']['introduce']; ?>
+                                    <?php echo $user['introduce']; ?>
                       </p>
                                 <hr/>
                                 <!-- <p>
@@ -162,7 +147,7 @@ if(isset($_SESSION['login_user'])){
                               学校名
                             </td>
                             <td>
-                              <?php echo $_SESSION['login_user']['school'];?>
+                              <?php echo $user['school'];?>
                             </td>
                           </tr>
                                         <tr>
@@ -170,7 +155,7 @@ if(isset($_SESSION['login_user'])){
                               性別
                             </td>
                             <td>
-                              <?php echo $_SESSION['login_user']['gender'];?>
+                              <?php echo $user['gender'];?>
                             </td>
                           </tr>
 

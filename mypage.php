@@ -37,6 +37,7 @@ if(!isset($_SESSION['login_user']['id'])){
 
   <?php require('parts/login_header.php'); ?>
 
+  <?php require('parts/login_header.php'); ?>
     <div class="container">
     <div class="row">
     </div>
@@ -65,7 +66,7 @@ if(!isset($_SESSION['login_user']['id'])){
     </div>
     <div class="col-md-8 column">
       <blockquote>
-        <p style="font-size: 40px; color: black;" >
+        <p style="font-size: 60px; color: black;" >
           <?php echo $_SESSION['login_user']['username']; ?> 
         </p> <!-- <small>学校名 / 性別 / </small> -->
       </blockquote>
@@ -76,6 +77,7 @@ if(!isset($_SESSION['login_user']['id'])){
                     プロフィール編集</span></a>
                  </button>
                  <button class="btn btn-default btn-block" type="button"><a href="edit_putup.php?login_user_id=<?php echo $_SESSION['login_user']['id']; ?>"><span style="font-weight: 900;">
+                                  <button class="btn btn-default btn-block" type="button"><a href="edit_putup.php"><span style="font-weight: 900;">
                     出品管理</span></a>
                  </button>
                  <button class="btn btn-default btn-block" type="button"><a href="favorite2.php"><span style="font-weight: 900;">
