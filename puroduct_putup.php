@@ -149,7 +149,7 @@ session_start();
                   <option>--地域を選択してください--</option>
                   <option>アヤラ</option>
                   <option>ITパーク</option>
-                  <option>マクタン</option>
+                  <option>マンダウエ</option>
                   <option>タランバン</option>
                   <option>その他</option>
                 </select>

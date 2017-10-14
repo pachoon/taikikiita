@@ -118,7 +118,6 @@ if(isset($_SESSION['login_user'])){
 
 
 
-
   <?php foreach ($chats as $chat) {?>
              <div class="table-container" >
               <table class="table table-filter">
