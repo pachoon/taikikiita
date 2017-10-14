@@ -18,27 +18,34 @@
 //    if(isset($_POST['tweet'])){
 //           $tweet=$_POST['tweet'];
 
-    
+  $sql  = "SELECT * FROM `cebty_items` WHERE `user_id` =? ";
+  $data = array($_GET['login_user_id']);
+  $stmt = $dbh->prepare($sql);
+  $stmt->execute($data);//object型でexecuteを実行している
 
-?>
-<?php 
+  // 表示用の配列を用意
+  $items = array();
+    while (true) {
+      $record = $stmt->fetch(PDO::FETCH_ASSOC);
+      // echo $record['username'];
+      // echo "<br>"
+      if (!$record){
+        break;
+      }
+      $items[]=$record;
+    }
+  $sql  = "SELECT * FROM `cebty_items` WHERE `user_id` =? ";
+  $data = array($_GET['login_user_id']);
+  $stmt = $dbh->prepare($sql);
+  $stmt->execute($data);
+  $deal = $stmt->fetch(PDO::FETCH_ASSOC);
 
-$sql  = "SELECT * FROM `cebty_items` WHERE `user_id` =? ";
-$data = array($_GET['login_user_id']);
-$stmt = $dbh->prepare($sql);
-$stmt->execute($data);//object型でexecuteを実行している
+  $sql = 'SELECT COUNT(*) AS `count` FROM `cebty_deals` WHERE `item_id` = ?';
+  $data = array($deal['id']);
+  $stmt = $dbh->prepare($sql);
+  $stmt->execute($data);
 
-//表示用の配列を用意
-$items = array();
-while (true) {
-  $record = $stmt->fetch(PDO::FETCH_ASSOC);
-  // echo $record['username'];
-  // echo "<br>"
-  if (!$record){
-    break;
-  }
-  $items[]=$record;
-}
+  $deal_chk = $stmt->fetch(PDO::FETCH_ASSOC);
 
  ?>
 <!-- 仮でした。 -->
@@ -77,10 +84,11 @@ while (true) {
         <!-- <link rel="stylesheet" href="css/skin/ice-blue.css"> -->
         <!-- <link rel="stylesheet" href="css/skin/summer-orange.css"> -->
         <!-- <link rel="stylesheet" href="css/skin/fresh-lime.css"> -->
-        <link rel="stylesheet" href="css/skin/night-purple.css">
-        <!-- aiが追加 -->
-        <link rel="stylesheet" href="css/edit_putup.css">
-        <!-- aiが追加　終わり -->
+    <link rel="stylesheet" href="css/skin/night-purple.css">
+    <!-- aiが追加 -->
+    <link rel="stylesheet" href="css/edit_putup.css">
+    <!-- aiが追加　終わり -->
+    
   <title>出品管理</title>
 </head>
 
@@ -98,7 +106,8 @@ else{
 
 
   <div class="container" style="padding-top: 130px;" align="center">
-    
+  <?php var_dump($deal['id']); ?>
+  <?php var_dump($deal_chk['count']); ?>
     <div class="row">
       <h2 id="product-h2">商品管理</h2>
       <div class="devider"></div>
@@ -125,25 +134,28 @@ else{
         <?php foreach ($items as $item) { ?>
           <div style="margin-bottom: 15px;">
             <tbody>
-            <tr style="vertical-align: middle;">
+            <tr style="vertical-align: middle; text-align: center;">
               <td style="vertical-align: middle;"><img src="itempic/<?php echo $item['itempc_path']; ?>" width="100px"></td>
               <td style="vertical-align: middle;"><a href="product.php?item_id=<?php echo $item['id']; ?>">
-              <strong></strong> <?php echo $item['item_name']; ?></a></td>
-              <td style="vertical-align: middle;">
+              <strong><?php echo $item['item_name']; ?></strong></a>
+              <?php if($deal_chk['count'] != 0){ ?>
+              <div id="btn-request">受付終了</div>
+              <?php } ?></td>
+              <td style="vertical-align: middle; text-align: center;">
                 <span style="font-size: 17px;"><?php echo $item['price'].'ペソ'; ?></span><br></td>
-              <td style="vertical-align: middle;">
+              <td style="vertical-align: middle; text-align: center;">
                 <span style="font-size: 17px;"><?php echo $item['limited_date']; ?></span><br></td>
-              <td style="vertical-align: middle;">
+              <td style="vertical-align: middle; text-align: center;">
                 <span style="font-size: 17px;"><?php echo $item['dealing_area']; ?></span><br></td>
-              <td style="vertical-align: middle;">
+              <td style="vertical-align: middle; text-align: center;">
                 <span style="font-size: 17px;"><?php echo $item['category']; ?></span><br></td>
-              <td style="vertical-align: middle;">
+              <td style="vertical-align: middle; text-align: center;">
                 <span style="font-size: 17px;"><?php echo $item['item_detail']; ?></span><br></td>
-              <td style="vertical-align: middle;">
+              <td style="vertical-align: middle; text-align: center;">
                 <span style="font-size: 17px;"><?php echo $item['daling_date']; ?></span><br></td>
-              <td style="vertical-align: middle;">
+              <td style="vertical-align: middle; text-align: center;">
                 <a href="edit_putup_change.php?item_id=<?php echo $item['id']; ?>" class="btn btn-warning btn-sm">編集</a><br><br>
-                <a href="product_delete.php?item_id=<?php echo $item['id']; ?>" class="btn btn-danger btn-sm">削除</a></td>
+                <a href="product_delete.php?item_id=<?php echo $item['id']; ?>" onClick="return confirm('削除してもよろしいでしょうか？');" class="btn btn-danger btn-sm">削除</a></td>
               <br><br>
             </tr>
           </div>
@@ -152,8 +164,6 @@ else{
         </div>
       
     </table>
-  
-
   <!-- <footer class="text-off-white">
     <div class="footer">
       <div class="container text-center wow fadeIn" data-wow-delay="0.4s">
@@ -163,8 +173,14 @@ else{
   </footer>
             <!- End footer -->
   <!-- <a href="#" class="scrolltotop"><i class="fa fa-arrow-up"></i></a> --> <!-- Scroll to top button -->
-       
-      
+      <!-- <script type="text/javascript">
+      function disp(){
+        // 「OK」時の処理開始 ＋ 確認ダイアログの表示
+        if(window.confirm('削除してもよろしいでしょうか？')){
+          location.href = "product_delete.php?item_id='.<?php echo $items['id']; ?>.'"; // 
+        }
+      }
+    </script> -->
 
 </body>
 </html>

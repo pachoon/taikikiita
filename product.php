@@ -24,22 +24,36 @@
 
    $item = $stmt->fetch(PDO::FETCH_ASSOC);
 
+   //  $sql = "SELECT * FROM `cebty_deals` WHERE `item_id`=? ";
+   // $data = array($_GET['item_id']); //?がない場合は空のままでOK
+   // $stmt = $dbh->prepare($sql);
+   // $stmt->execute($data); 
+
+   // $deal = $stmt->fetch(PDO::FETCH_ASSOC);
+
 // リクエスト機能
    if(isset($_POST['request']) && $_POST['request'] == 'request'){
-        //いいねを押した時はここの処理が走る
+        //リクエストを押した時はここの処理が走る
         echo 'リクエスト';
-        $sql = 'INSERT INTO `cebty_deals` SET `items_id`=? ,
-                                              `user_id`=?,
-                                              `buyrequest`=?
+        $sql = 'INSERT INTO `cebty_deals` SET `item_id`=? ,
+                                              `user_id`=?
         ';
-        $data = array($_POST['items_id'],$_SESSION['login_user']['id']);
+        $data = array($_POST['item_id'],$_SESSION['login_user']['id']);
+        $stmt = $dbh->prepare($sql);
+        $stmt->execute($data);
+    }elseif(isset($_POST['request']) && $_POST['request'] == 'unrequest'){
+        //いいね取り消しを押した場合、ここの処理が走る
+        $sql = 'DELETE FROM `cebty_deals` WHERE `item_id`=?
+                                             AND `user_id`=?
+        ';
+        $data = array($_POST['item_id'],$_SESSION['login_user']['id']);
         $stmt = $dbh->prepare($sql);
         $stmt->execute($data);
     }
     if(isset($_POST['request'])){
         // いいね、またはいいね取り消しを押した場合は、ここの処理が走る
         // $_POSTの情報を破棄。
-        header('Location: product.php?id=' . $_POST['items_id']);
+        header('Location: product.php?item_id=' . $_POST['item_id']);
         exit();
     }
 
@@ -62,8 +76,8 @@
         $data = array($_POST['items_id'],$_SESSION['login_user']['id']);
         $stmt = $dbh->prepare($sql);
         $stmt->execute($data);
-
     }
+
     if(isset($_POST['favorite'])){
         // いいね、またはいいね取り消しを押した場合は、ここの処理が走る
         // $_POSTの情報を破棄。
@@ -71,7 +85,12 @@
         exit();
     }
 
+    $sql = 'SELECT COUNT(*) AS `count` FROM `cebty_deals` WHERE `item_id` = ?';
+    $data = array($item['id']);
+    $stmt = $dbh->prepare($sql);
+    $stmt->execute($data);
 
+    $deal_chk = $stmt->fetch(PDO::FETCH_ASSOC);
 
 
 
@@ -146,16 +165,19 @@
           require('parts/header.php');
         } ?>
   
-  <div class="container" style="margin-top: 150px; height: 600px; ">
+  <div class="container" style="margin-top: 150px; height: 600px; text-align: center;">
     <div class="row">
       <h2 id="product-h2"><?php echo $item['item_name'];?></h2>
+      <?php if($deal_chk['count'] != 0){ ?>
+              <div id="btn-request">受付終了しました</div>
+      <?php } ?>
       <div class="devider"></div>
     </div>
     <!-- productPicture -->
     <div class="row">
-        <div class=" col-md-6" style="text-align: center;">
+      <div class=" col-md-6" style="text-align: center;">
         <img src="itempic/<?php echo $item['itempc_path']; ?>" width="400px" height="400px" >
-    </div>
+      </div>
     <!-- productPictureEnd -->
     <div class="col-md-6">
       <p class="item-detail">価格 : <?php echo $item['price'] ?>ペソ</p><br>
@@ -170,38 +192,37 @@
   <div class="container" style="text-align: center;">
     <div class="row">
       <div class="col-md-6">
-        <?php 
-          // 受付終了を表示
-          $sql = 'SELECT COUNT(*) AS `count` FROM `cebty_deals` WHERE `item_id` = ?';
-          $data = array($item['id']);
-          $stmt = $dbh->prepare($sql);
-          $stmt->execute($data);
+           <!-- 受付終了を表示 -->
+           <?php 
+            $sql = 'SELECT COUNT(*) AS `count` FROM `cebty_deals` WHERE `item_id` = ?';
+            $data = array($item['id']);
+            $stmt = $dbh->prepare($sql);
+            $stmt->execute($data);
 
-          $request = $stmt->fetch(PDO::FETCH_ASSOC);
+            $request = $stmt->fetch(PDO::FETCH_ASSOC);
 
-          // 自分が受付終了ボタンを押しているかどうかをチェック
-          $sql = 'SELECT COUNT(*) AS `count` FROM `cebty_deals` WHERE `item_id` = ?
-                                                                AND   `user_id` = ?
-                                                                                  ';
-          $data = array($item['id'],$_SESSION['login_user']['id']);
-          $stmt = $dbh->prepare($sql);
-          $stmt->execute($data);
+            // 自分が受付終了ボタンを押しているかどうかをチェック
+            $sql = 'SELECT COUNT(*) AS `count` FROM `cebty_deals` WHERE `item_id` = ?
+                                                                  AND   `user_id` = ?
+                                                                                    ';
+            $data = array($item['id'],$_SESSION['login_user']['id']);
+            $stmt = $dbh->prepare($sql);
+            $stmt->execute($data);
 
-          $request_chk = $stmt->fetch(PDO::FETCH_ASSOC);
-        ?>
-        
+            $request_chk = $stmt->fetch(PDO::FETCH_ASSOC);
+            ?>
         <?php if($_SESSION['login_user']['id'] == $item['user_id'] ){ ?>
           <form method="POST" action=""><br>
             <input type="hidden" name="item_id" value="<?php echo $item['id']; ?>">
             <?php if($request_chk['count'] == 0){ ?>
               <input type="hidden" name="request" value="request">
-              <input type="submit" value="受付終了" class="btn btn-danger btn-lg">
+              <input type="submit" value="受付終了する" class="btn btn-danger btn-lg">
             <?php }else{ ?>
-              <input type="hidden" name="favorite" value="unrequest">
-              <input type="submit" value="受付再開" class="btn btn-warning btn-lg">
+              <input type="hidden" name="request" value="unrequest">
+              <input type="submit" value="受付再開する" class="btn btn-warning btn-lg">
             <?php } ?><br><br>
           </form>
-          <a href="javascript:history.back()" class="btn btn-md btn-success btn-lg">商品管理ページに戻る</a>
+          <a href="edit_putup.php?login_user_id=<?php echo $_SESSION['login_user']['id']?>" class="btn btn-md btn-success btn-lg">商品管理ページに戻る</a>
         <?php } ?>
          <!-- お気に入りを表示 -->
         <?php 

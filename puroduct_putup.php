@@ -171,7 +171,7 @@ session_start();
                 <button class="btn btn-md btn-primary btn-block" type="submit">
                     確認画面へ</button>
                 </form><br>
-                <a href="edit_putup.php" class="btn btn-warning btn-block">出品管理画面へ戻る</a>
+                <a href="javascript:history.back()" class="btn btn-warning btn-block">出品管理画面へ戻る</a>
             </div>
         </div>
     </div>
