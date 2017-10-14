@@ -40,12 +40,7 @@
   $stmt->execute($data);
   $deal = $stmt->fetch(PDO::FETCH_ASSOC);
 
-  $sql = 'SELECT COUNT(*) AS `count` FROM `cebty_deals` WHERE `item_id` = ?';
-  $data = array($deal['id']);
-  $stmt = $dbh->prepare($sql);
-  $stmt->execute($data);
-
-  $deal_chk = $stmt->fetch(PDO::FETCH_ASSOC);
+  
 
  ?>
 <!-- 仮でした。 -->
@@ -106,8 +101,6 @@ else{
 
 
   <div class="container" style="padding-top: 130px;" align="center">
-  <?php var_dump($deal['id']); ?>
-  <?php var_dump($deal_chk['count']); ?>
     <div class="row">
       <h2 id="product-h2">商品管理</h2>
       <div class="devider"></div>
@@ -138,6 +131,13 @@ else{
               <td style="vertical-align: middle;"><img src="itempic/<?php echo $item['itempc_path']; ?>" width="100px"></td>
               <td style="vertical-align: middle;"><a href="product.php?item_id=<?php echo $item['id']; ?>">
               <strong><?php echo $item['item_name']; ?></strong></a>
+              <?php 
+                $sql = 'SELECT COUNT(*) AS `count` FROM `cebty_deals` WHERE `item_id` = ?';
+                $data = array($item['id']);
+                $stmt = $dbh->prepare($sql);
+                $stmt->execute($data);
+                $deal_chk = $stmt->fetch(PDO::FETCH_ASSOC);
+              ?>
               <?php if($deal_chk['count'] != 0){ ?>
               <div id="btn-request">受付終了</div>
               <?php } ?></td>
