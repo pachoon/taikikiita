@@ -290,7 +290,7 @@ while(true){
 <?php }elseif($favorite){ ?>
                         <a href="fav.php?item_id=<?php echo $product['id']; ?>&price=<?php echo $startPrice; ?>&area=<?php echo $startArea; ?>&freeword=<?php echo $startFreeword; ?>&unlike" rel="tooltip" title="お気に入り解除"><span class="fa fa-heart fa-2x"></span></a>
 <?php } ?>
-                        <a href="" rel="tooltip" title="商品詳細"><span class="fa fa-search fa-2x"></span></a>
+                        <a href="product.php?item_id=<?php echo $product['id']; ?>" rel="tooltip" title="商品詳細"><span class="fa fa-search fa-2x"></span></a>
                     </div>
                     <img src="itempc_path/<?php echo $product['itempc_path'];  ?>" class="img-responsive">
                      <div class="propertyType <?php if($product['dealing_area']=='ITパーク'){echo 'it';}elseif($product['dealing_area']=='アヤラ'){echo 'ayala';}elseif($product['dealing_area']=='マンダウエ'){echo 'mandaue';}elseif($product['dealing_area']=='マクタン島'){echo 'makutan';} ?>" style="line-height: 20px;"><?php echo $product['dealing_area']; ?></div>
