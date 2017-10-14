@@ -55,7 +55,7 @@ $startFreeword=$_POST['freeword'];
 
     $sql = 'SELECT * FROM `cebty_items` WHERE (`item_name` LIKE "%'.$_POST['freeword'].'%"
                                               OR `item_detail` LIKE "%'.$_POST['freeword'].'%")
-                                                               AND `price_label ` '.$a.'= ?
+                                                               AND `price_label` '.$a.'= ?
                                                                AND `dealing_area` '.$b.'= ?';
     $data = array($_POST['price'], $_POST['area']);
     $stmt = $dbh->prepare($sql);
@@ -79,7 +79,7 @@ while(true){
 
     $sql = 'SELECT * FROM `cebty_items` WHERE (`item_name` LIKE "%'.$_GET['freeword'].'%"
                                               OR `item_detail` LIKE "%'.$_GET['freeword'].'%")
-                                                               AND `price_label` '.$a.'= ?
+                                                               AND `price_label`'.$a.'= ?
                                                                AND `dealing_area` '.$b.'= ?';
     $data = array($_GET['price'], $_GET['area']);
     $stmt = $dbh->prepare($sql);
