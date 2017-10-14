@@ -22,8 +22,6 @@
 
   if(!empty($_POST)){
 
-
-
       $item_name = $_SESSION['item_info']['item_name'];
       $itempc_path = $_SESSION['item_info']['itempc_path'];
       $price = $_SESSION['item_info']['price'];
@@ -35,8 +33,11 @@
 
 
         if($_SESSION['item_info']['price'] <= 99){
-      $priceLabel = 1;}elseif($_SESSION['item_info']['price'] >= 100 && $_SESSION['item_info']['price'] <= 499){$priceLabel = 2;}elseif($_SESSION['item_info']['price'] >=500 && $_SESSION['item_info']['price'] <= 999){$priceLabel = 3;}elseif($_SESSION['item_info']['price'] >= 1000){$priceLabel = 4;}
-
+          $priceLabel = 1;
+        }elseif($_SESSION['item_info']['price'] >= 100 && $_SESSION['item_info']['price'] <= 499){$priceLabel = 2;
+        }elseif($_SESSION['item_info']['price'] >=500 && $_SESSION['item_info']['price'] <= 999){$priceLabel = 3;
+        }elseif($_SESSION['item_info']['price'] >= 1000){$priceLabel = 4;
+        }
 
       //INSERT処理
       $sql = 'INSERT INTO `cebty_items` SET `user_id`=?,
@@ -50,7 +51,6 @@
                                             `daling_date`=?,
                                             `category`=?,
                                             `created`=NOW()';
-
 
       $data = array($_SESSION['login_user']['id'],$item_name,$itempc_path,$price,$priceLabel,$limited_date,$item_detail,$dealing_area,$daling_date,$category);
       $stmt = $dbh->prepare($sql);
