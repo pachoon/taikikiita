@@ -70,6 +70,11 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav navbar-right">
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> ai
                             <li><a class="" href="index.php">ホーム</a></li>
                             <li><a class="" href="mypage.php">マイページ</a></li>
                             <li><a class="" href="search.php">商品検索</a></li>

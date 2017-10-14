@@ -22,8 +22,10 @@
 
   if(!empty($_POST)){
 
+
+
       $item_name = $_SESSION['item_info']['item_name'];
-      $itempic_path = $_SESSION['item_info']['itempic_path'];
+      $itempc_path = $_SESSION['item_info']['itempc_path'];
       $price = $_SESSION['item_info']['price'];
       $limited_date = $_SESSION['item_info']['limited_date'];
       $item_detail = $_SESSION['item_info']['item_detail'];
@@ -31,11 +33,19 @@
       $daling_date = $_SESSION['item_info']['daling_date'];
       $category = $_SESSION['item_info']['category'];
 
+
+
+
+      if($price <= 100){
+      $priceLabel = 1;
+      }elseif($price >= 100 && $price <= 500){$priceLabel = 2;}elseif($price >=500 && $price <= 1000){$priceLabel = 3;}elseif($price > 1000){$priceLabel = 4;}
+
       //INSERT処理
       $sql = 'INSERT INTO `cebty_items` SET `user_id`=?,
                                             `item_name`=?,
-                                            `itempic_path`=?,
+                                            `itempc_path`=?,
                                             `price`=?,
+                                            `price_label`=?,
                                             `limited_date`=?,
                                             `item_detail`=?,
                                             `dealing_area`=?,
@@ -43,7 +53,7 @@
                                             `category`=?,
                                             `created`=NOW()';
                                               
-      $data = array($_SESSION['login_user']['id'],$item_name,$itempic_path,$price,$limited_date,$item_detail,$dealing_area,$daling_date,$category);
+      $data = array($_SESSION['login_user']['id'],$item_name,$itempc_path,$price,$priceLabel,$limited_date,$item_detail,$dealing_area,$daling_date,$category);
       $stmt = $dbh->prepare($sql);
       $stmt->execute($data);
 
@@ -100,7 +110,7 @@ else{
                 </div>
             </div>
             <p style="padding-bottom:1px;">商品画像：</p>
-            <img src="itempic/<?php echo $_SESSION['item_info']['itempic_path'];?>" width="150">
+            <img src="itempic/<?php echo $_SESSION['item_info']['itempc_path'];?>" width="150">
             <div class="preview" style="padding-bottom:7px;"></div>
 
             <p style="padding-bottom:1px;">価格：　<?php echo $_SESSION['item_info']['price'];?> ペソ</p>

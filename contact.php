@@ -27,6 +27,10 @@ if(!isset($_SESSION['login_user']['id'])){
 </head>
 <body style="background-color: #3a6186 , #89253e" id="container">
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> ai
 
 
 
@@ -41,6 +45,7 @@ session_start();
 
 
 
+<<<<<<< HEAD
 =======
 <?php
 
@@ -54,6 +59,8 @@ if(isset($_SESSION['login_user'])){
 }
 
  ?>
+>>>>>>> ai
+=======
 >>>>>>> ai
   <div class="container">
     <div class="row">

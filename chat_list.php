@@ -25,15 +25,9 @@ $stmt->execute($data);
   }
   $chats[]=$record;
 }
-
-
-  $sql = 'SELECT * FROM `cebty_users` WHERE `id` = ?';
-  $data = array($_GET['user_id']);
-  $stmt = $dbh->prepare($sql);
-  $stmt->execute($data);
-
-  $user = $stmt->fetch(PDO::FETCH_ASSOC);
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -137,21 +131,18 @@ if(isset($_SESSION['login_user'])){
                     
                     <td>
                       <div class="media" style="width: 648px;">
+                        <p align="left" style="font-size: 30px"><?php echo $chat['username'];?></p>
                         <a href="chat.php?chat_id=<?php echo $chat['id'];?>" class="pull-left">
-                        <img alt="140x140" src="profile_image/<?php echo $user['picture_path']; ?> class="media-photo" >
-<?php var_dump($chat['id']) ?>
-                        </a>
+                       <img class="img-thumbnail"  align="left" alt="140x140" src="profile_image/<?php echo $_SESSION['login_user']['picture_path'];?>"><br><?php echo $chat['comment'];?></a>
                         <div class="media-body">
-                          <span class="media-meta pull-right"><?php echo $chat['modifid'];?></span>
+                          <span class="media-meta pull-right"><?php echo $chat['created'];?></span>
                           <h4 class="title">
-                            <?php echo $chat['username'];?>
                             <span class="pull-right recieve" ><?php if($chat['user_id']==$_SESSION['login_user']['id']){
                     echo '<font color="#5cb85c">送信</font>';
                   }else{
                     echo '<font color="#FF9900">受信</font>';
                   } ?></span>
                           </h4>
-                          <p class="summary"><?php echo $chat['comment'];?></p>
                         </div>
                       </div>
                     </td>

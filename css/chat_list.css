@@ -163,3 +163,8 @@ body {
 .table-filter .media .summary {
   font-size: 14px;
 }
+
+img {
+width: 30%;
+height: 130px;
+}
