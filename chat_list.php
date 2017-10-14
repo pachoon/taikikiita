@@ -11,20 +11,47 @@ if(!isset($_SESSION['login_user']['id'])){
 
 
 
-$sql = "SELECT * FROM `cebty_chat` WHERE `user_id`=? OR `other_id`=? ORDER BY `cebty_chat`.`created` DESC" ;
+$sql = "SELECT * FROM `cebty_chat` 
+        WHERE `user_id`=? 
+        OR `other_id`=? 
+        ORDER BY `cebty_chat`.`created` DESC" ;
 $data = array($_SESSION['login_user']['id'], $_SESSION['login_user']['id']);
 $stmt = $dbh->prepare($sql);
 $stmt->execute($data);
 
-  $chats=array();
-  while(true){
-  $record = $stmt->fetch(PDO::FETCH_ASSOC);
-  //$recordはデータベースのカラム値をkeyとする連想配列で構成されます.(データベースから１件取ってきます)
-  if(!$record){
-     break;
-  }
-  $chats[]=$record;
+$chats=array();
+while(true){
+$record = $stmt->fetch(PDO::FETCH_ASSOC);
+//$recordはデータベースのカラム値をkeyとする連想配列で構成されます.(データベースから１件取ってきます)
+if(!$record){
+   break;
 }
+$chats[]=$record;
+}
+
+$sql='SELECT `cebty_chat`.*, `cebty_users`.*
+      FROM `cebty_chat`
+      LEFT JOIN`cebty_users`
+      ON `cebty_chat`.`user_id` = `cebty_users`.`id`
+      WHERE `cebty_chat`.`user_id`=?';
+$data = array($_SESSION['login_user']['id']);
+$stmt = $dbh->prepare($sql);
+$stmt->execute($data);
+$join = $stmt->fetch(PDO::FETCH_ASSOC);
+
+
+
+// $sql='SELECT `cebty_chat`.*, `cebty_users`.*
+//       FROM `cebty_chat`
+//       LEFT JOIN`cebty_users`
+//       ON `cebty_chat`.`other_id` = `cebty_users`.`id`
+//       WHERE `cebty_chat`.`user_id`=`cebty_users`.`id` 
+//                                 AND `cebty_chat`.`other_id`=?';
+// $data = array($_SESSION['login_user']['id']);
+// $stmt = $dbh->prepare($sql);
+// $stmt->execute($data);
+// $others = $stmt->fetch(PDO::FETCH_ASSOC);
+
 ?>
 
 
@@ -96,7 +123,6 @@ if(isset($_SESSION['login_user'])){
 
 
 
-
     <section class="content">
       <div class="col-md-8 col-md-offset-2">
         <div class="panel panel-default">
@@ -131,9 +157,26 @@ if(isset($_SESSION['login_user'])){
                     
                     <td>
                       <div class="media" style="width: 648px;">
-                        <p align="left" style="font-size: 30px"><?php echo $chat['username'];?></p>
-                        <a href="chat.php?chat_id=<?php echo $chat['id'];?>" class="pull-left">
-                       <img class="img-thumbnail"  align="left" alt="140x140" src="profile_image/<?php echo $_SESSION['login_user']['picture_path'];?>"><br><?php echo $chat['comment'];?></a>
+                        <p align="left" style="font-size: 30px"><?php if($chat['user_id']==$_SESSION['login_user']['id']){
+                          echo $join['username'];
+                        }else{
+                          echo $join['other_name'];
+                        }?>
+                        </p>
+<?php var_dump($chat['other_id'])?>
+
+                        <?php if($chat['user_id']==$_SESSION['login_user']['id']){?>
+                          <a  href="chat.php?user_id=<?php echo $chat['user_id'];?>" class="pull-left">
+                        <?php }else{ ?>
+                          <a  href="chat.php?other_id=<?php echo $chat['other_id'];?>" class="pull-left">
+                        <?php }?>
+
+                        <?php if($chat['user_id']==$_SESSION['login_user']['id']){ ?>
+                            <img class="img-thumbnail"  align="left" alt="140x140" src="profile_image/<?php echo $_SESSION['login_user']['picture_path'];?>"> 
+                            <?php }else {?>
+<?php var_dump($chat['other_pc_path'])?>
+                            <img class="img-thumbnail"  align="left" alt="140x140" src="profile_image/<?php $join['other_pc_path']?>"> <?php } ?>
+                        <br><?php echo $chat['comment'];?></a>
                         <div class="media-body">
                           <span class="media-meta pull-right"><?php echo $chat['created'];?></span>
                           <h4 class="title">
