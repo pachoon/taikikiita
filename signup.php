@@ -59,6 +59,8 @@ session_start();
         }
 
     if (empty($errors)){
+
+        $fileName=uniqid().$fileName;
       //確認ページへ飛ばす。
         //全てのチェックでエラーが無ければ画像アップロード
         move_uploaded_file($_FILES['profile_image_path']['tmp_name'], 'profile_image/'.$fileName);

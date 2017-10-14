@@ -217,10 +217,15 @@ while(true){
                               <?php }else{ ?>
                               <option value="マンダウエ">マンダウエ</option>
                               <?php } ?>
-                              <?php if($startArea=="マクタン島"){ ?>
-                              <option value="マクタン島" selected>マクタン島</option>
+                              <?php if($startArea=="タランバン"){ ?>
+                              <option value="タランバン" selected>タランバン</option>
                               <?php }else{ ?>
-                              <option value="マクタン島">マクタン島</option>
+                              <option value="タランバン">タランバン</option>
+                              <?php } ?>
+                              <?php if($startArea=="その他"){ ?>
+                              <option value="その他" selected>その他</option>
+                              <?php }else{ ?>
+                              <option value="その他">その他</option>
                               <?php } ?>
                             </select>
                          </div>
@@ -268,6 +273,9 @@ while(true){
     <div class="row">
         <div class="col-md-12 col-sm-12">
 
+
+
+
         <?php foreach($products as $product){ ?>
 
 <?php
@@ -277,10 +285,26 @@ while(true){
   $stmt = $dbh->prepare($sql);
   $stmt->execute($data);
   $favorite = $stmt->fetch(PDO::FETCH_ASSOC);
+
+
+if($product['category'] == '家電'){
+  $cate = 'elec';
+}elseif($product['category'] == '衣服'){
+  $cate = 'cloth';
+}elseif($product['category'] == '食料品'){
+  $cate = 'food';
+}elseif($product['category'] == '薬'){
+  $cate = 'medecine';
+}elseif($product['category'] == 'その他'){
+  $cate = 'others';
+}
+
+
+
 ?>
 
 
-            <div class="col-md-3 col-sm-4 <?php echo $product['category']; ?> " id="<?php echo $product['id'];?>">
+            <div class="col-md-3 col-sm-4 <?php echo $cate; ?>" id="<?php echo $product['id'];?>">
                 <div class="view">
                     <div class="caption">
                         <h3>　　　　　</h3>
@@ -290,10 +314,10 @@ while(true){
 <?php }elseif($favorite){ ?>
                         <a href="fav.php?item_id=<?php echo $product['id']; ?>&price=<?php echo $startPrice; ?>&area=<?php echo $startArea; ?>&freeword=<?php echo $startFreeword; ?>&unlike" rel="tooltip" title="お気に入り解除"><span class="fa fa-heart fa-2x"></span></a>
 <?php } ?>
-                        <a href="" rel="tooltip" title="商品詳細"><span class="fa fa-search fa-2x"></span></a>
+                        <a href="product.php?item_id=<?php echo $product['id']; ?>" rel="tooltip" title="商品詳細"><span class="fa fa-search fa-2x"></span></a>
                     </div>
-                    <img src="itempc_path/<?php echo $product['itempc_path'];  ?>" class="img-responsive">
-                     <div class="propertyType <?php if($product['dealing_area']=='ITパーク'){echo 'it';}elseif($product['dealing_area']=='アヤラ'){echo 'ayala';}elseif($product['dealing_area']=='マンダウエ'){echo 'mandaue';}elseif($product['dealing_area']=='マクタン島'){echo 'makutan';} ?>" style="line-height: 20px;"><?php echo $product['dealing_area']; ?></div>
+                    <img src="itempic/<?php echo $product['itempc_path'];  ?>" class="img-responsive">
+                     <div class="propertyType <?php if($product['dealing_area']=='ITパーク'){echo 'it';}elseif($product['dealing_area']=='アヤラ'){echo 'ayala';}elseif($product['dealing_area']=='マンダウエ'){echo 'mandaue';}elseif($product['dealing_area']=='タランバン'){echo 'talamban';}elseif($product['dealing_area']=='その他'){echo 'others';} ?>" style="line-height: 20px;"><?php echo $product['dealing_area']; ?></div>
 
                 </div>
                 <div class="info">
@@ -311,6 +335,7 @@ while(true){
 </div>
 </div>
 
+          <?php var_dump($products);?>
 
         <script src="inc/jquery/jquery-1.11.1.min.js"></script>
         <script src="inc/bootstrap/js/bootstrap.min.js"></script>

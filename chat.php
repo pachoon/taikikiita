@@ -1,115 +1,109 @@
 <!-- 仮です -->
 <?php  
-   session_start();
-
-    $dsn = 'mysql:dbname=cebty;host=localhost';
-    $user = 'root';
-    $password = '';
-    $dbh = new PDO($dsn, $user, $password);
-    $dbh->query('SET NAMES utf8');
+  session_start();
 
      if(!isset($_SESSION['login_user']['id'])){
-    //セッションデータを保持しているかチェック
-    //セッションデータがなければ、ログインページに飛ばす。
-      header('Location:login.php');
-      exit();
-     }
+  //セッションデータを保持しているかチェック
+  //セッションデータがなければ、ログインページに飛ばす。
+    header('Location:login.php');
+    exit();
+   }
+
+  $dsn = 'mysql:dbname=cebty;host=localhost';
+  $user = 'root';
+  $password = '';
+  $dbh = new PDO($dsn, $user, $password);
+  $dbh->query('SET NAMES utf8');
+
+
+  $sql = 'SELECT * FROM `cebty_items` WHERE `id` = ?';
+  $data = array($_GET['item_id']);
+  $stmt = $dbh->prepare($sql);
+  $stmt->execute($data);
+
+  $item = $stmt->fetch(PDO::FETCH_ASSOC);
 
 
 
-  
+  $sql = 'SELECT `cebty_items`.*, `cebty_users`.*
+          FROM `cebty_items`
+          LEFT JOIN `cebty_users`
+          ON `cebty_items`.`user_id` = `cebty_users`.`id`
+          WHERE `cebty_items`.`user_id`=?';
 
-    $sql = 'SELECT * FROM `cebty_items` WHERE `id` = ?';
-    $data = array($_GET['item_id']);
-    $stmt = $dbh->prepare($sql);
-    $stmt->execute($data);
+  $data = array($_GET['user_id']); //?がない場合は空のままでOK
+  $stmt = $dbh->prepare($sql);
+  $stmt->execute($data);
 
-    $item = $stmt->fetch(PDO::FETCH_ASSOC);
-
-
-
-
-   $sql = 'SELECT `cebty_items`.*, `cebty_users`.*
-           FROM `cebty_items`
-           LEFT JOIN `cebty_users`
-           ON `cebty_items`.`user_id` = `cebty_users`.`id`
-           WHERE `cebty_items`.`user_id`=?';
-
-   $data = array($_GET['user_id']); //?がない場合は空のままでOK
-   $stmt = $dbh->prepare($sql);
-   $stmt->execute($data); 
-
-   $other = $stmt->fetch(PDO::FETCH_ASSOC);
+  $other = $stmt->fetch(PDO::FETCH_ASSOC);
 
 
 
-   $sql = "SELECT `cebty_chat`.*,`cebty_items`.* 
-           FROM `cebty_chat`
-           LEFT JOIN `cebty_items`
-           ON `cebty_chat`.`item_id` = `cebty_items`.`id`
-           WHERE `cebty_chat`.`user_id` 
-           OR `cebty_chat`.`other_id` 
-           AND `cebty_chat`.`item_id`
-           ORDER BY `cebty_chat`.`created` DESC" ;
-   $data = array();
-   $stmt = $dbh->prepare($sql);
-   $stmt->execute($data);
+  $sql = "SELECT `cebty_chat`.*,`cebty_items`.`id`
+          FROM `cebty_chat`
+          LEFT JOIN `cebty_items`
+          ON `cebty_chat`.`item_id` = `cebty_items`.`id`
+          WHERE `cebty_chat`.`item_id`=?
+          AND ( `cebty_chat`.`user_id` =?
+          OR `cebty_chat`.`other_id` =?)
+          ORDER BY `cebty_chat`.`created` DESC" ;
+  $data = array($_GET['item_id'],$_SESSION['login_user']['id'],$_SESSION['login_user']['id']);
+  $stmt = $dbh->prepare($sql);
+  $stmt->execute($data);
 
-   $chats=array();
-   while(true){
-   $record = $stmt->fetch(PDO::FETCH_ASSOC);
-   //$recordはデータベースのカラム値をkeyとする連想配列で構成されます.(データベースから１件取ってきます)
-   if(!$record){
+  $chats=array();
+  while(true){
+    $record = $stmt->fetch(PDO::FETCH_ASSOC);
+    //$recordはデータベースのカラム値をkeyとする連想配列で構成されます.(データベースから１件取ってきます)
+    if(!$record){
      break;
-   }
-   $chats[]=$record;
-   }
+    }
+    $chats[]=$record;
+  }
+
+
+  $sql = 'SELECT * FROM `cebty_users` WHERE `id` = ?';
+  $data = array($_GET['user_id']);
+  $stmt = $dbh->prepare($sql);
+  $stmt->execute($data);
+
+
+  $otherinfo = $stmt->fetch(PDO::FETCH_ASSOC);
+  $other_name = $otherinfo['username'];
+  $other_pc_path = $otherinfo['picture_path'];
+
+
+  $user_id=$_SESSION['login_user']['id'];
+  $other_id=$other['user_id'];
+  $item_id=$item['id'];
+  $comment=$_POST['comment'];
+  $vendor=0;
 
 
 
-$errors = array();
   if (!empty($_POST)) {
 
-    // if(isset($_POST['comment'])){
-          $user_id=$_SESSION['login_user']['id'];
-          $other_id=$other['user_id'];
-          $item_id=$item['id'];
-          $comment=$_POST['comment'];
-          $vendor=0;
-            if($item['user_id']=$user_id){
-              $vendor=1;
-            }
-          
 
-      // if($tweet ==''){
-      // $errors['tweet']='blank';
-      // }
-      if(isset($_POST['comment'])){
-          $comment=$_POST['comment'];
-
-      if($comment ==''){
-      $errors['comment']='blank';
-      }
-
-      if (empty($errors)) {
-        echo 'コメント送信<br>';
         $sql = 'INSERT INTO `cebty_chat` SET `user_id`=? ,
                                              `other_id`=? ,
+                                             `other_name`=? ,
+                                             `other_pc_path`=? ,
                                              `item_id`=? ,
                                              `comment`=? ,
                                              `vendor`=? ,
                                              `created`=NOW()';
-        $data = array($user_id,$other_id,$item_id,$comment,$vendor);
+        $data = array($user_id,$other_id,$other_name,$other_pc_path,$item_id,$comment,$vendor);
         $stmt = $dbh->prepare($sql);
         $stmt ->execute($data);
 
+        header('Location:chat.php?item_id='.$_GET['item_id'].'&user_id='.$_GET['user_id'].'&login_id='.$_GET['login_id'].'');
+        exit();
 
 
-      }
-    }
-  }
+ }
 
-  
+
+
 ?>
 
 
@@ -172,35 +166,40 @@ $errors = array();
         <div class="devider"></div>
       </div>
       <div class="col-md-4">
-        <h2 class="chat">投稿者</h2>
+        <?php if($user_id = $item['id']){ ?>
+          <h2 class="chat">投稿者</h2>
+        <?php }else{ ?>
+          <h2 class="chat">問合せ</h2>
+        <?php } ?>
         <div class="devider"></div>
       </div>
     </div>
     <div class="row" style="height: 120px; text-align: center; vertical-align: middle;">
       <div class="col-md-offset-2 col-md-2">
         <div class="chat-box1">
-          <img src="itempic/<?php echo $item['itempic_path'];?>" width="120px">
+          <img src="itempic/<?php echo $item['itempc_path'];?>" width="120px">
         </div>
       </div>
       <div class="col-md-2">
         <div class="chat-box2">
-          <h4> <a href="product.php?id=<?php echo $item['id']; ?>">
+          <h4> <a href="product.php?item_id=<?php echo $item['id']; ?>">
               <?php echo $item['item_name']; ?></a></h4>
         </div>
       </div>
       <div class="col-md-2">
         <div class="chat-box1">
-          <img src="profile_image/<?php echo $other['picture_path'];?>" width="120px">
+          <img src="profile_image/<?php echo $otherinfo['picture_path'];?>" width="120px">
         </div>
       </div>
       <div class="col-md-2">
         <div class="chat-box2">
-          <h4><a href="product.php?id=<?php echo $other['id']; ?>">
+          <h4><a href="user_information.php?user_id=<?php echo $other['id']; ?>">
               <?php echo $other['username']; ?></a></h4>
         </div>
       </div>
     </div>
   </div>
+  <br><br>
   <!-- chat bigin-->
   <div class="container">
     <div class="row">
@@ -209,14 +208,9 @@ $errors = array();
         <div class="panel panel-default">
           <div class="panel-body">
             <form method="POST" action="">
-              <textarea name="comment"></textarea><br>
-              <?php if (isset($errors['tweet'])) { ?>
-                <div class="alert alert-danger">
-                内容を入力してください。
-                </div>
-              <?php  } ?> 
-              <input type="submit" value="送信" class="btn btn-primary">
-            </form><br>
+              <textarea name="comment" style="width:80%;"  rows="4" cols="40" placeholder="新規メッセージを入力してください"></textarea>
+              <input type="submit" value="送信" style="margin-bottom:25px; margin-left:5px;" class="btn btn-primary">
+            </form>
             
                 <div class="table-container" style="overflow-x:scroll; height: 400px;">
                   <table class="table table-filter">
@@ -227,19 +221,19 @@ $errors = array();
 
                           <div class="chatComment" style="width: 570px;">
                             <!-- <a href="#" class="pull-left"> -->
-                            <?php if($user_id=!$other_id) { ?>
-                              <img src="profile_image/<?php echo $['picture_path'];?>" class="chatComment-photo">
+                            <?php if($chat['user_id']==$_SESSION['login_user']['id']) { ?>
+                              <img src="profile_image/<?php echo $_SESSION['login_user']['picture_path'];?>" class="chatComment-photo">
                               <!-- </a> -->
                               <div class="chatComment-body" style="width: 570px;">
                                <!-- <span class="media-meta pull-right"></span> -->
                                 <?php echo $chat['created'];?>
                                 <h4 class="title">
-                                <?php echo $other['username'];?>
+                                <?php echo $_SESSION['login_user']['username'];?>
                                 </h4>
                                 <p class="summary"><?php echo $chat['comment'];?></p>
                               </div>
                             <?php }else{ ?>
-                              <img src="profile_image/<?php echo $['picture_path'];?>" class="chatComment-photo">
+                              <img src="profile_image/<?php echo $other['picture_path'];?>" class="chatComment-photo">
                               <!-- </a> -->
                               <div class="chatComment-body" style="width: 570px;">
                                  <!-- <span class="media-meta pull-right"></span> -->
@@ -261,7 +255,7 @@ $errors = array();
         </section>
       </div>
     </div>
-                  
+
 
 
 <script type="text/javascript">

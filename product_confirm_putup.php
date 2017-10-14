@@ -22,8 +22,10 @@
 
   if(!empty($_POST)){
 
+
+
       $item_name = $_SESSION['item_info']['item_name'];
-      $itempic_path = $_SESSION['item_info']['itempic_path'];
+      $itempc_path = $_SESSION['item_info']['itempc_path'];
       $price = $_SESSION['item_info']['price'];
       $limited_date = $_SESSION['item_info']['limited_date'];
       $item_detail = $_SESSION['item_info']['item_detail'];
@@ -31,28 +33,39 @@
       $daling_date = $_SESSION['item_info']['daling_date'];
       $category = $_SESSION['item_info']['category'];
 
+
+        if($_SESSION['item_info']['price'] <= 99){
+      $priceLabel = 1;}elseif($_SESSION['item_info']['price'] >= 100 && $_SESSION['item_info']['price'] <= 499){$priceLabel = 2;}elseif($_SESSION['item_info']['price'] >=500 && $_SESSION['item_info']['price'] <= 999){$priceLabel = 3;}elseif($_SESSION['item_info']['price'] >= 1000){$priceLabel = 4;}
+
+
       //INSERT処理
       $sql = 'INSERT INTO `cebty_items` SET `user_id`=?,
                                             `item_name`=?,
-                                            `itempic_path`=?,
+                                            `itempc_path`=?,
                                             `price`=?,
+                                            `price_label`=?,
                                             `limited_date`=?,
                                             `item_detail`=?,
                                             `dealing_area`=?,
                                             `daling_date`=?,
                                             `category`=?,
                                             `created`=NOW()';
-                                              
-      $data = array($_SESSION['login_user']['id'],$item_name,$itempic_path,$price,$limited_date,$item_detail,$dealing_area,$daling_date,$category);
+
+
+      $data = array($_SESSION['login_user']['id'],$item_name,$itempc_path,$price,$priceLabel,$limited_date,$item_detail,$dealing_area,$daling_date,$category);
       $stmt = $dbh->prepare($sql);
       $stmt->execute($data);
 
-      header('Location: edit_putup.php');
-      exit();
+       header('Location: edit_putup.php?login_user_id='.$_SESSION['login_user']['id'].'');
+       exit();
 
   }
 
+
+
+
  ?>
+
 
 
 
@@ -69,6 +82,7 @@
   <title>登録内容確認</title>
 </head>
 <body>
+
 
 <?php
 
@@ -91,16 +105,16 @@ else{
 <div class="container" style="padding-top:100px;">
     <div class="row">
         <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 well">
-            <h5 class="text-center">登録内容確認</h5>
+            <h5 class="text-center">登録内容確認<?php var_dump($_POST);?></h5>
             <div class="devider"></div>
-            <form action="#" method="post" class="form" role="form">
+            <form action="" method="POST" class="form" role="form">
             <div class="row">
                 <div class="col-xs-12 col-md-12">
                   <p style="padding-bottom:1px;">題名： 　<?php echo $_SESSION['item_info']['item_name']; ?></p>
                 </div>
             </div>
             <p style="padding-bottom:1px;">商品画像：</p>
-            <img src="itempic/<?php echo $_SESSION['item_info']['itempic_path'];?>" width="150">
+            <img src="itempic/<?php echo $_SESSION['item_info']['itempc_path'];?>" width="150">
             <div class="preview" style="padding-bottom:7px;"></div>
 
             <p style="padding-bottom:1px;">価格：　<?php echo $_SESSION['item_info']['price'];?> ペソ</p>
@@ -112,8 +126,8 @@ else{
 
             <div class="row">
                <div class="col-sm-6 col-md-6">
-                <input type="hidden" name="action" value="submit">
-                <a href="edit_putup.php?login_user_id=<?php echo $_SESSION['login_user']['id']; ?>" class="btn btn-primary btn-block" type="submit">登録する</a><br><br>
+                <input type="hidden" name="newitem" value="newitem">
+                <button href="" class="btn btn-primary btn-block" type="newitem">登録する</button><br><br>
                  
                </div>
                <div class="col-sm-6 col-md-6">

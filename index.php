@@ -217,13 +217,12 @@ while(true){
 
 
 
-
                                 <?php foreach($products as $product){ ?>
                                     <div class="portfolio_content">
                                         <div class="row"  id="portfolio">
                                             <div class="col-xs-12 col-sm-4 <?php echo $product['category']; ?>">
                                                 <div class="portfolio_single_content">
-                                                    <img src="itempc_path/<?php echo $product['itempc_path'];?> " alt="title"/>
+                                                    <img src="itempic/<?php echo $product['itempc_path'];?> " alt="title"/>
                                                     <div>
                                                         <a href="#"> <?php echo $product['item_name']; ?></a>
                                                         <ul>

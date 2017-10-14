@@ -154,7 +154,7 @@
     <!-- productPicture -->
     <div class="row">
         <div class=" col-md-6" style="text-align: center;">
-        <img src="itempic/<?php echo $item['itempic_path']; ?>" width="400px" height="400px" >
+        <img src="itempic/<?php echo $item['itempc_path']; ?>" width="400px" height="400px" >
     </div>
     <!-- productPictureEnd -->
     <div class="col-md-6">
@@ -201,14 +201,11 @@
               <input type="submit" value="受付再開" class="btn btn-warning btn-lg">
             <?php } ?><br><br>
           </form>
-        <?php } ?>
-
-        <?php if($_SESSION['login_user']['id'] == $item['user_id'] ){ ?>
-          <a href="edit_putup.php?login_user_id=<?php echo $_SESSION['login_user']['id']; ?>" class="btn btn-warning btn-lg" >
-            商品管理ページに戻る</a>
+          <a href="javascript:history.back()" class="btn btn-md btn-success btn-lg">商品管理ページに戻る</a>
         <?php } ?>
          <!-- お気に入りを表示 -->
         <?php 
+
           $sql = 'SELECT COUNT(*) AS `count` FROM `cebty_favorite` WHERE `items_id` = ?';
           $data = array($item['id']);
           $stmt = $dbh->prepare($sql);
@@ -226,28 +223,29 @@
             // var_dump($likes_chk['count']);
         ?>
         <!-- お気に入りボタン設置 -->
-        <?php if($_SESSION['login_user']['id'] ==!$item['user_id'] ){ ?>
-          <form method="POST" action=""><br>
-            <input type="hidden" name="items_id" value="<?php echo $item['id']; ?>">
-            <!-- ここのif文で10回いいね！、しないと取り消しが出現しないようにしている -->
-            <?php if($favorite_chk['count'] == 0){ ?>
-                <input type="hidden" name="favorite" value="favorite">
-                <input type="submit" value="お気に入り！" class="btn btn-primary btn-lg">
-            <?php }else{ ?>
+         <?php 
+          // ログインしてるかどうかをチェック
+          if (isset($_SESSION['login_user']['id']) && ($_SESSION['login_user']['id'] != $item['user_id'] )){ ?>
+             
+              <form method="POST" action=""><br>
+                <input type="hidden" name="items_id" value="<?php echo $item['id']; ?>">
+                <!-- ここのif文で10回いいね！、しないと取り消しが出現しないようにしている -->
+                <?php if($favorite_chk['count'] == 0){ ?>
+                  <input type="hidden" name="favorite" value="favorite">
+                  <input type="submit" value="お気に入り！" class="btn btn-primary btn-lg">
+                <?php }else{ ?>
                   <input type="hidden" name="favorite" value="unfavorite">
                   <input type="submit" value="お気に入り！取消" class="btn btn-warning btn-lg">
-            <?php } ?><br><br>
-            お気に入り数:<?php echo $favorite['count'];?>
-          </form>
-        <?php } ?><br>
+                <?php } ?><br><br>
+                お気に入り数:<?php echo $favorite['count'];?>
+              </form>
+
+              <a href="chat.php?<?php echo 'item_id='.$item['id'].'&'.'user_id='.$item['user_id'].'&'.'login_id='.$_SESSION['login_user']['id']; ?>" class="btn btn-info btn-lg" >
+                出品者へ問い合わせ</a>
+            <?php } ?>
+
+
       </div>
-
-      <?php if($_SESSION['login_user']['id'] ==!$item['user_id']){ ?>
-        <a href="chat.php?<?php echo 'item_id='.$item['id'].'&'.'user_id='.$item['user_id'].'&'.'login_id='.$_SESSION['login_user']['id']; ?>" class="btn btn-info btn-lg" >
-          出品者へ問い合わせ</a>
-
-      <?php } ?>
-        
       <div class="col-md-6">
         <div id="box16" >
           <p style="text-align: center;">出品者</p>
@@ -257,6 +255,7 @@
         </div>
       </div>
     </div>
+  </div>
 
 
 

@@ -54,6 +54,11 @@ session_start();
     if (empty($errors)){
       //確認ページへ飛ばす。
         //全てのチェックでエラーが無ければ画像アップロード
+
+        $fileName=$_SESSION['login_user']['id']."__".$fileName;
+
+        // unlink('profile_image/'.$_SESSION['login_user']['picture_path']);
+
         move_uploaded_file($_FILES['profile_image_path']['tmp_name'], 'profile_image/'.$fileName);
 
         // check.phpへリダイレクト
@@ -73,6 +78,11 @@ session_start();
         exit();
     }
 
+  }
+
+
+  if(isset($_POST['profile_image_path'])){
+    echo '画像を変更しました';
   }
 
 
@@ -144,27 +154,86 @@ session_start();
 
 
             <label class="radio-inline" >
-                <input type="radio" name="gender" id="inlineCheckbox1" required value="male" />
+                <?php if($_SESSION['login_user']['gender']=='男'){ ?>
+                <input type="radio" name="gender" id="inlineCheckbox1" required value="男" checked/>
+                <?php } else{ ?>
+                <input type="radio" name="gender" id="inlineCheckbox1" required value="男" />
+                <?php } ?>
                 男
             </label>
             <label class="radio-inline">
-                <input type="radio" name="gender" id="inlineCheckbox2" required value="female" />
+                <?php if($_SESSION['login_user']['gender']=='女'){ ?>
+                <input type="radio" name="gender" id="inlineCheckbox2" required value="女" checked/>
+                <?php } else{ ?>
+                <input type="radio" name="gender" id="inlineCheckbox1" required value="女"/>
+                <?php } ?>
                 女
             </label>
             <br><br>
             <select class="form-control"  required name="school" style="height:28px; font-size:12px;">
               <option disabled selected>学校名</option>
+            <?php if($_SESSION['login_user']['school']=='NexSeed'){ ?>
+                  <option selected>NexSeed</option>
+            <?php }else{ ?>
                   <option>NexSeed</option>
-                  <option>QQ english</option>
+            <?php } ?>
+            <?php if($_SESSION['login_user']['school']=='QQ English'){ ?>
+                  <option selected>QQ English</option>
+            <?php }else{ ?>
+                  <option>QQ English</option>
+            <?php } ?>
+            <?php if($_SESSION['login_user']['school']=='NexSeed'){ ?>
+                  <option selected>NexSeed</option>
+            <?php }else{ ?>
+                  <option>NexSeed</option>
+            <?php } ?>
+            <?php if($_SESSION['login_user']['school']=='FEAセブシティ'){ ?>
+                  <option selected>FEAセブシティ</option>
+            <?php }else{ ?>
                   <option>FEAセブシティ</option>
+            <?php } ?>
+            <?php if($_SESSION['login_user']['school']=='FirstEnglish'){ ?>
+                  <option selected>FirstEnglish</option>
+            <?php }else{ ?>
                   <option>FirstEnglish</option>
+            <?php } ?>
+            <?php if($_SESSION['login_user']['school']=='ZEN English'){ ?>
+                  <option selected>ZEN English</option>
+            <?php }else{ ?>
                   <option>ZEN English</option>
+            <?php } ?>
+            <?php if($_SESSION['login_user']['school']=='UV-ESL'){ ?>
+                  <option selected>UV-ESL</option>
+            <?php }else{ ?>
                   <option>UV-ESL</option>
+            <?php } ?>
+            <?php if($_SESSION['login_user']['school']=='TARGET'){ ?>
+                  <option selected>TARGET</option>
+            <?php }else{ ?>
                   <option>TARGET</option>
+            <?php } ?>
+            <?php if($_SESSION['login_user']['school']=='Brilliant Cebu'){ ?>
+                  <option selected>Brilliant Cebu</option>
+            <?php }else{ ?>
                   <option>Brilliant Cebu</option>
+            <?php } ?>
+            <?php if($_SESSION['login_user']['school']=='CEGA'){ ?>
+                  <option selected>CEGA</option>
+            <?php }else{ ?>
                   <option>CEGA</option>
+            <?php } ?>
+            <?php if($_SESSION['login_user']['school']=='Cebu Blue Ocean'){ ?>
+                  <option selected>Cebu Blue Ocean</option>
+            <?php }else{ ?>
                   <option>Cebu Blue Ocean</option>
+            <?php } ?>
+            <?php if($_SESSION['login_user']['school']=='3D ACADEMY'){ ?>
+                  <option selected>3D ACADEMY</option>
+            <?php }else{ ?>
                   <option>3D ACADEMY</option>
+            <?php } ?>
+
+
             </select>
             <textarea class="form-control" name="introduce" required type="text" style="height:80px;font-size:12px;"/><?php echo $_SESSION['login_user']['introduce']; ?></textarea>
 
