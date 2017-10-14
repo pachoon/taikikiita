@@ -162,19 +162,17 @@ if(isset($_SESSION['login_user'])){
                           echo $join['other_name'];
                         }?>
                         </p>
-<?php var_dump($chat['other_id'])?>
-
                         <?php if($chat['user_id']==$_SESSION['login_user']['id']){?>
-                          <a  href="chat.php?user_id=<?php echo $chat['user_id'];?>" class="pull-left">
+                          <a  href="chat.php?item_id=<?php echo $chat['item_id'];?>&user_id=<?php echo $chat['other_id'];?>&login_id=<?php echo $_SESSION['login_user']['id'];?>" class="pull-left">
                         <?php }else{ ?>
-                          <a  href="chat.php?other_id=<?php echo $chat['other_id'];?>" class="pull-left">
+                          <a  href="chat.php?item_id=<?php echo $chat['item_id'];?>&user_id=<?php echo $chat['other_id'];?>&login_id=<?php echo $_SESSION['login_user']['id'];?>" class="pull-left">
                         <?php }?>
 
                         <?php if($chat['user_id']==$_SESSION['login_user']['id']){ ?>
                             <img class="img-thumbnail"  align="left" alt="140x140" src="profile_image/<?php echo $_SESSION['login_user']['picture_path'];?>"> 
                             <?php }else {?>
-<?php var_dump($chat['other_pc_path'])?>
-                            <img class="img-thumbnail"  align="left" alt="140x140" src="profile_image/<?php $join['other_pc_path']?>"> <?php } ?>
+
+                            <img class="img-thumbnail"  align="left" alt="140x140" src="profile_image/<?php echo $join['other_pc_path'];?>"> <?php } ?>
                         <br><?php echo $chat['comment'];?></a>
                         <div class="media-body">
                           <span class="media-meta pull-right"><?php echo $chat['created'];?></span>
@@ -190,10 +188,6 @@ if(isset($_SESSION['login_user'])){
                     </td>
                   </tr>
                   <?php } ?>
-
-
-
-
 
 
 
