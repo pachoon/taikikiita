@@ -70,11 +70,6 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav navbar-right">
-<<<<<<< HEAD
-=======
-
-
->>>>>>> ai
                             <li><a class="" href="index.php">ホーム</a></li>
                             <li><a class="" href="mypage.php">マイページ</a></li>
                             <li><a class="" href="search.php">商品検索</a></li>
@@ -227,7 +222,7 @@ while(true){
                                         <div class="row"  id="portfolio">
                                             <div class="col-xs-12 col-sm-4 <?php echo $product['category']; ?>">
                                                 <div class="portfolio_single_content">
-                                                    <img src="itempc_path/<?php echo $product['itempc_path'];?> " alt="title"/>
+                                                    <img src="itempic/<?php echo $product['itempc_path'];?> " alt="title"/>
                                                     <div>
                                                         <a href="#"> <?php echo $product['item_name']; ?></a>
                                                         <ul>

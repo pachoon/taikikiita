@@ -477,7 +477,9 @@ div.user-menu div.user-menu-content:not(.active){
 .propertyType.it { background-color: red; }
 .propertyType.ayala { background-color: orange; }
 .propertyType.mandaue { background-color: green; }
-.propertyType.makutan { background-color: blue; }
+.propertyType.others { background-color: purple; }
+.propertyType.talamban { background-color: blue; }
+
 
 .info {
     display: block;
