@@ -34,9 +34,7 @@ if(!isset($_SESSION['login_user']['id'])){
   <title>マイページ</title>
 </head>
 <body style="background-color: #3a6186 , #89253e">
-<<<<<<< HEAD
-  <?php require('parts/login_header.php'); ?>
-=======
+
 <?php
 
 if(isset($_SESSION['login_user'])){
@@ -50,7 +48,6 @@ if(isset($_SESSION['login_user'])){
 
  ?>
 
->>>>>>> eiri
     <div class="container">
     <div class="row">
     </div>
@@ -89,7 +86,7 @@ if(isset($_SESSION['login_user'])){
          <button class="btn btn-default btn-block" type="button"><a href="edit_intro.php"><span style="font-weight: 900;">
                     プロフィール編集</span></a>
                  </button>
-                 <button class="btn btn-default btn-block" type="button"><a href="###########"><span style="font-weight: 900;">
+                 <button class="btn btn-default btn-block" type="button"><a href="edit_putup.php"><span style="font-weight: 900;">
                     出品管理</span></a>
                  </button>
                  <button class="btn btn-default btn-block" type="button"><a href="favorite2.php"><span style="font-weight: 900;">
