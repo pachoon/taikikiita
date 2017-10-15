@@ -261,7 +261,7 @@
                 お気に入り数:<?php echo $favorite['count'];?>
               </form>
 
-              <a href="chat.php?<?php echo 'item_id='.$item['id'].'&'.'user_id='.$item['user_id'].'&'.'login_id='.$_SESSION['login_user']['id']; ?>" class="btn btn-info btn-lg" >
+              <a href="chat.php?<?php echo 'item_id='.$item['id'].'&'.'other_id='.$item['user_id'].'&'.'chat_user_id='.$_SESSION['login_user']['id'].'&vendor=0'; ?>" class="btn btn-info btn-lg" >
                 出品者へ問い合わせ</a>
             <?php } ?>
 
