@@ -166,7 +166,7 @@ $favorites[]=$record;
                 </div>
                 <div class="info">
                     <p class="small" style="text-overflow: ellipsis"><?php echo $favorites[$i]['item_name']; ?></p>
-                    <p class="small wb-red">受渡し可能日：<?php echo $favorites[$i]['daling_data']; ?></p>
+                    <p class="small wb-red">受渡し可能日：<?php echo $favorites[$i]['dealing_date']; ?></p>
                 </div>
                 <div class="stats wb-red-bg text-center">
                     <span class="fa fa-rub" rel="tooltip" title="価格：<?php echo $favorites[$i]['price']; ?>ペソ"> <strong> <?php echo $favorites[$i]['price']; ?></strong></span>
