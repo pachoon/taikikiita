@@ -14,8 +14,6 @@
 
     //一度も入力せずに飛んだ人は登録画面へ飛ばす。
   if(!isset($_SESSION['login_user']['id'])){
-    //セッションデータを保持しているかチェック
-    //セッションデータがなければログインページへ飛ばす
     header('Location: login.php');
     exit();
   }
@@ -31,28 +29,28 @@
       $daling_date = $_SESSION['item_info']['daling_date'];
       $category = $_SESSION['item_info']['category'];
 
-
-        if($_SESSION['item_info']['price'] <= 99){
-          $priceLabel = 1;
-        }elseif($_SESSION['item_info']['price'] >= 100 && $_SESSION['item_info']['price'] <= 499){$priceLabel = 2;
-        }elseif($_SESSION['item_info']['price'] >=500 && $_SESSION['item_info']['price'] <= 999){$priceLabel = 3;
-        }elseif($_SESSION['item_info']['price'] >= 1000){$priceLabel = 4;
-        }
+      if($_SESSION['item_info']['price'] <= 99){
+        $priceLabel = 1;
+      }elseif($_SESSION['item_info']['price'] >= 100 && $_SESSION['item_info']['price'] <= 499){$priceLabel = 2;
+      }elseif($_SESSION['item_info']['price'] >=500 && $_SESSION['item_info']['price'] <= 999){$priceLabel = 3;
+      }elseif($_SESSION['item_info']['price'] >= 1000){$priceLabel = 4;
+      }
 
       //INSERT処理
-      $sql = 'INSERT INTO `cebty_items` SET `user_id`=?,
-                                            `item_name`=?,
-                                            `itempc_path`=?,
-                                            `price`=?,
-                                            `price_label`=?,
-                                            `limited_date`=?,
-                                            `item_detail`=?,
-                                            `dealing_area`=?,
-                                            `daling_date`=?,
-                                            `category`=?,
-                                            `created`=NOW()';
+      $sql = 'UPDATE `cebty_items` SET  `user_id`=?,
+                                        `item_name`=?,
+                                        `itempc_path`=?,
+                                        `price`=?,
+                                        `price_label`=?,
+                                        `limited_date`=?,
+                                        `item_detail`=?,
+                                        `dealing_area`=?,
+                                        `daling_date`=?,
+                                        `category`=?,
+                                        `created`=NOW()
+                                        WHERE `id` =?';
 
-      $data = array($_SESSION['login_user']['id'],$item_name,$itempc_path,$price,$priceLabel,$limited_date,$item_detail,$dealing_area,$daling_date,$category);
+      $data = array($_SESSION['login_user']['id'],$item_name,$itempc_path,$price,$priceLabel,$limited_date,$item_detail,$dealing_area,$daling_date,$category,$_GET['item_id']);
       $stmt = $dbh->prepare($sql);
       $stmt->execute($data);
 

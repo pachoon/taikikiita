@@ -7,3 +7,11 @@ vertical-align: middle;
 text-align: center;
 vertical-align: middle;
 }
+#btn-request{
+  color: white;
+  background-color: #ec7166;
+  border-radius:10px !important;
+  text-align: center !important;
+  padding:0px 10px;
+  display: inline-block;
+}

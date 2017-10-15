@@ -1,3 +1,4 @@
+
 #box16{
   padding: 0.5em 1em;
   margin: 2em 0;
@@ -78,7 +79,19 @@
   text-align: center;
   padding-bottom: 20px;
 }
+
+#btn-request{
+  color: white;
+  background-color: #ec7166;
+  border-radius:15px !important;
+  text-align: center !important;
+  padding:8px 16px;
+  width: 220px;
+  display: inline-block;
+}
 .item-detail{
+
   font-size: 20px;
+}
 
 }
