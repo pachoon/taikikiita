@@ -98,7 +98,6 @@ if(isset($_SESSION['login_user'])){
 
  ?>
 
-
   <div class="container">
     <div class="row">
     </div>
@@ -123,6 +122,7 @@ if(isset($_SESSION['login_user'])){
         <br>
 <div class="container">
   <div class="row">
+<?php var_dump($chat['username'])?>
 
 
 
@@ -190,7 +190,6 @@ if(isset($_SESSION['login_user'])){
                     </td>
                   </tr>
                   <?php } ?>
-
 
 
 
