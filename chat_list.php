@@ -122,7 +122,6 @@ if(isset($_SESSION['login_user'])){
         <br>
 <div class="container">
   <div class="row">
-<?php var_dump($chat['username'])?>
 
 
 
