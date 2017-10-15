@@ -166,9 +166,9 @@ if(isset($_SESSION['login_user'])){
                         }?>
                         </p>
                         <?php if($chat['chat_user_id']==$_SESSION['login_user']['id']){?>
-                          <a  href="chat.php?item_id=<?php echo $chat['item_id'];?>&user_id=<?php echo $chat['other_id'];?>&login_id=<?php echo $_SESSION['login_user']['id'];?>&other_id=<?php ;?>" class="pull-left">
+                          <a  href="chat.php?item_id=<?php echo $chat['item_id'];?>&user_id=<?php echo $chat['chat_user_id'];?>&login_id=<?php echo $_SESSION['login_user']['id'];?>&other_id=<?php echo $chat['other_id'];?>" class="pull-left">
                         <?php }else{ ?>
-                          <a  href="chat.php?item_id=<?php echo $chat['item_id'];?>&user_id=<?php echo $chat['other_id'];?>&login_id=<?php echo $_SESSION['login_user']['id'];?>" class="pull-left">
+                          <a  href="chat.php?item_id=<?php echo $chat['item_id'];?>&user_id=<?php echo $chat['other_id'];?>&login_id=<?php echo $_SESSION['login_user']['id'];?>&other_id=<?php echo $chat['chat_user_id'] ;?>" class="pull-left">
                         <?php }?>
 
                         <?php if($chat['chat_user_id']==$_SESSION['login_user']['id']){ ?>

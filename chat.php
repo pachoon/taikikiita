@@ -45,8 +45,10 @@
           WHERE `cebty_chat`.`item_id`=?
           AND ( `cebty_chat`.`chat_user_id` =?
           OR `cebty_chat`.`other_id` =?)
+          AND ( `cebty_chat`.`chat_user_id` =?
+          OR `cebty_chat`.`other_id` =?)
           ORDER BY `cebty_chat`.`created` DESC" ;
-  $data = array($_GET['item_id'],$_SESSION['login_user']['id'],$_SESSION['login_user']['id']);
+  $data = array($_GET['item_id'],$_SESSION['login_user']['id'],$_SESSION['login_user']['id'],$_GET['other_id'],$_GET['other_id']);
   $stmt = $dbh->prepare($sql);
   $stmt->execute($data);
 
@@ -78,6 +80,10 @@
   $comment=$_POST['comment'];
   $vendor=0;
 
+  if($_GET['user_id']==$_GET['login_id']){
+    $other_id = $_GET['other_id'];
+  }
+
 
 
   if (!empty($_POST)) {
@@ -95,12 +101,23 @@
         $stmt = $dbh->prepare($sql);
         $stmt ->execute($data);
 
-        header('Location:chat.php?item_id='.$_GET['item_id'].'&user_id='.$_GET['user_id'].'&login_id='.$_GET['login_id'].'');
+        header('Location:chat.php?item_id='.$_GET['item_id'].'&user_id='.$_GET['user_id'].'&login_id='.$_GET['login_id'].'&other_id='.$_GET['other_id'].'');
         exit();
 
 
  }
 
+
+
+
+
+  $sql = 'SELECT * FROM `cebty_users` WHERE `id` = ?';
+  $data = array($_GET['other_id']);
+  $stmt = $dbh->prepare($sql);
+  $stmt->execute($data);
+
+
+  $sender = $stmt->fetch(PDO::FETCH_ASSOC);
 
 
 ?>
@@ -188,7 +205,7 @@
       <div class="col-md-2">
         <div class="chat-box1">
         <?php if($_GET['user_id'] == $_GET['login_id']){ ?>
-          <img src="profile_image/<?php echo $otherinfo['picture_path'];?>" width="120px">
+          <img src="profile_image/<?php echo $sender['picture_path'];?>" width="120px">
         <?php }else{ ?>
           <img src="profile_image/<?php echo $otherinfo['picture_path'];?>" width="120px">
         <?php } ?>
@@ -196,8 +213,13 @@
       </div>
       <div class="col-md-2">
         <div class="chat-box2">
+          <?php if($_GET['user_id'] == $_GET['login_id']){ ?>
+          <h4><a href="user_information.php?user_id=<?php echo $other['id']; ?>">
+              <?php echo $sender['username']; ?></a></h4>
+          <?php }else{ ?>
           <h4><a href="user_information.php?user_id=<?php echo $other['id']; ?>">
               <?php echo $other['username']; ?></a></h4>
+          <?php } ?>
         </div>
       </div>
     </div>
