@@ -22,6 +22,8 @@
 
   if(!empty($_POST)){
 
+
+
       $item_name = $_SESSION['item_info']['item_name'];
       $itempc_path = $_SESSION['item_info']['itempc_path'];
       $price = $_SESSION['item_info']['price'];
@@ -33,11 +35,8 @@
 
 
         if($_SESSION['item_info']['price'] <= 99){
-          $priceLabel = 1;
-        }elseif($_SESSION['item_info']['price'] >= 100 && $_SESSION['item_info']['price'] <= 499){$priceLabel = 2;
-        }elseif($_SESSION['item_info']['price'] >=500 && $_SESSION['item_info']['price'] <= 999){$priceLabel = 3;
-        }elseif($_SESSION['item_info']['price'] >= 1000){$priceLabel = 4;
-        }
+      $priceLabel = 1;}elseif($_SESSION['item_info']['price'] >= 100 && $_SESSION['item_info']['price'] <= 499){$priceLabel = 2;}elseif($_SESSION['item_info']['price'] >=500 && $_SESSION['item_info']['price'] <= 999){$priceLabel = 3;}elseif($_SESSION['item_info']['price'] >= 1000){$priceLabel = 4;}
+
 
       //INSERT処理
       $sql = 'INSERT INTO `cebty_items` SET `user_id`=?,
@@ -51,6 +50,7 @@
                                             `daling_date`=?,
                                             `category`=?,
                                             `created`=NOW()';
+
 
       $data = array($_SESSION['login_user']['id'],$item_name,$itempc_path,$price,$priceLabel,$limited_date,$item_detail,$dealing_area,$daling_date,$category);
       $stmt = $dbh->prepare($sql);
@@ -105,12 +105,12 @@ else{
 <div class="container" style="padding-top:100px;">
     <div class="row">
         <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 well">
-            <h5 class="text-center">登録内容確認 <?php var_dump($_SESSION['item_info']['itempc_path']); ?> </h5>
+            <h5 class="text-center">登録内容確認</h5>
             <div class="devider"></div>
             <form action="" method="POST" class="form" role="form">
             <div class="row">
                 <div class="col-xs-12 col-md-12">
-                  <p style="padding-bottom:1px;">題名： <?php echo $_SESSION['item_info']['item_name']; ?></p>
+                  <p style="padding-bottom:1px;">題名： 　<?php echo $_SESSION['item_info']['item_name']; ?></p>
                 </div>
             </div>
             <p style="padding-bottom:1px;">商品画像：</p>

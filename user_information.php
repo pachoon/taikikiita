@@ -56,7 +56,7 @@
 <div class="container">
     <div class="row clearfix well">
     <div class="col-md-2 column">
-      <img class="img-thumbnail" alt="140x140" src="profile_image/<?php echo $user['picture_path']; ?>" >
+      <img class="img-thumbnail" alt="140x140" src="profile_image/<?php echo $user['picture_path'];?>" >
     </div>
     <div class="col-md-8 column">
       <blockquote>
@@ -87,7 +87,7 @@
       <div class="tabbable" id="tabs-444468">
         <ul class="nav nav-tabs">
           <li class="active">
-            <a href="#panel-200304" data-toggle="tab">About</a>
+            <a href="#panel-200304" data-toggle="tab" style="font-size: 40px;">About me</a>
           </li>
           <!-- <li>
             <a href="#panel-567649" data-toggle="tab">Photos</a>
@@ -97,9 +97,9 @@
           <div class="tab-pane active" id="panel-200304">
              <div class="row clearfix">
                       <div class="col-md-8 column">
-                      <p>
-                        <strong>About me</strong><br/>
-                                    <?php echo $user['introduce']; ?>
+                      <p style="text-align: left; "><br>
+                        <!-- <strong>About me</strong><br/> -->
+                          <span style="color: #ffff7f; font-size: 30px; "><?php echo $_SESSION['login_user']['introduce']; ?></span>
                       </p>
                                 <hr/>
                                 <!-- <p>
@@ -133,29 +133,29 @@
                       <table class="table" style="color: white;">
                         <thead>
                           <tr>
-                            <th>
+                            <th style="font-size: 40px;">
                               Details
                             </th>
-                            <th>
+                            <th style="font-size: 40px;">
                               His/ Her
                             </th> 
                           </tr>
                         </thead>
                         <tbody>
                           <tr>
-                            <td>
+                            <td style="font-size: 35px;">
                               学校名
                             </td>
                             <td>
-                              <?php echo $user['school'];?>
+                              <span style="color: #ffff7f; font-size: 30px; " ><?php echo $_SESSION['login_user']['school'];?></span>
                             </td>
                           </tr>
                                         <tr>
-                              <td>
+                            <td style="font-size: 35px;">
                               性別
                             </td>
                             <td>
-                              <?php echo $user['gender'];?>
+                              <span style="color: #ffff7f; font-size: 30px;"><?php echo $_SESSION['login_user']['gender'];?></span>
                             </td>
                           </tr>
 

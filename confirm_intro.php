@@ -25,7 +25,7 @@
       $gender = $_SESSION['user_info']['gender'];
       $school = $_SESSION['user_info']['school'];
       $introduce = $_SESSION['user_info']['introduce'];
-      $picture_path = $_SESSION['user_info']['profile_image_path'];
+      $picture_path = $_SESSION['user_info']['picture_path'];
 
 
       $sql = 'UPDATE `cebty_users` SET `username`=?,
