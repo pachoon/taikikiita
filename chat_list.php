@@ -131,8 +131,8 @@ if(isset($_SESSION['login_user'])){
           <div class="panel-body">
             <div class="pull-right">
               <div class="btn-group">
-                <button type="button" class="btn btn-success btn-filter" data-target="send">送信（購入者）</button>
-                <button type="button" class="btn btn-warning btn-filter" data-target="recieve">受信（出品者）</button>
+                <button type="button" class="btn btn-success btn-filter" data-target="send">送信</button>
+                <button type="button" class="btn btn-warning btn-filter" data-target="recieve">受信</button>
                 <!-- <button type="button" class="btn btn-danger btn-filter" data-target="cancelado">Cancelado</button> -->
                 <button type="button" class="btn btn-default btn-filter" data-target="all">全て</button>
               </div>
