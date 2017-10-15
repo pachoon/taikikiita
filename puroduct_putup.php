@@ -64,10 +64,13 @@ session_start();
             $ext = strtolower($ext);
             if ($ext != 'jpg' && $ext != 'png' && $ext != 'gif'){
                 $errors['itempc_path'] = 'extension';
-            }
+            }    
+        }else{
+                $errors['profile_image_path'] = 'blank';
         }
         if (empty($errors)){
-             move_uploaded_file($_FILES['itempc_path']['tmp_name'], 'itempic/'.$fileName);
+            $fileName=uniqid().$fileName;
+            move_uploaded_file($_FILES['itempc_path']['tmp_name'], 'itempic/'.uniqid().$fileName);
     
          // データを一時的に保存する
              $_SESSION['item_info']['item_name'] = $item_name;
