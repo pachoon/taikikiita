@@ -11,8 +11,11 @@ if(!isset($_SESSION['login_user']['id'])){
 
 
 
-$sql = "SELECT * FROM `cebty_chat` 
-        WHERE `user_id`=? 
+$sql = "SELECT `cebty_chat`.*, `cebty_users`.`username`,`cebty_users`.`picture_path`
+        FROM `cebty_chat`
+        LEFT JOIN `cebty_users`
+        ON `cebty_chat`.`chat_user_id` = `cebty_users`.`id`
+        WHERE `chat_user_id`=? 
         OR `other_id`=? 
         ORDER BY `cebty_chat`.`created` DESC" ;
 $data = array($_SESSION['login_user']['id'], $_SESSION['login_user']['id']);
@@ -32,8 +35,8 @@ $chats[]=$record;
 $sql='SELECT `cebty_chat`.*, `cebty_users`.*
       FROM `cebty_chat`
       LEFT JOIN`cebty_users`
-      ON `cebty_chat`.`user_id` = `cebty_users`.`id`
-      WHERE `cebty_chat`.`user_id`=?';
+      ON `cebty_chat`.`chat_user_id` = `cebty_users`.`id`
+      WHERE `cebty_chat`.`chat_user_id`=?';
 $data = array($_SESSION['login_user']['id']);
 $stmt = $dbh->prepare($sql);
 $stmt->execute($data);
@@ -148,7 +151,7 @@ if(isset($_SESSION['login_user'])){
              <div class="table-container" >
               <table class="table table-filter">
                 <tbody>
-                  <tr data-status="<?php if($chat['user_id']==$_SESSION['login_user']['id']){
+                  <tr data-status="<?php if($chat['chat_user_id']==$_SESSION['login_user']['id']){
                     echo 'send';
                   }else{
                     echo 'recieve';
@@ -156,28 +159,27 @@ if(isset($_SESSION['login_user'])){
                     
                     <td>
                       <div class="media" style="width: 648px;">
-                        <p align="left" style="font-size: 30px"><?php if($chat['user_id']==$_SESSION['login_user']['id']){
-                          echo $join['username'];
+                        <p align="left" style="font-size: 30px"><?php if($chat['chat_user_id']==$_SESSION['login_user']['id']){
+                          echo $chat['username'];
                         }else{
-                          echo $join['other_name'];
+                          echo $chat['username'];
                         }?>
                         </p>
-                        <?php if($chat['user_id']==$_SESSION['login_user']['id']){?>
-                          <a  href="chat.php?item_id=<?php echo $chat['item_id'];?>&user_id=<?php echo $chat['other_id'];?>&login_id=<?php echo $_SESSION['login_user']['id'];?>" class="pull-left">
+                        <?php if($chat['chat_user_id']==$_SESSION['login_user']['id']){?>
+                          <a  href="chat.php?item_id=<?php echo $chat['item_id'];?>&user_id=<?php echo $chat['other_id'];?>&login_id=<?php echo $_SESSION['login_user']['id'];?>&other_id=<?php ;?>" class="pull-left">
                         <?php }else{ ?>
                           <a  href="chat.php?item_id=<?php echo $chat['item_id'];?>&user_id=<?php echo $chat['other_id'];?>&login_id=<?php echo $_SESSION['login_user']['id'];?>" class="pull-left">
                         <?php }?>
 
-                        <?php if($chat['user_id']==$_SESSION['login_user']['id']){ ?>
+                        <?php if($chat['chat_user_id']==$_SESSION['login_user']['id']){ ?>
                             <img class="img-thumbnail"  align="left" alt="140x140" src="profile_image/<?php echo $_SESSION['login_user']['picture_path'];?>"> 
                             <?php }else {?>
-
-                            <img class="img-thumbnail"  align="left" alt="140x140" src="profile_image/<?php echo $join['other_pc_path'];?>"> <?php } ?>
+                            <img class="img-thumbnail"  align="left" alt="140x140" src="profile_image/<?php echo $chat['picture_path'];?>"> <?php } ?>
                         <br><?php echo $chat['comment'];?></a>
                         <div class="media-body">
                           <span class="media-meta pull-right"><?php echo $chat['created'];?></span>
                           <h4 class="title">
-                            <span class="pull-right recieve" ><?php if($chat['user_id']==$_SESSION['login_user']['id']){
+                            <span class="pull-right recieve" ><?php if($chat['chat_user_id']==$_SESSION['login_user']['id']){
                     echo '<font color="#5cb85c">送信</font>';
                   }else{
                     echo '<font color="#FF9900">受信</font>';

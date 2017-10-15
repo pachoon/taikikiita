@@ -335,7 +335,7 @@ if($product['category'] == '家電'){
 </div>
 </div>
 
-          <?php var_dump($products);?>
+
 
         <script src="inc/jquery/jquery-1.11.1.min.js"></script>
         <script src="inc/bootstrap/js/bootstrap.min.js"></script>

@@ -196,10 +196,31 @@ while(true){
 
 
 
+
+
+
                                 <?php foreach($products as $product){ ?>
+
+
+<?php 
+
+if($product['category'] == '家電'){
+  $cate = 'elec';
+}elseif($product['category'] == '衣服'){
+  $cate = 'cloth';
+}elseif($product['category'] == '食料品'){
+  $cate = 'food';
+}elseif($product['category'] == '薬'){
+  $cate = 'medecine';
+}elseif($product['category'] == 'その他'){
+  $cate = 'others';
+}
+?>
+
+                                
                                     <div class="portfolio_content">
                                         <div class="row"  id="portfolio">
-                                            <div class="col-xs-12 col-sm-4 <?php echo $product['category']; ?>">
+                                            <div class="col-xs-12 col-sm-4 <?php echo $cate; ?>">
                                                 <div class="portfolio_single_content">
                                                     <img src="itempic/<?php echo $product['itempc_path'];?> " alt="title"/>
                                                     <div>
