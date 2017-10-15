@@ -39,12 +39,11 @@
 
 
 
-  $sql = "SELECT `cebty_chat`.*,`cebty_items`.`id`
-          FROM `cebty_chat`
-          LEFT JOIN `cebty_items`
-          ON `cebty_chat`.`item_id` = `cebty_items`.`id`
+  $sql = "SELECT * FROM `cebty_chat` INNER JOIN `cebty_items`
+          ON `cebty_chat`.`item_id` = `cebty_items`.`id` INNER JOIN `cebty_users`
+          ON `cebty_chat`.`chat_user_id` = `cebty_users`.`id`
           WHERE `cebty_chat`.`item_id`=?
-          AND ( `cebty_chat`.`user_id` =?
+          AND ( `cebty_chat`.`chat_user_id` =?
           OR `cebty_chat`.`other_id` =?)
           ORDER BY `cebty_chat`.`created` DESC" ;
   $data = array($_GET['item_id'],$_SESSION['login_user']['id'],$_SESSION['login_user']['id']);
@@ -84,7 +83,7 @@
   if (!empty($_POST)) {
 
 
-        $sql = 'INSERT INTO `cebty_chat` SET `user_id`=? ,
+        $sql = 'INSERT INTO `cebty_chat` SET `chat_user_id`=? ,
                                              `other_id`=? ,
                                              `other_name`=? ,
                                              `other_pc_path`=? ,
@@ -166,10 +165,10 @@
         <div class="devider"></div>
       </div>
       <div class="col-md-4">
-        <?php if($user_id = $item['id']){ ?>
-          <h2 class="chat">投稿者</h2>
+        <?php if($_GET['user_id'] == $_GET['login_id']){ ?>
+          <h2 class="chat">送信先ユーザー</h2>
         <?php }else{ ?>
-          <h2 class="chat">問合せ</h2>
+          <h2 class="chat">投稿者</h2>
         <?php } ?>
         <div class="devider"></div>
       </div>
@@ -188,7 +187,11 @@
       </div>
       <div class="col-md-2">
         <div class="chat-box1">
+        <?php if($_GET['user_id'] == $_GET['login_id']){ ?>
           <img src="profile_image/<?php echo $otherinfo['picture_path'];?>" width="120px">
+        <?php }else{ ?>
+          <img src="profile_image/<?php echo $otherinfo['picture_path'];?>" width="120px">
+        <?php } ?>
         </div>
       </div>
       <div class="col-md-2">
@@ -221,7 +224,7 @@
 
                           <div class="chatComment" style="width: 570px;">
                             <!-- <a href="#" class="pull-left"> -->
-                            <?php if($chat['user_id']==$_SESSION['login_user']['id']) { ?>
+                            <?php if($chat['chat_user_id']==$_SESSION['login_user']['id']) { ?>
                               <img src="profile_image/<?php echo $_SESSION['login_user']['picture_path'];?>" class="chatComment-photo">
                               <!-- </a> -->
                               <div class="chatComment-body" style="width: 570px;">
@@ -233,13 +236,13 @@
                                 <p class="summary"><?php echo $chat['comment'];?></p>
                               </div>
                             <?php }else{ ?>
-                              <img src="profile_image/<?php echo $other['picture_path'];?>" class="chatComment-photo">
+                              <img src="profile_image/<?php echo $chat['picture_path'];?>" class="chatComment-photo">
                               <!-- </a> -->
                               <div class="chatComment-body" style="width: 570px;">
                                  <!-- <span class="media-meta pull-right"></span> -->
                                 <?php echo $chat['created'];?>
                                 <h4 class="title">
-                                  <?php echo $other['username'];?>
+                                  <?php echo $chat['username'];?>
                                 </h4>
                                 <p class="summary"><?php echo $chat['comment'];?></p>
                               </div>
