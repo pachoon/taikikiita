@@ -70,7 +70,7 @@ session_start();
         $_SESSION['user_info']['gender'] = $gender;
         $_SESSION['user_info']['school'] = $school;
         $_SESSION['user_info']['introduce'] = $introduce;
-        $_SESSION['user_info']['profile_image_path'] = $fileName;
+        $_SESSION['user_info']['picture_path'] = $fileName;
 
 
         // POST送信を破棄する
