@@ -61,7 +61,6 @@ if(!isset($_SESSION['login_user']['id'])){
 <div class="container">
     <div class="row clearfix well">
     <div class="col-md-2 column">
-      <?php var_dump($_SESSION['user_info']['profile_image_path']) ?>
       <img class="img-thumbnail" alt="140x140" src="profile_image/<?php echo $_SESSION['user_info']['profile_image_path'];?>" >
     </div>
     <div class="col-md-8 column">
