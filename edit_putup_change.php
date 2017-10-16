@@ -81,9 +81,6 @@ session_start();
     }
     
     if (empty($errors)){
-      $fileName=$_GET['item_id']."__".$fileName;
-
-        // unlink('profile_image/'.$_SESSION['login_user']['picture_path']);
              move_uploaded_file($_FILES['itempc_path']['tmp_name'], 'itempic/'.$fileName);
     
          // データを一時的に保存する
@@ -214,6 +211,11 @@ session_start();
     <script src="inc/isotope.pkgd.min.js"></script>
     <script src="inc/classie.js"></script>
     <script src="inc/jquery.easing.min.js"></script>
+    <script src="inc/jquery.counterup.min.js"></script>
+    <script src="inc/smoothscroll.js"></script>
+
+</body>
+</html>cript>
     <script src="inc/jquery.counterup.min.js"></script>
     <script src="inc/smoothscroll.js"></script>
 
