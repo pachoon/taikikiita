@@ -81,6 +81,9 @@ session_start();
     }
     
     if (empty($errors)){
+      $fileName=$_GET['item_id']."__".$fileName;
+
+        // unlink('profile_image/'.$_SESSION['login_user']['picture_path']);
              move_uploaded_file($_FILES['itempc_path']['tmp_name'], 'itempic/'.$fileName);
     
          // データを一時的に保存する

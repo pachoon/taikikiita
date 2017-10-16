@@ -70,7 +70,7 @@ session_start();
         }
         if (empty($errors)){
             $fileName=uniqid().$fileName;
-            move_uploaded_file($_FILES['itempc_path']['tmp_name'], 'itempic/'.uniqid().$fileName);
+            move_uploaded_file($_FILES['itempc_path']['tmp_name'], 'itempic/'.$fileName);
     
          // データを一時的に保存する
              $_SESSION['item_info']['item_name'] = $item_name;
