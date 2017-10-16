@@ -20,33 +20,14 @@ if(!isset($_SESSION['login_user']['id'])){
   <link rel="stylesheet" href="css/style.css">  
   <meta charset="utf-8">
   <title>お問い合わせ</title>
-  <link href="css/contact.css" rel="stylesheet" />
+  <!-- <link href="css/contact.css" rel="stylesheet" /> -->
   <link href="https://fonts.googleapis.com/css?family=Oleo+Script:400,700" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Teko:400,700" rel="stylesheet">
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
-<body style="background-color: #3a6186 , #89253e" id="container">
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
->>>>>>> ai
+<body  id="container" style="background-color: white;">
 
 
-
-<?php
-session_start();
-
-  if(isset($_SESSION['login_user']['id'])){
-    require('parts/login_header.php');
-}else{
-    require('parts/header.php');
-} ?>
-
-
-
-<<<<<<< HEAD
-=======
 <?php
 
 if(isset($_SESSION['login_user'])){
@@ -59,9 +40,7 @@ if(isset($_SESSION['login_user'])){
 }
 
  ?>
->>>>>>> ai
-=======
->>>>>>> ai
+
   <div class="container">
     <div class="row">
     </div>
@@ -81,8 +60,9 @@ if(isset($_SESSION['login_user'])){
         <br>
         <br>
 
-        <h1 class="section-header"><span class="content-header wow fadeIn " data-wow-delay="0.2s" data-wow-duration="2s">お問い合わせ</span></h1>
-        <h3><span style="color: #fffff9">何かお困りですか？<br>サービスへのご意見、ご相談されたいことがあれば<br>お気軽に下記からご連絡をお待ちしております。</span></h3>
+        <div align="ceter">
+        <h1 class="section-header" ><span class="content-header wow fadeIn " data-wow-delay="0.2s" data-wow-duration="2s" >お問い合わせ</span></h1>
+        <h3><span style="color: black">何かお困りですか？<br>サービスへのご意見、ご相談されたいことがあれば<br>お気軽に下記からご連絡をお待ちしております。</span></h3></div>
       </div>
       <div class="contact-section">
       <div class="container">

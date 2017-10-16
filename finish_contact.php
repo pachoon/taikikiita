@@ -5,10 +5,10 @@
   <link rel="stylesheet" href="css/style.css">  
   <meta charset="utf-8">
   <title>お問い合わせ完了</title>
-  <link href="css/confirm_contact.css" rel="stylesheet" />
+ <!--  <link href="css/confirm_contact.css" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css?family=Oleo+Script:400,700" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Teko:400,700" rel="stylesheet">
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
 </head>
 <body>
 
@@ -33,7 +33,7 @@
         <br>
 
         <h1 class="section-header"><span class="content-header wow fadeIn " data-wow-delay="0.2s" data-wow-duration="2s">Get Touch with us</span></h1>
-        <h3><span style="color: #fffff9">お問い合わせ完了！</span></h3>
+        <h3><span style="color: black">お問い合わせ完了！</span></h3>
 
 
 <div class="modalin" style="display: block;" >

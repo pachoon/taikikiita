@@ -107,19 +107,12 @@ $favorites[]=$record;
   
   <link rel="stylesheet" href="css/style.css">  
   <link href="css/search.css" rel="stylesheet" />
+
   <meta charset="utf-8">
 
   <title>お気に入り</title>
 </head>
-<body style="
-  background-color: #ffffff;
-  background-color: transparent;
-  background: #3a6186; /* fallback for old browsers */
-  background: -webkit-linear-gradient(to left, #3a6186 , #89253e); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to left, #3a6186 , #89253e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  height: 100%;
- text-align: center; 
- ">
+<body>
 
 
 <div class="section-content">
@@ -139,7 +132,7 @@ $favorites[]=$record;
       「<?php echo $_GET['content']; ?>」という商品を削除しました。
     </div>
 <?php } ?>
-        <h1 class="section-header"><span class="content-header wow fadeIn " data-wow-delay="0.2s" data-wow-duration="2s" style="color: #fcc500; font-size: 45px;">お気に入り</span></h1>
+        <h1 class="section-header"><span class="content-header wow fadeIn " data-wow-delay="0.2s" data-wow-duration="2s" style="font-size: 45px;" align="center">お気に入り</span></h1>
 
         <br>
         <br>
@@ -162,7 +155,7 @@ $favorites[]=$record;
                 <div class="view">
                     <div class="caption">
                     </div>
-                    <a href="product.php?item_id=<?php echo $favorites[$i]['item_id']; ?>"><img src="itempic/<?php echo $favorites[$i]['itempic_path'];?>" class="img-responsive"></a>
+                    <a href="product.php?item_id=<?php echo $favorites[$i]['items_id']; ?>"><img src="itempic/<?php echo $favorites[$i]['itempic_path'];?>" class="img-responsive"></a>
                 </div>
                 <div class="info">
                     <p class="small" style="text-overflow: ellipsis"><?php echo $favorites[$i]['item_name']; ?></p>

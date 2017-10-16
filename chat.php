@@ -63,6 +63,8 @@
   }
 
 
+
+
   $sql = 'SELECT * FROM `cebty_users` WHERE `id` = ?';
   $data = array($_GET['user_id']);
   $stmt = $dbh->prepare($sql);
@@ -214,10 +216,10 @@
       <div class="col-md-2">
         <div class="chat-box2">
           <?php if($_GET['user_id'] == $_GET['login_id']){ ?>
-          <h4><a href="user_information.php?user_id=<?php echo $other['id']; ?>">
+          <h4><a href="user_information.php?user_id=<?php echo $_GET['other_id']; ?>">
               <?php echo $sender['username']; ?></a></h4>
           <?php }else{ ?>
-          <h4><a href="user_information.php?user_id=<?php echo $other['id']; ?>">
+          <h4><a href="user_information.php?user_id=<?php echo $_GET['other_id']; ?>">
               <?php echo $other['username']; ?></a></h4>
           <?php } ?>
         </div>
