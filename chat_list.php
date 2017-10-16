@@ -75,15 +75,7 @@ $join = $stmt->fetch(PDO::FETCH_ASSOC);
 
 <?php require('parts/assets.php'); ?>
 </head>
-<body style="
-background-color: #ffffff;
-background-color: transparent;
-background: #3a6186; /* fallback for old browsers */
-background: -webkit-linear-gradient(to left, #3a6186 , #89253e); /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to left, #3a6186 , #89253e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-height: 100%;
-text-align: center; 
-">
+<body >
 
 <?php
 
@@ -117,7 +109,7 @@ if(isset($_SESSION['login_user'])){
         <br>
         <br>
  
-        <h1 class="section-header" style="text-align: center;"><span class="content-header wow fadeIn " data-wow-delay="0.2s" data-wow-duration="2s"> チャット一覧</span></h1>
+        <h1 class="section-header" style="text-align: center;"><span class="content-header wow fadeIn " data-wow-delay="0.2s" data-wow-duration="2s" style="color: black"> チャット一覧</span></h1>
         <br>
         <br>
 <div class="container">

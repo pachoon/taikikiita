@@ -60,9 +60,9 @@ if(isset($_SESSION['login_user'])){
         <br>
         <br>
 
-        <div align="ceter">
-        <h1 class="section-header" ><span class="content-header wow fadeIn " data-wow-delay="0.2s" data-wow-duration="2s" >お問い合わせ</span></h1>
-        <h3><span style="color: black">何かお困りですか？<br>サービスへのご意見、ご相談されたいことがあれば<br>お気軽に下記からご連絡をお待ちしております。</span></h3></div>
+        <div >
+        <h1 class="section-header" align="center"><span class="content-header wow fadeIn " data-wow-delay="0.2s" data-wow-duration="2s" >お問い合わせ</span></h1>
+        <h3 align="center"><span style="color: black">何かお困りですか？<br>サービスへのご意見、ご相談されたいことがあれば<br>お気軽に下記からご連絡をお待ちしております。</span></h3></div>
       </div>
       <div class="contact-section">
       <div class="container">
@@ -99,16 +99,7 @@ if(isset($_SESSION['login_user'])){
         <br>
         <br>
         <br>
-            <footer class="text-off-white">
 
-
-                <div class="footer">
-                    <div class="container text-center wow fadeIn" data-wow-delay="0.4s">
-                        <p class="copyright">Copyright &copy; 2017 - Designed By <a href="" class="theme-author">TaikiKiita</a> &amp; Developed by <a href="" class="theme-author">NagamiTaiki</a></p>
-                    </div>
-                </div>
-
-            </footer>
 </section>
 </body>
 </html>

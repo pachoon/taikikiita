@@ -56,7 +56,7 @@ if(!isset($_SESSION['login_user']['id'])){
         <br>
         <br>
 
-        <h1 class="section-header"><span class="content-header wow fadeIn " data-wow-delay="0.2s" data-wow-duration="2s">マイページ</span></h1>
+        <h1 class="section-header"><span class="content-header wow fadeIn " data-wow-delay="0.2s" data-wow-duration="2s" style="color: black">マイページ</span></h1>
 
 <div class="container">
     <div class="row clearfix well">
