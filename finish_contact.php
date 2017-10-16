@@ -5,10 +5,10 @@
   <link rel="stylesheet" href="css/style.css">  
   <meta charset="utf-8">
   <title>お問い合わせ完了</title>
-  <link href="css/confirm_contact.css" rel="stylesheet" />
+ <!--  <link href="css/confirm_contact.css" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css?family=Oleo+Script:400,700" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Teko:400,700" rel="stylesheet">
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
 </head>
 <body>
 
@@ -32,19 +32,19 @@
         <br>
         <br>
 
-        <h1 class="section-header"><span class="content-header wow fadeIn " data-wow-delay="0.2s" data-wow-duration="2s">Get Touch with us</span></h1>
-        <h3><span style="color: #fffff9">お問い合わせ完了！</span></h3>
+        <h1 class="section-header" align="center"><span class="content-header wow fadeIn " data-wow-delay="0.2s" data-wow-duration="2s">お問い合わせ完了！</span></h1>
+        <!-- <h3 align="center"><span style="color: black">お問い合わせ完了！</span></h3> -->
 
 
 <div class="modalin" style="display: block;" >
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">お問い合わせいただきまして誠にありがとうございます！</h4>
+        <h4 class="modal-title" align="center">お問い合わせいただき、誠にありがとうございます！</h4>
       </div>
       <div class="modal-body">
         <p>お問い合わせいただきました内容につきましては、追ってご連絡をお待ちくださいね</p>
-        <a href="index.php"><button type="submit" class="btn btn-default submit" ><i class="fa fa-paper-plane" aria-hidden="true"></i>  Back</button></a>
+        <a href="index.php"><button type="submit" class="btn btn-default submit pull-right" ><i class="fa fa-paper-plane" aria-hidden="true"></i>  Back</button></a>
         <div class="row">
             <div class="col-12-xs text-center">
             </div>
@@ -174,7 +174,6 @@
 
 
 ?>
-  <?php require('parts/footer.php'); ?>
 <script type="text/javascript">
     $(document).ready(function() {
   $("#navMenu").click(function() {

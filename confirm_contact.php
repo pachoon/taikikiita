@@ -29,8 +29,8 @@
         <br>
         <br>
         <br>
-        <h1 class="section-header"><span class="content-header wow fadeIn " data-wow-delay="0.2s" data-wow-duration="2s">Get Touch with us</span></h1>
-        <h3><span style="color: #fffff9">内容確認画面</span></h3>
+        <h1 class="section-header" align="center"><span class="content-header wow fadeIn " data-wow-delay="0.2s" data-wow-duration="2s" style="color: black">お問い合わせ</span></h1>
+        <h3 align="center"><span style="color: black" >内容確認画面</span></h3>
       </div>
       <div class="contact-section">
       <div class="container">
@@ -121,8 +121,8 @@
           <?php echo 'Message: '.$content; ?><br>
           <div class="row">
               <div class="col-12-xs text-center">
-                <button type="submit" class="btn btn-default submit" ><i class="fa fa-paper-plane" aria-hidden="true"></i>  Send</button>
-          <button class="btn btn-default submit" onclick="history.back()" formaction="contact.php"><i class="fa fa-paper-plane" aria-hidden="true"></i>  Back</button>
+                <button type="submit" class="btn btn-default submit" >
+                <i class="fa fa-paper-plane" aria-hidden="true"></i>  Send</button>                             <button class="btn btn-default submit" onclick="history.back()" formaction="contact.php"><i class="fa fa-paper-plane" aria-hidden="true"></i>  Back</button>
       </form>
   
 

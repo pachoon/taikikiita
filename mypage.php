@@ -21,19 +21,19 @@ if(!isset($_SESSION['login_user']['id'])){
 <head>
 <meta charset="utf-8">
 <?php require('parts/assets.php') ?>
-  <!-- <link rel="stylesheet" href="css/style.css">   -->
+  <link rel="stylesheet" href="css/style.css">  
   <link href="css/user_information.css" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css?family=Oleo+Script:400,700" rel="stylesheet">
+ <!--  <link href="https://fonts.googleapis.com/css?family=Oleo+Script:400,700" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Teko:400,700" rel="stylesheet">
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
-  <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'>
+  <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'> -->
 
   <meta charset="utf-8">
 
   <title>マイページ</title>
 </head>
-<body style="background-color: #3a6186 , #89253e">
+<body>
 
   <?php require('parts/login_header.php'); ?>
 
@@ -56,13 +56,15 @@ if(!isset($_SESSION['login_user']['id'])){
         <br>
         <br>
 
-        <h1 class="section-header"><span class="content-header wow fadeIn " data-wow-delay="0.2s" data-wow-duration="2s">マイページ</span></h1>
+        <h1 class="section-header"><span class="content-header wow fadeIn " data-wow-delay="0.2s" data-wow-duration="2s" style="color: black">マイページ</span></h1>
 
 <div class="container">
     <div class="row clearfix well">
     <div class="col-md-2 column">
 
+
       <img class="img-thumbnail" alt="140x140" src="profile_image/<?php echo $_SESSION['login_user']['picture_path'];?>" >
+
     </div>
     <div class="col-md-8 column">
       <blockquote>
@@ -72,13 +74,13 @@ if(!isset($_SESSION['login_user']['id'])){
       </blockquote>
     </div>
     <div class="col-md-2 column">
-         <button class="btn btn-default btn-block" type="button"><a href="edit_intro.php"><span style="font-weight: 900;">
+         <button class="btn btn-default btn-block" type="button"><a href="edit_intro.php"><span style="font-weight: 900; color: white;">
                     プロフィール編集</span></a>
                  </button>
-                 <button class="btn btn-default btn-block" type="button"><a href="edit_putup.php?login_user_id=<?php echo $_SESSION['login_user']['id']; ?>"><span style="font-weight: 900;">
+                 <button class="btn btn-default btn-block" type="button"><a href="edit_putup.php?login_user_id=<?php echo $_SESSION['login_user']['id']; ?>"><span style="font-weight: 900; color: white;">
                     出品管理</span></a>
                  </button>
-                 <button class="btn btn-default btn-block" type="button"><a href="favorite2.php"><span style="font-weight: 900;">
+                 <button class="btn btn-default btn-block" type="button"><a href="favorite2.php"><span style="font-weight: 900; color: white;">
                     お気に入り</span></a>
                  </button>
     </div>
@@ -88,7 +90,7 @@ if(!isset($_SESSION['login_user']['id'])){
       <div class="tabbable" id="tabs-444468">
         <ul class="nav nav-tabs">
           <li class="active">
-            <a href="#panel-200304" data-toggle="tab" style="font-size: 40px;">About me</a>
+            <div style="font-size: 40px;">About me</div>
           </li>
           <!-- <li>
             <a href="#panel-567649" data-toggle="tab">Photos</a>
@@ -98,9 +100,9 @@ if(!isset($_SESSION['login_user']['id'])){
           <div class="tab-pane active" id="panel-200304">
              <div class="row clearfix">
                       <div class="col-md-8 column">
-                      <p style="text-align: left; "><br>
+                      <p style="text-align: left; word-break: normal;"><br>
                         <!-- <strong style="font-size: 40px;"">About me</strong><br/> -->
-                          <span style="color: #ffff7f; font-size: 30px; "><?php echo $_SESSION['login_user']['introduce']; ?></span>
+                          <span style="color: black; font-size: 30px; "><?php echo $_SESSION['login_user']['introduce']; ?></span>
                       </p>
                                 <hr/>
                                 <!-- <p>
@@ -134,29 +136,29 @@ if(!isset($_SESSION['login_user']['id'])){
                       <table class="table" style="color: white;">
                         <thead>
                           <tr>
-                            <th style="font-size: 40px;">
+                            <th style="font-size: 30px; color: black">
                               Details
                             </th>
-                            <th style="font-size: 40px;">
+                            <!-- <th style="font-size: 40px;">
                               His/ Her
-                            </th> 
+                            </th> --> 
                           </tr>
                         </thead>
                         <tbody>
                           <tr>
-                            <td style="font-size: 35px;">
+                            <td style="font-size: 25px; color: black">
                               [School]
                             </td>
                             <td>
-                              <span style="color: #ffff7f; font-size: 30px; " ><?php echo $_SESSION['login_user']['school'];?></span>
+                              <span style="color: black; font-size: 20px; " ><?php echo $_SESSION['login_user']['school'];?></span>
                             </td>
                           </tr>
-                                        <tr>
-                              <td style="font-size: 35px;">
+                            <tr>
+                              <td style="font-size: 25px; color: black">
                               [Gender]
                             </td>
                             <td>
-                              <span style="color: #ffff7f; font-size: 30px;"><?php echo $_SESSION['login_user']['gender'];?></span>
+                              <span style="color: black; font-size: 20px;"><?php echo $_SESSION['login_user']['gender'];?></span>
                             </td>
                           </tr>
 

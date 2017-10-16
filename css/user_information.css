@@ -1,6 +1,6 @@
 /*Contact sectiom*/
 .content-header{
-  font-family: 'Oleo Script', cursive;
+  /*font-family: 'Oleo Script', cursive;*/
   color:#fcc500;
   font-size: 45px;
 }
@@ -9,18 +9,7 @@
   text-align: center; 
 
 }
-#contact{
-    
-    font-family: 'Teko', sans-serif;
-  padding-top: 60px;
-  width: 100%;
-  width: 100vw;
-  height: 550px;
-  background: #3a6186; /* fallback for old browsers */
-  background: -webkit-linear-gradient(to left, #3a6186 , #89253e); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to left, #3a6186 , #89253e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    color : #fff;    
-}
+
 .contact-section{
   padding-top: 40px;
 }
@@ -59,17 +48,13 @@ textarea.form-control {
 }
 
 
-body {
-  background-color: #ffffff;
-  background-color: transparent;
-  background: #3a6186; /* fallback for old browsers */
-  background: -webkit-linear-gradient(to left, #3a6186 , #89253e); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to left, #3a6186 , #89253e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  height: 100;
-}
 #container{
     flex-grow: 1;
 }
 
 div.background {
-  min-height: 100%; /* 最小の高さ *
+  min-height: 100%;}
+
+  p.nomal{
+  word-wrap: break-word;
+}

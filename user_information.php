@@ -17,13 +17,13 @@
 <head>
 <meta charset="utf-8">
 <?php require('parts/assets.php') ?>
-  <!-- <link rel="stylesheet" href="css/style.css">   -->
+  <link rel="stylesheet" href="css/style.css">  
   <link href="css/user_information.css" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css?family=Oleo+Script:400,700" rel="stylesheet">
+<!--   <link href="https://fonts.googleapis.com/css?family=Oleo+Script:400,700" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Teko:400,700" rel="stylesheet">
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
-  <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'>
+  <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'> -->
 
   <meta charset="utf-8">
 
@@ -87,7 +87,7 @@
       <div class="tabbable" id="tabs-444468">
         <ul class="nav nav-tabs">
           <li class="active">
-            <a href="#panel-200304" data-toggle="tab" style="font-size: 40px;">About me</a>
+            <div style="font-size: 40px;">About me</div>
           </li>
           <!-- <li>
             <a href="#panel-567649" data-toggle="tab">Photos</a>
@@ -99,7 +99,7 @@
                       <div class="col-md-8 column">
                       <p style="text-align: left; "><br>
                         <!-- <strong>About me</strong><br/> -->
-                          <span style="color: #ffff7f; font-size: 30px; "><?php echo $_SESSION['login_user']['introduce']; ?></span>
+                          <span style="color: black; font-size: 30px; "><?php echo $user['introduce']; ?></span>
                       </p>
                                 <hr/>
                                 <!-- <p>
@@ -133,29 +133,29 @@
                       <table class="table" style="color: white;">
                         <thead>
                           <tr>
-                            <th style="font-size: 40px;">
+                            <th style="font-size: 40px; color: black">
                               Details
                             </th>
-                            <th style="font-size: 40px;">
+       <!--                      <th style="font-size: 40px;">
                               His/ Her
-                            </th> 
+                            </th> --> 
                           </tr>
                         </thead>
                         <tbody>
                           <tr>
-                            <td style="font-size: 35px;">
-                              学校名
+                            <td style="font-size: 35px; color: black">
+                              [School]
                             </td>
                             <td>
-                              <span style="color: #ffff7f; font-size: 30px; " ><?php echo $_SESSION['login_user']['school'];?></span>
+                              <span style="color: black; font-size: 30px; " ><?php echo $user['school'];?></span>
                             </td>
                           </tr>
-                                        <tr>
-                            <td style="font-size: 35px;">
-                              性別
+                            <tr>
+                            <td style="font-size: 35px; color: black">
+                              [Gender]
                             </td>
                             <td>
-                              <span style="color: #ffff7f; font-size: 30px;"><?php echo $_SESSION['login_user']['gender'];?></span>
+                              <span style="color: black; font-size: 30px;"><?php echo $user['gender'];?></span>
                             </td>
                           </tr>
 
