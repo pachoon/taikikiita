@@ -222,9 +222,9 @@ if($product['category'] == '家電'){
                                         <div class="row"  id="portfolio">
                                             <div class="col-xs-12 col-sm-4 <?php echo $cate; ?>">
                                                 <div class="portfolio_single_content">
-                                                    <img src="itempic/<?php echo $product['itempc_path'];?> " alt="title"/>
+                                                    <a href="product.php?item_id=<?php echo $product['id']; ?>"><img src="itempic/<?php echo $product['itempc_path'];?> " alt="title"/></a>
                                                     <div>
-                                                        <a href="#"> <?php echo $product['item_name']; ?></a>
+                                                        <a href="product.php?item_id=<?php echo $product['id'];?>"> <?php echo $product['item_name']; ?></a>
                                                         <ul>
                                                             <li><span>価格：<?php echo $product['price']; ?></span></li>
                                                             <li><span>引き渡し可能日：<?php echo $product['daling_date'] ?></span></li>
