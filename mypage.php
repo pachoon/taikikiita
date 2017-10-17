@@ -21,7 +21,7 @@ if(!isset($_SESSION['login_user']['id'])){
 <head>
 <meta charset="utf-8">
 <?php require('parts/assets.php') ?>
-  <link rel="stylesheet" href="css/style.css">  
+  <link rel="stylesheet" href="css/style.css">
   <link href="css/user_information.css" rel="stylesheet" />
  <!--  <link href="https://fonts.googleapis.com/css?family=Oleo+Script:400,700" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Teko:400,700" rel="stylesheet">
@@ -56,7 +56,8 @@ if(!isset($_SESSION['login_user']['id'])){
         <br>
         <br>
 
-        <h1 class="section-header"><span class="content-header wow fadeIn " data-wow-delay="0.2s" data-wow-duration="2s" style="color: black">マイページ</span></h1>
+        <h2 class="section-header"><span class="content-header wow fadeIn " data-wow-delay="0.2s" data-wow-duration="2s" style="color: black; font-size:38px;">マイページ</span></h2>
+        <div class="devider" style="margin-bottom:20px;"></div>
 
 <div class="container">
     <div class="row clearfix well">
@@ -68,12 +69,12 @@ if(!isset($_SESSION['login_user']['id'])){
     </div>
     <div class="col-md-8 column">
       <blockquote>
-        <p style="font-size: 60px; color: black;" >
+        <p style="font-size: 60px; color: black; margin-top:25px;" >
           <?php echo $_SESSION['login_user']['username']; ?> 
         </p> <!-- <small>学校名 / 性別 / </small> -->
       </blockquote>
     </div>
-    <div class="col-md-2 column">
+    <div class="col-md-2 column" style="margin-top:18px;">
          <button class="btn btn-default btn-block" type="button"><a href="edit_intro.php"><span style="font-weight: 900; color: white;">
                     プロフィール編集</span></a>
                  </button>
@@ -90,7 +91,7 @@ if(!isset($_SESSION['login_user']['id'])){
       <div class="tabbable" id="tabs-444468">
         <ul class="nav nav-tabs">
           <li class="active">
-            <div style="font-size: 40px;">About me</div>
+            <div style="font-size: 32px;">【About Me】</div>
           </li>
           <!-- <li>
             <a href="#panel-567649" data-toggle="tab">Photos</a>
@@ -102,7 +103,7 @@ if(!isset($_SESSION['login_user']['id'])){
                       <div class="col-md-8 column">
                       <p style="text-align: left; word-break: normal;"><br>
                         <!-- <strong style="font-size: 40px;"">About me</strong><br/> -->
-                          <span style="color: black; font-size: 30px; "><?php echo $_SESSION['login_user']['introduce']; ?></span>
+                          <span style="color: black; font-size: 20px; "><?php echo $_SESSION['login_user']['introduce']; ?></span>
                       </p>
                                 <hr/>
                                 <!-- <p>
@@ -136,8 +137,8 @@ if(!isset($_SESSION['login_user']['id'])){
                       <table class="table" style="color: white;">
                         <thead>
                           <tr>
-                            <th style="font-size: 30px; color: black">
-                              Details
+                            <th style="font-size: 30px; color: black; font-weight:100;">
+                              【Details】
                             </th>
                             <!-- <th style="font-size: 40px;">
                               His/ Her

@@ -62,29 +62,30 @@ if(isset($_SESSION['login_user'])){
 
         <div >
         <h1 class="section-header" align="center"><span class="content-header wow fadeIn " data-wow-delay="0.2s" data-wow-duration="2s" >お問い合わせ</span></h1>
-        <h3 align="center"><span style="color: black">何かお困りですか？<br>サービスへのご意見、ご相談されたいことがあれば<br>お気軽に下記からご連絡をお待ちしております。</span></h3></div>
+        <div class="devider"></div>
+        <h4 align="center" style="margin-bottom:30px; margin-top:20px;"><span style="color: black; margin-bottom:20px;">何かお困りですか？<br>サービスへのご意見、ご相談されたいことがあれば<br>お気軽に下記からご連絡をお待ちしております。</span></h4></div>
       </div>
       <div class="contact-section">
       <div class="container">
         <form method="POST" action="confirm_contact.php">
           <div class="col-md-6 form-line">
               <div class="form-group">
-                <label for="exampleInputUsername">Your name</label>
+                <label for="exampleInputUsername" style="font-size:16px;">Your name</label>
                 <input type="text" name="username" class="form-control" id="" placeholder=" Enter Name">
               </div>
               <div class="form-group">
-                <label for="exampleInputEmail">Email Address</label>
+                <label for="exampleInputEmail" style="font-size:16px;">Email Address</label>
                 <input type="email" name="email" class="form-control" id="exampleInputEmail" placeholder=" Enter Email">
               </div>  
               <div class="form-group">
-                <label for="telephone">Subject</label>
+                <label for="telephone" style="font-size:16px;">Subject</label>
                 <input type="tel" name="subject" class="form-control" id="telephone" placeholder=" Enter Subject" required>
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
-                <label for ="description"> Message</label>
-                <textarea name="content" class="form-control" id="description" placeholder="Enter Your Message" required></textarea>
+                <label for ="description" style="font-size:16px;"> Message</label>
+                <textarea name="content" class="form-control" id="description" placeholder="Enter Your Message" required rows="5"></textarea>
               </div>
               <div>
 

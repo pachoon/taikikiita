@@ -115,7 +115,7 @@ $favorites[]=$record;
 <body>
 
 
-<div class="section-content">
+<div class="section-content" style="height:265px">
         <br>
         <br>
         <br>
@@ -132,7 +132,8 @@ $favorites[]=$record;
       「<?php echo $_GET['content']; ?>」という商品を削除しました。
     </div>
 <?php } ?>
-        <h1 class="section-header"><span class="content-header wow fadeIn " data-wow-delay="0.2s" data-wow-duration="2s" style="font-size: 45px;" align="center">お気に入り</span></h1>
+        <h1 class="section-header" style="text-align:center;"><span class="content-header wow fadeIn" data-wow-delay="0.2s" data-wow-duration="2s" style="font-size: 45px;" align="center">お気に入り</span></h1>
+        <div class="devider"></div>
 
         <br>
         <br>
@@ -143,7 +144,7 @@ $favorites[]=$record;
 
 
 
-<div class="portfolio_content" id="portfolio">
+<div class="portfolio_content" id="portfolio" style="margin-top:0px;">
 <div class="container">
     <div class="row">
         <div class="col-md-12 col-sm-12">

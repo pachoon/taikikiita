@@ -167,11 +167,11 @@
   
   <div class="container" style="margin-top: 150px; height: 600px; text-align: center;">
     <div class="row">
-      <h2 id="product-h2"><?php echo $item['item_name'];?></h2>
+      <h2 id="product-h2" style="padding-bottom:0px;"><?php echo $item['item_name'];?></h2>
       <?php if($deal_chk['count'] != 0){ ?>
               <div id="btn-request">受付終了しました</div>
       <?php } ?>
-      <div class="devider"></div>
+      <div class="devider" style="margin-bottom:20px;"></div>
     </div>
     <!-- productPicture -->
     <div class="row">
@@ -216,10 +216,10 @@
             <input type="hidden" name="item_id" value="<?php echo $item['id']; ?>">
             <?php if($request_chk['count'] == 0){ ?>
               <input type="hidden" name="request" value="request">
-              <input type="submit" value="受付終了する" class="btn btn-danger btn-lg">
+              <input type="submit" value="受付を終了する" class="btn btn-danger btn-lg">
             <?php }else{ ?>
               <input type="hidden" name="request" value="unrequest">
-              <input type="submit" value="受付再開する" class="btn btn-warning btn-lg">
+              <input type="submit" value="受付を再開する" class="btn btn-warning btn-lg">
             <?php } ?><br><br>
           </form>
           <a href="edit_putup.php?login_user_id=<?php echo $_SESSION['login_user']['id']?>" class="btn btn-md btn-success btn-lg">商品管理ページに戻る</a>
@@ -268,10 +268,10 @@
 
       </div>
       <div class="col-md-6">
-        <div id="box16" >
-          <p style="text-align: center;">出品者</p>
-            <img src="profile_image/<?php echo $item['picture_path']; ?>" width="100px">
-            <a href="user_information.php?user_id=<?php echo $item['user_id']; ?>">
+        <div id="box16" style="margin:0;" >
+          <p style="text-align: center; font-size:18px; padding-bottom:10px">出品者</p>
+            <img src="profile_image/<?php echo $item['picture_path']; ?>" width="150px">
+            <a href="user_information.php?user_id=<?php echo $item['user_id']; ?>" style="font-size:24px; line-height:60px;">
               <?php echo $item['username']?></a>
         </div>
       </div>

@@ -109,7 +109,8 @@ if(isset($_SESSION['login_user'])){
         <br>
         <br>
  
-        <h1 class="section-header" style="text-align: center;"><span class="content-header wow fadeIn " data-wow-delay="0.2s" data-wow-duration="2s" style="color: black"> チャット一覧</span></h1>
+        <h2 class="section-header" style="text-align: center;"><span class="content-header wow fadeIn " data-wow-delay="0.2s" data-wow-duration="2s" style="color: black; font-size:38px;"> チャット一覧</span></h2>
+        <div class="devider"></div>
         <br>
         <br>
 <div class="container">
@@ -157,16 +158,16 @@ if(isset($_SESSION['login_user'])){
                         }?>
                         </p>
                         <?php if($chat['chat_user_id']==$_SESSION['login_user']['id']){?>
-                          <a  href="chat.php?item_id=<?php echo $chat['item_id'];?>&user_id=<?php echo $chat['chat_user_id'];?>&login_id=<?php echo $_SESSION['login_user']['id'];?>&other_id=<?php echo $chat['other_id'];?>" class="pull-left">
+                          <a  href="chat.php?item_id=<?php echo $chat['item_id'];?>&user_id=<?php echo $chat['chat_user_id'];?>&login_id=<?php echo $_SESSION['login_user']['id'];?>&other_id=<?php echo $chat['other_id'];?>" class="pull-left" style="width:400px;">
                         <?php }else{ ?>
-                          <a  href="chat.php?item_id=<?php echo $chat['item_id'];?>&user_id=<?php echo $chat['other_id'];?>&login_id=<?php echo $_SESSION['login_user']['id'];?>&other_id=<?php echo $chat['chat_user_id'] ;?>" class="pull-left">
+                          <a  href="chat.php?item_id=<?php echo $chat['item_id'];?>&user_id=<?php echo $chat['other_id'];?>&login_id=<?php echo $_SESSION['login_user']['id'];?>&other_id=<?php echo $chat['chat_user_id'] ;?>" class="pull-left" style="width:400px;">
                         <?php }?>
 
                         <?php if($chat['chat_user_id']==$_SESSION['login_user']['id']){ ?>
-                            <img class="img-thumbnail"  align="left" alt="140x140" src="profile_image/<?php echo $_SESSION['login_user']['picture_path'];?>"> 
+                            <img class="img-thumbnail"  align="left" alt="140x140" src="profile_image/<?php echo $_SESSION['login_user']['picture_path'];?>" width="87px" height="87px"> 
                             <?php }else {?>
-                            <img class="img-thumbnail"  align="left" alt="140x140" src="profile_image/<?php echo $chat['picture_path'];?>"> <?php } ?>
-                        <br><?php echo $chat['comment'];?></a>
+                            <img class="img-thumbnail"  align="left" alt="140x140" src="profile_image/<?php echo $chat['picture_path'];?>" width="87px" height="87px"> <?php } ?>
+                        <br>　<span><?php echo $chat['comment'];?></span></a>
                         <div class="media-body">
                           <span class="media-meta pull-right"><?php echo $chat['created'];?></span>
                           <h4 class="title">
@@ -181,8 +182,6 @@ if(isset($_SESSION['login_user'])){
                     </td>
                   </tr>
                   <?php } ?>
-
-
 
 
 
@@ -303,6 +302,8 @@ if(isset($_SESSION['login_user'])){
 </script>
 
 </body>
+
+
 
 </html>
 
