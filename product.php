@@ -85,6 +85,7 @@
         exit();
     }
 
+
     $sql = 'SELECT COUNT(*) AS `count` FROM `cebty_deals` WHERE `item_id` = ?';
     $data = array($item['id']);
     $stmt = $dbh->prepare($sql);
@@ -92,7 +93,21 @@
 
     $deal_chk = $stmt->fetch(PDO::FETCH_ASSOC);
 
+    $sql = 'SELECT COUNT(*) AS `count` FROM `cebty_favorite` WHERE `items_id` = ?';
+    $data = array($item['id']);
+    $stmt = $dbh->prepare($sql);
+    $stmt->execute($data);
 
+    $favorite = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    $sql = 'SELECT COUNT(*) AS `count` FROM `cebty_favorite` WHERE `items_id` = ? AND `user_id` = ?';
+    $data = array($item['id'],$_SESSION['login_user']['id']);
+    $stmt = $dbh->prepare($sql);
+    $stmt->execute($data);
+
+    $favorite_chk = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            // var_dump($likes_chk['count']);
 
 
 //   $tweets = array();
@@ -186,7 +201,8 @@
       <p class="item-detail">カテゴリ : <?php echo $item['category'] ?></p><br>
       <p class="item-detail">コメント : </p>
       <p class="item-detail" style="font-size: 18px;"><?php echo $item['item_detail'] ?></p><br>
-      <p class="item-detail">掲載期限 : <?php echo $item['limited_date'] ?></p><br><br><br>
+      <p class="item-detail">掲載期限 : <?php echo $item['limited_date'] ?></p><br><br>
+      <p class="item-detail"  style="color: #867ad8;"><?php echo $favorite['count'];?>人 がお気に入り登録中</p><br>
     </div>
   </div>
   <div class="container" style="text-align: center;">
@@ -225,24 +241,7 @@
           <a href="edit_putup.php?login_user_id=<?php echo $_SESSION['login_user']['id']?>" class="btn btn-md btn-success btn-lg">商品管理ページに戻る</a>
         <?php } ?>
          <!-- お気に入りを表示 -->
-        <?php 
-
-          $sql = 'SELECT COUNT(*) AS `count` FROM `cebty_favorite` WHERE `items_id` = ?';
-          $data = array($item['id']);
-          $stmt = $dbh->prepare($sql);
-          $stmt->execute($data);
-
-          $favorite = $stmt->fetch(PDO::FETCH_ASSOC);
-
-          $sql = 'SELECT COUNT(*) AS `count` FROM `cebty_favorite` WHERE `items_id` = ? AND `user_id` = ?';
-          $data = array($item['id'],$_SESSION['login_user']['id']);
-          $stmt = $dbh->prepare($sql);
-          $stmt->execute($data);
-
-          $favorite_chk = $stmt->fetch(PDO::FETCH_ASSOC);
-
-            // var_dump($likes_chk['count']);
-        ?>
+        
         <!-- お気に入りボタン設置 -->
          <?php 
           // ログインしてるかどうかをチェック
@@ -258,7 +257,6 @@
                   <input type="hidden" name="favorite" value="unfavorite">
                   <input type="submit" value="お気に入り！取消" class="btn btn-warning btn-lg">
                 <?php } ?><br><br>
-                お気に入り数:<?php echo $favorite['count'];?>
               </form>
 
               <a href="chat.php?<?php echo 'item_id='.$item['id'].'&'.'user_id='.$item['user_id'].'&'.'login_id='.$_SESSION['login_user']['id']; ?>" class="btn btn-info btn-lg" >
@@ -270,9 +268,11 @@
       <div class="col-md-6">
         <div id="box16" style="margin:0;" >
           <p style="text-align: center; font-size:18px; padding-bottom:10px">出品者</p>
-            <img src="profile_image/<?php echo $item['picture_path']; ?>" width="150px">
-            <a href="user_information.php?user_id=<?php echo $item['user_id']; ?>" style="font-size:24px; line-height:60px;">
-              <?php echo $item['username']?></a>
+            <div style="display: -webkit-flex; display: flex; -webkit-align-items: center; -webkit-justify-content: center;">
+              <img src="profile_image/<?php echo $item['picture_path']; ?>" width="150px">
+              <a href="user_information.php?user_id=<?php echo $item['user_id']; ?>" style="font-size:24px; line-height:60px;">
+                <?php echo $item['username']?></a>
+            </div>
         </div>
       </div>
     </div>
