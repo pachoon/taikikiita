@@ -79,12 +79,16 @@
   $user_id=$_SESSION['login_user']['id'];
   $other_id=$other['user_id'];
   $item_id=$item['id'];
+if(!empty($_POST)){
   $comment=$_POST['comment'];
+}
   $vendor=0;
 
   if($_GET['user_id']==$_GET['login_id']){
     $other_id = $_GET['other_id'];
   }
+
+
 
 
 

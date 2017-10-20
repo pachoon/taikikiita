@@ -13,20 +13,24 @@
 
 <?php
 
+if(isset($_SESSION['login_user'])){
+
+  require('parts/login_header.php');
+
+}else{
+
+  require('parts/header.php');
+}
+
+
+
+
 session_start();
 $startPrice='9999';
 $startArea='9999';
 $startFreeword='';
 
-if(isset($_SESSION['login_user']['username'])){
 
-require('parts/login_header.php');
-
-}else{
-
-require('parts/header.php');
-
-}
 
 
   $dsn = 'mysql:dbname=cebty;host=localhost';
@@ -37,10 +41,10 @@ require('parts/header.php');
 
 
 
-  if($_POST['price']=='9999'){
+  if(isset($_POST['price']) && $_POST['price']=='9999'){
     $a = "!";}else{ $a = '';}
 
-  if($_POST['area']=='9999'){
+  if(isset($_POST['price']) && $_POST['area']=='9999'){
     $b = '!' ;} else { $b = '';}
 
 
@@ -121,13 +125,6 @@ while(true){
   $products[]=$record;
 }
 }
-
-
-
-
-
-
-
 
 
  ?>
@@ -279,6 +276,9 @@ while(true){
         <?php foreach($products as $product){ ?>
 
 <?php
+
+if(isset($_SESSION['login_user']['id'])){
+
   $sql='SELECT * FROM `cebty_favorite` where `user_id` =? and `items_id` = ?';
 
   $data = array($_SESSION['login_user']['id'], $product['id']);
@@ -299,7 +299,7 @@ if($product['category'] == '家電'){
   $cate = 'others';
 }
 
-
+}
 
 ?>
 
@@ -309,14 +309,14 @@ if($product['category'] == '家電'){
                     <div class="caption">
                         <h3>　　　　　</h3>
 
-<?php if(!$favorite){ ?>
+<?php  if(isset($_SESSION['login_user'])){  if(!$favorite){ ?>
                         <a href="fav.php?item_id=<?php echo $product['id']; ?>&price=<?php echo $startPrice; ?>&area=<?php echo $startArea; ?>&freeword=<?php echo $startFreeword; ?>&like" rel="tooltip" title="お気に入り"><span class="fa fa-heart-o fa-2x"></span></a>
 <?php }elseif($favorite){ ?>
                         <a href="fav.php?item_id=<?php echo $product['id']; ?>&price=<?php echo $startPrice; ?>&area=<?php echo $startArea; ?>&freeword=<?php echo $startFreeword; ?>&unlike" rel="tooltip" title="お気に入り解除"><span class="fa fa-heart fa-2x"></span></a>
-<?php } ?>
+<?php }} ?>
                         <a href="product.php?item_id=<?php echo $product['id']; ?>" rel="tooltip" title="商品詳細"><span class="fa fa-search fa-2x"></span></a>
                     </div>
-                    <img src="itempic/<?php echo $product['itempc_path'];  ?>" class="img-responsive">
+                    <img src="itempic/<?php echo $product['itempc_path']; ?>" class="" width="263" height="197">
                      <div class="propertyType <?php if($product['dealing_area']=='ITパーク'){echo 'it';}elseif($product['dealing_area']=='アヤラ'){echo 'ayala';}elseif($product['dealing_area']=='マンダウエ'){echo 'mandaue';}elseif($product['dealing_area']=='タランバン'){echo 'talamban';}elseif($product['dealing_area']=='その他'){echo 'others';} ?>" style="line-height: 20px;"><?php echo $product['dealing_area']; ?></div>
 
                 </div>

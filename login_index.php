@@ -199,7 +199,7 @@ while(true){
 
 
 
-                                <?php foreach($products as $product){ ?>
+                                <?php if(!empty($products)){    foreach($products as $product){ ?>
 
 
 <?php 
@@ -222,17 +222,17 @@ if($product['category'] == '家電'){
                                         <div class="row"  id="portfolio">
                                             <div class="col-xs-12 col-sm-4 <?php echo $cate; ?>">
                                                 <div class="portfolio_single_content">
-                                                    <a href="product.php?item_id=<?php echo $product['id']; ?>"><img src="itempic/<?php echo $product['itempc_path'];?> " alt="title"/></a>
+                                                    <a href="product.php?item_id=<?php echo $product['id']; ?>"><img src="itempic/<?php echo $product['itempc_path'];?> " alt="title" width="300" height="260" ></a>
                                                     <div>
                                                         <a href="product.php?item_id=<?php echo $product['id'];?>"> <?php echo $product['item_name']; ?></a>
                                                         <ul>
-                                                            <li><span>価格：<?php echo $product['price']; ?></span></li>
-                                                            <li><span>引き渡し可能日：<?php echo $product['daling_date'] ?></span></li>
+                                                            <li><span>価格：<?php echo $product['price']; ?>ペソ</span></li>
+                                                            <li><span>引き渡し可能日：<?php echo $product['daling_date'] ?>以降</span></li>
                                                         </ul>
                                                     </div>
                                                 </div>
                                             </div>
-                                <?php } ?>
+                                <?php }} ?>
 
 
 

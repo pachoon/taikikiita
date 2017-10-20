@@ -217,7 +217,7 @@ while(true){
 
 
 
-                                <?php foreach($products as $product){ ?>
+                                <?php if(!empty($products)){foreach($products as $product){ ?>
                                     <div class="portfolio_content">
                                         <div class="row"  id="portfolio">
                                             <div class="col-xs-12 col-sm-4 <?php echo $product['category']; ?>">
@@ -232,7 +232,7 @@ while(true){
                                                     </div>
                                                 </div>
                                             </div>
-                                <?php } ?>
+                                <?php }} ?>
 
 
 

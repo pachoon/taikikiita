@@ -176,7 +176,7 @@
     <!-- productPicture -->
     <div class="row">
       <div class=" col-md-6" style="text-align: center;">
-        <img src="itempic/<?php echo $item['itempc_path']; ?>" width="400px" height="400px" >
+        <img src="itempic/<?php echo $item['itempc_path']; ?>" width="525px" height="400px" >
       </div>
     <!-- productPictureEnd -->
     <div class="col-md-6">
@@ -194,6 +194,9 @@
       <div class="col-md-6">
            <!-- 受付終了を表示 -->
            <?php 
+
+           if(isset($_SESSION['login_user']['id'])){
+
             $sql = 'SELECT COUNT(*) AS `count` FROM `cebty_deals` WHERE `item_id` = ?';
             $data = array($item['id']);
             $stmt = $dbh->prepare($sql);
@@ -210,8 +213,11 @@
             $stmt->execute($data);
 
             $request_chk = $stmt->fetch(PDO::FETCH_ASSOC);
+
+}
+
             ?>
-        <?php if($_SESSION['login_user']['id'] == $item['user_id'] ){ ?>
+        <?php if(isset($_SESSION['login_user']) && $_SESSION['login_user']['id'] == $item['user_id'] ){ ?>
           <form method="POST" action=""><br>
             <input type="hidden" name="item_id" value="<?php echo $item['id']; ?>">
             <?php if($request_chk['count'] == 0){ ?>
@@ -226,6 +232,8 @@
         <?php } ?>
          <!-- お気に入りを表示 -->
         <?php 
+
+        if(isset($_SESSION['login_user'])){
 
           $sql = 'SELECT COUNT(*) AS `count` FROM `cebty_favorite` WHERE `items_id` = ?';
           $data = array($item['id']);
@@ -242,6 +250,7 @@
           $favorite_chk = $stmt->fetch(PDO::FETCH_ASSOC);
 
             // var_dump($likes_chk['count']);
+        }
         ?>
         <!-- お気に入りボタン設置 -->
          <?php 
@@ -261,7 +270,7 @@
                 お気に入り数:<?php echo $favorite['count'];?>
               </form>
 
-              <a href="chat.php?<?php echo 'item_id='.$item['id'].'&'.'user_id='.$item['user_id'].'&'.'login_id='.$_SESSION['login_user']['id']; ?>" class="btn btn-info btn-lg" >
+              <a href="chat.php?<?php echo 'item_id='.$item['id'].'&'.'user_id='.$item['user_id'].'&'.'login_id='.$_SESSION['login_user']['id'].'&'.'other_id='.$item['user_id']; ?>" class="btn btn-info btn-lg" >
                 出品者へ問い合わせ</a>
             <?php } ?>
 

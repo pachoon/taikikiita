@@ -13,4 +13,4 @@
 
             <a href="#" class="scrolltotop"><i class="fa fa-arrow-up"></i></a> <!-- Scroll to top button -->
 
-        </div><!-- body ends -->
+
