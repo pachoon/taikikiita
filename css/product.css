@@ -1,21 +1,55 @@
 
-#box16{
+/*#box16{
   padding: 0.5em 1em;
   margin: 2em 0;
-  background: -webkit-repeating-linear-gradient(-45deg, #f0f8ff, #f0f8ff 3px,#e9f4ff 3px, #e9f4ff 7px);
-  background: repeating-linear-gradient(-45deg, #f0f8ff, #f0f8ff 3px,#e9f4ff 3px, #e9f4ff 7px);
+  background: -webkit-repeating-linear-gradient(-45deg, #fce8e5, #fce8e5 3px,#d4d2e9 3px, #d4d2e9 7px);
+  background: repeating-linear-gradient(-45deg, #fce8e5, #fce8e5 3px,#d4d2e9 3px, #d4d2e9 7px);
 }
 #box16 p {
   margin: 0;
   padding: 0;
-} 
+} */
+#frame16 {
+  position: relative;
+  display: inline-block;
+  overflow: hidden; /* 不要部分を消す */
+  padding: 1px;
+}
+#frame16:after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  width: 100px;
+  height: auto;
+  background: red;
+  content: "closed"; /* 表示するテキスト */
+  text-align: center;
+  color: #fff;
+  font-family: 'Arial';
+  font-weight: bold;
+  padding: 5px 10px;
+  left: -30px;
+  top: 3px;
+  transform: rotate(-30deg);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+#box16 {
+    background: rgba(0,128,128,0.2);
+    border: 5px dashed #746ab7;
+    border-radius: 8px;
+    /*box-shadow: 0 0 0 4px #514a7f;*/
+    color: black;
+    margin: 2em 0;
+    padding: 5px;
+    border-radius: 20px !important;}
 
 
 .carousel-inner {
   position: relative;
   width: 100%;
   min-height: 300px;
-  padding-top: 50px;
+  padding-top: 15px;
   }
 
  
