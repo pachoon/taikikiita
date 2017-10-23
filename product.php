@@ -179,128 +179,109 @@
         }else{
           require('parts/header.php');
         } ?>
-  
-  <div class="container" style="margin-top: 150px; height: 600px; text-align: center;">
-    <div class="row">
-      <h2 id="product-h2" style="padding-bottom:0px;"><?php echo $item['item_name'];?></h2>
-      <?php if($deal_chk['count'] != 0){ ?>
-              <div id="btn-request">受付終了しました</div>
-      <?php } ?>
-      <div class="devider" style="margin-bottom:20px;"></div>
-    </div>
-    <!-- productPicture -->
-    <div class="row">
-      <div class="col-md-6" style="text-align: center;">
-        <div class="frame"><img src="itempic/<?php echo $item['itempc_path']; ?>" width="465px" height="400px" ></div>
+  <div class="wrap" style="background: url(img/slider-bg.jpg) no-repeat; background-size: cover; background-attachment: fixed; height: 1000px;">
+    <div class="background" style=" height: 100%;
+  background: rgba(255,255,255,0.8);">
+      <div class="container" style="margin-top: 0px; height: 600px; text-align: center;">
+        <div class="row" >
+          <h2 id="product-h2" style="padding-bottom:0px; margin-top: 100px;"><?php echo $item['item_name'];?></h2>
+          <?php if($deal_chk['count'] != 0){ ?>
+                  <div id="btn-request">受付終了しました</div>
+          <?php } ?>
+          <div class="devider" style="margin-bottom:20px;"></div>
+        </div>
+        <!-- productPicture -->
+        <div class="row">
+          <div class=" col-md-6" style="text-align: center;">
+              <img src="itempic/<?php echo $item['itempc_path']; ?>" width="400px" height="400px" >
+          </div>
+        <!-- productPictureEnd -->
+        <div class="col-md-6" style="text-align: left;">
+          <p class="item-detail"><strong>価格</strong>&emsp;&emsp;&emsp;&emsp;:&emsp;<?php echo $item['price'] ?>ペソ</p><br>
+          <p class="item-detail"><strong>引渡可能日</strong>&emsp;:&emsp;<?php echo $item['daling_date'] ?></p><br>
+          <p class="item-detail"><strong>エリア</strong>&emsp;&emsp;&emsp;:&emsp;<?php echo $item['dealing_area'] ?></p><br>
+          <p class="item-detail"><strong>カテゴリ</strong>&emsp;&emsp;:&emsp;<?php echo $item['category'] ?></p><br>
+          <p class="item-detail" style="display: inline-block;"><strong>掲載期限</strong>&emsp;&emsp;:&emsp;<?php echo $item['limited_date'] ?></p><br><br>
+          <div style="width: 500px; height: 200px; position: relative; top: 5px; left: 0px;">
+            <div style="width: 150px; height: 100%; position: absolute; top: 15px; left: 0px;">
+              <p class="item-detail" ><strong>コメント</strong>&emsp;&emsp;:&emsp;</p>
+            </div>
+            <div style="width: 350px; height: 100%; position: absolute; top: 15px; left: 150px;">
+              <p class="item-detail" style="font-size: 18px;"><?php echo $item['item_detail'] ?></p><br>
+            </div>
+          </div>
+          <p class="item-detail"  style="color: #867ad8; text-align: center;"><?php echo $favorite['count'];?>人 がお気に入り登録中</p><br><br>
+        </div>
       </div>
+      <div class="container" style="text-align: center;">
+        <div class="row">
+          <div class="col-md-6">
+               <!-- 受付終了を表示 -->
+               <?php 
+                $sql = 'SELECT COUNT(*) AS `count` FROM `cebty_deals` WHERE `item_id` = ?';
+                $data = array($item['id']);
+                $stmt = $dbh->prepare($sql);
+                $stmt->execute($data);
 
+                $request = $stmt->fetch(PDO::FETCH_ASSOC);
 
-<style type="text/css">
+                // 自分が受付終了ボタンを押しているかどうかをチェック
+                $sql = 'SELECT COUNT(*) AS `count` FROM `cebty_deals` WHERE `item_id` = ?
+                                                                      AND   `user_id` = ?
+                                                                                        ';
+                $data = array($item['id'],$_SESSION['login_user']['id']);
+                $stmt = $dbh->prepare($sql);
+                $stmt->execute($data);
 
-.frame {
-  display: inline-block;
-  position: relative;
-}
-.frame:after {
-  position: absolute;
-  display: block;
-  content: "";
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  transform: rotate(3deg); /* 回転させる */
-  background: #fff;
-  z-index: -1;
-}
-
-
-</style>
-
-
-
-
-    <!-- productPictureEnd -->
-    <div class="col-md-6">
-      <p class="item-detail">価格 : <?php echo $item['price'] ?>ペソ</p><br>
-      <p class="item-detail">引渡可能日 : <?php echo $item['daling_date'] ?></p><br>
-      <p class="item-detail">エリア : <?php echo $item['dealing_area'] ?></p><br>
-      <p class="item-detail">カテゴリ : <?php echo $item['category'] ?></p><br>
-      <p class="item-detail">コメント : </p>
-      <p class="item-detail" style="font-size: 18px;"><?php echo $item['item_detail'] ?></p><br>
-      <p class="item-detail">掲載期限 : <?php echo $item['limited_date'] ?></p><br><br>
-      <p class="item-detail"  style="color: #867ad8; border: 1px solid; font-size:16px;"><?php echo $favorite['count'];?>人 がお気に入り登録中</p><br>
-    </div>
-  </div>
-  <div class="container" style="text-align: center;">
-    <div class="row">
-      <div class="col-md-6">
-           <!-- 受付終了を表示 -->
-           <?php 
-            $sql = 'SELECT COUNT(*) AS `count` FROM `cebty_deals` WHERE `item_id` = ?';
-            $data = array($item['id']);
-            $stmt = $dbh->prepare($sql);
-            $stmt->execute($data);
-
-            $request = $stmt->fetch(PDO::FETCH_ASSOC);
-
-            // 自分が受付終了ボタンを押しているかどうかをチェック
-            $sql = 'SELECT COUNT(*) AS `count` FROM `cebty_deals` WHERE `item_id` = ?
-                                                                  AND   `user_id` = ?
-                                                                                    ';
-            $data = array($item['id'],$_SESSION['login_user']['id']);
-            $stmt = $dbh->prepare($sql);
-            $stmt->execute($data);
-
-            $request_chk = $stmt->fetch(PDO::FETCH_ASSOC);
-            ?>
-        <?php if($_SESSION['login_user']['id'] == $item['user_id'] ){ ?>
-          <form method="POST" action=""><br>
-            <input type="hidden" name="item_id" value="<?php echo $item['id']; ?>">
-            <?php if($request_chk['count'] == 0){ ?>
-              <input type="hidden" name="request" value="request">
-              <input type="submit" value="受付を終了する" class="btn btn-danger btn-lg">
-            <?php }else{ ?>
-              <input type="hidden" name="request" value="unrequest">
-              <input type="submit" value="受付を再開する" class="btn btn-warning btn-lg">
-            <?php } ?><br><br>
-          </form>
-          <a href="edit_putup.php?login_user_id=<?php echo $_SESSION['login_user']['id']?>" class="btn btn-md btn-success btn-lg">商品管理ページに戻る</a>
-        <?php } ?>
-         <!-- お気に入りを表示 -->
-        
-        <!-- お気に入りボタン設置 -->
-         <?php 
-          // ログインしてるかどうかをチェック
-          if (isset($_SESSION['login_user']['id']) && ($_SESSION['login_user']['id'] != $item['user_id'] )){ ?>
-             
+                $request_chk = $stmt->fetch(PDO::FETCH_ASSOC);
+                ?>
+            <?php if($_SESSION['login_user']['id'] == $item['user_id'] ){ ?>
               <form method="POST" action=""><br>
-                <input type="hidden" name="items_id" value="<?php echo $item['id']; ?>">
-                <!-- ここのif文で10回いいね！、しないと取り消しが出現しないようにしている -->
-                <?php if($favorite_chk['count'] == 0){ ?>
-                  <input type="hidden" name="favorite" value="favorite">
-                  <input type="submit" value="お気に入り！" class="btn btn-primary btn-lg">
+                <input type="hidden" name="item_id" value="<?php echo $item['id']; ?>">
+                <?php if($request_chk['count'] == 0){ ?>
+                  <input type="hidden" name="request" value="request">
+                  <input type="submit" value="受付を終了する" class="btn btn-danger btn-lg">
                 <?php }else{ ?>
-                  <input type="hidden" name="favorite" value="unfavorite">
-                  <input type="submit" value="お気に入り！取消" class="btn btn-warning btn-lg">
+                  <input type="hidden" name="request" value="unrequest">
+                  <input type="submit" value="受付を再開する" class="btn btn-warning btn-lg">
                 <?php } ?><br><br>
               </form>
-
-              <a href="chat.php?<?php echo 'item_id='.$item['id'].'&'.'user_id='.$item['user_id'].'&'.'login_id='.$_SESSION['login_user']['id']; ?>" class="btn btn-info btn-lg" >
-                出品者へ問い合わせ</a>
+              <a href="edit_putup.php?login_user_id=<?php echo $_SESSION['login_user']['id']?>" class="btn btn-md btn-success btn-lg">商品管理ページに戻る</a>
             <?php } ?>
+             <!-- お気に入りを表示 -->
+            
+            <!-- お気に入りボタン設置 -->
+             <?php 
+              // ログインしてるかどうかをチェック
+              if (isset($_SESSION['login_user']['id']) && ($_SESSION['login_user']['id'] != $item['user_id'] )){ ?>
+                 
+                  <form method="POST" action=""><br>
+                    <input type="hidden" name="items_id" value="<?php echo $item['id']; ?>">
+                    <!-- ここのif文で10回いいね！、しないと取り消しが出現しないようにしている -->
+                    <?php if($favorite_chk['count'] == 0){ ?>
+                      <input type="hidden" name="favorite" value="favorite">
+                      <input type="submit" value="お気に入り！" class="btn btn-primary btn-lg">
+                    <?php }else{ ?>
+                      <input type="hidden" name="favorite" value="unfavorite">
+                      <input type="submit" value="お気に入り！取消" class="btn btn-warning btn-lg">
+                    <?php } ?><br><br>
+                  </form>
 
-
-      </div>
-      <div class="col-md-6">
-        <div id="box16" style="margin:0;" >
-          <p style="text-align: center; font-size:18px; padding-bottom:10px">出品者</p>
-            <div style="display: -webkit-flex; display: flex; -webkit-align-items: center; -webkit-justify-content: center;">
-              <img src="profile_image/<?php echo $item['picture_path']; ?>" width="150px" class="img-thumbnail">
-              <a href="user_information.php?user_id=<?php echo $item['user_id']; ?>" style="font-size:24px; line-height:60px;">
-                <?php echo $item['username']?></a>
+                  <a href="chat.php?<?php echo 'item_id='.$item['id'].'&'.'user_id='.$item['user_id'].'&'.'login_id='.$_SESSION['login_user']['id']; ?>" class="btn btn-info btn-lg" >
+                    出品者へ問い合わせ</a>
+                <?php } ?>
+          </div>
+          <div class="col-md-6">
+            <div id="box16" style="margin:0;" >
+              <p style="text-align: center; font-size:20px; padding-bottom:10px">出品者</p>
+                <div style="display: -webkit-flex; display: flex; -webkit-align-items: center; -webkit-justify-content: center;">
+                  <img src="profile_image/<?php echo $item['picture_path']; ?>" width="150px">
+                  &emsp;&emsp;&emsp;
+                  <a href="user_information.php?user_id=<?php echo $item['user_id']; ?>" style="font-size:35px; line-height:60px;">
+                    <?php echo $item['username']?></a>
+                </div>
             </div>
+          </div>
         </div>
       </div>
     </div>
