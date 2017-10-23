@@ -222,7 +222,7 @@ if($product['category'] == '家電'){
                                         <div class="row"  id="portfolio">
                                             <div class="col-xs-12 col-sm-4 <?php echo $cate; ?>">
                                                 <div class="portfolio_single_content">
-                                                    <a href="product.php?item_id=<?php echo $product['id']; ?>"><img src="itempic/<?php echo $product['itempc_path'];?> " alt="title" width="300" height="260" ></a>
+                                                    <a href="product.php?item_id=<?php echo $product['id']; ?>"><img src="itempic/<?php echo $product['itempc_path'];?> " alt="title" width="300" height="260"></a>
                                                     <div>
                                                         <a href="product.php?item_id=<?php echo $product['id'];?>"> <?php echo $product['item_name']; ?></a>
                                                         <ul>
@@ -236,6 +236,27 @@ if($product['category'] == '家電'){
 
 
 
+<style type="text/css">
+
+.frame {
+    display: inline-block;
+    position: relative;
+}
+.frame:after {
+    position: absolute;
+    display: block;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transform: rotate(3deg); /* 回転させる */
+    background: #fff;
+    z-index: -1;
+}
+
+</style>
 
 
 

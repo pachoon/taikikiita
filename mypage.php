@@ -56,7 +56,7 @@ if(!isset($_SESSION['login_user']['id'])){
         <br>
         <br>
 
-        <h2 class="section-header"><span class="content-header wow fadeIn " data-wow-delay="0.2s" data-wow-duration="2s" style="color: black; font-size:38px;">マイページ</span></h2>
+        <h2 class="section-header"><span class="content-header wow fadeIn " data-wow-delay="0.2s" data-wow-duration="2s" style="color: black; font-size:34px;">マイページ</span></h2>
         <div class="devider" style="margin-bottom:20px;"></div>
 
 <div class="container">
@@ -69,12 +69,12 @@ if(!isset($_SESSION['login_user']['id'])){
     </div>
     <div class="col-md-8 column">
       <blockquote>
-        <p style="font-size: 60px; color: black; margin-top:25px;" >
+        <p style="font-size: 40px; color: black; margin-top:25px;" >
           <?php echo $_SESSION['login_user']['username']; ?> 
         </p> <!-- <small>学校名 / 性別 / </small> -->
       </blockquote>
     </div>
-    <div class="col-md-2 column" style="margin-top:18px;">
+    <div class="col-md-2 column" style="margin-top:5px;">
          <button class="btn btn-default btn-block" type="button"><a href="edit_intro.php"><span style="font-weight: 900; color: white;">
                     プロフィール編集</span></a>
                  </button>
@@ -89,21 +89,21 @@ if(!isset($_SESSION['login_user']['id'])){
   <div class="row clearfix">
     <div class="col-md-12 column">
       <div class="tabbable" id="tabs-444468">
-        <ul class="nav nav-tabs">
-          <li class="active">
-            <div style="font-size: 32px;">【About Me】</div>
-          </li>
-          <!-- <li>
-            <a href="#panel-567649" data-toggle="tab">Photos</a>
-          </li> -->
-        </ul>
-        <div class="tab-content">
+        <div class="tab-content" style="margin-top:20px;">
           <div class="tab-pane active" id="panel-200304">
              <div class="row clearfix">
                       <div class="col-md-8 column">
+                        <ul class="nav nav-tabs">
+                          <li class="active">
+                            <div style="font-size: 26px; margin-bottom:13px;">【About Me】</div>
+                          </li>
+                          <!-- <li>
+                            <a href="#panel-567649" data-toggle="tab">Photos</a>
+                          </li> -->
+                        </ul>
                       <p style="text-align: left; word-break: normal;"><br>
                         <!-- <strong style="font-size: 40px;"">About me</strong><br/> -->
-                          <span style="color: black; font-size: 20px; "><?php echo $_SESSION['login_user']['introduce']; ?></span>
+                          <span style="color: black; font-size: 18px; "><?php echo $_SESSION['login_user']['introduce']; ?></span>
                       </p>
                                 <hr/>
                                 <!-- <p>
@@ -134,35 +134,25 @@ if(!isset($_SESSION['login_user']['id'])){
                       </p> -->
                     </div>
                     <div class="col-md-4 column">
-                      <table class="table" style="color: white;">
-                        <thead>
-                          <tr>
-                            <th style="font-size: 30px; color: black; font-weight:100;">
-                              【Details】
-                            </th>
-                            <!-- <th style="font-size: 40px;">
-                              His/ Her
-                            </th> --> 
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td style="font-size: 25px; color: black">
-                              [School]
-                            </td>
-                            <td>
-                              <span style="color: black; font-size: 20px; " ><?php echo $_SESSION['login_user']['school'];?></span>
-                            </td>
-                          </tr>
-                            <tr>
-                              <td style="font-size: 25px; color: black">
-                              [Gender]
-                            </td>
-                            <td>
-                              <span style="color: black; font-size: 20px;"><?php echo $_SESSION['login_user']['gender'];?></span>
-                            </td>
-                          </tr>
+                        <ul class="nav nav-tabs">
+                          <li class="active">
+                            <div style="font-size: 26px; margin-bottom:13px;">【Details】</div>
+                          </li>
+                          <!-- <li>
+                            <a href="#panel-567649" data-toggle="tab">Photos</a>
+                          </li> -->
+                        </ul>
+                      <p style="text-align: left; word-break: normal;"><br>
+                      <span style="font-size: 20px; color: black">　[School]</span>
+                          <span style="color: black; font-size: 20px; padding-left:70px;" ><?php echo $_SESSION['login_user']['school'];?></span>
+                      </p>
+                                <hr/>
 
+                      <p style="text-align: left; word-break: normal; padding-top:5px;">
+                      <span style="font-size: 20px; color: black;">　[Gender]</span>
+                          <span style="color: black; font-size: 20px; padding-left:100px;" ><?php echo $_SESSION['login_user']['gender'];?></span>
+                      </p>
+                                <hr/><br><br>
 
                                         <!-- <tr>
                               <td>

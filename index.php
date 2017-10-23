@@ -222,7 +222,7 @@ while(true){
                                         <div class="row"  id="portfolio">
                                             <div class="col-xs-12 col-sm-4 <?php echo $product['category']; ?>">
                                                 <div class="portfolio_single_content">
-                                                    <img src="itempic/<?php echo $product['itempc_path'];?> " alt="title"/>
+                                                    <img src="itempic/<?php echo $product['itempc_path'];?> " alt="title" width="300" height="260"/>
                                                     <div>
                                                         <a href="product.php?item_id=<?php echo $product['id']; ?>"> <?php echo $product['item_name']; ?></a>
                                                         <ul>
