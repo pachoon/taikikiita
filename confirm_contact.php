@@ -137,7 +137,6 @@
   </div><!-- /.modal -->
       </div>
     </section>
-  <?php require('parts/footer.php'); ?>
 
 </body>
 </html>
