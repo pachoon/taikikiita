@@ -10,6 +10,32 @@
  /*.search {
     margin-top: -10%;
 }*/
+#frame16 {
+  position: relative;
+  display: inline-block;
+  overflow: hidden; /* 不要部分を消す */
+  padding: 1px;
+}
+#frame16:after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  width: 100px;
+  height: auto;
+  background: red;
+  content: "Closed";
+  font-size: 10px;
+  text-align: center;
+  color: #fff;
+  font-family: 'Arial';
+  font-weight: bold;
+  padding: 2px 5px;
+  left: -30px;
+  top: 3px;
+  transform: rotate(-30deg);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
 .search .form-section{
   background-image:;
   background:rgba(78, 71, 121, 0.8);

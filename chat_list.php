@@ -89,99 +89,101 @@ if(isset($_SESSION['login_user'])){
 }
 
  ?>
+<div class="wrap" style="background: url(img/slider-bg.jpg) no-repeat; background-size: cover; background-attachment: fixed; height: 1000px;">
+    <div class="background" style=" height: 100%; background: rgba(255,255,255,0.8);">
+      <div class="container">
+        <div class="row">
+        </div>
+      </div>
 
-  <div class="container">
-    <div class="row">
-    </div>
-  </div>
-
-<section id="contact">
-      <div class="section-content">
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
- 
-        <h2 class="section-header" style="text-align: center;"><span class="content-header wow fadeIn " data-wow-delay="0.2s" data-wow-duration="2s" style="color: black; font-size:38px;"> チャット一覧</span></h2>
-        <div class="devider"></div>
-        <br>
-        <br>
-<div class="container">
-  <div class="row">
-
-
-
-    <section class="content">
-      <div class="col-md-8 col-md-offset-2">
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <div class="pull-right">
-              <div class="btn-group">
-                <button type="button" class="btn btn-success btn-filter" data-target="send">送信</button>
-                <button type="button" class="btn btn-warning btn-filter" data-target="recieve">受信</button>
-                <!-- <button type="button" class="btn btn-danger btn-filter" data-target="cancelado">Cancelado</button> -->
-                <button type="button" class="btn btn-default btn-filter" data-target="all">全て</button>
-              </div>
-            </div>
+    <section id="contact">
+          <div class="section-content">
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+     
+            <h2 class="section-header" style="text-align: center;"><span class="content-header wow fadeIn " data-wow-delay="0.2s" data-wow-duration="2s" style="color: black; font-size:38px;"> チャット一覧</span></h2>
+            <div class="devider"></div>
+            <br>
+            <br>
+    <div class="container">
+      <div class="row">
 
 
 
+        <section class="content">
+          <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+              <div class="panel-body">
+                <div class="pull-right">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-success btn-filter" data-target="send">送信</button>
+                    <button type="button" class="btn btn-warning btn-filter" data-target="recieve">受信</button>
+                    <!-- <button type="button" class="btn btn-danger btn-filter" data-target="cancelado">Cancelado</button> -->
+                    <button type="button" class="btn btn-default btn-filter" data-target="all">全て</button>
+                  </div>
+                </div>
 
 
 
 
 
 
-  <?php foreach ($chats as $chat) {?>
-             <div class="table-container" >
-              <table class="table table-filter">
-                <tbody>
-                  <tr data-status="<?php if($chat['chat_user_id']==$_SESSION['login_user']['id']){
-                    echo 'send';
-                  }else{
-                    echo 'recieve';
-                  } ?>">
-                    
-                    <td>
-                      <div class="media" style="width: 648px;">
-                        <p align="left" style="font-size: 30px"><?php if($chat['chat_user_id']==$_SESSION['login_user']['id']){
-                          echo $chat['username'];
-                        }else{
-                          echo $chat['username'];
-                        }?>
-                        </p>
-                        <?php if($chat['chat_user_id']==$_SESSION['login_user']['id']){?>
-                          <a  href="chat.php?item_id=<?php echo $chat['item_id'];?>&user_id=<?php echo $chat['chat_user_id'];?>&login_id=<?php echo $_SESSION['login_user']['id'];?>&other_id=<?php echo $chat['other_id'];?>" class="pull-left" style="width:400px;">
-                        <?php }else{ ?>
-                          <a  href="chat.php?item_id=<?php echo $chat['item_id'];?>&user_id=<?php echo $chat['other_id'];?>&login_id=<?php echo $_SESSION['login_user']['id'];?>&other_id=<?php echo $chat['chat_user_id'] ;?>" class="pull-left" style="width:400px;">
-                        <?php }?>
 
-                        <?php if($chat['chat_user_id']==$_SESSION['login_user']['id']){ ?>
-                            <img class="img-thumbnail"  align="left" alt="140x140" src="profile_image/<?php echo $_SESSION['login_user']['picture_path'];?>" width="87px" height="87px"> 
-                            <?php }else {?>
-                            <img class="img-thumbnail"  align="left" alt="140x140" src="profile_image/<?php echo $chat['picture_path'];?>" width="87px" height="87px"> <?php } ?>
-                        <br>　<span><?php echo $chat['comment'];?></span></a>
-                        <div class="media-body">
-                          <span class="media-meta pull-right"><?php echo $chat['created'];?></span>
-                          <h4 class="title">
-                            <span class="pull-right recieve" ><?php if($chat['chat_user_id']==$_SESSION['login_user']['id']){
-                    echo '<font color="#5cb85c">送信</font>';
-                  }else{
-                    echo '<font color="#FF9900">受信</font>';
-                  } ?></span>
-                          </h4>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                  <?php } ?>
+
+
+      <?php foreach ($chats as $chat) {?>
+                 <div class="table-container" >
+                  <table class="table table-filter">
+                    <tbody>
+                      <tr data-status="<?php if($chat['chat_user_id']==$_SESSION['login_user']['id']){
+                        echo 'send';
+                      }else{
+                        echo 'recieve';
+                      } ?>">
+                        
+                        <td>
+                          <div class="media" style="width: 648px;">
+                            <p align="left" style="font-size: 30px"><?php if($chat['chat_user_id']==$_SESSION['login_user']['id']){
+                              echo $chat['username'];
+                            }else{
+                              echo $chat['username'];
+                            }?>
+                            </p>
+                            <?php if($chat['chat_user_id']==$_SESSION['login_user']['id']){?>
+                              <a  href="chat.php?item_id=<?php echo $chat['item_id'];?>&user_id=<?php echo $chat['chat_user_id'];?>&login_id=<?php echo $_SESSION['login_user']['id'];?>&other_id=<?php echo $chat['other_id'];?>" class="pull-left" style="width:400px;">
+                            <?php }else{ ?>
+                              <a  href="chat.php?item_id=<?php echo $chat['item_id'];?>&user_id=<?php echo $chat['other_id'];?>&login_id=<?php echo $_SESSION['login_user']['id'];?>&other_id=<?php echo $chat['chat_user_id'] ;?>" class="pull-left" style="width:400px;">
+                            <?php }?>
+
+                            <?php if($chat['chat_user_id']==$_SESSION['login_user']['id']){ ?>
+                                <img class="img-thumbnail"  align="left" alt="140x140" src="profile_image/<?php echo $_SESSION['login_user']['picture_path'];?>" width="87px" height="87px"> 
+                                <?php }else {?>
+                                <img class="img-thumbnail"  align="left" alt="140x140" src="profile_image/<?php echo $chat['picture_path'];?>" width="87px" height="87px"> <?php } ?>
+                            <br>　<span><?php echo $chat['comment'];?></span></a>
+                            <div class="media-body">
+                              <span class="media-meta pull-right"><?php echo $chat['created'];?></span>
+                              <h4 class="title">
+                                <span class="pull-right recieve" ><?php if($chat['chat_user_id']==$_SESSION['login_user']['id']){
+                        echo '<font color="#5cb85c">送信</font>';
+                      }else{
+                        echo '<font color="#FF9900">受信</font>';
+                      } ?></span>
+                              </h4>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <?php } ?>
+
 
 
 
@@ -276,7 +278,8 @@ if(isset($_SESSION['login_user'])){
     
   </div>
 </div> --> 
-
+</div>
+</div>
 <script type="text/javascript">
   $(document).ready(function () {
 

@@ -40,6 +40,24 @@
   $stmt->execute($data);
   $deal = $stmt->fetch(PDO::FETCH_ASSOC);
 
+  $sql = "SELECT `cebty_items`.*, `cebty_users`.`username`,`cebty_users`.`picture_path`
+           FROM `cebty_items`
+           LEFT JOIN `cebty_users`
+           ON `cebty_items`.`user_id` = `cebty_users`.`id`
+           WHERE `cebty_users`.`id`=? ";
+  $data = array($_GET['login_user_id']); //?がない場合は空のままでOK
+  $stmt = $dbh->prepare($sql);
+  $stmt->execute($data); 
+
+  $item = $stmt->fetch(PDO::FETCH_ASSOC);
+
+
+  $sql = 'SELECT COUNT(*) AS `count` FROM `cebty_deals` WHERE `item_id` = ?';
+  $data = array($item['id']);
+  $stmt = $dbh->prepare($sql);
+  $stmt->execute($data);
+
+  $deal_chk = $stmt->fetch(PDO::FETCH_ASSOC);
   
 
  ?>
@@ -128,7 +146,15 @@ else{
           <div style="margin-bottom: 15px;">
             <tbody>
             <tr style="vertical-align: middle; text-align: center;">
+            <?php if($deal_chk['count'] != 0){ ?>
+                <td style="vertical-align: middle;" >
+                  <div id="frame16">
+                    <img src="itempic/<?php echo $item['itempc_path']; ?>" width="100px" >
+                  </div>
+                </td>
+            <?php }else{ ?>
               <td style="vertical-align: middle;"><img src="itempic/<?php echo $item['itempc_path']; ?>" width="100px"></td>
+            <?php } ?>
               <td style="vertical-align: middle;"><a href="product.php?item_id=<?php echo $item['id']; ?>">
               <strong><?php echo $item['item_name']; ?></strong></a>
               <?php 

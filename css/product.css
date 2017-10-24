@@ -19,10 +19,11 @@
   content: "";
   position: absolute;
   z-index: 1;
-  width: 100px;
+  width: 250px;
   height: auto;
   background: red;
-  content: "closed"; /* 表示するテキスト */
+  content: "Closed";
+  font-size: 30px;
   text-align: center;
   color: #fff;
   font-family: 'Arial';
