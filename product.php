@@ -189,10 +189,15 @@
       <div class="devider" style="margin-bottom:20px;"></div>
     </div>
     <!-- productPicture -->
-    <div class="row">
-      <div class="col-md-6" style="text-align: center;">
-        <div class="frame"><img src="itempic/<?php echo $item['itempc_path']; ?>" width="465px" height="400px" ></div>
-      </div>
+    <div class=" col-md-6" style="text-align: center;">
+          <?php if($deal_chk['count'] == 0){ ?>
+              <img src="itempic/<?php echo $item['itempc_path']; ?>" width="400px" height="400px" >
+          <?php }else{ ?>
+            <div id="frame16">  
+              <img src="itempic/<?php echo $item['itempc_path']; ?>" width="400px" height="400px" >
+            </div>
+          <?php } ?>
+          </div>
 
 
 <style type="text/css">
