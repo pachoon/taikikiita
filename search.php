@@ -13,19 +13,19 @@
 
 <?php
 
-if(isset($_SESSION['login_user'])){
-
-  require('parts/login_header.php');
-
-}else{
-
-  require('parts/header.php');
-}
-
-
-
-
 session_start();
+
+    if(isset($_SESSION['login_user'])){
+      require('parts/login_header.php');
+    }
+    else{
+      require('parts/header.php');
+    }
+
+
+
+
+
 $startPrice='9999';
 $startArea='9999';
 $startFreeword='';
@@ -60,7 +60,8 @@ $startFreeword=$_POST['freeword'];
     $sql = 'SELECT * FROM `cebty_items` WHERE (`item_name` LIKE "%'.$_POST['freeword'].'%"
                                               OR `item_detail` LIKE "%'.$_POST['freeword'].'%")
                                                                AND `price_label` '.$a.'= ?
-                                                               AND `dealing_area` '.$b.'= ?';
+                                                               AND `dealing_area` '.$b.'= ?
+                                                               ORDER BY `cebty_items`.`created` DESC';
     $data = array($_POST['price'], $_POST['area']);
     $stmt = $dbh->prepare($sql);
     $stmt->execute($data);
@@ -84,7 +85,8 @@ while(true){
     $sql = 'SELECT * FROM `cebty_items` WHERE (`item_name` LIKE "%'.$_GET['freeword'].'%"
                                               OR `item_detail` LIKE "%'.$_GET['freeword'].'%")
                                                                AND `price_label`'.$a.'= ?
-                                                               AND `dealing_area` '.$b.'= ?';
+                                                               AND `dealing_area` '.$b.'= ?
+                                                               ORDER BY `cebty_items`.`created` DESC';
     $data = array($_GET['price'], $_GET['area']);
     $stmt = $dbh->prepare($sql);
     $stmt->execute($data);
@@ -106,7 +108,7 @@ while(true){
 
 }else{
 
-    $sql = "SELECT * FROM `cebty_items` " ;
+    $sql = "SELECT * FROM `cebty_items` ORDER BY `cebty_items`.`created` DESC" ;
     $data = array();
     $stmt = $dbh->prepare($sql);
     $stmt->execute($data);
@@ -129,7 +131,7 @@ while(true){
 
  ?>
 
-                                    <div class="portfolio_menu" id="filters" style="padding-top:80px;">
+                                    <div class="portfolio_menu" id="filters" style="padding-top:100px;">
                                         <ul>
                                             <li class="active_prot_menu"><a href="#porfolio_menu" data-filter="*">すべて</a></li>
                                             <li><a href="#porfolio_menu" data-filter=".elec">家電</a></li>
@@ -286,6 +288,8 @@ if(isset($_SESSION['login_user']['id'])){
   $stmt->execute($data);
   $favorite = $stmt->fetch(PDO::FETCH_ASSOC);
 
+}
+
 
 if($product['category'] == '家電'){
   $cate = 'elec';
@@ -299,7 +303,7 @@ if($product['category'] == '家電'){
   $cate = 'others';
 }
 
-}
+
 
 ?>
 
@@ -316,13 +320,13 @@ if($product['category'] == '家電'){
 <?php }} ?>
                         <a href="product.php?item_id=<?php echo $product['id']; ?>" rel="tooltip" title="商品詳細"><span class="fa fa-search fa-2x"></span></a>
                     </div>
-                    <img src="itempic/<?php echo $product['itempc_path']; ?>" class="" width="263" height="197">
+                    <img src="itempic/<?php echo $product['itempc_path']; ?>" class="" width="250" height="175">
                      <div class="propertyType <?php if($product['dealing_area']=='ITパーク'){echo 'it';}elseif($product['dealing_area']=='アヤラ'){echo 'ayala';}elseif($product['dealing_area']=='マンダウエ'){echo 'mandaue';}elseif($product['dealing_area']=='タランバン'){echo 'talamban';}elseif($product['dealing_area']=='その他'){echo 'others';} ?>" style="line-height: 20px;"><?php echo $product['dealing_area']; ?></div>
 
                 </div>
                 <div class="info">
                     <p class="small" style="text-overflow: ellipsis"><?php echo $product['item_name']; ?></p>
-                    <p class="small wb-red">受渡し可能日：<?php echo $product['daling_date']; ?></p>
+                    <p class="small wb-red">受渡し可能日：<?php echo $product['daling_date']; ?>以降</p>
                 </div>
                 <div class="stats wb-red-bg text-center">
                     <span class="fa fa-rub" rel="tooltip" title="価格：<?php echo $product['price']; ?>ペソ"> <strong> <?php echo $product['price']; ?></strong></span>

@@ -75,7 +75,7 @@ if(!isset($_SESSION['login_user']['id'])){
       </blockquote>
     </div>
     <div class="col-md-2 column" style="margin-top:5px;">
-         <button class="btn btn-default btn-block" type="button"><a href="edit_intro.php"><span style="font-weight: 900; color: white;">
+         <button class="btn btn-default btn-block" type="button"><a href="edit_intro.php"><span style="font-weight: 900; color: white; font-size:12px;">
                     プロフィール編集</span></a>
                  </button>
                  <button class="btn btn-default btn-block" type="button"><a href="edit_putup.php?login_user_id=<?php echo $_SESSION['login_user']['id']; ?>"><span style="font-weight: 900; color: white;">

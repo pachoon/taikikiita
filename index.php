@@ -184,7 +184,7 @@ function gate(){
 
 
 
-$sql = "SELECT * FROM `cebty_items` " ;
+$sql = "SELECT * FROM `cebty_items` ORDER BY `cebty_items`.`created` DESC " ; ;
 $data = array();
 $stmt = $dbh->prepare($sql);
 $stmt->execute($data);
@@ -222,7 +222,7 @@ while(true){
                                         <div class="row"  id="portfolio">
                                             <div class="col-xs-12 col-sm-4 <?php echo $product['category']; ?>">
                                                 <div class="portfolio_single_content">
-                                                    <img src="itempic/<?php echo $product['itempc_path'];?> " alt="title" width="300" height="260"/>
+                                                    <img src="itempic/<?php echo $product['itempc_path'];?> " alt="title" width="200" height="200"/>
                                                     <div>
                                                         <a href="product.php?item_id=<?php echo $product['id']; ?>"> <?php echo $product['item_name']; ?></a>
                                                         <ul>

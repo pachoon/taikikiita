@@ -141,7 +141,7 @@ session_start();
                     <input type="file" name="itempc_path" accept="image/*"  >
 
                 </div>
-                <h5>価格</h5>
+                <h5>価格（ペソ）</h5>
                 <input class="form-control" name="price" placeholder="例：1000" type="numper" style="height:28px; font-size:12px;"/>
                 <h5>掲載期限</h5>
                 <input class="form-control" name="limited_date" type="date" style="height:28px; font-size:12px;"/>

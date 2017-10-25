@@ -30,7 +30,7 @@ if(!isset($_SESSION['login_user']['id'])){
 
 
 
-$sql = "SELECT * FROM `cebty_items` " ;
+$sql = "SELECT * FROM `cebty_items` ORDER BY `cebty_items`.`created` DESC " ;
 $data = array();
 $stmt = $dbh->prepare($sql);
 $stmt->execute($data);
@@ -222,7 +222,7 @@ if($product['category'] == '家電'){
                                         <div class="row"  id="portfolio">
                                             <div class="col-xs-12 col-sm-4 <?php echo $cate; ?>">
                                                 <div class="portfolio_single_content">
-                                                    <a href="product.php?item_id=<?php echo $product['id']; ?>"><img src="itempic/<?php echo $product['itempc_path'];?> " alt="title" width="300" height="260"></a>
+                                                    <a href="product.php?item_id=<?php echo $product['id']; ?>"><img src="itempic/<?php echo $product['itempc_path'];?> " alt="title" width="200" height="200"></a>
                                                     <div>
                                                         <a href="product.php?item_id=<?php echo $product['id'];?>"> <?php echo $product['item_name']; ?></a>
                                                         <ul>

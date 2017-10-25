@@ -141,13 +141,13 @@
                         </ul>
                       <p style="text-align: left; word-break: normal;"><br>
                       <span style="font-size: 20px; color: black">　[School]</span>
-                          <span style="color: black; font-size: 20px; padding-left:70px;" ><?php echo $_SESSION['login_user']['school'];?></span>
+                          <span style="color: black; font-size: 20px; padding-left:70px;" ><?php echo $user['school'];?></span>
                       </p>
                                 <hr/>
 
                       <p style="text-align: left; word-break: normal; padding-top:5px;">
                       <span style="font-size: 20px; color: black;">　[Gender]</span>
-                          <span style="color: black; font-size: 20px; padding-left:100px;" ><?php echo $_SESSION['login_user']['gender'];?></span>
+                          <span style="color: black; font-size: 20px; padding-left:100px;" ><?php echo $user['gender'];?></span>
                       </p>
                                 <hr/><br><br>
 

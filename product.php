@@ -192,11 +192,32 @@
         </div>
         <!-- productPicture -->
         <div class="row">
-          <div class=" col-md-6" style="text-align: center;">
-              <img src="itempic/<?php echo $item['itempc_path']; ?>" width="400px" height="400px" >
+          <div class="col-md-6" style="text-align: center;">
+              <img src="itempic/<?php echo $item['itempc_path'];?>" width="500px" height="400px" class="box11">
           </div>
+
+
+<style type="text/css">
+
+.box11{
+    padding: 0.5em 1em;
+    margin: 2em 0;
+    color: #5d627b;
+    background: white;
+    border-top: solid 2px #5d627b;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
+}
+.box11 p {
+    margin: 0; 
+    padding: 0;
+}
+
+</style>
+
+
+
         <!-- productPictureEnd -->
-        <div class="col-md-6" style="text-align: left;">
+        <div class="col-md-6 col-sm-6 col-sm-offset-2" style="text-align: left;">
           <p class="item-detail"><strong>価格</strong>&emsp;&emsp;&emsp;&emsp;:&emsp;<?php echo $item['price'] ?>ペソ</p><br>
           <p class="item-detail"><strong>引渡可能日</strong>&emsp;:&emsp;<?php echo $item['daling_date'] ?></p><br>
           <p class="item-detail"><strong>エリア</strong>&emsp;&emsp;&emsp;:&emsp;<?php echo $item['dealing_area'] ?></p><br>
@@ -210,14 +231,22 @@
               <p class="item-detail" style="font-size: 18px;"><?php echo $item['item_detail'] ?></p><br>
             </div>
           </div>
-          <p class="item-detail"  style="color: #867ad8; text-align: center;"><?php echo $favorite['count'];?>人 がお気に入り登録中</p><br><br>
         </div>
+        <div class="row">
+          <div class="col-sm-6 col-sm-offset-3">
+          <p class="item-detail"  style="color: #867ad8; text-align: center; border: solid 1px;"><?php echo $favorite['count'];?>人 がお気に入り登録中</p><br><br>
+        </div>
+      </div>
       </div>
       <div class="container" style="text-align: center;">
         <div class="row">
           <div class="col-md-6">
                <!-- 受付終了を表示 -->
                <?php 
+
+               if(isset($_SESSION['login_user'])){
+
+
                 $sql = 'SELECT COUNT(*) AS `count` FROM `cebty_deals` WHERE `item_id` = ?';
                 $data = array($item['id']);
                 $stmt = $dbh->prepare($sql);
@@ -234,8 +263,10 @@
                 $stmt->execute($data);
 
                 $request_chk = $stmt->fetch(PDO::FETCH_ASSOC);
+
+              }
                 ?>
-            <?php if($_SESSION['login_user']['id'] == $item['user_id'] ){ ?>
+            <?php if(isset($_SESSION['login_user']) && $_SESSION['login_user']['id'] == $item['user_id'] ){ ?>
               <form method="POST" action=""><br>
                 <input type="hidden" name="item_id" value="<?php echo $item['id']; ?>">
                 <?php if($request_chk['count'] == 0){ ?>
@@ -246,7 +277,7 @@
                   <input type="submit" value="受付を再開する" class="btn btn-warning btn-lg">
                 <?php } ?><br><br>
               </form>
-              <a href="edit_putup.php?login_user_id=<?php echo $_SESSION['login_user']['id']?>" class="btn btn-md btn-success btn-lg">商品管理ページに戻る</a>
+              <a href="edit_putup.php?login_user_id=<?php echo $_SESSION['login_user']['id']?>" style="margin-bottom:30px; " class="btn btn-md btn-success btn-lg">商品管理ページに戻る</a>
             <?php } ?>
              <!-- お気に入りを表示 -->
             
@@ -267,15 +298,15 @@
                     <?php } ?><br><br>
                   </form>
 
-                  <a href="chat.php?<?php echo 'item_id='.$item['id'].'&'.'user_id='.$item['user_id'].'&'.'login_id='.$_SESSION['login_user']['id']; ?>" class="btn btn-info btn-lg" >
+                  <a href="chat.php?<?php echo 'item_id='.$item['id'].'&'.'user_id='.$item['user_id'].'&'.'login_id='.$_SESSION['login_user']['id'].'&'.'other_id='.$item['user_id']; ?>" class="btn btn-info btn-lg" style="margin-bottom:30px; " >
                     出品者へ問い合わせ</a>
                 <?php } ?>
           </div>
           <div class="col-md-6">
-            <div id="box16" style="margin:0;" >
+            <div id="box16" style="margin:0px; margin-bottom:20px" >
               <p style="text-align: center; font-size:20px; padding-bottom:10px">出品者</p>
                 <div style="display: -webkit-flex; display: flex; -webkit-align-items: center; -webkit-justify-content: center;">
-                  <img src="profile_image/<?php echo $item['picture_path']; ?>" width="150px">
+                  <img src="profile_image/<?php echo $item['picture_path']; ?>" width="150px" class="img-thumbnail">
                   &emsp;&emsp;&emsp;
                   <a href="user_information.php?user_id=<?php echo $item['user_id']; ?>" style="font-size:35px; line-height:60px;">
                     <?php echo $item['username']?></a>

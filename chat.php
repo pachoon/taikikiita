@@ -183,11 +183,11 @@ if(!empty($_POST)){
 
   <div class="container" style="padding-top: 130px">
     <div class="row" style="text-align: center;">
-      <div class="col-md-offset-2 col-md-4">
+      <div class="col-md-offset-2 col-md-4 col-sm-offset-2 col-sm-4">
         <h2 class="chat">商品</h2>
         <div class="devider"></div>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-4 col-sm-4">
         <?php if($_GET['user_id'] == $_GET['login_id']){ ?>
           <h2 class="chat">送信先ユーザー</h2>
         <?php }else{ ?>
@@ -197,18 +197,18 @@ if(!empty($_POST)){
       </div>
     </div>
     <div class="row" style="height: 120px; text-align: center; vertical-align: middle;">
-      <div class="col-md-offset-2 col-md-2">
+      <div class="col-md-offset-2 col-md-2 col-sm-2 col-sm-offset-2">
         <div class="chat-box1">
-          <img src="itempic/<?php echo $item['itempc_path'];?>" width="120px">
+          <img src="itempic/<?php echo $item['itempc_path'];?>" width="120px" height="120px">
         </div>
       </div>
-      <div class="col-md-2">
+      <div class="col-md-2 col-sm-2">
         <div class="chat-box2">
           <h4> <a href="product.php?item_id=<?php echo $item['id']; ?>">
               <?php echo $item['item_name']; ?></a></h4>
         </div>
       </div>
-      <div class="col-md-2">
+      <div class="col-md-2 col-sm-2">
         <div class="chat-box1">
         <?php if($_GET['user_id'] == $_GET['login_id']){ ?>
           <img src="profile_image/<?php echo $sender['picture_path'];?>" width="120px">
@@ -217,7 +217,7 @@ if(!empty($_POST)){
         <?php } ?>
         </div>
       </div>
-      <div class="col-md-2">
+      <div class="col-md-2 col-sm-2">
         <div class="chat-box2">
           <?php if($_GET['user_id'] == $_GET['login_id']){ ?>
           <h4><a href="user_information.php?user_id=<?php echo $_GET['other_id']; ?>">
