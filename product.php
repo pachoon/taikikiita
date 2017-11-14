@@ -107,6 +107,14 @@
 
     $favorite_chk = $stmt->fetch(PDO::FETCH_ASSOC);
 
+
+   $sql = 'SELECT COUNT(*) AS `count` FROM `cebty_deals` WHERE `item_id` = ?';
+   $data = array($item['id']);
+   $stmt = $dbh->prepare($sql);
+   $stmt->execute($data);
+
+   $deal_chk = $stmt->fetch(PDO::FETCH_ASSOC);
+
             // var_dump($likes_chk['count']);
 
 
@@ -193,7 +201,13 @@
         <!-- productPicture -->
         <div class="row">
           <div class="col-md-6" style="text-align: center;">
+            <?php if($deal_chk['count'] == 0) { ?>
               <img src="itempic/<?php echo $item['itempc_path'];?>" width="500px" height="400px" class="box11">
+            <?php }else{ ?>
+              <div id="frame16">
+                <img src="itempic/<?php echo $item['itempc_path'];?>" width="500px" height="400px" class="box11">
+              </div>
+            <?php } ?>
           </div>
 
 

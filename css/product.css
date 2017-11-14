@@ -1,4 +1,32 @@
 
+#frame16{
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  padding: 1px;
+}
+#frame16:after {
+ content: “”;
+ position: absolute;
+ z-index: 1;
+ width: 250px;
+ height: auto;
+ background: red;
+ content: “Closed”;
+ font-size: 30px;
+ text-align: center;
+ color: #fff;
+ font-family: ‘Arial’;
+ font-weight: bold;
+ padding: 5px 10px;
+ left: -30px;
+ top: 3px;
+ transform: rotate(-30deg);
+ box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+
+
 #box16{
   padding: 0.5em 1em;
   margin: 2em 0;
