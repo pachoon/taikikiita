@@ -208,6 +208,26 @@
                 <img src="itempic/<?php echo $item['itempc_path'];?>" width="500px" height="400px" class="box11">
               </div>
             <?php } ?>
+=======
+  
+  <div class="container" style="margin-top: 150px; height: 600px; text-align: center;">
+    <div class="row">
+      <h2 id="product-h2" style="padding-bottom:0px;"><?php echo $item['item_name'];?></h2>
+      <?php if($deal_chk['count'] != 0){ ?>
+              <div id="btn-request">受付終了しました</div>
+      <?php } ?>
+      <div class="devider" style="margin-bottom:20px;"></div>
+    </div>
+    <!-- productPicture -->
+    <div class=" col-md-6" style="text-align: center;">
+          <?php if($deal_chk['count'] == 0){ ?>
+              <img src="itempic/<?php echo $item['itempc_path']; ?>" width="400px" height="400px" >
+          <?php }else{ ?>
+            <div id="frame16">  
+              <img src="itempic/<?php echo $item['itempc_path']; ?>" width="400px" height="400px" >
+            </div>
+          <?php } ?>
+>>>>>>> 1fd1fea3809bfca910dad1b44f89c8d28b63f755
           </div>
 
 
