@@ -1,0 +1,125 @@
+
+#frame16{
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  padding: 1px;
+}
+#frame16:after {
+ content: “”;
+ position: absolute;
+ z-index: 1;
+ width: 250px;
+ height: auto;
+ background: red;
+ content: “Closed”;
+ font-size: 30px;
+ text-align: center;
+ color: #fff;
+ font-family: ‘Arial’;
+ font-weight: bold;
+ padding: 5px 10px;
+ left: -30px;
+ top: 3px;
+ transform: rotate(-30deg);
+ box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+
+
+#box16{
+  padding: 0.5em 1em;
+  margin: 2em 0;
+  background: -webkit-repeating-linear-gradient(-45deg, #f0f8ff, #f0f8ff 3px,#e9f4ff 3px, #e9f4ff 7px);
+  background: repeating-linear-gradient(-45deg, #f0f8ff, #f0f8ff 3px,#e9f4ff 3px, #e9f4ff 7px);
+}
+#box16 p {
+  margin: 0;
+  padding: 0;
+} 
+
+
+.carousel-inner {
+  position: relative;
+  width: 100%;
+  min-height: 300px;
+  padding-top: 50px;
+  }
+
+ 
+ .carousel-control.right {
+  right: 0;
+  left: auto;
+  background-image: none !important;
+  background-repeat: repeat-x;
+}
+ .carousel-control.left {
+  left: 0;
+  right: auto;
+  background-image: none !important;
+  background-repeat: repeat-x;
+}
+#carousel-example-generic {
+    margin: 20px auto;
+    width: 100%;
+}
+
+#carousel-custom {
+    margin: 20px auto;
+    width: 400px;
+}
+#carousel-custom .carousel-indicators {
+    margin: 10px 0 0;
+    overflow: auto;
+    position: static;
+    text-align: left;
+    white-space: nowrap;
+    width: 100%;
+    overflow:hidden;
+}
+#carousel-custom .carousel-indicators li {
+    background-color: transparent;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    display: inline-block;
+    height: auto;
+    margin: 0 !important;
+    width: auto;
+}
+#carousel-custom .carousel-indicators li img {
+    display: block;
+    opacity: 0.5;
+}
+#carousel-custom .carousel-indicators li.active img {
+    opacity: 1;
+}
+#carousel-custom .carousel-indicators li:hover img {
+    opacity: 0.75;
+}
+#carousel-custom .carousel-outer {
+    position: relative;
+}
+.carousel-indicators li img {
+  height: 66px;
+  width: 52px;
+}
+#product-h2{
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+#btn-request{
+  color: white;
+  background-color: #ec7166;
+  border-radius:15px !important;
+  text-align: center !important;
+  padding:8px 16px;
+  width: 220px;
+  display: inline-block;
+}
+.item-detail{
+
+  font-size: 20px;
+}
+
+}
